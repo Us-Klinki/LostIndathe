@@ -6,17 +6,17 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		JFrame window = new JFrame();
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setResizable(false);
-		window.setTitle("Lost in Dathe");
+		JFrame window = new JFrame();								//JFrame wird erstellt
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		//Das Fenster kann geschlossen werden
+		window.setResizable(false);									//Das Fenster kann nicht vergrößert werden
+		window.setTitle("Lost in Dathe");							
 		
-		GamePanel gamePanel = new GamePanel();
+		GamePanel gamePanel = new GamePanel();						//GamePanel wird in Main Klasse eingefügt
 		window.add(gamePanel);
 		
 		window.pack();
 		
-		window.setLocationRelativeTo(null);
+		window.setLocationRelativeTo(null);							//Fenster wird in der Mitte des Bildschirms erstellt
 		window.setVisible(true);
 		
 	}

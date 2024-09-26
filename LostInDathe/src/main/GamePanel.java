@@ -17,17 +17,17 @@ public class GamePanel extends JPanel implements Runnable{
 	final int screenWidth = tileSize * maxScreenCol;
 	final int screenHeight = tileSize * maxScreenRow;
 	
-	Thread gameThread;
+	Thread gameThread;				//Thread ist nötig damit das Spiel durchgehend läuft
 	
 	
-	public GamePanel() {
+	public GamePanel() {			//GamePanel Compiler
 		
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.setBackground(Color.BLACK);
 		this.setDoubleBuffered(true);
 	}
 
-	public void startGameThread() {
+	public void startGameThread() {				//Thread Compiler
 	
 		gameThread = new Thread(this);
 		gameThread.start();
@@ -35,6 +35,8 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	@Override
 	public void run() {
+		
+		//GameLoop muss erstellt werden
 		
 	}
 }
