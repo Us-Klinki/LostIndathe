@@ -36,7 +36,7 @@ public class GamePanel extends JPanel implements Runnable{
 	@Override
 	public void run() {
 		
-		Lol//GameLoop muss erstellt werden
+		//GameLoop muss erstellt werden
 		
 	}
 }
