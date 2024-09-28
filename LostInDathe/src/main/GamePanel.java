@@ -31,9 +31,9 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	
 	//Default Spieler Position
-	int playerX = 100;
-	int playerY = 100;
-	int playerSpeed = 4;
+	//int playerX = 100;
+	//int playerY = 100;
+	//int playerSpeed = 4;
 	
 	public GamePanel() {			//GamePanel Compiler
 		
