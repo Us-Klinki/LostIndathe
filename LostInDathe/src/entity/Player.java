@@ -74,6 +74,26 @@ public class Player extends Entity {
 				direction = "right";
 				x += speed;
 			}
+			/*else if(keyH.rightPressed == true && keyH.upPressed == true) {
+				direction = "tright";
+				x += speed/2;
+				y -= speed/2;
+			}
+			else if(keyH.rightPressed == true && keyH.downPressed == true) {
+				direction = "bright";
+				x += speed/2;
+				y += speed/2;
+			}
+			else if(keyH.leftPressed == true && keyH.upPressed == true) {
+				direction = "tleft";
+				x -= speed/2;
+				y -= speed/2;
+			}
+			else if(keyH.leftPressed == true && keyH.downPressed == true) {
+				direction = "tright";
+				x -= speed/2;
+				y += speed/2;
+			}*/
 		
 			spriteCounter++;
 			if(spriteCounter > 12) { // jede 1/5-Sekunde

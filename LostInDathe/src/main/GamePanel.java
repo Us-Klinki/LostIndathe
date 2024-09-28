@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import entity.Player;
+import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -21,19 +22,29 @@ public class GamePanel extends JPanel implements Runnable{
 	final int screenWidth = tileSize * maxScreenCol;
 	final int screenHeight = tileSize * maxScreenRow;
 	
+	public int getMaxScreenCol() {
+		return maxScreenCol;
+	}
+	
+	public int getMaxScreenRow() {
+		return maxScreenRow;
+	}
+	
+	public int getScreenWidth() {
+		return screenWidth;
+	}
+	public int getScreenHeight() {
+		return screenHeight;
+	}
 	// FPS
 	int FPS = 60;
 	
+	TileManager tileM = new TileManager(this);
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;				//Thread ist nötig damit das Spiel durchgehend läuft
 	Player player = new Player(this, keyH);
 	
-	
-	
-	//Default Spieler Position
-	//int playerX = 100;
-	//int playerY = 100;
-	//int playerSpeed = 4;
+
 	
 	public GamePanel() {			//GamePanel Compiler
 		
@@ -87,29 +98,29 @@ public class GamePanel extends JPanel implements Runnable{
 		double delta = 0;
 		long lastTime = System.nanoTime();
 		long currentTime;
-		long timer = 0;
-		int drawCount = 0;
+		//long timer = 0;
+		//int drawCount = 0;
 		
 		while(gameThread != null) {
 			
 			currentTime = System.nanoTime();
 			
 			delta += (currentTime - lastTime)/drawIntervall;
-			timer += (currentTime-lastTime);
+			//timer += (currentTime-lastTime);
 			lastTime = currentTime;
 			
 			if(delta >= 1) {
 				update();
 				repaint();
 				delta--;
-				drawCount++;
+				//drawCount++;
 			}
 			
-			 if(timer >= 1000000000) {
+			 /*if(timer >= 1000000000) {
 				System.out.println("FPS:" + drawCount);
 				drawCount = 0;
 				timer = 0;
-			} 
+			}*/
 			
 		}
 		
@@ -125,6 +136,8 @@ public class GamePanel extends JPanel implements Runnable{
 		super.paintComponent(g);
 		
 		Graphics2D g2 = (Graphics2D)g;
+		
+		tileM.draw(g2);
 		
 		player.draw(g2);
 		
