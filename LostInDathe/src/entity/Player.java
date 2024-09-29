@@ -55,25 +55,74 @@ public class Player extends Entity {
 	
 	public void update() { // Methode wird 60-mal pro Sekunde aufgerufen
 		
-		if(keyH.upPressed == true || keyH.downPressed == true || 
+		 double diagonalSpeed = speed / Math.sqrt(2); // Geschwindigkeit bei diagonaler Bewegung
+		 //System.out.println(diagonalSpeed);
+		 //System.out.println(speed);
+		    boolean movingHorizontally = keyH.leftPressed || keyH.rightPressed;
+		    boolean movingVertically = keyH.upPressed || keyH.downPressed;
+
+		    if (movingHorizontally || movingVertically) {
+		        if (movingHorizontally && movingVertically) {
+		            // Diagonale Bewegung
+		            if (keyH.upPressed) {
+		                direction = "up";
+		                y -= diagonalSpeed;
+		            }
+		            if (keyH.downPressed) {
+		                direction = "down";
+		                y += diagonalSpeed;
+		            }
+		            if (keyH.leftPressed) {
+		                direction = "left";
+		                x -= diagonalSpeed;
+		            }
+		            if (keyH.rightPressed) {
+		                direction = "right";
+		                x += diagonalSpeed;
+		            }
+		        } 
+		        
+		        else {
+		            // Normale Bewegung
+		            if (keyH.upPressed) {
+		                direction = "up";
+		                y -= speed;
+		            }
+		            if (keyH.downPressed) {
+		                direction = "down";
+		                y += speed;
+		            }
+		            if (keyH.leftPressed) {
+		                direction = "left";
+		                x -= speed;
+		            }
+		            if (keyH.rightPressed) {
+		                direction = "right";
+		                x += speed;
+		            }
+		        }
+		    }
+		
+		
+		/*if(keyH.upPressed == true || keyH.downPressed == true || 
 				keyH.leftPressed == true || keyH.rightPressed == true) {
 		
 			if(keyH.upPressed == true) {
 				direction = "up";
 				y -= speed;
 			}
-			else if(keyH.leftPressed == true) {
+			if(keyH.leftPressed == true) {
 				direction = "left";
 				x -= speed;
 			}
-			else if(keyH.downPressed == true) {
+			if(keyH.downPressed == true) {
 				direction = "down";
 				y += speed;
 			}
-			else if(keyH.rightPressed == true) {
+			if(keyH.rightPressed == true) {
 				direction = "right";
 				x += speed;
-			}
+			} */
 			/*else if(keyH.rightPressed == true && keyH.upPressed == true) {
 				direction = "tright";
 				x += speed/2;
@@ -106,7 +155,7 @@ public class Player extends Entity {
 				spriteCounter = 0;
 			}
 		}
-	}
+	
 	
 	public void draw(Graphics2D g2) {
 		
