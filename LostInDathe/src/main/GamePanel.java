@@ -16,12 +16,21 @@ public class GamePanel extends JPanel implements Runnable{
 	final int originalTileSize = 16;
 	final int scale = 3;
 	
-	public final int tileSize = originalTileSize * scale; // 48*48 tile size
+	final int tileSize = originalTileSize * scale; // 48*48 tile size
 	final int maxScreenCol = 16;
 	final int maxScreenRow = 12;
 	final int screenWidth = tileSize * maxScreenCol;
 	final int screenHeight = tileSize * maxScreenRow;
 	
+	// WORLD SETTINGS
+	final int maxWorldCol = 50;
+	final int maxWorldRow = 50;
+	final int worldWidth = tileSize * maxWorldCol;
+	final int worldHeight = tileSize * maxWorldRow;
+	
+	public int getTileSize() {
+		return tileSize;
+	}
 	public int getMaxScreenCol() {
 		return maxScreenCol;
 	}
@@ -36,13 +45,29 @@ public class GamePanel extends JPanel implements Runnable{
 	public int getScreenHeight() {
 		return screenHeight;
 	}
+	
+	public int getMaxWorldCol() {
+		return maxWorldCol;
+	}
+	
+	public int getMaxWorldRow() {
+		return maxWorldRow;
+	}
+	
+	public int getWorldWidth() {
+		return worldWidth;
+	}
+	
+	public int getWorldHeight() {
+		return worldHeight;
+	}
 	// FPS
 	int FPS = 60;
 	
 	TileManager tileM = new TileManager(this);
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;				//Thread ist nötig damit das Spiel durchgehend läuft
-	Player player = new Player(this, keyH);
+	private Player player = new Player(this, keyH);
 	
 
 	
@@ -127,7 +152,7 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	public void update() {							//Darf der Charakter schräg laufen?
 		
-		player.update();
+		getPlayer().update();
 		
 	}
 	
@@ -139,9 +164,21 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		tileM.draw(g2);
 		
-		player.draw(g2);
+		getPlayer().draw(g2);
 		
 		g2.dispose();
+	}
+	/**
+	 * @return the player
+	 */
+	public Player getPlayer() {
+		return player;
+	}
+	/**
+	 * @param player the player to set
+	 */
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 }
 

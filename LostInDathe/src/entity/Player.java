@@ -14,12 +14,16 @@ public class Player extends Entity {
 	GamePanel gp;
 	KeyHandler keyH;
 	
-	
+	public final int screenX;
+	public final int screenY;
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		
 		this.gp = gp;
 		this.keyH = keyH;
+		
+		screenX = this.gp.getScreenWidth() / 2 - (gp.getTileSize() / 2);
+		screenY = this.gp.getScreenHeight() / 2 - (gp.getTileSize() / 2);
 		
 		setDefaultValues();
 		getPlayerImage();
@@ -28,8 +32,8 @@ public class Player extends Entity {
 	
 	public void setDefaultValues() {
 		
-		x = 100;
-		y = 100;
+		worldX = gp.getTileSize() * 23;
+		worldY = gp.getTileSize() * 21;
 		speed = 4;
 		direction = "down";
 		
@@ -84,8 +88,8 @@ public class Player extends Entity {
 	    }
 
 	    // Position aktualisieren
-	    x += moveX;
-	    y += moveY;
+	    worldX += moveX;
+	    worldY += moveY;
 
 	    // Richtung setzen
 	    if (moveY < 0) {
@@ -158,6 +162,6 @@ public class Player extends Entity {
 			}
 			break;
 		}
-		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+		g2.drawImage(image, screenX, screenY, gp.getTileSize(), gp.getTileSize(), null);
 	}
 }
