@@ -136,13 +136,14 @@ public class Player extends Entity {
 				spriteCounter = 0;
 			}
 		}
+		else {
+			spriteNum = 1;
+		}
 	}
 	
 	
 	public void draw(Graphics2D g2) {
 		
-		//g2.setColor(Color.RED);
-		//g2.fillRect(x, y, gp.tileSize, gp.tileSize);	
 		
 		BufferedImage image = null;
 		
