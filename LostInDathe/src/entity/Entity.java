@@ -1,14 +1,6 @@
 package entity;
 
-import entity.Player;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import javax.swing.JPanel;
-import tile.TileManager;
-
 public class Entity {
 
   public int worldX, worldY;
@@ -19,5 +11,4 @@ public class Entity {
   
   public int spriteCounter = 0;
   public int spriteNum = 1;
-
 }
