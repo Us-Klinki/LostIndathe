@@ -13,8 +13,16 @@ import main.GamePanel;
 public class TileManager {
 
 	GamePanel gp;
-	Tile[] tile;
-	int mapTileNum[] [];
+	private Tile[] tile;
+	private int mapTileNum[] [];
+	
+	public Tile[] getTile() {
+		return tile;
+	}
+	
+	public int [][]getMapTileNum() {
+		return mapTileNum;
+	}
 	
 	
 	public TileManager(GamePanel gp) {

@@ -78,19 +78,46 @@ public class Player extends Entity {
 
 	    // Horizontale Bewegungsrichtung
 	    if (keyH.leftPressed) {
-	        moveX -= speed; // Normale Geschwindigkeit
+	    	direction = "left";
+	        
 	    }
 	    if (keyH.rightPressed) {
-	        moveX += speed; // Normale Geschwindigkeit
+	    	direction = "right";
+	       
 	    }
 
 	    // Vertikale Bewegungsrichtung
 	    if (keyH.upPressed) {
-	        moveY -= speed; // Normale Geschwindigkeit
+	    	direction = "up";
+	        
 	    }
 	    if (keyH.downPressed) {
-	        moveY += speed; // Normale Geschwindigkeit
+	    	direction = "down";
+	        
 	    }
+	 // Check Collision
+	    setCollisionOn(false);
+	    gp.cChecker.checkTile(this);
+	    
+	    // if collision is false, player can move		
+		if(isCollisionOn() == false){
+			
+			switch(direction) {
+			case "up":
+				moveY -= speed; // Normale Geschwindigkeit
+				break;
+		    case "down":
+		    	moveY += speed; // Normale Geschwindigkeit
+		    	break;
+		    case "left":
+		    	moveX -= speed; // Normale Geschwindigkeit
+		    	break;
+		    case "right":
+		    	 moveX += speed; // Normale Geschwindigkeit
+		    	break;
+			
+			}
+		}
 	    
 	    if (moveY < 0) {
 	        direction = "up";
@@ -123,11 +150,11 @@ public class Player extends Entity {
 	    worldX += moveX;
 	    worldY += moveY;
 
+	    
+			
+			
+		
 	    // Richtung setzen
-
-		
-		
-
 		if(moveX != 0 || moveY != 0) {
 			spriteCounter++;
 			if(spriteCounter > 12) { // jede 1/5-Sekunde
