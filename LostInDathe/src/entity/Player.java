@@ -101,46 +101,8 @@ public class Player extends Entity {
 	
 		
 		
-		/*if(keyH.upPressed == true || keyH.downPressed == true || 
-				keyH.leftPressed == true || keyH.rightPressed == true) {
-		
-			if(keyH.upPressed == true) {
-				direction = "up";
-				y -= speed;
-			}
-			if(keyH.leftPressed == true) {
-				direction = "left";
-				x -= speed;
-			}
-			if(keyH.downPressed == true) {
-				direction = "down";
-				y += speed;
-			}
-			if(keyH.rightPressed == true) {
-				direction = "right";
-				x += speed;
-			} */
-			/*else if(keyH.rightPressed == true && keyH.upPressed == true) {
-				direction = "tright";
-				x += speed/2;
-				y -= speed/2;
-			}
-			else if(keyH.rightPressed == true && keyH.downPressed == true) {
-				direction = "bright";
-				x += speed/2;
-				y += speed/2;
-			}
-			else if(keyH.leftPressed == true && keyH.upPressed == true) {
-				direction = "tleft";
-				x -= speed/2;
-				y -= speed/2;
-			}
-			else if(keyH.leftPressed == true && keyH.downPressed == true) {
-				direction = "tright";
-				x -= speed/2;
-				y += speed/2;
-			}*/
-		
+
+		if(moveX != 0 || moveY != 0) {
 			spriteCounter++;
 			if(spriteCounter > 12) { // jede 1/5-Sekunde
 				if(spriteNum == 1) {
@@ -152,6 +114,7 @@ public class Player extends Entity {
 				spriteCounter = 0;
 			}
 		}
+	}
 	
 	
 	public void draw(Graphics2D g2) {

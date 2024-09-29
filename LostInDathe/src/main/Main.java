@@ -8,7 +8,7 @@ public class Main {
 		
 		JFrame window = new JFrame();								//JFrame wird erstellt
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		//Das Fenster kann geschlossen werden
-		window.setResizable(false);									//Das Fenster kann nicht vergrößert werden
+		window.setResizable(true);									//Das Fenster kann nicht vergrößert werden
 		window.setTitle("Lost in Dathe");							
 		
 		GamePanel gamePanel = new GamePanel();						//GamePanel wird in Main Klasse eingefügt
