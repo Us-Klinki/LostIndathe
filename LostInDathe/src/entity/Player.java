@@ -50,6 +50,14 @@ public class Player extends Entity {
 			left2 = ImageIO.read(getClass().getResourceAsStream("/player/links2.png"));
 			right1 = ImageIO.read(getClass().getResourceAsStream("/player/rechts.png"));
 			right2 = ImageIO.read(getClass().getResourceAsStream("/player/rechts2.png"));
+			tleft1 = ImageIO.read(getClass().getResourceAsStream("/player/oben-links.png"));
+			tleft2 = ImageIO.read(getClass().getResourceAsStream("/player/oben-links2.png"));
+			tright1 = ImageIO.read(getClass().getResourceAsStream("/player/oben-rechts.png"));
+			tright2 = ImageIO.read(getClass().getResourceAsStream("/player/oben-rechts2.png"));
+			bleft1 = ImageIO.read(getClass().getResourceAsStream("/player/unten-links.png"));
+			bleft2 = ImageIO.read(getClass().getResourceAsStream("/player/unten-links2.png"));
+			bright1 = ImageIO.read(getClass().getResourceAsStream("/player/unten-rechts.png"));
+			bright2 = ImageIO.read(getClass().getResourceAsStream("/player/unten-rechts2.png"));
 		}
 		catch(IOException e) {
 			e.printStackTrace();
@@ -79,6 +87,26 @@ public class Player extends Entity {
 	    if (keyH.downPressed) {
 	        moveY += speed; // Normale Geschwindigkeit
 	    }
+	    
+	    if (moveY < 0) {
+	        direction = "up";
+	    } else if (moveY > 0) {
+	        direction = "down";
+	    } 
+	    if (moveX < 0) {
+	        direction = "left";
+	    } else if (moveX > 0) {
+	        direction = "right";
+	    } 
+	    if (moveX > 0 && moveY < 0) {
+	    	direction = "tright";
+	    } else if (moveX > 0 && moveY > 0) {
+	    	direction = "bright";
+	    } else if (moveX < 0 && moveY < 0) {
+	    	direction = "tleft";
+	    } else if (moveX < 0 && moveY > 0) {
+	    	direction = "bleft";
+	    }
 
 	    // Diagonalbewegung: Wenn sowohl horizontal als auch vertikal bewegt wird, normalisieren
 	    if (moveX != 0 && moveY != 0) {
@@ -92,17 +120,7 @@ public class Player extends Entity {
 	    worldY += moveY;
 
 	    // Richtung setzen
-	    if (moveY < 0) {
-	        direction = "up";
-	    } else if (moveY > 0) {
-	        direction = "down";
-	    }
-	    if (moveX < 0) {
-	        direction = "left";
-	    } else if (moveX > 0) {
-	        direction = "right";
-	    }
-	
+
 		
 		
 
@@ -160,6 +178,39 @@ public class Player extends Entity {
 			if(spriteNum == 2) {
 				image = left2;
 			}
+			break;
+		case "tright":
+			if(spriteNum == 1) {
+				image = tright1;
+			}
+			if(spriteNum == 2) {
+				image = tright2;
+			}
+			break;
+		case "tleft":
+			if(spriteNum == 1) {
+				image = tleft1;
+			}
+			if(spriteNum == 2) {
+				image = tleft2;
+			}
+			break;
+		case "bright":
+			if(spriteNum == 1) {
+				image = bright1;
+			}
+			if(spriteNum == 2) {
+				image = bright2;
+			}
+			break;
+		case "bleft":
+			if(spriteNum == 1) {
+				image = bleft1;
+			}
+			if(spriteNum == 2) {
+				image = bleft2;
+			}
+			
 			break;
 		}
 		g2.drawImage(image, screenX, screenY, gp.getTileSize(), gp.getTileSize(), null);
