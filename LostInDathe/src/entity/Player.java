@@ -76,33 +76,46 @@ public class Player extends Entity {
 	    double moveX = 0;
 	    double moveY = 0;
 
-	    // Horizontale Bewegungsrichtung
-	    if (keyH.leftPressed) {
-	    	direction = "left";
-	        
-	    }
-	    if (keyH.rightPressed) {
-	    	direction = "right";
-	       
-	    }
-
-	    // Vertikale Bewegungsrichtung
-	    if (keyH.upPressed) {
-	    	direction = "up";
-	        
-	    }
-	    if (keyH.downPressed) {
-	    	direction = "down";
-	        
-	    }
 	 // Check Collision
 	    setCollisionOn(false);
-	    gp.cChecker.checkTile(this);
-	    
-	    // if collision is false, player can move		
-		if(isCollisionOn() == false){
+
+	    // Horizontale Bewegungsrichtung prüfen
+	    if (keyH.leftPressed) {
+	        direction = "left";
+	        moveX -= speed; // Bewege temporär nach links
+	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der linken Bewegung
+	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
+	            moveX += speed; // Setze Bewegung zurück
+	        }
+	    }
+	    if (keyH.rightPressed) {
+	        direction = "right";
+	        moveX += speed; // Bewege temporär nach rechts
+	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der rechten Bewegung
+	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
+	            moveX -= speed; // Setze Bewegung zurück
+	        }
+	    }
+
+	    // Vertikale Bewegungsrichtung prüfen
+	    if (keyH.upPressed) {
+	        direction = "up";
+	        moveY -= speed; // Bewege temporär nach oben
+	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der oberen Bewegung
+	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
+	            moveY += speed; // Setze Bewegung zurück
+	        }
+	    }
+	    if (keyH.downPressed) {
+	        direction = "down";
+	        moveY += speed; // Bewege temporär nach unten
+	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der unteren Bewegung
+	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
+	            moveY -= speed; // Setze Bewegung zurück
+	        }
+	    }
 			
-			switch(direction) {
+			/*switch(direction) {
 			case "up":
 				moveY -= speed; // Normale Geschwindigkeit
 				break;
@@ -116,8 +129,8 @@ public class Player extends Entity {
 		    	 moveX += speed; // Normale Geschwindigkeit
 		    	break;
 			
-			}
-		}
+			} */
+		
 	    
 	    if (moveY < 0) {
 	        direction = "up";
