@@ -1,6 +1,5 @@
 package entity;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -55,7 +54,7 @@ public class Player extends Entity {
 	
 	public void update() { // Methode wird 60-mal pro Sekunde aufgerufen
 		
-	    double diagonalSpeed = speed*1.25; // Math.sqrt(2); // Geschwindigkeit bei diagonaler Bewegung
+	    double diagonalSpeed = speed/ Math.sqrt(2); // Geschwindigkeit bei diagonaler Bewegung
 	    
 	    // Initialisierung der x- und y-Bewegung
 	    double moveX = 0;
