@@ -55,53 +55,51 @@ public class Player extends Entity {
 	
 	public void update() { // Methode wird 60-mal pro Sekunde aufgerufen
 		
-		 double diagonalSpeed = speed / Math.sqrt(2); // Geschwindigkeit bei diagonaler Bewegung
-		 //System.out.println(diagonalSpeed);
-		 //System.out.println(speed);
-		    boolean movingHorizontally = keyH.leftPressed || keyH.rightPressed;
-		    boolean movingVertically = keyH.upPressed || keyH.downPressed;
+	    double diagonalSpeed = speed / Math.sqrt(2); // Geschwindigkeit bei diagonaler Bewegung
+	    
+	    // Initialisierung der x- und y-Bewegung
+	    double moveX = 0;
+	    double moveY = 0;
 
-		    if (movingHorizontally || movingVertically) {
-		        if (movingHorizontally && movingVertically) {
-		            // Diagonale Bewegung
-		            if (keyH.upPressed) {
-		                direction = "up";
-		                y -= diagonalSpeed;
-		            }
-		            if (keyH.downPressed) {
-		                direction = "down";
-		                y += diagonalSpeed;
-		            }
-		            if (keyH.leftPressed) {
-		                direction = "left";
-		                x -= diagonalSpeed;
-		            }
-		            if (keyH.rightPressed) {
-		                direction = "right";
-		                x += diagonalSpeed;
-		            }
-		        } 
-		        
-		        else {
-		            // Normale Bewegung
-		            if (keyH.upPressed) {
-		                direction = "up";
-		                y -= speed;
-		            }
-		            if (keyH.downPressed) {
-		                direction = "down";
-		                y += speed;
-		            }
-		            if (keyH.leftPressed) {
-		                direction = "left";
-		                x -= speed;
-		            }
-		            if (keyH.rightPressed) {
-		                direction = "right";
-		                x += speed;
-		            }
-		        }
-		    }
+	    // Horizontale Bewegungsrichtung
+	    if (keyH.leftPressed) {
+	        moveX -= speed; // Normale Geschwindigkeit
+	    }
+	    if (keyH.rightPressed) {
+	        moveX += speed; // Normale Geschwindigkeit
+	    }
+
+	    // Vertikale Bewegungsrichtung
+	    if (keyH.upPressed) {
+	        moveY -= speed; // Normale Geschwindigkeit
+	    }
+	    if (keyH.downPressed) {
+	        moveY += speed; // Normale Geschwindigkeit
+	    }
+
+	    // Diagonalbewegung: Wenn sowohl horizontal als auch vertikal bewegt wird, normalisieren
+	    if (moveX != 0 && moveY != 0) {
+	        double totalMovement = Math.sqrt(moveX * moveX + moveY * moveY);
+	        moveX = (moveX / totalMovement) * diagonalSpeed;
+	        moveY = (moveY / totalMovement) * diagonalSpeed;
+	    }
+
+	    // Position aktualisieren
+	    x += moveX;
+	    y += moveY;
+
+	    // Richtung setzen
+	    if (moveY < 0) {
+	        direction = "up";
+	    } else if (moveY > 0) {
+	        direction = "down";
+	    }
+	    if (moveX < 0) {
+	        direction = "left";
+	    } else if (moveX > 0) {
+	        direction = "right";
+	    }
+	
 		
 		
 		/*if(keyH.upPressed == true || keyH.downPressed == true || 
