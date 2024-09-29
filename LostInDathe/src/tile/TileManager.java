@@ -38,6 +38,7 @@ public class TileManager {
 			
 			tile[1] = new Tile();
 			tile[1].image = ImageIO.read(getClass().getResourceAsStream("/Tiles/wand_textur.png"));
+			tile[1].setCollision(true);
 			
 			
 		} catch(IOException e) {

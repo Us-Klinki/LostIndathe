@@ -1,6 +1,7 @@
 package entity;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -24,6 +25,9 @@ public class Player extends Entity {
 		
 		screenX = this.gp.getScreenWidth() / 2 - (gp.getTileSize() / 2);
 		screenY = this.gp.getScreenHeight() / 2 - (gp.getTileSize() / 2);
+		
+		//TODO: angepasste Borders für Charakter Sprite eintragen (x, y, breite, höhe)
+		setSolidArea(new Rectangle(0, 0, gp.getTileSize(), gp.getTileSize()));
 		
 		setDefaultValues();
 		getPlayerImage();
