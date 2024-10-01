@@ -46,22 +46,22 @@ public class Player extends Entity {
 		
 		try {
 			
-			up1 = ImageIO.read(getClass().getResourceAsStream("/player/oben.png"));
-			up2 = ImageIO.read(getClass().getResourceAsStream("/player/oben2.png"));
-			down1 = ImageIO.read(getClass().getResourceAsStream("/player/unten.png"));
-			down2 = ImageIO.read(getClass().getResourceAsStream("/player/unten2.png"));
-			left1 = ImageIO.read(getClass().getResourceAsStream("/player/links.png"));
-			left2 = ImageIO.read(getClass().getResourceAsStream("/player/links2.png"));
-			right1 = ImageIO.read(getClass().getResourceAsStream("/player/rechts.png"));
-			right2 = ImageIO.read(getClass().getResourceAsStream("/player/rechts2.png"));
-			tleft1 = ImageIO.read(getClass().getResourceAsStream("/player/oben-links.png"));
-			tleft2 = ImageIO.read(getClass().getResourceAsStream("/player/oben-links2.png"));
-			tright1 = ImageIO.read(getClass().getResourceAsStream("/player/oben-rechts.png"));
-			tright2 = ImageIO.read(getClass().getResourceAsStream("/player/oben-rechts2.png"));
-			bleft1 = ImageIO.read(getClass().getResourceAsStream("/player/unten-links.png"));
-			bleft2 = ImageIO.read(getClass().getResourceAsStream("/player/unten-links2.png"));
-			bright1 = ImageIO.read(getClass().getResourceAsStream("/player/unten-rechts.png"));
-			bright2 = ImageIO.read(getClass().getResourceAsStream("/player/unten-rechts2.png"));
+			up1 = ImageIO.read(getClass().getResourceAsStream("/player/Hinten1.png"));
+			up2 = ImageIO.read(getClass().getResourceAsStream("/player/Hinten2.png"));
+			down1 = ImageIO.read(getClass().getResourceAsStream("/player/Vorne1.png"));
+			down2 = ImageIO.read(getClass().getResourceAsStream("/player/Vorne2.png"));
+			left1 = ImageIO.read(getClass().getResourceAsStream("/player/Links1.png"));
+			left2 = ImageIO.read(getClass().getResourceAsStream("/player/Links2.png"));
+			right1 = ImageIO.read(getClass().getResourceAsStream("/player/Rechts1.png"));
+			right2 = ImageIO.read(getClass().getResourceAsStream("/player/Rechts2.png"));
+			tleft1 = ImageIO.read(getClass().getResourceAsStream("/player/HintenLinks1.png"));
+			tleft2 = ImageIO.read(getClass().getResourceAsStream("/player/HintenLinks2.png"));
+			tright1 = ImageIO.read(getClass().getResourceAsStream("/player/HintenRechts1.png"));
+			tright2 = ImageIO.read(getClass().getResourceAsStream("/player/HintenRechts2.png"));
+			bleft1 = ImageIO.read(getClass().getResourceAsStream("/player/VorneLinks1.png"));
+			bleft2 = ImageIO.read(getClass().getResourceAsStream("/player/VorneLinks2.png"));
+			bright1 = ImageIO.read(getClass().getResourceAsStream("/player/VorneRechts1.png"));
+			bright2 = ImageIO.read(getClass().getResourceAsStream("/player/VorneRechts2.png"));
 		}
 		catch(IOException e) {
 			e.printStackTrace();
