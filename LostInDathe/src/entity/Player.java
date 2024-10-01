@@ -26,7 +26,7 @@ public class Player extends Entity {
 		screenX = this.gp.getScreenWidth() / 2 - (gp.getTileSize() / 2);
 		screenY = this.gp.getScreenHeight() / 2 - (gp.getTileSize() / 2);
 		
-		//TODO: angepasste Borders für Charakter Sprite eintragen (x, y, breite, höhe)
+		
 		setSolidArea(new Rectangle(8, 20, 32, 28));
 		
 		setDefaultValues();
