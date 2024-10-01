@@ -121,37 +121,9 @@ public class Player extends Entity {
 	    }
 	    if (moveX != 0 && moveY != 0) {
 	        double totalMovement = Math.sqrt(moveX * moveX + moveY * moveY);
-	        direction = "right";
-	        gp.cChecker.checkTile(this);
-	        if(!isCollisionOn()) {
 	        	moveX = (moveX / totalMovement) * diagonalSpeed;
 	        	moveY = (moveY / totalMovement) * diagonalSpeed;
-	        } 
-	        else {
-	        	direction = "left";
-	        	gp.cChecker.checkTile(this);
-		        if(!isCollisionOn()) {
-			        moveX = (moveX / totalMovement) * diagonalSpeed;
-			        moveY = (moveY / totalMovement) * diagonalSpeed;
-			    }
-		        else {
-		        	direction = "up";
-		        	gp.cChecker.checkTile(this);
-			        if(!isCollisionOn()) {
-				        moveX = (moveX / totalMovement) * diagonalSpeed;
-				        moveY = (moveY / totalMovement) * diagonalSpeed;
-			        }
-			        else {
-			        	direction = "down";
-			        	gp.cChecker.checkTile(this);
-			        	if(!isCollisionOn()) {
-			        		moveX = (moveX / totalMovement) * diagonalSpeed;
-			        		moveY = (moveY / totalMovement) * diagonalSpeed;
-			        	}
-			        }
-		        }
-	        }
-	    }
+	    } 
 			
 	    
 	    if (moveY < 0) {
