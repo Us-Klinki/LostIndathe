@@ -88,6 +88,7 @@ public class Player extends Entity {
 	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der oberen Bewegung
 	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
 	            moveY += speed; // Setze Bewegung zurück
+	    	    setCollisionOn(false);
 	        }
 	    }
 	    if (keyH.downPressed) {
@@ -96,6 +97,7 @@ public class Player extends Entity {
 	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der unteren Bewegung
 	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
 	            moveY -= speed; // Setze Bewegung zurück
+	    	    setCollisionOn(false);
 	        }
 	    }
 	    // Horizontale Bewegungsrichtung prüfen
@@ -105,6 +107,7 @@ public class Player extends Entity {
 	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der linken Bewegung
 	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
 	            moveX += speed; // Setze Bewegung zurück
+	    	    setCollisionOn(false);
 	        }
 	    }
 	    if (keyH.rightPressed) {
@@ -113,6 +116,7 @@ public class Player extends Entity {
 	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der rechten Bewegung
 	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
 	            moveX -= speed; // Setze Bewegung zurück
+	    	    setCollisionOn(false);
 	        }
 	    }
 	    if (moveX != 0 && moveY != 0) {
