@@ -17,6 +17,7 @@ public class Player extends Entity {
 	
 	public final int screenX;
 	public final int screenY;
+	int hasKey = 0;
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		
@@ -28,6 +29,9 @@ public class Player extends Entity {
 		
 		
 		setSolidArea(new Rectangle(8, 20, 32, 28));
+		setSolidAreaDefaultX(getSolidArea().x);
+		setSolidAreaDefaultY(getSolidArea().y);
+		
 		
 		setDefaultValues();
 		getPlayerImage();
@@ -76,8 +80,13 @@ public class Player extends Entity {
 	    double moveX = 0;
 	    double moveY = 0;
 
-	 // Check Collision
+	 // Überprüfe Kollision
 	    setCollisionOn(false);
+	    
+	 // Überprüfe Kollisionen der Objekte
+	    int objIndex = gp.cChecker.checkObject(this, true);
+	    pickUpObject(objIndex);
+	    
 
 
 
@@ -175,6 +184,33 @@ public class Player extends Entity {
 		}
 	}
 	
+	// Aufsammeln / Interagieren mit Objekten
+	public void pickUpObject(int i) { 
+		
+		if (i != 999) {
+			
+			String objectName = gp.getObj()[i].getName();
+			switch(objectName) {
+			case "Key":
+				hasKey++; // virtuelles Inventar
+				gp.getObj()[i] = null;
+				System.out.println("Schlüssel: " + hasKey);
+				break;
+			case "Bathroomdoor":
+				//TODO: Bugfix benötigt: Wenn man keinen Schlüssel hat, ist es möglich, sich zu softlocken...
+				if(hasKey > 0) {
+					gp.getObj()[i] = null;
+					hasKey--;
+				}
+				else {
+			        System.out.println("Nicht genug Schlüssel");
+			    }
+				System.out.println("Schlüssel: " + hasKey);
+				break;
+			}
+			
+		}
+	}
 	
 	public void draw(Graphics2D g2) {
 		

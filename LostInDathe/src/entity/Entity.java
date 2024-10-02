@@ -14,6 +14,7 @@ public class Entity {
   public int spriteCounter = 0;
   public int spriteNum = 1;
   private Rectangle solidArea;
+  private int solidAreaDefaultX, solidAreaDefaultY;
   private boolean collisionOn = false;
   
   
@@ -42,5 +43,29 @@ public class Entity {
   public void setCollisionOn(boolean collisionOn) {
 	  this.collisionOn = collisionOn;
   }
+/**
+ * @return the solidAreaDefaultX
+ */
+public int getSolidAreaDefaultX() {
+	return solidAreaDefaultX;
+}
+/**
+ * @param solidAreaDefaultX the solidAreaDefaultX to set
+ */
+public void setSolidAreaDefaultX(int solidAreaDefaultX) {
+	this.solidAreaDefaultX = solidAreaDefaultX;
+}
+/**
+ * @return the solidAreaDeafaultY
+ */
+public int getSolidAreaDefaultY() {
+	return solidAreaDefaultY;
+}
+/**
+ * @param solidAreaDeafaultY the solidAreaDeafaultY to set
+ */
+public void setSolidAreaDefaultY(int solidAreaDefaultY) {
+	this.solidAreaDefaultY = solidAreaDefaultY;
+}
   
 }

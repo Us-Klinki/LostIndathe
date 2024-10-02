@@ -1,6 +1,9 @@
 package main;
 
 import entity.Player;
+import object.SuperObject;
+import main.AssetPlacer;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -67,7 +70,9 @@ public class GamePanel extends JPanel implements Runnable{
   KeyHandler keyH = new KeyHandler();
   Thread gameThread;        //Thread ist nötig damit das Spiel durchgehend läuft
   public CollisionChecker cChecker = new CollisionChecker(this);
+  private AssetPlacer aPlacer = new AssetPlacer(this);
   private Player player = new Player(this, keyH);
+  private SuperObject obj[] = new SuperObject[30];
   
 
   
@@ -79,7 +84,11 @@ public class GamePanel extends JPanel implements Runnable{
     this.addKeyListener(keyH);
     this.setFocusable(true);
   }
-
+  
+  public void setupGame() {
+	  aPlacer.setObject();
+  }
+  
   public void startGameThread() {       //Thread Compiler
   
     gameThread = new Thread(this);
@@ -162,8 +171,17 @@ public class GamePanel extends JPanel implements Runnable{
     
     Graphics2D g2 = (Graphics2D)g;
     
+    // Hier werden die Tiles erzeugt
     tileM.draw(g2);
     
+    // Hier werden die Objekte platziert
+    for(int i = 0; i < obj.length; i++) {
+    	if(obj[i] != null) {	// sicherstellen, dass Arrayindex immer gefüllt ist
+    		obj[i].draw(g2, this);
+    	}
+    }
+    
+    // Hier wird der Spieler gespawnt
     getPlayer().draw(g2);
     
     g2.dispose();
@@ -181,6 +199,18 @@ public class GamePanel extends JPanel implements Runnable{
     this.player = player;
   }
   // end methods
+/**
+ * @return the obj
+ */
+public SuperObject[] getObj() {
+	return obj;
+}
+/**
+ * @param obj the obj to set
+ */
+public void setObj(SuperObject obj[]) {
+	this.obj = obj;
+}
 }
 
 
