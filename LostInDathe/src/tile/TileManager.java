@@ -1,6 +1,8 @@
 package tile;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,6 +11,7 @@ import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import main.UtilityTool;
 
 public class TileManager {
 
@@ -28,31 +31,46 @@ public class TileManager {
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
 		
-		tile = new Tile[10];
+		tile = new Tile[20];
 		mapTileNum = new int[gp.getMaxWorldCol()] [gp.getMaxWorldRow()];
 		
 		getTileImage();
-		loadMap("/maps/test.txt");
+		loadMap("/maps/bathroom.txt");
 		
 	}
 	
 
 	public void getTileImage() {
+			
+		// setup(TileIndex, "Dateiname", Kollision true/false);
+		setup(0, "1_bathground", false);
+		setup(1, "2_bathwall_plain_bl", true);
+		setup(2, "2_bathwall_plain_br", true);
+		setup(3, "2_bathwall_plain_tl", true);
+		setup(4, "2_bathwall_plain_tr", true);
+		setup(5, "3_bathwall_bl", true);
+		setup(6, "3_bathwall_br", true);
+		setup(7, "3_bathwall_tl", true);
+		setup(8, "3_bathwall_tr", true);
+		setup(9, "4_bathwall", true);
+	}
+	
+	public void setup(int tileIndex, String imageName, boolean collision) {
+		
+		UtilityTool uToolTiles = new UtilityTool();
 		
 		try {
+			tile[tileIndex] = new Tile();
+			tile[tileIndex].image = ImageIO.read(getClass().getResourceAsStream("/Tiles/" + imageName + ".png"));
+			tile[tileIndex].image = uToolTiles.getScaledImage(tile[tileIndex].image, gp.getTileSize(), gp.getTileSize());
+			tile[tileIndex].setCollision(collision);
 			
-			tile[0] = new Tile();
-			tile[0].image = ImageIO.read(getClass().getResourceAsStream("/Tiles/boden_textur.png"));
-			
-			tile[1] = new Tile();
-			tile[1].image = ImageIO.read(getClass().getResourceAsStream("/Tiles/wand_textur.png"));
-			tile[1].setCollision(true);
-			
-			
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
+	
 	public void loadMap(String filePath) {
 		
 		try {
@@ -107,7 +125,7 @@ public class TileManager {
 					worldY + gp.getTileSize() > gp.getPlayer().worldY - gp.getPlayer().screenY &&
 					worldY - gp.getTileSize() < gp.getPlayer().worldY + gp.getPlayer().screenY) {
 				
-				g2.drawImage(tile[tileNum].image, screenX, screenY, gp.getTileSize(), gp.getTileSize(), null);
+				g2.drawImage(tile[tileNum].image, screenX, screenY, null);
 			}
 			
 			worldCol++;

@@ -6,15 +6,19 @@ import main.AssetPlacer;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 import tile.TileManager;
 
-public class GamePanel extends JPanel implements Runnable{
-
-  //SCREEN SETTINGS
+public class GamePanel extends JPanel implements Runnable {
+	
+	//DEBUG
+	private int currentFPS = 0;
+	
+	//SCREEN SETTINGS
   final int originalTileSize = 16;
   final int scale = 3;
   
@@ -66,6 +70,7 @@ public class GamePanel extends JPanel implements Runnable{
   //ENTITY AND OBJECTS
   private Player player = new Player(this, keyH);
   private SuperObject obj[] = new SuperObject[30];
+  Font debug = new Font("Bahnschrift", Font.BOLD, 24);
   
 
   
@@ -97,32 +102,39 @@ public class GamePanel extends JPanel implements Runnable{
     double delta = 0;
     long lastTime = System.nanoTime();
     long currentTime;
-    //long timer = 0;
-    //int drawCount = 0;
+    long timer = 0;
+    int drawCount = 0; 
+
+    
     
     while(gameThread != null) {
       
-      currentTime = System.nanoTime();
+    	currentTime = System.nanoTime();
       
-      delta += (currentTime - lastTime)/drawIntervall;
-      //timer += (currentTime-lastTime);
-      lastTime = currentTime;
+    	delta += (currentTime - lastTime)/drawIntervall;
+    	if(keyH.isDebug()) {
+    		timer += (currentTime-lastTime);
+      	}
+    	lastTime = currentTime;
       
-      if(delta >= 1) {
-        update();
-        repaint();
-        delta--;
-        //drawCount++;
-      }
+    	if(delta >= 1) {
+    		update();
+    		repaint();
+    		delta--;
+    		if(keyH.isDebug()) {
+        	drawCount++;
+    		}
+    	}
       
-       /*if(timer >= 1000000000) {
-        System.out.println("FPS:" + drawCount);
-        drawCount = 0;
-        timer = 0;
-      }*/
-      // hallo text (kann weg)
+    	if(keyH.isDebug()) {
+    		if(timer >= 1000000000) {
+    			currentFPS = drawCount;
+    			drawCount = 0;
+    			timer = 0;
+    		} 
+      
+    	}
     }
-    
   }
   public void update() {              //Darf der Charakter schräg laufen?
     
@@ -136,18 +148,44 @@ public class GamePanel extends JPanel implements Runnable{
     
     Graphics2D g2 = (Graphics2D)g;
     
+    // DEBUG
+    long drawStart = 0;
+    if(keyH.isDebug() == true) {
+    	drawStart = System.nanoTime();
+    }
+    
+    
     // Hier werden die Tiles erzeugt
     tileM.draw(g2);
     
     // Hier werden die Objekte platziert
     for(int i = 0; i < obj.length; i++) {
     	if(obj[i] != null) {	// sicherstellen, dass Arrayindex immer gefüllt ist
-    		obj[i].draw(g2, this);
+    		obj[i].draw(g2, this, keyH);
     	}
     }
     
     // Hier wird der Spieler gespawnt
     getPlayer().draw(g2);
+    
+    
+    // DEBUG
+    if(keyH.isDebug() == true) {
+    	long drawEnd = System.nanoTime();
+    	long passed = drawEnd - drawStart;
+    	g2.setColor(Color.red);
+    	g2.setFont(debug);
+    	g2.drawString("Debug Infos", 10, 100);
+    	g2.setColor(Color.green);
+    	g2.drawString("Renderzeit: " + passed + " Nano-Sekunden", 10, 125);
+    	System.out.println("Draw Time: " + passed);
+    	g2.setColor(Color.cyan);
+    	g2.drawString(currentFPS + " FPS", 680, 30);
+    	g2.setColor(Color.magenta);
+    	g2.drawString("x: " + player.worldX / tileSize, 10, 30);
+    	g2.drawString("y: " + (player.worldY + 48) / tileSize, 10, 55);
+    }
+    
     
     g2.dispose();
   }

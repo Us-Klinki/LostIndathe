@@ -1,12 +1,16 @@
 package object;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import main.GamePanel;
+import main.KeyHandler;
+import main.UtilityTool;
 
 public class SuperObject {
+	KeyHandler keyH;
 	
 	private BufferedImage image;
 	private String name;
@@ -15,8 +19,10 @@ public class SuperObject {
 	private Rectangle solidArea = new Rectangle(0, 0, 48, 48);
 	private int solidAreaDefaultX = 0;
 	private int solidAreaDefaultY = 0;
+	UtilityTool uToolObjects = new UtilityTool();
 	
-	public void draw(Graphics2D g2, GamePanel gp) {
+	public void draw(Graphics2D g2, GamePanel gp, KeyHandler keyH) {
+		this.keyH = keyH;
 		
 		int screenX = worldX - gp.getPlayer().worldX + gp.getPlayer().screenX;
 		int screenY = worldY - gp.getPlayer().worldY + gp.getPlayer().screenY;
@@ -29,6 +35,10 @@ public class SuperObject {
 				worldY - gp.getTileSize() < gp.getPlayer().worldY + gp.getPlayer().screenY) {
 			
 			g2.drawImage(image, screenX, screenY, gp.getTileSize(), gp.getTileSize(), null);
+			if(keyH.isDebug() == true) {
+				g2.setColor(Color.YELLOW);
+				g2.drawRect(screenX + getSolidArea().x, screenY + getSolidArea().y, getSolidArea().width, getSolidArea().height);
+			} 
 		}
 		
 	}

@@ -6,6 +6,23 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener{
 	
 	public boolean upPressed, downPressed, leftPressed, rightPressed;
+	
+	// DEBUG
+	private boolean debug = false;
+	
+	/**
+	 * @return the debug
+	 */
+	public boolean isDebug() {
+		return debug;
+	}
+
+	/**
+	 * @param debug the debug to set
+	 */
+	public void setDebug(boolean debug) {
+		this.debug = debug;
+	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -28,6 +45,17 @@ public class KeyHandler implements KeyListener{
 		if(code == KeyEvent.VK_D) {
 			rightPressed = true;
 		}
+	
+	
+		// DEBUG
+		if(code == KeyEvent.VK_Q) {
+			if(isDebug() == false) {
+				setDebug(true);
+			}
+			else if(isDebug() == true) {
+				setDebug(false);
+			}
+		}
 	}
 
 	@Override
@@ -48,5 +76,6 @@ public class KeyHandler implements KeyListener{
 			rightPressed = false;
 		}
 	}
+
 
 }

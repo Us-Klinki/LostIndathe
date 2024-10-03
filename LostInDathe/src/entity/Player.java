@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -9,6 +10,7 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UtilityTool;
 
 public class Player extends Entity {
 
@@ -40,36 +42,46 @@ public class Player extends Entity {
 	
 	public void setDefaultValues() {
 		
-		worldX = gp.getTileSize() * 23;
-		worldY = gp.getTileSize() * 21;
+		worldX = gp.getTileSize() * 20;
+		worldY = gp.getTileSize() * 25;
 		speed = 4;
 		direction = "down";
 		
 	}
-	public void getPlayerImage() { //TODO: HIER NOCH ECHTE PLAYER-TEXTUR EINFÜGEN!!!
+	public void getPlayerImage() { 
+	
+	up1 = setup("Hinten1");
+	up2 = setup("Hinten2");
+	down1 = setup("Vorne1");
+	down2 = setup("Vorne2");
+	left1 = setup("Links1");
+	left2 = setup("Links2");
+	right1 = setup("Rechts1");
+	right2 = setup("Rechts2");
+	tleft1 = setup("HintenLinks1");
+	tleft2 = setup("HintenLinks2");
+	tright1 = setup("HintenRechts1");
+	tright2 = setup("HintenRechts2");
+	bleft1 = setup("VorneLinks1");
+	bleft2 = setup("VorneLinks2");
+	bright1 = setup("VorneRechts1");
+	bright2 = setup("VorneRechts2");
+	}
+	
+	private BufferedImage setup(String imageName) {
+		
+		UtilityTool uToolPlayer = new UtilityTool();
+		BufferedImage playerSprite = null;
 		
 		try {
+			playerSprite = ImageIO.read(getClass().getResourceAsStream("/player/" + imageName +".png"));
+			playerSprite = uToolPlayer.getScaledImage(playerSprite, gp.getTileSize(), gp.getTileSize());
 			
-			up1 = ImageIO.read(getClass().getResourceAsStream("/player/Hinten1.png"));
-			up2 = ImageIO.read(getClass().getResourceAsStream("/player/Hinten2.png"));
-			down1 = ImageIO.read(getClass().getResourceAsStream("/player/Vorne1.png"));
-			down2 = ImageIO.read(getClass().getResourceAsStream("/player/Vorne2.png"));
-			left1 = ImageIO.read(getClass().getResourceAsStream("/player/Links1.png"));
-			left2 = ImageIO.read(getClass().getResourceAsStream("/player/Links2.png"));
-			right1 = ImageIO.read(getClass().getResourceAsStream("/player/Rechts1.png"));
-			right2 = ImageIO.read(getClass().getResourceAsStream("/player/Rechts2.png"));
-			tleft1 = ImageIO.read(getClass().getResourceAsStream("/player/HintenLinks1.png"));
-			tleft2 = ImageIO.read(getClass().getResourceAsStream("/player/HintenLinks2.png"));
-			tright1 = ImageIO.read(getClass().getResourceAsStream("/player/HintenRechts1.png"));
-			tright2 = ImageIO.read(getClass().getResourceAsStream("/player/HintenRechts2.png"));
-			bleft1 = ImageIO.read(getClass().getResourceAsStream("/player/VorneLinks1.png"));
-			bleft2 = ImageIO.read(getClass().getResourceAsStream("/player/VorneLinks2.png"));
-			bright1 = ImageIO.read(getClass().getResourceAsStream("/player/VorneRechts1.png"));
-			bright2 = ImageIO.read(getClass().getResourceAsStream("/player/VorneRechts2.png"));
-		}
-		catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		return playerSprite;
 	}
 	
 	public void update() { // Methode wird 60-mal pro Sekunde aufgerufen
@@ -287,6 +299,12 @@ public class Player extends Entity {
 			
 			break;
 		}
-		g2.drawImage(image, screenX, screenY, gp.getTileSize(), gp.getTileSize(), null);
+		g2.drawImage(image, screenX, screenY, null);
+		
+		//DEBUG
+		if(keyH.isDebug() == true) {
+			g2.setColor(Color.pink);
+			g2.drawRect(screenX + getSolidArea().x, screenY + getSolidArea().y, getSolidArea().width, getSolidArea().height);
+		}
 	}
 }
