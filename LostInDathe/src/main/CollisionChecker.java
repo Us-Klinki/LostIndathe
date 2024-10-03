@@ -72,7 +72,7 @@ public void checkTile(Entity entity) {
 
 public int checkObject(Entity entity, boolean player) {
 
-    int index = 999; // Standardwert, falls kein Objekt gefunden wird
+    int objectIndex = 999; // Standardwert, falls kein Objekt gefunden wird
 
     // Überprüfe alle Objekte im Spiel
     for (int i = 0; i < gp.getObj().length; i++) {
@@ -107,7 +107,7 @@ public int checkObject(Entity entity, boolean player) {
                     entity.setCollisionOn(true);
                 }
                 if (player) {
-                    index = i; // Wenn der Spieler das Objekt ist, speichere den Index
+                    objectIndex = i; // Wenn der Spieler das Objekt ist, speichere den Index
                 }
             }
 
@@ -119,7 +119,7 @@ public int checkObject(Entity entity, boolean player) {
         }
     }
 
-    return index;
+    return objectIndex;
 }
 
 

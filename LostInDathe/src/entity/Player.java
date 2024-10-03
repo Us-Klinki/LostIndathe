@@ -84,8 +84,8 @@ public class Player extends Entity {
 	    setCollisionOn(false);
 
 	    // Überprüfe Kollisionen der Objekte
-	    int objIndex = gp.cChecker.checkObject(this, true); // Check object collision first
-	    pickUpObject(objIndex);
+	    int objectIndex = gp.cChecker.checkObject(this, true); // Check object collision first
+	    pickUpObject(objectIndex);
 
 	    // Vertikale Bewegungsrichtung prüfen
 	    if (keyH.upPressed) {
