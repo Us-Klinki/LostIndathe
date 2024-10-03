@@ -193,6 +193,7 @@ public class Player extends Entity {
 			String objectName = gp.getObj()[i].getName();
 			switch(objectName) {
 			case "Key":
+				gp.playSE(1);
 				hasKey++; // virtuelles Inventar
 				gp.getObj()[i] = null;
 				System.out.println("Schlüssel: " + hasKey);
@@ -200,6 +201,7 @@ public class Player extends Entity {
 			case "Bathroomdoor":
 				//TODO: Bugfix benötigt: Wenn man keinen Schlüssel hat, ist es möglich, sich zu softlocken...
 				if(hasKey > 0) {
+					gp.playSE(0);
 					gp.getObj()[i] = null;
 					hasKey--;
 				}

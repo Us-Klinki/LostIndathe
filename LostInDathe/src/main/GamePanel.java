@@ -27,8 +27,6 @@ public class GamePanel extends JPanel implements Runnable{
   // WORLD SETTINGS
   final int maxWorldCol = 50;
   final int maxWorldRow = 50;
-  final int worldWidth = tileSize * maxWorldCol;
-  final int worldHeight = tileSize * maxWorldRow;
   
   public int getTileSize() {
     return tileSize;
@@ -56,21 +54,16 @@ public class GamePanel extends JPanel implements Runnable{
     return maxWorldRow;
   }
   
-  public int getWorldWidth() {
-    return worldWidth;
-  }
-  
-  public int getWorldHeight() {
-    return worldHeight;
-  }
   // FPS
   int FPS = 60;
   
   TileManager tileM = new TileManager(this);
   KeyHandler keyH = new KeyHandler();
-  Thread gameThread;        //Thread ist nötig damit das Spiel durchgehend läuft
+  Sound sound = new Sound();
   public CollisionChecker cChecker = new CollisionChecker(this);
   private AssetPlacer aPlacer = new AssetPlacer(this);
+  Thread gameThread;        //Thread ist nötig damit das Spiel durchgehend läuft
+  //ENTITY AND OBJECTS
   private Player player = new Player(this, keyH);
   private SuperObject obj[] = new SuperObject[30];
   
@@ -87,6 +80,8 @@ public class GamePanel extends JPanel implements Runnable{
   
   public void setupGame() {
 	  aPlacer.setObject();
+	  
+	  playMusic(2);
   }
   
   public void startGameThread() {       //Thread Compiler
@@ -96,36 +91,6 @@ public class GamePanel extends JPanel implements Runnable{
   }
   
   @Override
-  /* public void run() {
-    
-    double drawIntervall = 1000000000/FPS; // 0,016666666 Sekunden
-    double nextDrawTime = System.nanoTime() + drawIntervall;
-    
-    while(gameThread != null) {
-      
-      update();
-      
-      repaint();
-      
-      try {
-        
-          double remainingTime = nextDrawTime - System.nanoTime();
-          remainingTime = remainingTime/1000000;
-          
-          if(remainingTime < 0) {
-            remainingTime = 0;
-          }
-          
-        Thread.sleep((long) remainingTime);;
-        
-        nextDrawTime += drawIntervall;
-        
-      } catch (InterruptedException e) {
-          e.printStackTrace();
-      } 
-    }
-  }
-  */
   public void run() {
     
     double drawIntervall = 1000000000/FPS;
@@ -185,6 +150,22 @@ public class GamePanel extends JPanel implements Runnable{
     getPlayer().draw(g2);
     
     g2.dispose();
+  }
+  
+  public void playMusic(int i) {
+	  
+	  sound.setFile(i);
+	  sound.play();
+	  sound.loop();
+  }
+  public void stopMusic() {
+	  
+	  sound.stop();
+  }
+  public void playSE(int i) {
+	  
+	  sound.setFile(i);
+	  sound.play();
   }
   /**
    * @return the player
