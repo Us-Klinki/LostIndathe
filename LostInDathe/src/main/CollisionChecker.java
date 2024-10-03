@@ -87,17 +87,17 @@ public int checkObject(Entity entity, boolean player) {
 
             // Überprüfe die Richtung der Entität
             switch (entity.direction) {
+            	case "up":
+            		entity.getSolidArea().y -= entity.speed;
+            		break;
+            	case "down":
+            		entity.getSolidArea().y += entity.speed;
+            		break;   
                  case "left":
                     entity.getSolidArea().x -= entity.speed;
                     break;
                  case "right":
                     entity.getSolidArea().x += entity.speed;
-                    break;
-                 case "up":
-                    entity.getSolidArea().y -= entity.speed;
-                    break;
-                 case "down":
-                    entity.getSolidArea().y += entity.speed;
                     break;
             }
 

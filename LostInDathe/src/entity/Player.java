@@ -80,20 +80,20 @@ public class Player extends Entity {
 	    double moveX = 0;
 	    double moveY = 0;
 
-	    // Überprüfe Kollision
-	    setCollisionOn(false);
-
 	    // Überprüfe Kollisionen der Objekte
 	    int objectIndex = gp.cChecker.checkObject(this, true); // Check object collision first
 	    pickUpObject(objectIndex);
+	    
+	    setCollisionOn(false);
 
 	    // Vertikale Bewegungsrichtung prüfen
 	    if (keyH.upPressed) {
 	        direction = "up";
 	        moveY -= speed; // Bewege temporär nach oben
 	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der oberen Bewegung
+	        gp.cChecker.checkObject(this, true);
 	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
-	            moveY += speed; // Setze Bewegung zurück
+	            moveY = 0; // Setze Bewegung zurück
 	            setCollisionOn(false);
 	        }
 	    }
@@ -101,8 +101,9 @@ public class Player extends Entity {
 	        direction = "down";
 	        moveY += speed; // Bewege temporär nach unten
 	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der unteren Bewegung
+	        gp.cChecker.checkObject(this, true);
 	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
-	            moveY -= speed; // Setze Bewegung zurück
+	            moveY = 0; // Setze Bewegung zurück
 	            setCollisionOn(false);
 	        }
 	    }
@@ -111,8 +112,9 @@ public class Player extends Entity {
 	        direction = "left";
 	        moveX -= speed; // Bewege temporär nach links
 	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der linken Bewegung
+	        gp.cChecker.checkObject(this, true);
 	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
-	            moveX += speed; // Setze Bewegung zurück
+	            moveX = 0; // Setze Bewegung zurück
 	            setCollisionOn(false);
 	        }
 	    }
@@ -120,11 +122,14 @@ public class Player extends Entity {
 	        direction = "right";
 	        moveX += speed; // Bewege temporär nach rechts
 	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der rechten Bewegung
+	        gp.cChecker.checkObject(this, true);
 	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
-	            moveX -= speed; // Setze Bewegung zurück
+	            moveX = 0; // Setze Bewegung zurück
 	            setCollisionOn(false);
 	        }
 	    }
+
+
 
 	    // Diagonalbewegung: Wenn sowohl horizontal als auch vertikal bewegt wird, normalisieren
 	    if (moveX != 0 && moveY != 0) {
