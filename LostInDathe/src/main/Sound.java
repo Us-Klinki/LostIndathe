@@ -10,6 +10,6 @@ public class Sound {
 	
 	public Sound() {
 		
-		soundURL[0] = getClass().getResource("");
+		soundURL[0] = getClass().getResource("/sound/door.wav");
 	}
 }
