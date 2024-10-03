@@ -73,22 +73,19 @@ public class Player extends Entity {
 	}
 	
 	public void update() { // Methode wird 60-mal pro Sekunde aufgerufen
-		
-	    double diagonalSpeed = speed/ Math.sqrt(2); // Geschwindigkeit bei diagonaler Bewegung
-	    
+
+	    double diagonalSpeed = speed / Math.sqrt(2); // Geschwindigkeit bei diagonaler Bewegung
+
 	    // Initialisierung der x- und y-Bewegung
 	    double moveX = 0;
 	    double moveY = 0;
 
-	 // Überprüfe Kollision
+	    // Überprüfe Kollision
 	    setCollisionOn(false);
-	    
-	 // Überprüfe Kollisionen der Objekte
-	    int objIndex = gp.cChecker.checkObject(this, true);
+
+	    // Überprüfe Kollisionen der Objekte
+	    int objIndex = gp.cChecker.checkObject(this, true); // Check object collision first
 	    pickUpObject(objIndex);
-	    
-
-
 
 	    // Vertikale Bewegungsrichtung prüfen
 	    if (keyH.upPressed) {
@@ -97,7 +94,7 @@ public class Player extends Entity {
 	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der oberen Bewegung
 	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
 	            moveY += speed; // Setze Bewegung zurück
-	    	    setCollisionOn(false);
+	            setCollisionOn(false);
 	        }
 	    }
 	    if (keyH.downPressed) {
@@ -106,7 +103,7 @@ public class Player extends Entity {
 	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der unteren Bewegung
 	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
 	            moveY -= speed; // Setze Bewegung zurück
-	    	    setCollisionOn(false);
+	            setCollisionOn(false);
 	        }
 	    }
 	    // Horizontale Bewegungsrichtung prüfen
@@ -116,7 +113,7 @@ public class Player extends Entity {
 	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der linken Bewegung
 	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
 	            moveX += speed; // Setze Bewegung zurück
-	    	    setCollisionOn(false);
+	            setCollisionOn(false);
 	        }
 	    }
 	    if (keyH.rightPressed) {
@@ -125,16 +122,18 @@ public class Player extends Entity {
 	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der rechten Bewegung
 	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
 	            moveX -= speed; // Setze Bewegung zurück
-	    	    setCollisionOn(false);
+	            setCollisionOn(false);
 	        }
 	    }
+
+	    // Diagonalbewegung: Wenn sowohl horizontal als auch vertikal bewegt wird, normalisieren
 	    if (moveX != 0 && moveY != 0) {
 	        double totalMovement = Math.sqrt(moveX * moveX + moveY * moveY);
-	        	moveX = (moveX / totalMovement) * diagonalSpeed;
-	        	moveY = (moveY / totalMovement) * diagonalSpeed;
+	        moveX = (moveX / totalMovement) * diagonalSpeed;
+	        moveY = (moveY / totalMovement) * diagonalSpeed;
 	    } 
-			
-	    
+
+	    // Setze Richtung basierend auf der Bewegung
 	    if (moveY < 0) {
 	        direction = "up";
 	    } else if (moveY > 0) {
@@ -146,17 +145,14 @@ public class Player extends Entity {
 	        direction = "right";
 	    } 
 	    if (moveX > 0 && moveY < 0) {
-	    	direction = "tright";
+	        direction = "tright";
 	    } else if (moveX > 0 && moveY > 0) {
-	    	direction = "bright";
+	        direction = "bright";
 	    } else if (moveX < 0 && moveY < 0) {
-	    	direction = "tleft";
+	        direction = "tleft";
 	    } else if (moveX < 0 && moveY > 0) {
-	    	direction = "bleft";
+	        direction = "bleft";
 	    }
-
-	    // Diagonalbewegung: Wenn sowohl horizontal als auch vertikal bewegt wird, normalisieren
-
 
 	    // Position aktualisieren
 	    worldX += moveX;

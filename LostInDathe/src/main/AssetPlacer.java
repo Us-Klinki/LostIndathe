@@ -26,14 +26,26 @@ public class AssetPlacer {
 		
 		gp.getObj()[3] = new OBJ_Toilet();
 		gp.getObj()[3].setWorldX(18 * gp.getTileSize());
-		gp.getObj()[3].setWorldY(1 * gp.getTileSize());
+		gp.getObj()[3].setWorldY(2 * gp.getTileSize());
 		
 		gp.getObj()[4] = new OBJ_Toilet();
 		gp.getObj()[4].setWorldX(19 * gp.getTileSize());
-		gp.getObj()[4].setWorldY(1 * gp.getTileSize());
+		gp.getObj()[4].setWorldY(2 * gp.getTileSize());
 		
 		gp.getObj()[5] = new OBJ_Toilet();
 		gp.getObj()[5].setWorldX(20 * gp.getTileSize());
-		gp.getObj()[5].setWorldY(1 * gp.getTileSize());
+		gp.getObj()[5].setWorldY(2 * gp.getTileSize());
+		
+		gp.getObj()[6] = new OBJ_Toilet();
+		gp.getObj()[6].setWorldX(18 * gp.getTileSize());
+		gp.getObj()[6].setWorldY(3 * gp.getTileSize());
+		
+		gp.getObj()[7] = new OBJ_Toilet();
+		gp.getObj()[7].setWorldX(19 * gp.getTileSize());
+		gp.getObj()[7].setWorldY(3 * gp.getTileSize());
+		
+		gp.getObj()[8] = new OBJ_Toilet();
+		gp.getObj()[8].setWorldX(20 * gp.getTileSize());
+		gp.getObj()[8].setWorldY(3 * gp.getTileSize());
 	}
 }

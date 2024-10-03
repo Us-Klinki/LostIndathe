@@ -71,12 +71,12 @@ public void checkTile(Entity entity) {
 	}
 
 public int checkObject(Entity entity, boolean player) {
-    
+
     int index = 999; // Standardwert, falls kein Objekt gefunden wird
-    
+
     // Überprüfe alle Objekte im Spiel
     for (int i = 0; i < gp.getObj().length; i++) {
-        
+
         if (gp.getObj()[i] != null) {
             // Bestimme die Hitbox (SolidArea) für die Entität
             entity.getSolidArea().x = entity.worldX + entity.getSolidAreaDefaultX();
@@ -84,69 +84,44 @@ public int checkObject(Entity entity, boolean player) {
             // Bestimme die Hitbox (SolidArea) für das Objekt
             gp.getObj()[i].getSolidArea().x = gp.getObj()[i].getWorldX() + gp.getObj()[i].getSolidAreaDefaultX();
             gp.getObj()[i].getSolidArea().y = gp.getObj()[i].getWorldY() + gp.getObj()[i].getSolidAreaDefaultY();
-        
+
             // Überprüfe die Richtung der Entität
             switch (entity.direction) {
-                case "up":
-                    entity.getSolidArea().y -= entity.speed;
-                    if (entity.getSolidArea().intersects(gp.getObj()[i].getSolidArea())) {
-                        if (gp.getObj()[i].isCollision()) {
-                            entity.setCollisionOn(true);
-                            entity.worldY += entity.speed; // Bewegung rückgängig machen
-                        }
-                        if (player) {
-                            index = i;
-                        }
-                    }
-                    break;
-                case "down":
-                    entity.getSolidArea().y += entity.speed;
-                    if (entity.getSolidArea().intersects(gp.getObj()[i].getSolidArea())) {
-                        if (gp.getObj()[i].isCollision()) {
-                            entity.setCollisionOn(true);
-                            entity.worldY -= entity.speed; // Bewegung rückgängig machen
-                        }
-                        if (player) {
-                            index = i;
-                        }
-                    }
-                    break;
-                case "left":
+                 case "left":
                     entity.getSolidArea().x -= entity.speed;
-                    if (entity.getSolidArea().intersects(gp.getObj()[i].getSolidArea())) {
-                        if (gp.getObj()[i].isCollision()) {
-                            entity.setCollisionOn(true);
-                            entity.worldX += entity.speed; // Bewegung rückgängig machen
-                        }
-                        if (player) {
-                            index = i;
-                        }
-                    }
                     break;
-                case "right":
+                 case "right":
                     entity.getSolidArea().x += entity.speed;
-                    if (entity.getSolidArea().intersects(gp.getObj()[i].getSolidArea())) {
-                        if (gp.getObj()[i].isCollision()) {
-                            entity.setCollisionOn(true);
-                            entity.worldX -= entity.speed; // Bewegung rückgängig machen
-                        }
-                        if (player) {
-                            index = i;
-                        }
-                    }
+                    break;
+                 case "up":
+                    entity.getSolidArea().y -= entity.speed;
+                    break;
+                 case "down":
+                    entity.getSolidArea().y += entity.speed;
                     break;
             }
-            
-            // Setze die SolidAreas nach der Kollisionserkennung zurück
+
+            // Prüfe, ob die Hitboxen sich überlappen
+            if (entity.getSolidArea().intersects(gp.getObj()[i].getSolidArea())) {
+                if (gp.getObj()[i].isCollision()) {
+                    entity.setCollisionOn(true);
+                }
+                if (player) {
+                    index = i; // Wenn der Spieler das Objekt ist, speichere den Index
+                }
+            }
+
+            // Setze die Hitboxen zurück
             entity.getSolidArea().x = entity.getSolidAreaDefaultX();
             entity.getSolidArea().y = entity.getSolidAreaDefaultY();
             gp.getObj()[i].getSolidArea().x = gp.getObj()[i].getSolidAreaDefaultX();
             gp.getObj()[i].getSolidArea().y = gp.getObj()[i].getSolidAreaDefaultY();
         }
     }
-    
+
     return index;
 }
+
 
 
 
