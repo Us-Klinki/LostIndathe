@@ -62,7 +62,7 @@ public class GamePanel extends JPanel implements Runnable {
   int FPS = 60;
   
   TileManager tileM = new TileManager(this);
-  KeyHandler keyH = new KeyHandler();
+  KeyHandler keyH = new KeyHandler(this);
   Sound music = new Sound();
   Sound se = new Sound();
   public CollisionChecker cChecker = new CollisionChecker(this);
@@ -72,8 +72,14 @@ public class GamePanel extends JPanel implements Runnable {
   private Player player = new Player(this, keyH);
   private SuperObject obj[] = new SuperObject[30];
   Font debug = new Font("Bahnschrift", Font.BOLD, 24);
+  public UI ui = new UI(this);
   
-
+  
+  //Game State
+  public int gameState; 
+  public final int playState = 1;
+  public final int pauseState = 2;
+  
   
   public GamePanel() {      //GamePanel Compiler
     
@@ -88,6 +94,7 @@ public class GamePanel extends JPanel implements Runnable {
 	  aPlacer.setObject();
 	  
 	  playMusic(2);
+	  gameState = playState;
   }
   
   public void startGameThread() {       //Thread Compiler
@@ -139,11 +146,17 @@ public class GamePanel extends JPanel implements Runnable {
   }
   public void update() {              //Darf der Charakter schräg laufen?
     
-    getPlayer().update();
+	  if(gameState == playState) {
+		  getPlayer().update();
     
-  }
+	  }
+	  if(gameState == pauseState) { 
+		  
+	  }
+		  
+	  }
   
-  public void paintComponent(Graphics g) {
+  public void paintComponent(Graphics g ) {
     
     super.paintComponent(g);
     
@@ -155,7 +168,8 @@ public class GamePanel extends JPanel implements Runnable {
     	drawStart = System.nanoTime();
     }
     
-    
+    //Überpfrüfung vom game state
+    if(gameState == playState) {
     // Hier werden die Tiles erzeugt
     tileM.draw(g2);
     
@@ -168,7 +182,12 @@ public class GamePanel extends JPanel implements Runnable {
     
     // Hier wird der Spieler gespawnt
     getPlayer().draw(g2);
-    
+    }
+    else if (gameState == pauseState) {
+    	
+    	ui.drawPauseScreen(g2);
+    }
+  
     
     // DEBUG
     if(keyH.isDebug() == true) {
@@ -191,7 +210,9 @@ public class GamePanel extends JPanel implements Runnable {
     g2.dispose();
   }
   
-  public void playMusic(int i) {
+	
+
+public void playMusic(int i) {
 	  
 	  music.setFile(i);
 	  music.play();

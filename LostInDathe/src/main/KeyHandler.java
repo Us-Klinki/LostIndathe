@@ -5,8 +5,14 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener{
 	
+	GamePanel gp;
 	public boolean upPressed, downPressed, leftPressed, rightPressed;
 	
+	
+	//GAME STATE
+	public KeyHandler(GamePanel gp) {
+		this.gp = gp;
+	}
 	// DEBUG
 	private boolean debug = false;
 	
@@ -46,6 +52,18 @@ public class KeyHandler implements KeyListener{
 			rightPressed = true;
 		}
 	
+		//GAME STATE
+		if(code == KeyEvent.VK_K) {
+			System.out.println("K wurde gedrückt");
+			if(gp.gameState == gp.playState) {
+				gp.gameState = gp.pauseState;
+				System.out.println("Spiel pausiert");
+			}
+			else if (gp.gameState == gp.pauseState) {
+				gp.gameState = gp.playState;
+				
+			}
+		}
 	
 		// DEBUG
 		if(code == KeyEvent.VK_Q) {
