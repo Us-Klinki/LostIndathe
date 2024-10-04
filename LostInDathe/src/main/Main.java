@@ -24,6 +24,8 @@ public class Main {
     getWindow().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    //Das Fenster kann geschlossen werden
     getWindow().setResizable(true);                  //Das Fenster kann nicht vergrößert werden
     getWindow().setTitle("Lost in Dathe"); 
+    
+    //GUI Leiste oben zum Fenster schließen
     getWindow().setUndecorated(true);
     
     GamePanel gamePanel = new GamePanel();            //GamePanel wird in Main Klasse eingefügt

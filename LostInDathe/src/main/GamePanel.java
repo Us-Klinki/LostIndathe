@@ -12,6 +12,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
@@ -140,6 +141,7 @@ public class GamePanel extends JPanel implements Runnable {
  		tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
  		g2 = (Graphics2D)tempScreen.getGraphics();
  		
+ 		//Hier kann Full Screen ausgeschalten werden
  		setFullScreen();
  		
 	 
@@ -294,6 +296,7 @@ public class GamePanel extends JPanel implements Runnable {
  		
  		Graphics g = getGraphics();
  		g.drawImage(tempScreen, 0, 0, screenWidthVollbild, screenHeightVollbild, null);
+ 		
  		g.dispose();
  	}
  	public void playMusic(int i) {
