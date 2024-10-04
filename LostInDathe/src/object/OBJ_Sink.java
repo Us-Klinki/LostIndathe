@@ -22,6 +22,7 @@ public class OBJ_Sink extends SuperObject {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
+		setCollision(true);
 		
 	}
 }
