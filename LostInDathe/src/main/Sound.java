@@ -15,6 +15,7 @@ public class Sound {
 		soundURL[0] = getClass().getResource("/sound/door.wav");
 		soundURL[1] = getClass().getResource("/sound/key.wav");
 		soundURL[2] = getClass().getResource("/sound/music.wav");
+		soundURL[3] = getClass().getResource("/sound/mainmenu.wav");
 	}
 	
 	public void setFile(int i) {
@@ -40,5 +41,29 @@ public class Sound {
 	public void stop() {
 		
 		clip.stop();
+	}
+	
+	public void pause() {
+        if (clip.isRunning()) {
+            clip.stop(); // Stoppe die Wiedergabe
+        }
+    }
+	
+	public void resume() {
+        if (!clip.isRunning()) {
+            clip.start(); // Starte die Wiedergabe
+        }
+    }
+	
+	public void setPosition(long position) {
+        clip.setFramePosition((int) position);
+    }
+	
+	public long getPosition() {
+        return clip != null ? clip.getMicrosecondPosition() : 0;
+    }
+
+	public boolean isPlaying() {
+	    return clip != null && clip.isRunning();
 	}
 }

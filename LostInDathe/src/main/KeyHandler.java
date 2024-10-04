@@ -36,8 +36,43 @@ public class KeyHandler implements KeyListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-
+		
 		int code = e.getKeyCode();
+		
+		//TITEL STATE
+		if(gp.gameState == gp.titleState) {
+			
+			if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
+				//if(gp.ui.getCommandNum() < 1) {
+				gp.ui.setCommandNum(gp.ui.getCommandNum() - 1);
+				if(gp.ui.getCommandNum() == -1) {
+					gp.ui.setCommandNum(2);
+				}
+			}
+			
+			if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
+				gp.ui.setCommandNum(gp.ui.getCommandNum() + 1);
+				if(gp.ui.getCommandNum() == 3) {
+					gp.ui.setCommandNum(0);
+				}
+			}
+			
+			if(code == KeyEvent.VK_ENTER) {
+				if(gp.ui.getCommandNum() == 0) {
+					gp.gameState = gp.playState;
+					gp.stopMusic(3);
+					gp.playMusic(2);
+				}
+				if(gp.ui.getCommandNum() == 1) {
+					// für Savegames später
+				}
+				if(gp.ui.getCommandNum() == 2) {
+					System.exit(0);
+				}
+			}
+		}
+		
+		
 		
 		if(code == KeyEvent.VK_W) {
 			upPressed = true;
@@ -51,7 +86,9 @@ public class KeyHandler implements KeyListener{
 		if(code == KeyEvent.VK_D) {
 			rightPressed = true;
 		}
-	
+		
+		
+		
 		//GAME STATE
 		if(code == KeyEvent.VK_K) {
 			System.out.println("K wurde gedrückt");
