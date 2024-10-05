@@ -130,6 +130,10 @@ public class GamePanel extends JPanel implements Runnable {
  		this.setDoubleBuffered(true);
  		this.addKeyListener(keyH);
  		this.setFocusable(true);
+ 		Toolkit.getDefaultToolkit().setDynamicLayout(true);
+ 		System.setProperty("sun.java2d.opengl", "true"); // OpenGL aktivieren
+ 		System.setProperty("sun.java2d.translaccel", "true"); // Transparenzbeschleunigung
+ 		System.setProperty("sun.java2d.ddforcevram", "true"); // Video-RAM-Zwänge
  	}
   
  	public void setupGame() {
