@@ -219,7 +219,7 @@ public class GamePanel extends JPanel implements Runnable {
  	
  	public void update() {              //Darf der Charakter schräg laufen?
     
- 		if(gameState == playState) {
+ 		//if(gameState == playState) {
  			/*lastFrame = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
  			Graphics2D g2LastFrame = lastFrame.createGraphics();
  			tileM.draw(g2LastFrame);
@@ -230,10 +230,10 @@ public class GamePanel extends JPanel implements Runnable {
  			}*/
  			getPlayer().update();
  			//g2LastFrame.dispose();
- 		}
+/* 		}
  		
  		if(gameState == pauseState) { 
- 		}	  
+ 		}	  */
 	 }
   
  	
