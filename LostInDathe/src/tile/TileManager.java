@@ -1,8 +1,10 @@
 package tile;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
+import java.awt.image.VolatileImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,7 +13,7 @@ import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
-import main.UtilityTool;
+import main.UtilityToolTiles;
 
 public class TileManager {
 
@@ -56,21 +58,36 @@ public class TileManager {
 	}
 	
 	public void setup(int tileIndex, String imageName, boolean collision) {
-		
-		UtilityTool uToolTiles = new UtilityTool();
-		
-		try {
-			tile[tileIndex] = new Tile();
-			tile[tileIndex].image = ImageIO.read(getClass().getResourceAsStream("/Tiles/" + imageName + ".png"));
-			tile[tileIndex].image = uToolTiles.getScaledImage(tile[tileIndex].image, gp.getTileSize(), gp.getTileSize());
-			tile[tileIndex].setCollision(collision);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+
+	    UtilityToolTiles uToolTiles = new UtilityToolTiles();
+	    try {
+	        // Initialize the tile
+	        tile[tileIndex] = new Tile();
+	        
+	        // Load the image as BufferedImage first
+	        BufferedImage bufferedImage = ImageIO.read(getClass().getResourceAsStream("/Tiles/" + imageName + ".png"));
+	        
+	        // Scale the image
+	        VolatileImage scaledImage = uToolTiles.getScaledImage(bufferedImage, gp.getTileSize(), gp.getTileSize());
+
+	        // Convert the BufferedImage to VolatileImage
+	        GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment()
+	                                                       .getDefaultScreenDevice()
+	                                                       .getDefaultConfiguration();
+	        VolatileImage volatileImage = gc.createCompatibleVolatileImage(scaledImage.getWidth(), scaledImage.getHeight());
+	        volatileImage.createGraphics().drawImage(scaledImage, 0, 0, null);
+
+	        // Assign the VolatileImage to the tile
+	        tile[tileIndex].image = volatileImage;
+	        
+	        // Set collision property
+	        tile[tileIndex].setCollision(collision);
+	        
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
-	
+	//grad am telefonieren
 	public void loadMap(String filePath) {
 		
 		try {

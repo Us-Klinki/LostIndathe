@@ -1,10 +1,10 @@
 package tile;
 
-import java.awt.image.BufferedImage;
+import java.awt.image.VolatileImage;
 
 public class Tile {
 	
-	public BufferedImage image;
+	public VolatileImage image;
 	private boolean collision = false;
 	
 	public boolean getCollision() {
