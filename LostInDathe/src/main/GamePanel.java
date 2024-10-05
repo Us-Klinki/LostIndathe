@@ -120,7 +120,7 @@ public class GamePanel extends JPanel implements Runnable {
  	public final int titleState = 0;
  	public final int playState = 1;
  	public final int pauseState = 2;
- 	private BufferedImage lastFrame;
+ 	//private BufferedImage lastFrame;
   
   
  	public GamePanel() {      //GamePanel Compiler
@@ -220,16 +220,16 @@ public class GamePanel extends JPanel implements Runnable {
  	public void update() {              //Darf der Charakter schräg laufen?
     
  		if(gameState == playState) {
- 			lastFrame = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+ 			/*lastFrame = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
  			Graphics2D g2LastFrame = lastFrame.createGraphics();
  			tileM.draw(g2LastFrame);
  			for(int i = 0; i < obj.length; i++) {
  				if(obj[i] != null) {
  					obj[i].draw(g2LastFrame, this, keyH);
  				}
- 			}
+ 			}*/
  			getPlayer().update();
- 			g2LastFrame.dispose();
+ 			//g2LastFrame.dispose();
  		}
  		
  		if(gameState == pauseState) { 
@@ -269,9 +269,9 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 		g2.setColor(new Color(0, 0, 0, 128));
  	 	 		g2.fillRect(0, 0, getWidth(), getHeight());
  	 	 		// Den letzten Frame zeichnen
- 	 	 		if (lastFrame != null) {
- 	 	 			g2.drawImage(lastFrame, 0, 0, null); // Zeige den letzten Frame an
- 	 	 		}
+ 	 	 		//if (lastFrame != null) {
+ 	 	 			//g2.drawImage(lastFrame, 0, 0, null); // Zeige den letzten Frame an
+ 	 	 		//}
  	 	 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f)); // Volle Deckkraft für Text
  	 	 		ui.draw(g2);
  	 	 	}
