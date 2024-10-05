@@ -21,6 +21,7 @@ public class UI {
 	public boolean gameFinished = false;
 	public BufferedImage logo;
 	private int commandNum = 0;
+	private Color black = new Color(0, 0, 0, 0);
 	
 	public UI(GamePanel gp) {
 		 this.gp = gp; 
@@ -124,7 +125,7 @@ public class UI {
 	
 	public void drawPauseScreen() {
 	    
-	    g2.setColor(new Color(0, 0, 0, 0)); 
+	    g2.setColor(black); 
 	    g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);  
 
 	    

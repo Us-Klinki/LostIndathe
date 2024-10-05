@@ -15,6 +15,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.awt.image.VolatileImage;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -42,7 +43,7 @@ public class GamePanel extends JPanel implements Runnable {
 	// Für Vollbild
 	int screenWidthVollbild = screenWidth;
 	int screenHeightVollbild = screenHeight;
-	BufferedImage tempScreen;
+	VolatileImage tempScreen;
 	Graphics2D g2;
 	
 	
@@ -121,6 +122,7 @@ public class GamePanel extends JPanel implements Runnable {
  	public final int playState = 1;
  	public final int pauseState = 2;
  	//private BufferedImage lastFrame;
+ 	private Color transparentblack = new Color(0, 0, 0, 128);
   
   
  	public GamePanel() {      //GamePanel Compiler
@@ -142,7 +144,7 @@ public class GamePanel extends JPanel implements Runnable {
  		playMusic(3);
  		gameState = titleState;
  		
- 		tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
+ 		tempScreen = createVolatileImage(screenWidth, screenHeight);
  		g2 = (Graphics2D)tempScreen.getGraphics();
  		
  		//Hier kann Full Screen ausgeschalten werden
@@ -201,7 +203,7 @@ public class GamePanel extends JPanel implements Runnable {
  				}
  				drawToTempScreen(); // alles wird temporär in dem Buffer gespeichert
  				drawToScreen();	// Buffer wird auf den Bildschirm gezeichnet
- 				delta--;
+ 				delta = 0;
  				if(keyH.isDebug()) {
  					drawCount++;
  				}
@@ -266,7 +268,7 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 	}
  	 	 	else if (gameState == pauseState) {
  	 	 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
- 	 	 		g2.setColor(new Color(0, 0, 0, 128));
+ 	 	 		g2.setColor(transparentblack);
  	 	 		g2.fillRect(0, 0, getWidth(), getHeight());
  	 	 		// Den letzten Frame zeichnen
  	 	 		//if (lastFrame != null) {
