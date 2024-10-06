@@ -5,10 +5,14 @@ import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 
 public class Sound {
 	Clip clip;
 	URL soundURL[] = new URL[30];
+	FloatControl fc;
+	int volumeScale = 6;
+	float volume;
 	
 	public Sound() {
 		
@@ -16,6 +20,7 @@ public class Sound {
 		soundURL[1] = getClass().getResource("/sound/key.wav");
 		soundURL[2] = getClass().getResource("/sound/music.wav");
 		soundURL[3] = getClass().getResource("/sound/mainmenu.wav");
+		soundURL[4] = getClass().getResource("/sound/switch.wav");
 	}
 	
 	public void setFile(int i) {
@@ -25,6 +30,8 @@ public class Sound {
 			AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
 			clip = AudioSystem.getClip();
 			clip.open(ais);
+			fc = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
+			checkVolume();
 			
 		}catch(Exception e) {
 		}
@@ -65,5 +72,24 @@ public class Sound {
 
 	public boolean isPlaying() {
 	    return clip != null && clip.isRunning();
+	}
+	public void checkVolume() {
+		
+		switch(volumeScale) {
+		case 0: volume = -80f; break;
+		case 1: volume = -30f; break;
+		case 2: volume = -21f; break;
+		case 3: volume = -16f; break;
+		case 4: volume = -11f; break;
+		case 5: volume = -7f; break;
+		case 6: volume = -4f; break;
+		case 7: volume = -1f; break;
+		case 8: volume = 1f; break;
+		case 9: volume = 3f; break;
+		case 10: volume = 5f; break;
+		case 11: volume = 6f; break;
+		}
+		fc.setValue(volume);
+		
 	}
 }

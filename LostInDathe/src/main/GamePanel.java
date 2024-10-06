@@ -44,7 +44,9 @@ public class GamePanel extends JPanel implements Runnable {
 	int screenWidthVollbild = screenWidth;
 	int screenHeightVollbild = screenHeight;
 	VolatileImage tempScreen;
+	//BufferedImage tempScreen;
 	Graphics2D g2;
+	private boolean fullScreenOn = false;
 	
 	
 	//GETTER-SETTER
@@ -98,6 +100,18 @@ public class GamePanel extends JPanel implements Runnable {
  	public void setObj(SuperObject obj[]) {
  		this.obj = obj;
  	}
+ 	/**
+	 * @return the fullScreenOn
+	 */
+	public boolean isFullScreenOn() {
+		return fullScreenOn;
+	}
+	/**
+	 * @param fullScreenOn the fullScreenOn to set
+	 */
+	public void setFullScreenOn(boolean fullScreenOn) {
+		this.fullScreenOn = fullScreenOn;
+	}
   
  	// FPS
  	int FPS = 60;
@@ -121,6 +135,8 @@ public class GamePanel extends JPanel implements Runnable {
  	public final int titleState = 0;
  	public final int playState = 1;
  	public final int pauseState = 2;
+ 	public final int optionsState = 3;
+ 	
  	//private BufferedImage lastFrame;
  	private Color transparentblack = new Color(0, 0, 0, 128);
   
@@ -145,6 +161,7 @@ public class GamePanel extends JPanel implements Runnable {
  		gameState = titleState;
  		
  		tempScreen = createVolatileImage(screenWidth, screenHeight);
+ 		//tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
  		g2 = (Graphics2D)tempScreen.getGraphics();
  		
  		//Hier kann Full Screen ausgeschalten werden
@@ -221,7 +238,7 @@ public class GamePanel extends JPanel implements Runnable {
  	
  	public void update() {              //Darf der Charakter schräg laufen?
     
- 		//if(gameState == playState) {
+ 		if(gameState == playState) {
  			/*lastFrame = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
  			Graphics2D g2LastFrame = lastFrame.createGraphics();
  			tileM.draw(g2LastFrame);
@@ -231,11 +248,10 @@ public class GamePanel extends JPanel implements Runnable {
  				}
  			}*/
  			getPlayer().update();
- 			//g2LastFrame.dispose();
-/* 		}
+ 			//g2LastFrame.dispose();/* 		
+ 		}
  		
- 		if(gameState == pauseState) { 
- 		}	  */
+ 			  
 	 }
   
  	
@@ -277,6 +293,9 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f)); // Volle Deckkraft für Text
  	 	 		ui.draw(g2);
  	 	 	}
+ 	 	 	else if(gameState == optionsState) {
+ 	 	 		ui.draw(g2);
+ 	 	    }
  	 	}
  	
  	 	// DEBUG
@@ -320,5 +339,6 @@ public class GamePanel extends JPanel implements Runnable {
  		se.setFile(i);
  		se.play();
  	}
+	
 
 }
