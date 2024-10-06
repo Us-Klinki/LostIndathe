@@ -58,6 +58,11 @@ public class KeyHandler implements KeyListener{
 		else if(gp.gameState == gp.optionsState) {
 			optionsState(code);
 		}
+		
+		// DIALOGUE STATE
+		else if(gp.gameState == gp.dialogueState) {
+			dialogueState(code);
+		}
 
 	}
 	
@@ -128,6 +133,12 @@ public class KeyHandler implements KeyListener{
 			System.out.println(gp.gameState);
 		}
 		debug(code);
+		if(code == KeyEvent.VK_R) {
+			switch(gp.getCurrentMap()) {
+			case 0: gp.tileM.loadMap("/maps/bathroom.txt", 0); break;
+			case 1: gp.tileM.loadMap("/maps/subArea.txt", 1); break;
+			}
+		}
 	}
 	
 		// DEBUG
@@ -197,6 +208,13 @@ public class KeyHandler implements KeyListener{
 			}
 		}
 		debug(code);
+	}
+	
+	public void dialogueState(int code) {
+		if(code == KeyEvent.VK_ENTER) {
+			gp.gameState = gp.playState;
+		}
+		
 	}
 
 	@Override

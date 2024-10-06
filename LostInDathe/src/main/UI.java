@@ -46,6 +46,36 @@ public class UI {
 		 
 		 }
 	
+	/**
+	 * @return the commandNum
+	 */
+	public int getCommandNum() {
+		return commandNum;
+	}
+
+
+	/**
+	 * @param commandNum the commandNum to set
+	 */
+	public void setCommandNum(int commandNum) {
+		this.commandNum = commandNum;
+	}
+
+
+	/**
+	 * @return the currentDialogue
+	 */
+	public String getCurrentDialogue() {
+		return currentDialogue;
+	}
+
+
+	/**
+	 * @param currentDialogue the currentDialogue to set
+	 */
+	public void setCurrentDialogue(String currentDialogue) {
+		this.currentDialogue = currentDialogue;
+	}
 	
 	public void showMessage(String text) {
 		
@@ -290,9 +320,9 @@ public class UI {
 		
 		g2.setFont(bahn_xs);
 		g2.setColor(Color.white);
-		currentDialogue = "Das Spiel muss neugestartet werden, \num die Änderung zu realisieren.";
+		setCurrentDialogue("Das Spiel muss neugestartet werden, \num die Änderung zu realisieren.");
 		
-		 for (String line: currentDialogue.split("\n")) {
+		 for (String line: getCurrentDialogue().split("\n")) {
 		 	g2.drawString(line, textX, textY);
 		 	textY+= 40;
 		 }
@@ -357,9 +387,9 @@ public class UI {
 		int textX = frameX + gp.getTileSize();
 		int textY = frameY +  gp.getTileSize() + gp.getTileSize()/2;
 		
-		currentDialogue = "Spiel verlassen und zum Titelbildschirm \nzurückkehren? \n\nUngespeicherter Fortschritt geht verloren.";
+		setCurrentDialogue("Spiel verlassen und zum Titelbildschirm \nzurückkehren? \n\nUngespeicherter Fortschritt geht verloren.");
 		
-		for (String line: currentDialogue.split("\n")) {
+		for (String line: getCurrentDialogue().split("\n")) {
 			 	g2.drawString(line, textX, textY);
 			 	textY+= 40;
 			 } 
@@ -431,6 +461,27 @@ public class UI {
 		return uiPicture;
 	}
 	
+	public void drawDialogueScreen() {
+		
+		// Fenster
+		int x = gp.getTileSize() * 3;
+		int y = gp.getTileSize();
+		int width = gp.getScreenWidth() - (gp.getTileSize() * 8);
+		int height = gp.getTileSize() * 6;
+		drawSubWindow(x, y, width, height);
+		
+		g2.setFont(bahn_xs);
+		
+		x += gp.getTileSize();
+		y += gp.getTileSize();
+		
+		for (String line: getCurrentDialogue().split("\n")) {
+		 	g2.drawString(line, x, y);
+		 	y += 40;
+		 } 
+		g2.drawString(currentDialogue, x, y);
+	}
+	
 	public void drawSubWindow(int x, int y, int width, int height) {
 		int strokeWidth = 5;
 		int bogen = 35;
@@ -449,20 +500,7 @@ public class UI {
 	}
 
 
-	/**
-	 * @return the commandNum
-	 */
-	public int getCommandNum() {
-		return commandNum;
-	}
-
-
-	/**
-	 * @param commandNum the commandNum to set
-	 */
-	public void setCommandNum(int commandNum) {
-		this.commandNum = commandNum;
-	}
+	
 }
 
 	

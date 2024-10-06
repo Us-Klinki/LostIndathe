@@ -195,26 +195,31 @@ public class Player extends Entity {
 		else {
 			spriteNum = 1;
 		}
+		
+		// Check Event
+		gp.eHandler.checkEvent();
 	}
+	
+	
 	
 	// Aufsammeln / Interagieren mit Objekten
 	public void pickUpObject(int i) { 
 		
 		if (i != 999) {
 			
-			String objectName = gp.getObj()[i].getName();
+			String objectName = gp.getObj()[gp.getCurrentMap()][i].getName();
 			switch(objectName) {
 			case "Key":
 				gp.playSE(1);
 				hasKey++; // virtuelles Inventar
-				gp.getObj()[i] = null;
+				gp.getObj()[gp.getCurrentMap()][i] = null;
 				System.out.println("Schlüssel: " + hasKey);
 				break;
 			case "Bathroomdoor":
 				//TODO: Bugfix benötigt: Wenn man keinen Schlüssel hat, ist es möglich, sich zu softlocken...
 				if(hasKey > 0) {
 					gp.playSE(0);
-					gp.getObj()[i] = null;
+					gp.getObj()[gp.getCurrentMap()][i].setCollision(false);
 					hasKey--;
 				}
 				else {

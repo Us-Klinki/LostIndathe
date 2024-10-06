@@ -16,11 +16,13 @@ public class Sound {
 	
 	public Sound() {
 		
-		soundURL[0] = getClass().getResource("/sound/door.wav");
-		soundURL[1] = getClass().getResource("/sound/key.wav");
-		soundURL[2] = getClass().getResource("/sound/music.wav");
-		soundURL[3] = getClass().getResource("/sound/mainmenu.wav");
-		soundURL[4] = getClass().getResource("/sound/switch.wav");
+		soundURL[0] = pfad("door.wav");
+		soundURL[1] = pfad("key.wav");
+		soundURL[2] = pfad("music.wav");
+		soundURL[3] = pfad("mainmenu.wav");
+		soundURL[4] = pfad("switch.wav");
+		soundURL[5] = pfad("teleport.wav");
+		soundURL[6] = pfad("subArea.wav");
 	}
 	
 	public void setFile(int i) {
@@ -91,5 +93,9 @@ public class Sound {
 		}
 		fc.setValue(volume);
 		
+	}
+	
+	private URL pfad(String dateiname) {
+		return getClass().getResource("/sound/" + dateiname);
 	}
 }

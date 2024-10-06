@@ -39,6 +39,8 @@ public class GamePanel extends JPanel implements Runnable {
 	// WORLD SETTINGS
 	final int maxWorldCol = 50;
 	final int maxWorldRow = 50;
+	private final int maxMap = 16;
+	private int currentMap = 0;
 	
 	// Für Vollbild
 	int screenWidthVollbild = screenWidth;
@@ -91,13 +93,13 @@ public class GamePanel extends JPanel implements Runnable {
  	/**
  	 * @return the obj
  	 */
- 	public SuperObject[] getObj() {
+ 	public SuperObject[][] getObj() {
  		return obj;
  	}
  	/**
  	 * @param obj the obj to set
  	 */
- 	public void setObj(SuperObject obj[]) {
+ 	public void setObj(SuperObject obj[][]) {
  		this.obj = obj;
  	}
  	/**
@@ -112,6 +114,24 @@ public class GamePanel extends JPanel implements Runnable {
 	public void setFullScreenOn(boolean fullScreenOn) {
 		this.fullScreenOn = fullScreenOn;
 	}
+	/**
+	 * @return the maxMap
+	 */
+	public int getMaxMap() {
+		return maxMap;
+	}
+	/**
+	 * @return the currentMap
+	 */
+	public int getCurrentMap() {
+		return currentMap;
+	}
+	/**
+	 * @param currentMap the currentMap to set
+	 */
+	public void setCurrentMap(int currentMap) {
+		this.currentMap = currentMap;
+	}
   
  	// FPS
  	int FPS = 60;
@@ -123,15 +143,17 @@ public class GamePanel extends JPanel implements Runnable {
  	Sound se = new Sound();
  	public CollisionChecker cChecker = new CollisionChecker(this);
  	private AssetPlacer aPlacer = new AssetPlacer(this);
+ 	public UI ui = new UI(this);
+ 	public EventHandler eHandler = new EventHandler(this);
  	Config config = new Config(this);
  	Thread gameThread;        //Thread ist nötig damit das Spiel durchgehend läuft
  	
  	
  	//ENTITY AND OBJECTS
  	private Player player = new Player(this, keyH);
- 	private SuperObject obj[] = new SuperObject[30];
+ 	private SuperObject obj[][] = new SuperObject[maxMap][30];
  	Font debug = new Font("Bahnschrift", Font.BOLD, 24);
- 	public UI ui = new UI(this);
+ 	
   
  	//Game State
  	public int gameState;
@@ -139,6 +161,7 @@ public class GamePanel extends JPanel implements Runnable {
  	public final int playState = 1;
  	public final int pauseState = 2;
  	public final int optionsState = 3;
+ 	public final int dialogueState = 4;
  	
  	//private BufferedImage lastFrame;
  	private Color transparentblack = new Color(0, 0, 0, 128);
@@ -253,7 +276,9 @@ public class GamePanel extends JPanel implements Runnable {
  					obj[i].draw(g2LastFrame, this, keyH);
  				}
  			}*/
+
  			getPlayer().update();
+ 			eHandler.checkEvent();
  			//g2LastFrame.dispose();/* 		
  		}
  		
@@ -279,9 +304,9 @@ public class GamePanel extends JPanel implements Runnable {
  	 	    	// Hier werden die Tiles erzeugt
  	 	 		tileM.draw(g2);
  	 	 		// Hier werden die Objekte platziert
- 	 	 		for(int i = 0; i < obj.length; i++) {
- 	 	 			if(obj[i] != null) {	// sicherstellen, dass Arrayindex immer gefüllt ist
- 	 	 				obj[i].draw(g2, this, keyH);
+ 	 	 		for(int i = 0; i < obj[1].length; i++) {
+ 	 	 			if(obj[currentMap][i] != null) {	// sicherstellen, dass Arrayindex immer gefüllt ist
+ 	 	 				obj[currentMap][i].draw(g2, this, keyH);
  	 	 			}
  	 	 		}
  	 	    
@@ -345,6 +370,8 @@ public class GamePanel extends JPanel implements Runnable {
  		se.setFile(i);
  		se.play();
  	}
+	
+	
 	
 
 }
