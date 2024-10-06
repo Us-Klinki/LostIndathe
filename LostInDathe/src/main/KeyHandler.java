@@ -196,6 +196,7 @@ public class KeyHandler implements KeyListener{
 				}
 			}
 		}
+		debug(code);
 	}
 
 	@Override

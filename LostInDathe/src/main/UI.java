@@ -22,6 +22,7 @@ public class UI {
 	int messageCounter = 0;
 	public boolean gameFinished = false;
 	public BufferedImage logo;
+	private String currentDialogue = "";
 	private int commandNum = 0;
 	private Color black = new Color(0, 0, 0, 0);                    
 	int subState = 0;
@@ -167,13 +168,17 @@ public class UI {
 		
 		switch(subState) {
 		case 0: options_top(abstand, absatz, frameX, frameY, auswahlAbstand); break;
-		case 1: options_fullScreenNotification(frameX, frameY, auswahlAbstand); break;
+		case 1: options_fullScreenNotification(frameX, frameY, auswahlAbstand, abstand, absatz); break;
 		case 2: options_control(absatz, abstand, frameX, frameY, auswahlAbstand); break;
 		case 3: options_endGameConfirmation(absatz, abstand, frameX, frameY, auswahlAbstand); break;
 		}
 		
 		gp.keyH.enterPressed = false;
 	}
+	
+	/*public void drawDialogueScreen() {
+		
+	} */
 	public void options_top(int abstand, int absatz, int frameX, int frameY, int auswahlAbstand) {
 		int textX;
 		int textY;
@@ -259,7 +264,7 @@ public class UI {
 		g2.setStroke(new BasicStroke(3));
 		g2.setColor(new Color(190, 60, 190));
 		g2.drawRect(textX, textY, gp.getTileSize() / 2, gp.getTileSize() / 2);
-		if(gp.isFullScreenOn() == false) {
+		if(gp.isFullScreenOn() == true) {
 			g2.fillRect(textX, textY, gp.getTileSize() / 2, gp.getTileSize() / 2);
 		}
 		
@@ -274,30 +279,34 @@ public class UI {
 		g2.drawRect(textX, textY, musicAuswahlBreite, gp.getTileSize() / 2);
 		volumeWidth = (musicAuswahlBreite + 5) / 11 * gp.se.volumeScale;
 		g2.fillRect(textX, textY, (int) volumeWidth, gp.getTileSize() / 2);
+		
+		gp.config.saveConfig();
 	}
 	
-	public void options_fullScreenNotification(int frameX, int frameY, int auswahlAbstand) {
+	public void options_fullScreenNotification(int frameX, int frameY, int auswahlAbstand, int abstand, int absatz) {
 		
-		//int textX = frameX + gp.getTileSize();
-		//int textY = frameY + gp.getTileSize() * 4;
+		int textX = frameX + gp.getTileSize();
+		int textY = frameY + gp.getTileSize() * 4;
 		
-		/* WENN DIALOGE IMPLEMENTIERT currentDialoge = "Das Spiel muss neugestartet werden, um die Änderung zu realisieren."
+		g2.setFont(bahn_xs);
+		g2.setColor(Color.white);
+		currentDialogue = "Das Spiel muss neugestartet werden, \num die Änderung zu realisieren.";
 		
-		 for (String line: currentDialogue.split("\n)) {
-		 	g2.drawSting(line, textX, textY);
+		 for (String line: currentDialogue.split("\n")) {
+		 	g2.drawString(line, textX, textY);
 		 	textY+= 40;
 		 }
 		 
-		 
-		 textY = gp.getTileSize() * 9;
-		 g2.drawString("Zurück zum Menü", textX, textY);
+		 g2.setFont(bahn_s);
+		 textY += abstand * 3.9;
+		 g2.drawString("Zurück", textX, textY);
 		 if(commandNum == 0) {
 		 	g2.drawString(">", textX-25, textY);
 		 	if(gp.keyH.enterPressed == true) {
 		 		subState = 0;
 		 	}
 		 }	
-		 */
+		 
 		
 	}
 	
@@ -333,7 +342,7 @@ public class UI {
 		g2.setFont(bahn_s);
 		textX = frameX + gp.getTileSize();
 		textY += absatz;
-		g2.drawString("Zurück ins Menü", textX, textY);
+		g2.drawString("Zurück", textX, textY);
 		if(commandNum == 0) {
 			g2.drawString(">", textX - auswahlAbstand, textY);
 			if(gp.keyH.enterPressed == true) {
@@ -343,18 +352,18 @@ public class UI {
 		}
 	}
 	public void options_endGameConfirmation(int absatz, int abstand, int frameX, int frameY, int auswahlAbstand) {
-		g2.setFont(bahn_s);
+		g2.setFont(bahn_xs);
 		g2.setColor(Color.white);
 		int textX = frameX + gp.getTileSize();
 		int textY = frameY +  gp.getTileSize() + gp.getTileSize()/2;
 		
-		/*currentDialogue = "Spiel verlassen und \nzum Titelbildschirm zurückkehren? \nUngespeicherter Fortschritt \ngeht verloren.";
+		currentDialogue = "Spiel verlassen und zum Titelbildschirm \nzurückkehren? \n\nUngespeicherter Fortschritt geht verloren.";
 		
-		for (String line: currentDialogue.split("\n)) {
-			 	g2.drawSting(line, textX, textY);
+		for (String line: currentDialogue.split("\n")) {
+			 	g2.drawString(line, textX, textY);
 			 	textY+= 40;
-			 } */
-		
+			 } 
+		g2.setFont(bahn_s);
 		// Nein
 		String text = "Nein";
 		textX = getXforCenteredText(text);
@@ -377,6 +386,7 @@ public class UI {
 			g2.drawString(">", auswahlAbstand, textY);
 			if(gp.keyH.enterPressed == true) {
 				subState = 0;
+				commandNum = 0;
 				gp.music.stop();
 				gp.playMusic(3);
 				gp.gameState = gp.titleState;

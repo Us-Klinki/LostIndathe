@@ -115,15 +115,18 @@ public class GamePanel extends JPanel implements Runnable {
   
  	// FPS
  	int FPS = 60;
-  
+ 	
+ 	// System
  	TileManager tileM = new TileManager(this);
  	KeyHandler keyH = new KeyHandler(this);
  	Sound music = new Sound();
  	Sound se = new Sound();
  	public CollisionChecker cChecker = new CollisionChecker(this);
  	private AssetPlacer aPlacer = new AssetPlacer(this);
+ 	Config config = new Config(this);
  	Thread gameThread;        //Thread ist nötig damit das Spiel durchgehend läuft
-  
+ 	
+ 	
  	//ENTITY AND OBJECTS
  	private Player player = new Player(this, keyH);
  	private SuperObject obj[] = new SuperObject[30];
@@ -165,7 +168,10 @@ public class GamePanel extends JPanel implements Runnable {
  		g2 = (Graphics2D)tempScreen.getGraphics();
  		
  		//Hier kann Full Screen ausgeschalten werden
- 		setFullScreen();
+ 		if(fullScreenOn == true) {
+ 			setFullScreen();
+ 		}
+ 		
  		
 	 
  	}

@@ -16,6 +16,7 @@ public class Entity {
   private Rectangle solidArea;
   private int solidAreaDefaultX, solidAreaDefaultY;
   private boolean collisionOn = false;
+  String dialogues[] = new String[20];
   
   
 /**
