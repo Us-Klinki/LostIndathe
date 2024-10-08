@@ -268,7 +268,7 @@ public class UI {
 		}
 		// Spiel beenden
 		textY += abstand;
-		g2.drawString("Zum Hauptmenü", textX, textY);
+		g2.drawString("Spiel beenden", textX, textY);
 		if(commandNum == 4) {
 			g2.drawString(">", textX - auswahlAbstand, textY);
 			if(gp.keyH.enterPressed == true) {
@@ -387,7 +387,7 @@ public class UI {
 		int textX = frameX + gp.getTileSize();
 		int textY = frameY +  gp.getTileSize() + gp.getTileSize()/2;
 		
-		setCurrentDialogue("Spiel verlassen und zum Titelbildschirm \nzurückkehren? \n\nUngespeicherter Fortschritt geht verloren.");
+		setCurrentDialogue("Spiel verlassen und zum Desktop \nzurückkehren? \n\nUngespeicherter Fortschritt geht verloren.");
 		
 		for (String line: getCurrentDialogue().split("\n")) {
 			 	g2.drawString(line, textX, textY);
@@ -415,11 +415,14 @@ public class UI {
 		if(commandNum == 1) {
 			g2.drawString(">", auswahlAbstand, textY);
 			if(gp.keyH.enterPressed == true) {
-				subState = 0;
-				commandNum = 0;
-				gp.music.stop();
-				gp.playMusic(3);
-				gp.gameState = gp.titleState;
+				//subState = 0;
+				//commandNum = 0;
+				System.exit(1);
+				
+				//gp.music.stop();
+				//gp.playMusic(3);
+				
+				//gp.gameState = gp.titleState;
 			}
 		}
 		
