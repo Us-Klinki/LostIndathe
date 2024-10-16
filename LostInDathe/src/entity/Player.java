@@ -221,11 +221,11 @@ public class Player extends Entity {
 					gp.playSE(0);
 					gp.getObj()[gp.getCurrentMap()][i].setCollision(false);
 					hasKey--;
+					System.out.println("Schlüssel: " + hasKey);
 				}
-				else {
+				else if(gp.getObj()[gp.getCurrentMap()][i].isCollision() == true){
 			        System.out.println("Nicht genug Schlüssel");
 			    }
-				System.out.println("Schlüssel: " + hasKey);
 				break;
 			}
 			
