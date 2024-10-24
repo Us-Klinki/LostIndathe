@@ -12,20 +12,20 @@ public class CollisionChecker {
 		this.gp = gp;
 	}
 	
-public void checkTile(Entity entity) {
-    int entityLeftWorldX = entity.worldX + entity.getSolidArea().x;
-    int entityRightWorldX = entity.worldX + entity.getSolidArea().x + entity.getSolidArea().width;
-    int entityTopWorldY = entity.worldY + entity.getSolidArea().y;
-    int entityBottomWorldY = entity.worldY + entity.getSolidArea().y + entity.getSolidArea().height;
+	public void checkTile(Entity entity) {
+		int entityLeftWorldX = entity.worldX + entity.getSolidArea().x;
+		int entityRightWorldX = entity.worldX + entity.getSolidArea().x + entity.getSolidArea().width;
+		int entityTopWorldY = entity.worldY + entity.getSolidArea().y;
+		int entityBottomWorldY = entity.worldY + entity.getSolidArea().y + entity.getSolidArea().height;
 
-    int entityLeftCol = entityLeftWorldX/gp.tileSize;
-    int entityRightCol = entityRightWorldX/gp.tileSize;
-    int entityTopRow = entityTopWorldY/gp.tileSize;
-    int entityBottomRow = entityBottomWorldY/gp.tileSize;
+		int entityLeftCol = entityLeftWorldX/gp.tileSize;
+		int entityRightCol = entityRightWorldX/gp.tileSize;
+		int entityTopRow = entityTopWorldY/gp.tileSize;
+		int entityBottomRow = entityBottomWorldY/gp.tileSize;
+		
+		int tileNum1, tileNum2;
     
-    int tileNum1, tileNum2;
-    
-    switch(entity.direction) {
+		switch(entity.direction) {
     	case "up":
     		entityTopRow = (entityTopWorldY - entity.speed)/ gp.tileSize;
     		tileNum1 = gp.tileM.getMapTileNum()[gp.getCurrentMap()][entityLeftCol][entityTopRow];
@@ -70,23 +70,23 @@ public void checkTile(Entity entity) {
   
 	}
 
-public int checkObject(Entity entity, boolean player) {
+	public int checkObject(Entity entity, boolean player) {
 
-    int objectIndex = 999; // Standardwert, falls kein Objekt gefunden wird
+		int objectIndex = 999; // Standardwert, falls kein Objekt gefunden wird
 
-    // Überprüfe alle Objekte im Spiel
-    for (int i = 0; i < gp.getObj()[1].length; i++) { // AUF MEHRERE MAPS ANGEPASST
+		// Überprüfe alle Objekte im Spiel
+		for (int i = 0; i < gp.getObj()[1].length; i++) { // AUF MEHRERE MAPS ANGEPASST
 
-        if (gp.getObj()[gp.getCurrentMap()][i] != null) {
-            // Bestimme die Hitbox (SolidArea) für die Entität
-            entity.getSolidArea().x = entity.worldX + entity.getSolidAreaDefaultX();
-            entity.getSolidArea().y = entity.worldY + entity.getSolidAreaDefaultY();
-            // Bestimme die Hitbox (SolidArea) für das Objekt
-            gp.getObj()[gp.getCurrentMap()][i].getSolidArea().x = gp.getObj()[gp.getCurrentMap()][i].getWorldX() + gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultX();
-            gp.getObj()[gp.getCurrentMap()][i].getSolidArea().y = gp.getObj()[gp.getCurrentMap()][i].getWorldY() + gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultY();
+			if (gp.getObj()[gp.getCurrentMap()][i] != null) {
+				// Bestimme die Hitbox (SolidArea) für die Entität
+				entity.getSolidArea().x = entity.worldX + entity.getSolidAreaDefaultX();
+				entity.getSolidArea().y = entity.worldY + entity.getSolidAreaDefaultY();
+				// Bestimme die Hitbox (SolidArea) für das Objekt
+				gp.getObj()[gp.getCurrentMap()][i].getSolidArea().x = gp.getObj()[gp.getCurrentMap()][i].getWorldX() + gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultX();
+				gp.getObj()[gp.getCurrentMap()][i].getSolidArea().y = gp.getObj()[gp.getCurrentMap()][i].getWorldY() + gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultY();
 
-            // Überprüfe die Richtung der Entität
-            switch (entity.direction) {
+				// Überprüfe die Richtung der Entität
+				switch (entity.direction) {
             	case "up":
             		entity.getSolidArea().y -= entity.speed;
             		break;
@@ -99,32 +99,107 @@ public int checkObject(Entity entity, boolean player) {
                  case "right":
                     entity.getSolidArea().x += entity.speed;
                     break;
-            }
+				}
 
-            // Prüfe, ob die Hitboxen sich überlappen
-            if (entity.getSolidArea().intersects(gp.getObj()[gp.getCurrentMap()][i].getSolidArea())) {
-                if (gp.getObj()[gp.getCurrentMap()][i].isCollision()) {
-                    entity.setCollisionOn(true);
-                }
-                if (player) {
-                    objectIndex = i; // Wenn der Spieler das Objekt ist, speichere den Index
-                }
-            }
+				// Prüfe, ob die Hitboxen sich überlappen
+				if (entity.getSolidArea().intersects(gp.getObj()[gp.getCurrentMap()][i].getSolidArea())) {
+					if (gp.getObj()[gp.getCurrentMap()][i].isCollision()) {
+						entity.setCollisionOn(true);
+					}
+					if (player) {
+						objectIndex = i; // Wenn der Spieler das Objekt ist, speichere den Index
+					}
+				}
+				
+				// Setze die Hitboxen zurück
+				entity.getSolidArea().x = entity.getSolidAreaDefaultX();
+				entity.getSolidArea().y = entity.getSolidAreaDefaultY();
+				gp.getObj()[gp.getCurrentMap()][i].getSolidArea().x = gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultX();
+				gp.getObj()[gp.getCurrentMap()][i].getSolidArea().y = gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultY();
+			}
+		}
+		return objectIndex;
+	}
+	
+	public int checkEntity(Entity entity, Entity[][] target) {
+		int Entityindex = 999; // Standardwert, falls kein Objekt gefunden wird
 
-            // Setze die Hitboxen zurück
-            entity.getSolidArea().x = entity.getSolidAreaDefaultX();
-            entity.getSolidArea().y = entity.getSolidAreaDefaultY();
-            gp.getObj()[gp.getCurrentMap()][i].getSolidArea().x = gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultX();
-            gp.getObj()[gp.getCurrentMap()][i].getSolidArea().y = gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultY();
-        }
-    }
+		// Überprüfe alle Objekte im Spiel
+		for (int i = 0; i < target[1].length; i++) { // AUF MEHRERE MAPS ANGEPASST
 
-    return objectIndex;
-}
+			if (target[gp.getCurrentMap()][i] != null) {
+				// Bestimme die Hitbox (SolidArea) für die Entität
+				entity.getSolidArea().x = entity.worldX + entity.getSolidAreaDefaultX();
+				entity.getSolidArea().y = entity.worldY + entity.getSolidAreaDefaultY();
+				// Bestimme die Hitbox (SolidArea) für das Objekt
+				target[gp.getCurrentMap()][i].getSolidArea().x = target[gp.getCurrentMap()][i].worldX + target[gp.getCurrentMap()][i].getSolidAreaDefaultX();
+				target[gp.getCurrentMap()][i].getSolidArea().y = target[gp.getCurrentMap()][i].worldY + target[gp.getCurrentMap()][i].getSolidAreaDefaultY();
 
+				// Überprüfe die Richtung der Entität
+				switch (entity.direction) {
+            	case "up":
+            		entity.getSolidArea().y -= entity.speed;
+            		break;
+            	case "down":
+            		entity.getSolidArea().y += entity.speed;
+            		break;   
+                 case "left":
+                    entity.getSolidArea().x -= entity.speed;
+                    break;
+                 case "right":
+                    entity.getSolidArea().x += entity.speed;
+                    break;
+				}
 
+				// Prüfe, ob die Hitboxen sich überlappen
+				if (entity.getSolidArea().intersects(target[gp.getCurrentMap()][i].getSolidArea())) {
+					entity.setCollisionOn(true);
+					Entityindex = i;
+				}
+				
+				// Setze die Hitboxen zurück
+				entity.getSolidArea().x = entity.getSolidAreaDefaultX();
+				entity.getSolidArea().y = entity.getSolidAreaDefaultY();
+				target[gp.getCurrentMap()][i].getSolidArea().x = target[gp.getCurrentMap()][i].getSolidAreaDefaultX();
+				target[gp.getCurrentMap()][i].getSolidArea().y = target[gp.getCurrentMap()][i].getSolidAreaDefaultY();
+			}
+		}
+		return Entityindex;
+	}
+	
+	public void checkPlayer(Entity entity) {
+		entity.getSolidArea().x = entity.worldX + entity.getSolidAreaDefaultX();
+		entity.getSolidArea().y = entity.worldY + entity.getSolidAreaDefaultY();
+		// Bestimme die Hitbox (SolidArea) für das Objekt
+		gp.getPlayer().getSolidArea().x = gp.getPlayer().worldX + gp.getPlayer().getSolidAreaDefaultX();
+		gp.getPlayer().getSolidArea().y = gp.getPlayer().worldY + gp.getPlayer().getSolidAreaDefaultY();
 
+		// Überprüfe die Richtung der Entität
+		switch (entity.direction) {
+    	case "up":
+    		entity.getSolidArea().y -= entity.speed;
+    		break;
+    	case "down":
+    		entity.getSolidArea().y += entity.speed;
+    		break;   
+         case "left":
+            entity.getSolidArea().x -= entity.speed;
+            break;
+         case "right":
+            entity.getSolidArea().x += entity.speed;
+            break;
+		}
 
-
+		// Prüfe, ob die Hitboxen sich überlappen
+		if (entity.getSolidArea().intersects(gp.getPlayer().getSolidArea())) {
+			entity.setCollisionOn(true);
+		}
+		
+		// Setze die Hitboxen zurück
+		entity.getSolidArea().x = entity.getSolidAreaDefaultX();
+		entity.getSolidArea().y = entity.getSolidAreaDefaultY();
+		gp.getPlayer().getSolidArea().x = gp.getPlayer().getSolidAreaDefaultX();
+		gp.getPlayer().getSolidArea().y = gp.getPlayer().getSolidAreaDefaultY();
+	}
 }
 

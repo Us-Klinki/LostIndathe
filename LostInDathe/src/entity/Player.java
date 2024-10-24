@@ -4,17 +4,12 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
-import main.UtilityTool;
 
 public class Player extends Entity {
 
-	GamePanel gp;
 	KeyHandler keyH;
 	
 	public final int screenX;
@@ -23,7 +18,8 @@ public class Player extends Entity {
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		
-		this.gp = gp;
+		super(gp);
+		
 		this.keyH = keyH;
 		
 		screenX = this.gp.getScreenWidth() / 2 - (gp.getTileSize() / 2);
@@ -50,39 +46,24 @@ public class Player extends Entity {
 	}
 	public void getPlayerImage() { 
 	
-	up1 = setup("Hinten1");
-	up2 = setup("Hinten2");
-	down1 = setup("Vorne1");
-	down2 = setup("Vorne2");
-	left1 = setup("Links1");
-	left2 = setup("Links2");
-	right1 = setup("Rechts1");
-	right2 = setup("Rechts2");
-	tleft1 = setup("HintenLinks1");
-	tleft2 = setup("HintenLinks2");
-	tright1 = setup("HintenRechts1");
-	tright2 = setup("HintenRechts2");
-	bleft1 = setup("VorneLinks1");
-	bleft2 = setup("VorneLinks2");
-	bright1 = setup("VorneRechts1");
-	bright2 = setup("VorneRechts2");
+	up1 = setup("/player/Hinten1");
+	up2 = setup("/player/Hinten2");
+	down1 = setup("/player/Vorne1");
+	down2 = setup("/player/Vorne2");
+	left1 = setup("/player/Links1");
+	left2 = setup("/player/Links2");
+	right1 = setup("/player/Rechts1");
+	right2 = setup("/player/Rechts2");
+	tleft1 = setup("/player/HintenLinks1");
+	tleft2 = setup("/player/HintenLinks2");
+	tright1 = setup("/player/HintenRechts1");
+	tright2 = setup("/player/HintenRechts2");
+	bleft1 = setup("/player/VorneLinks1");
+	bleft2 = setup("/player/VorneLinks2");
+	bright1 = setup("/player/VorneRechts1");
+	bright2 = setup("/player/VorneRechts2");
 	}
 	
-	private BufferedImage setup(String imageName) {
-		
-		UtilityTool uToolPlayer = new UtilityTool();
-		BufferedImage playerSprite = null;
-		
-		try {
-			playerSprite = ImageIO.read(getClass().getResourceAsStream("/player/" + imageName +".png"));
-			playerSprite = uToolPlayer.getScaledImage(playerSprite, gp.getTileSize(), gp.getTileSize());
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return playerSprite;
-	}
 	
 	public void update() { // Methode wird 60-mal pro Sekunde aufgerufen
 
@@ -92,9 +73,13 @@ public class Player extends Entity {
 	    double moveX = 0;
 	    double moveY = 0;
 
-	    // Überprüfe Kollisionen der Objekte
+	    // Überprüfe Kollisionen der Objekte zum aufheben
 	    int objectIndex = gp.cChecker.checkObject(this, true); // Check object collision first
 	    pickUpObject(objectIndex);
+	    
+	    // Überprüfe Kollision der NPCs zum interagieren
+	    int npcIndex = gp.cChecker.checkEntity(this, gp.getNpc());
+	    interactNPC(npcIndex);
 	    
 	    setCollisionOn(false);
 
@@ -104,6 +89,7 @@ public class Player extends Entity {
 	        moveY -= speed; // Bewege temporär nach oben
 	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der oberen Bewegung
 	        gp.cChecker.checkObject(this, true);
+	        gp.cChecker.checkEntity(this, gp.getNpc());
 	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
 	            moveY = 0; // Setze Bewegung zurück
 	            setCollisionOn(false);
@@ -114,6 +100,7 @@ public class Player extends Entity {
 	        moveY += speed; // Bewege temporär nach unten
 	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der unteren Bewegung
 	        gp.cChecker.checkObject(this, true);
+	        gp.cChecker.checkEntity(this, gp.getNpc());
 	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
 	            moveY = 0; // Setze Bewegung zurück
 	            setCollisionOn(false);
@@ -125,6 +112,7 @@ public class Player extends Entity {
 	        moveX -= speed; // Bewege temporär nach links
 	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der linken Bewegung
 	        gp.cChecker.checkObject(this, true);
+	        gp.cChecker.checkEntity(this, gp.getNpc());
 	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
 	            moveX = 0; // Setze Bewegung zurück
 	            setCollisionOn(false);
@@ -135,6 +123,7 @@ public class Player extends Entity {
 	        moveX += speed; // Bewege temporär nach rechts
 	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der rechten Bewegung
 	        gp.cChecker.checkObject(this, true);
+	        gp.cChecker.checkEntity(this, gp.getNpc());
 	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
 	            moveX = 0; // Setze Bewegung zurück
 	            setCollisionOn(false);
@@ -229,6 +218,17 @@ public class Player extends Entity {
 				break;
 			}
 			
+		}
+	}
+	
+	public void interactNPC(int i) {
+		if(i != 999) {
+			String npcName = gp.getNpc()[gp.getCurrentMap()][i].getName();
+			switch(npcName) {
+			case "test":
+				//Interaktion mit NPC
+				break;
+			}
 		}
 	}
 	

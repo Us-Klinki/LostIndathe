@@ -1,8 +1,8 @@
 package main;
 
+import entity.Entity;
 import entity.Player;
 import object.SuperObject;
-import main.AssetPlacer;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -10,11 +10,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.RenderingHints;
 import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
 import java.awt.image.VolatileImage;
 
 import javax.swing.JFrame;
@@ -102,6 +98,12 @@ public class GamePanel extends JPanel implements Runnable {
  	public void setObj(SuperObject obj[][]) {
  		this.obj = obj;
  	}
+	public Entity[][] getNpc() {
+		return npc;
+	}
+	public void setNpc(Entity npc[][]) {
+		this.npc = npc;
+	}
  	/**
 	 * @return the fullScreenOn
 	 */
@@ -152,6 +154,7 @@ public class GamePanel extends JPanel implements Runnable {
  	//ENTITY AND OBJECTS
  	private Player player = new Player(this, keyH);
  	private SuperObject obj[][] = new SuperObject[maxMap][30];
+ 	private Entity npc[][] = new Entity[maxMap][10];
  	Font debug = new Font("Bahnschrift", Font.BOLD, 24);
  	
   
@@ -182,6 +185,7 @@ public class GamePanel extends JPanel implements Runnable {
   
  	public void setupGame() {
  		aPlacer.setObject();
+ 		aPlacer.setNPC();
 	  
  		playMusic(3);
  		gameState = titleState;
@@ -278,6 +282,12 @@ public class GamePanel extends JPanel implements Runnable {
  			}*/
 
  			getPlayer().update();
+ 			
+ 			for(int i = 0; i < npc[1].length; i++) {
+ 				if(npc[currentMap][i] != null) {
+ 					npc[currentMap][i].update();
+ 				}
+ 			}
  			eHandler.checkEvent();
  			//g2LastFrame.dispose();/* 		
  		}
@@ -309,6 +319,12 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 				obj[currentMap][i].draw(g2, this, keyH);
  	 	 			}
  	 	 		}
+ 	 	 		for(int i = 0; i < npc[1].length; i++) {
+ 	 	 			if(npc[currentMap][i] != null) {	// sicherstellen, dass Arrayindex immer gefüllt ist
+ 	 	 				npc[currentMap][i].draw(g2);
+ 	 	 			}
+ 	 	 		}
+ 	 	 		
  	 	    
  	 	 		// Hier wird der Spieler gespawnt
  	 	 	getPlayer().draw(g2);
@@ -370,6 +386,7 @@ public class GamePanel extends JPanel implements Runnable {
  		se.setFile(i);
  		se.play();
  	}
+
 	
 	
 	
