@@ -52,7 +52,7 @@ public class Entity {
 		  case "up": moveY -= speed; break;
 		  case "down": moveY += speed; break;
 		  case "left": moveX -= speed; break;
-		  case "Right": moveX += speed; break;
+		  case "right": moveX += speed; break;
 		  }
 	  }
 	  

@@ -124,13 +124,10 @@ public class KeyHandler implements KeyListener{
 			rightPressed = true;
 		}
 		if(code == KeyEvent.VK_K) {
-			System.out.println("K");
 			gp.gameState = gp.pauseState;
-			System.out.println(gp.gameState);
 		}
 		if(code == KeyEvent.VK_ESCAPE) {
 			gp.gameState = gp.optionsState;
-			System.out.println(gp.gameState);
 		}
 		debug(code);
 		if(code == KeyEvent.VK_R) {
