@@ -107,8 +107,23 @@ public class UI {
 		else if(gp.gameState == gp.optionsState) {
 			drawOptionsScreen();
 		}
+		
+		// Dialog-Status
+		if(gp.gameState == gp.dialogueState) {
+			drawDialogueScreen();
+		}
 	}
-
+	
+	/*public void drawDialogueScreen () {
+		//Fenster
+		int x = gp.tileSize*2;
+		int y ;
+		int width;
+		int height; 
+		
+	}
+	*/
+	
 	public void drawTitleScreen() {
 	    g2.setColor(new Color(170, 110, 170)); 
 	    g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);  		
