@@ -343,6 +343,9 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 	else if(gameState == optionsState) {
  	 	 		ui.draw(g2);
  	 	    }
+ 	 	 	else if(gameState == dialogueState) {
+ 	 	 		ui.draw(g2);
+ 	 	}
  	 	}
  	
  	 	// DEBUG

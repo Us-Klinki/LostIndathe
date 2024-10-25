@@ -14,6 +14,7 @@ public class NPC_Test extends Entity{
 		speed = 1;
 		
 		getNPCImage();
+		setDialogue();
 	}
 	public void getNPCImage() { 
 		
@@ -27,6 +28,13 @@ public class NPC_Test extends Entity{
 	right2 = setup("/npc/oldman_right_2");
 
 	}
+	//Dialog Test 
+	
+	public void setDialogue() {
+		dialogues[0][0] = "Hello World!";
+	}
+	
+	
 	public void setAction() {
 		
 		setActionLockCounter(getActionLockCounter()+1);

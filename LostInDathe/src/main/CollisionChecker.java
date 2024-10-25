@@ -1,6 +1,8 @@
 package main;
 
 import entity.Entity;
+import entity.Player;
+
 
 public class CollisionChecker {
 	
@@ -157,6 +159,10 @@ public class CollisionChecker {
 					Entityindex = i;
 				}
 				
+				/*if (entity instanceof Player && gp.gameState == gp.playState) { 
+			        gp.gameState = gp.dialogueState;
+				}
+				*/
 				// Setze die Hitboxen zurück
 				entity.getSolidArea().x = entity.getSolidAreaDefaultX();
 				entity.getSolidArea().y = entity.getSolidAreaDefaultY();

@@ -223,12 +223,15 @@ public class Player extends Entity {
 	
 	public void interactNPC(int i) {
 		if(i != 999) {
+			
 			String npcName = gp.getNpc()[gp.getCurrentMap()][i].getName();
 			switch(npcName) {
 			case "test":
-				//Interaktion mit NPC
+					
 				break;
 			}
+			
+	
 		}
 	}
 	
@@ -311,5 +314,6 @@ public class Player extends Entity {
 			g2.setColor(Color.pink);
 			g2.drawRect(screenX + getSolidArea().x, screenY + getSolidArea().y, getSolidArea().width, getSolidArea().height);
 		}
+	
 	}
 }
