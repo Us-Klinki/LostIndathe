@@ -36,7 +36,7 @@ public class Entity {
   public Entity(GamePanel gp, KeyHandler keyH) {
 	  this.gp = gp;
 	  this.keyH = keyH;
-	  this.dialogues = new String[gp.getMaxMap()][20];
+	  this.dialogues = new String[30][20];
   }
   public void setAction() {}
   
