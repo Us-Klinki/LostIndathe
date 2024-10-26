@@ -10,15 +10,13 @@ import main.KeyHandler;
 
 public class Player extends Entity {
 
-	KeyHandler keyH;
-	
 	public final int screenX;
 	public final int screenY;
 	int hasKey = 0;
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		
-		super(gp);
+		super(gp, keyH);
 		
 		this.keyH = keyH;
 		
@@ -79,7 +77,9 @@ public class Player extends Entity {
 	    
 	    // Überprüfe Kollision der NPCs zum interagieren
 	    int npcIndex = gp.cChecker.checkEntity(this, gp.getNpc());
-	    interactNPC(npcIndex);
+	    if(keyH.enterPressed) {
+			interactNPC(npcIndex);
+	    }
 	    
 	    setCollisionOn(false);
 
@@ -223,17 +223,8 @@ public class Player extends Entity {
 	
 	public void interactNPC(int i) {
 		if(i != 999) {
-			
-			/*String npcName = gp.getNpc()[gp.getCurrentMap()][i].getName();
-			switch(npcName) {
-			case "test":
-					
-				break;
-			}*/
-			
 			gp.gameState = gp.dialogueState;
 			gp.getNpc()[gp.getCurrentMap()][i].speak();
-	
 		}
 	}
 	

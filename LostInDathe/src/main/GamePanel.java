@@ -144,7 +144,7 @@ public class GamePanel extends JPanel implements Runnable {
  	Sound music = new Sound();
  	Sound se = new Sound();
  	public CollisionChecker cChecker = new CollisionChecker(this);
- 	private AssetPlacer aPlacer = new AssetPlacer(this);
+ 	private AssetPlacer aPlacer = new AssetPlacer(this, keyH);
  	public UI ui = new UI(this);
  	public EventHandler eHandler = new EventHandler(this);
  	Config config = new Config(this);
@@ -299,7 +299,7 @@ public class GamePanel extends JPanel implements Runnable {
  	 	if(keyH.isDebug() == true) {
  			drawStart = System.nanoTime();
  	 	}
- 	 		
+ 	    //g2.clearRect(0, 0, getWidth(), getHeight()); // Clear the entire graphics context	
  	 	// TITLE SCREEN
  	 	if(gameState == titleState) {
  	 		ui.draw(g2);	
@@ -307,7 +307,7 @@ public class GamePanel extends JPanel implements Runnable {
  	 	// RESTLICHES SPIEL
  	 	else {
  	 		//Überpfrüfung vom game state
- 	 	 	if(gameState == playState) {
+ 	 	 	if(gameState == playState || gameState == dialogueState) {
  	 	    	// Hier werden die Tiles erzeugt
  	 	 		tileM.draw(g2);
  	 	 		// Hier werden die Objekte platziert
@@ -321,7 +321,6 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 				npc[currentMap][i].draw(g2);
  	 	 			}
  	 	 		}
- 	 	 		
  	 	    
  	 	 		// Hier wird der Spieler gespawnt
  	 	 	getPlayer().draw(g2);
@@ -340,8 +339,14 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 	else if(gameState == optionsState) {
  	 	 		ui.draw(g2);
  	 	    }
- 	 	 	else if(gameState == dialogueState) {
+ 	 	 	if(gameState == dialogueState) {
  	 	 		ui.draw(g2);
+ 	 	 		for(int i = 0; i < npc[1].length; i++) {
+ 	 	 			if(npc[currentMap][i] != null) {	// sicherstellen, dass Arrayindex immer gefüllt ist
+ 	 	 				npc[currentMap][i].draw(g2);
+ 	 	 			}
+ 	 	 		}
+ 	 	 	 	getPlayer().draw(g2);
  	 	 	}
  	 	}
  	

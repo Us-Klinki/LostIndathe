@@ -7,7 +7,9 @@ public class KeyHandler implements KeyListener{
 	
 	GamePanel gp;
 	public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed;
-	
+	private boolean canPressKey = true;
+	private long lastKeyPress = 0;
+	private final long keyCooldown = 300;
 	
 	//GAME STATE
 	public KeyHandler(GamePanel gp) {
@@ -123,11 +125,19 @@ public class KeyHandler implements KeyListener{
 		if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) {
 			rightPressed = true;
 		}
+		if(code == KeyEvent.VK_ENTER) {
+			enterPressed = true;
+		}
 		if(code == KeyEvent.VK_K) {
 			gp.gameState = gp.pauseState;
 		}
 		if(code == KeyEvent.VK_ESCAPE) {
-			gp.gameState = gp.optionsState;
+	        long currentTime = System.currentTimeMillis();
+			if (canPressKey && (currentTime - lastKeyPress) >= keyCooldown) {
+	            canPressKey = false;
+	            lastKeyPress = currentTime;
+				gp.gameState = gp.optionsState;
+			}
 		}
 		debug(code);
 		if(code == KeyEvent.VK_R) {
@@ -152,8 +162,13 @@ public class KeyHandler implements KeyListener{
 	
 	public void optionsState(int code) {
 		
-		if(code == KeyEvent.VK_ESCAPE) {
-			gp.gameState = gp.playState;
+		if(code == KeyEvent.VK_ESCAPE) {						//Presscooldown
+	        long currentTime = System.currentTimeMillis();
+			if (canPressKey && (currentTime - lastKeyPress) >= keyCooldown) {
+	            canPressKey = false;
+	            lastKeyPress = currentTime;
+	            gp.gameState = gp.playState;
+			}
 		}
 		if(code == KeyEvent.VK_ENTER) {
 			enterPressed = true;
@@ -208,10 +223,18 @@ public class KeyHandler implements KeyListener{
 	}
 	
 	public void dialogueState(int code) {
-		if(code == KeyEvent.VK_ENTER) {
-			gp.gameState = gp.playState;
-		}
-		
+		int i = gp.cChecker.checkEntity(gp.getPlayer(), gp.getNpc());
+	    if(code == KeyEvent.VK_ENTER) {
+	        long currentTime = System.currentTimeMillis();						//PressCooldown
+			if (canPressKey && (currentTime - lastKeyPress) >= keyCooldown) {	
+	            canPressKey = false;
+	            lastKeyPress = currentTime;
+	            
+	            if(gp.gameState == gp.dialogueState && i != 999) {
+	                gp.getNpc()[gp.getCurrentMap()][i].speak();
+	            }
+	        }
+	    }
 	}
 
 	@Override
@@ -230,6 +253,13 @@ public class KeyHandler implements KeyListener{
 		}
 		if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) {
 			rightPressed = false;
+		}
+		if(code == KeyEvent.VK_ENTER) {
+			enterPressed = false;
+			canPressKey = true;
+		}
+		if(code == KeyEvent.VK_ESCAPE) {
+			canPressKey = true;
 		}
 	}
 

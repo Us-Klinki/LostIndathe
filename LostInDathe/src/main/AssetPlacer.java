@@ -6,9 +6,11 @@ import object.*;
 public class AssetPlacer {
 	
 	GamePanel gp;
+	KeyHandler keyH;
 	
-	public AssetPlacer (GamePanel gp) {
+	public AssetPlacer (GamePanel gp, KeyHandler keyH) {
 		this.gp = gp;
+		this.keyH = keyH;
 	}
 	
 	void setObject() { // platzieren eines Objektes mit Array-Index
@@ -46,7 +48,7 @@ public class AssetPlacer {
 	}
 	public void setNPC() {
 		int mapNum = 0;
-		gp.getNpc()[mapNum][0] = new NPC_Test(gp);
+		gp.getNpc()[mapNum][0] = new NPC_Test(gp, keyH);
 		gp.getNpc()[mapNum][0].worldX = 24*gp.getTileSize();
 		gp.getNpc()[mapNum][0].worldY = 24*gp.getTileSize();
 	}

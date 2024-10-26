@@ -1,14 +1,21 @@
 package entity;
 
+import java.awt.Graphics2D;
 import java.util.Random;
 
+
+
 import main.GamePanel;
+import main.KeyHandler;
+import main.UI;
 
 
-public class NPC_Test extends Entity{
+public class NPC_Test extends Entity{ //Man schaft es mit dem NPC das Game zu crashen aber schwer
 	
-	public NPC_Test(GamePanel gp) {
-		super(gp);
+	
+	public NPC_Test(GamePanel gp, KeyHandler keyH) {
+		super(gp, keyH);
+		
 		setName("test");
 		direction = "";
 		speed = 1;
@@ -34,7 +41,7 @@ public class NPC_Test extends Entity{
 		dialogues[0][0] = "Hello World!";
 		dialogues[0][1] = "Adventurer";
 		dialogues[0][2] = "You fool";
-		dialogues[0][3] = "Jabadabadu";
+		dialogues[0][3] = "You have to save the village, it burn in flames an we dont know what to do. You have to leave the school and play more \nvideo games to find a way to help us. Please i beg u.";
 		
 	}
 	
@@ -63,10 +70,6 @@ public class NPC_Test extends Entity{
 	}
 	
 	public void speak() {
-		if(dialogues[gp.getCurrentMap()][dialogueSet] == null) {
-			dialogueSet = 0;
-		}
-		gp.ui.setCurrentDialogue(dialogues[gp.getCurrentMap()][dialogueSet]);
-		dialogueSet++;
+		super.speak();
 	}
 }

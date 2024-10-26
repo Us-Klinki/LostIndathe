@@ -482,8 +482,8 @@ public class UI {
 		x += gp.getTileSize();
 		y += gp.getTileSize();
 		
-		for (String line: getCurrentDialogue().split("\n")) {
-		 	g2.drawString(line, x, y);
+		for (String p: getCurrentDialogue().split("\n")) {
+		 	g2.drawString(p, x, y);
 		 	y += 40;
 		} 
 		//g2.drawString(currentDialogue, x, y);

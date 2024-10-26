@@ -8,10 +8,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import main.KeyHandler;
 import main.UtilityTool;
 public class Entity {
 
   GamePanel gp;
+  KeyHandler keyH;
   public int worldX;
   public int worldY;
   public int speed;
@@ -25,16 +27,54 @@ public class Entity {
   private Rectangle solidArea = new Rectangle(0, 0, 48, 48);
   private int solidAreaDefaultX, solidAreaDefaultY;
   private boolean collisionOn = false;
+  private boolean dialogueStarted = false;
   private int actionLockCounter = 0;
   String dialogues[][];
   int dialogueSet = 0;
+  int dialogueCounter = 0;
   
-  public Entity(GamePanel gp) {
+  public Entity(GamePanel gp, KeyHandler keyH) {
 	  this.gp = gp;
+	  this.keyH = keyH;
 	  this.dialogues = new String[gp.getMaxMap()][20];
   }
   public void setAction() {}
-  public void speak() {}
+  
+  public void speak() {
+	    switch(gp.getPlayer().direction) {
+	    case "up": 
+	    	direction = "down";
+	    	break;
+	    case "down": 
+	    	direction = "up";
+	    	break;
+		case "left": 
+			direction = "right";
+			break;
+		case "right": 
+			direction = "left";
+			break;
+	    }
+	    if (!isDialogueStarted()) {
+	        setDialogueStarted(true);
+	        if (dialogues[gp.getCurrentMap()][getDialogueSet()] == null) {
+	            setDialogueSet(0);
+	        }
+	        gp.ui.setCurrentDialogue(dialogues[gp.getCurrentMap()][getDialogueSet()]);
+	        return;
+	    }
+
+	    setDialogueSet(getDialogueSet() + 1);
+	    
+	    if (dialogues[gp.getCurrentMap()][getDialogueSet()] == null) {
+	        setDialogueSet(0);
+	        setDialogueStarted(false); 
+	        gp.gameState = gp.playState; 
+	        return;
+	    }
+
+	    gp.ui.setCurrentDialogue(dialogues[gp.getCurrentMap()][getDialogueSet()]);
+  }
   public void update () {
 	  
 	  setAction();
@@ -209,4 +249,22 @@ public class Entity {
   public void setName(String name) {
 	  Name = name;
   }
+  public int getDialogueSet() {
+	return dialogueSet;
+  }
+  public void setDialogueSet(int dialogueSet) {
+	this.dialogueSet = dialogueSet;
+  }
+  public int getDialogueCounter() {
+	return dialogueCounter;
+  }
+  public void setDialogueCounter(int dialogueCounter) {
+	this.dialogueCounter = dialogueCounter;
+  }
+public boolean isDialogueStarted() {
+	return dialogueStarted;
+}
+public void setDialogueStarted(boolean dialogueStarted) {
+	this.dialogueStarted = dialogueStarted;
+}
 }
