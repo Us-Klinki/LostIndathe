@@ -26,15 +26,15 @@ public class Entity {
   private int solidAreaDefaultX, solidAreaDefaultY;
   private boolean collisionOn = false;
   private int actionLockCounter = 0;
-  String dialogues[][] = new String[20][20];
-  int DialogueSet = 0;
+  String dialogues[][];
+  int dialogueSet = 0;
   
   public Entity(GamePanel gp) {
 	  this.gp = gp;
+	  this.dialogues = new String[gp.getMaxMap()][20];
   }
-  public void setAction() {
-	  
-  }
+  public void setAction() {}
+  public void speak() {}
   public void update () {
 	  
 	  setAction();
@@ -173,41 +173,40 @@ public class Entity {
   public void setCollisionOn(boolean collisionOn) {
 	  this.collisionOn = collisionOn;
   }
-/**
- * @return the solidAreaDefaultX
- */
-public int getSolidAreaDefaultX() {
-	return solidAreaDefaultX;
-}
+  /**
+   * @return the solidAreaDefaultX
+   */
+  public int getSolidAreaDefaultX() {
+	  return solidAreaDefaultX;
+  }
 /**
  * @param solidAreaDefaultX the solidAreaDefaultX to set
  */
-public void setSolidAreaDefaultX(int solidAreaDefaultX) {
-	this.solidAreaDefaultX = solidAreaDefaultX;
-}
+  public void setSolidAreaDefaultX(int solidAreaDefaultX) {
+	  this.solidAreaDefaultX = solidAreaDefaultX;
+  }
 /**
  * @return the solidAreaDeafaultY
  */
-public int getSolidAreaDefaultY() {
-	return solidAreaDefaultY;
-}
+  public int getSolidAreaDefaultY() {
+	  return solidAreaDefaultY;
+  }
 /**
  * @param solidAreaDeafaultY the solidAreaDeafaultY to set
  */
-public void setSolidAreaDefaultY(int solidAreaDefaultY) {
-	this.solidAreaDefaultY = solidAreaDefaultY;
-}
-public int getActionLockCounter() {
-	return actionLockCounter;
-}
-public void setActionLockCounter(int actionLockCounter) {
-	this.actionLockCounter = actionLockCounter;
-}
-public String getName() {
-	return Name;
-}
-public void setName(String name) {
-	Name = name;
-}
-  
+  public void setSolidAreaDefaultY(int solidAreaDefaultY) {
+	  this.solidAreaDefaultY = solidAreaDefaultY;
+  }
+  public int getActionLockCounter() {
+	  return actionLockCounter;
+  }
+  public void setActionLockCounter(int actionLockCounter) {
+	  this.actionLockCounter = actionLockCounter;
+  }
+  public String getName() {
+	  return Name;
+  }
+  public void setName(String name) {
+	  Name = name;
+  }
 }

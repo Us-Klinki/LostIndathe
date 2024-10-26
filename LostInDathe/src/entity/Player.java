@@ -224,13 +224,15 @@ public class Player extends Entity {
 	public void interactNPC(int i) {
 		if(i != 999) {
 			
-			String npcName = gp.getNpc()[gp.getCurrentMap()][i].getName();
+			/*String npcName = gp.getNpc()[gp.getCurrentMap()][i].getName();
 			switch(npcName) {
 			case "test":
 					
 				break;
-			}
+			}*/
 			
+			gp.gameState = gp.dialogueState;
+			gp.getNpc()[gp.getCurrentMap()][i].speak();
 	
 		}
 	}

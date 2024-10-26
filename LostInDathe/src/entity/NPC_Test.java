@@ -32,6 +32,10 @@ public class NPC_Test extends Entity{
 	
 	public void setDialogue() {
 		dialogues[0][0] = "Hello World!";
+		dialogues[0][1] = "Adventurer";
+		dialogues[0][2] = "You fool";
+		dialogues[0][3] = "Jabadabadu";
+		
 	}
 	
 	
@@ -56,5 +60,13 @@ public class NPC_Test extends Entity{
 			}
 			setActionLockCounter(0);
 		}
+	}
+	
+	public void speak() {
+		if(dialogues[gp.getCurrentMap()][dialogueSet] == null) {
+			dialogueSet = 0;
+		}
+		gp.ui.setCurrentDialogue(dialogues[gp.getCurrentMap()][dialogueSet]);
+		dialogueSet++;
 	}
 }

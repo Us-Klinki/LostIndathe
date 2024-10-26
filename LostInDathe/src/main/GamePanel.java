@@ -198,9 +198,6 @@ public class GamePanel extends JPanel implements Runnable {
  		if(fullScreenOn == true) {
  			setFullScreen();
  		}
- 		
- 		
-	 
  	}
  	
  	public void setFullScreen() {
@@ -345,7 +342,7 @@ public class GamePanel extends JPanel implements Runnable {
  	 	    }
  	 	 	else if(gameState == dialogueState) {
  	 	 		ui.draw(g2);
- 	 	}
+ 	 	 	}
  	 	}
  	
  	 	// DEBUG
