@@ -74,7 +74,7 @@ public class KeyHandler implements KeyListener{
 		if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
 			//if(gp.ui.getCommandNum() < 1) {
 			gp.ui.setCommandNum(gp.ui.getCommandNum() - 1);
-			gp.playSE(4);
+			gp.playSE(8);
 			if(gp.ui.getCommandNum() == -1) {
 				gp.ui.setCommandNum(2);
 			}
@@ -82,7 +82,7 @@ public class KeyHandler implements KeyListener{
 			
 		if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
 			gp.ui.setCommandNum(gp.ui.getCommandNum() + 1);
-			gp.playSE(4);
+			gp.playSE(8);
 			if(gp.ui.getCommandNum() == 3) {
 				gp.ui.setCommandNum(0);
 			}
@@ -92,6 +92,8 @@ public class KeyHandler implements KeyListener{
 			if(gp.ui.getCommandNum() == 0) {
 				gp.gameState = gp.playState;
 				gp.stopMusic(3);
+				gp.playSE(7);
+				gp.playSE(9);
 				gp.playMusic(2);
 			}
 			if(gp.ui.getCommandNum() == 1) {
@@ -181,14 +183,14 @@ public class KeyHandler implements KeyListener{
 		}
 		if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
 			gp.ui.setCommandNum(gp.ui.getCommandNum() - 1);
-			gp.playSE(4);
+			gp.playSE(8);
 			if(gp.ui.getCommandNum() == -1) {
 				gp.ui.setCommandNum(maxCommandNum);
 			}
 		}
 		if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
 			gp.ui.setCommandNum(gp.ui.getCommandNum() + 1);
-			gp.playSE(4);
+			gp.playSE(8);
 			if(gp.ui.getCommandNum() > maxCommandNum) {
 				gp.ui.setCommandNum(0);
 			}
@@ -198,11 +200,11 @@ public class KeyHandler implements KeyListener{
 				if(gp.ui.getCommandNum() == 1 && gp.music.volumeScale > 0) {
 					gp.music.volumeScale--;
 					gp.music.checkVolume();
-					gp.playSE(4);
+					gp.playSE(8);
 				}
 				if(gp.ui.getCommandNum() == 2 && gp.se.volumeScale > 0) {
 					gp.se.volumeScale--;
-					gp.playSE(4);
+					gp.playSE(8);
 				}
 			}
 		}
@@ -211,11 +213,11 @@ public class KeyHandler implements KeyListener{
 				if(gp.ui.getCommandNum() == 1 && gp.music.volumeScale < 11) {
 					gp.music.volumeScale++;
 					gp.music.checkVolume();
-					gp.playSE(4);
+					gp.playSE(8);
 				}
 				if(gp.ui.getCommandNum() == 2 && gp.se.volumeScale < 11) {
 					gp.se.volumeScale++;
-					gp.playSE(4);
+					gp.playSE(8);
 				}
 			}
 		}

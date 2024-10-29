@@ -237,10 +237,12 @@ public class UI {
 			g2.drawString(">", textX - auswahlAbstand, textY);
 			if(gp.keyH.enterPressed == true) {
 				if(gp.isFullScreenOn() == true) {
-					gp.setFullScreenOn(false);		
+					gp.setFullScreenOn(false);	
+					gp.playSE(7);
 				}
 				else if (gp.isFullScreenOn() == false) {
 					gp.setFullScreenOn(true);
+					gp.playSE(7);
 				}
 				subState = 1;
 			}
