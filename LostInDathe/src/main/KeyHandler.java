@@ -65,6 +65,11 @@ public class KeyHandler implements KeyListener{
 		else if(gp.gameState == gp.dialogueState) {
 			dialogueState(code);
 		}
+		
+		// MAP STATE
+		else if(gp.gameState == gp.mapState) {
+			mapState(code);
+		}
 
 	}
 	
@@ -130,6 +135,9 @@ public class KeyHandler implements KeyListener{
 		}
 		if(code == KeyEvent.VK_K) {
 			gp.gameState = gp.pauseState;
+		}
+		if(code == KeyEvent.VK_SPACE) {
+			gp.gameState = gp.mapState;
 		}
 		if(code == KeyEvent.VK_ESCAPE) {
 	        long currentTime = System.currentTimeMillis();
@@ -236,7 +244,13 @@ public class KeyHandler implements KeyListener{
 	        }
 	    }
 	}
-
+	
+	public void mapState (int code) {
+		
+		if(code == KeyEvent.VK_SPACE) {
+			gp.gameState = gp.playState;
+		}
+	}
 	@Override
 	public void keyReleased(KeyEvent e) {
 		

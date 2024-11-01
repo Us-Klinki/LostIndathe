@@ -28,7 +28,7 @@ public class UI {
 	private String displayedDialogue = "";
 	private int dialogueIndex = 0;
 	private int dialogueSpeed = 2; 
-	private int dialogueTickCounter = 0;
+	private int dialogueCounter = 0;
 
 	public UI(GamePanel gp) {
 		 this.gp = gp; 
@@ -502,12 +502,12 @@ public class UI {
 	// letter by letter
 	public void updateDialogue() {
 	    if (gp.gameState == gp.dialogueState && dialogueIndex < currentDialogue.length()) {
-	        dialogueTickCounter++;
+	        dialogueCounter++;
 	        
-	        if (dialogueTickCounter >= dialogueSpeed) {
+	        if (dialogueCounter >= dialogueSpeed) {
 	            displayedDialogue += currentDialogue.charAt(dialogueIndex);
 	            dialogueIndex++;
-	            dialogueTickCounter = 0;
+	            dialogueCounter = 0;
 	        }
 	    }
 	}
