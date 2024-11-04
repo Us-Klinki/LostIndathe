@@ -44,22 +44,23 @@ public class Player extends Entity {
 	}
 	public void getPlayerImage() { 
 	
-	up1 = setup("/player/Hinten1");
-	up2 = setup("/player/Hinten2");
-	down1 = setup("/player/Vorne1");
-	down2 = setup("/player/Vorne2");
-	left1 = setup("/player/Links1");
-	left2 = setup("/player/Links2");
-	right1 = setup("/player/Rechts1");
-	right2 = setup("/player/Rechts2");
-	tleft1 = setup("/player/HintenLinks1");
-	tleft2 = setup("/player/HintenLinks2");
-	tright1 = setup("/player/HintenRechts1");
-	tright2 = setup("/player/HintenRechts2");
-	bleft1 = setup("/player/VorneLinks1");
-	bleft2 = setup("/player/VorneLinks2");
-	bright1 = setup("/player/VorneRechts1");
-	bright2 = setup("/player/VorneRechts2");
+		up1 = setup("/player/Hinten1");
+		up2 = setup("/player/Hinten2");
+		down1 = setup("/player/Vorne1");
+		down2 = setup("/player/Vorne2");
+		left1 = setup("/player/Links1");
+		left2 = setup("/player/Links2");
+		right1 = setup("/player/Rechts1");
+		right2 = setup("/player/Rechts2");
+		tleft1 = setup("/player/HintenLinks1");
+		tleft2 = setup("/player/HintenLinks2");
+		tright1 = setup("/player/HintenRechts1");
+		tright2 = setup("/player/HintenRechts2");
+		bleft1 = setup("/player/VorneLinks1");
+		bleft2 = setup("/player/VorneLinks2");
+		bright1 = setup("/player/VorneRechts1");
+		bright2 = setup("/player/VorneRechts2");
+	
 	}
 	
 	
