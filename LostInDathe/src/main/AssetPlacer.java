@@ -1,5 +1,6 @@
 package main;
 
+import entity.NPC_Priebe;
 import entity.NPC_Test;
 import object.*;
 
@@ -47,9 +48,12 @@ public class AssetPlacer {
 
 	}
 	public void setNPC() {
-		int mapNum = 0;
-		gp.getNpc()[mapNum][0] = new NPC_Test(gp, keyH);
-		gp.getNpc()[mapNum][0].worldX = 24*gp.getTileSize();
-		gp.getNpc()[mapNum][0].worldY = 24*gp.getTileSize();
+		gp.getNpc()[0][0] = new NPC_Test(gp, keyH);
+		gp.getNpc()[0][0].worldX = 24*gp.getTileSize();
+		gp.getNpc()[0][0].worldY = 24*gp.getTileSize();
+		
+		gp.getNpc()[1][0] = new NPC_Priebe(gp, keyH);
+		gp.getNpc()[1][0].worldX = 24*gp.getTileSize();
+		gp.getNpc()[1][0].worldY = 24*gp.getTileSize();
 	}
 }
