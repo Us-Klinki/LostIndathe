@@ -23,6 +23,10 @@ public class Sound {
 		soundURL[4] = pfad("switch.wav");
 		soundURL[5] = pfad("teleport.wav");
 		soundURL[6] = pfad("subArea.wav");
+		soundURL[7] = pfad("Menü_Spiel_Starten.wav");
+		soundURL[8] = pfad("Menü_Button_Wechseln.wav");
+		soundURL[9] = pfad("Menü_Button_Auswählen.wav");
+		soundURL[10] = pfad("Schlüssel_Einsammeln.wav");
 	}
 	
 	public void setFile(int i) {
