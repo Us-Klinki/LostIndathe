@@ -11,7 +11,7 @@ public class NPC_Priebe extends Entity {
 	public NPC_Priebe(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
 		
-		setName("test");
+		setName("priebe");
 		direction = "";
 		speed = 1;
 		
@@ -35,10 +35,11 @@ public class NPC_Priebe extends Entity {
 	//Dialog Test 
 	
 	public void setDialogue() {
-		dialogues[0][0] = "Hello World!";
-		dialogues[0][1] = "Adventurer";
-		dialogues[0][2] = "You fool";
-		dialogues[0][3] = "You have to save the village, it burn in flames an we dont know what to do. You have to leave the school and play more \nvideo games to find a way to help us. Please i beg u.";
+		dialogues[2][0] = "Das Sonnenlicht fehlt wohl.";
+		dialogues[2][1] = "Sie ist sooo blass...";
+		dialogues[2][2] = "Wir haben nicht ewig Zeit.";
+		dialogues[2][3] = "Hilf ihr doch!!!";
+		dialogues[2][4] = "Danke für deine Hilfe! \nIch habe gehört, in der Chemie gibt es Probleme.\nSchau dort mal vorbei, hier haste nen Schlüssel.";
 		
 	}
 	

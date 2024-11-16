@@ -31,7 +31,7 @@ public class Entity {
   private int actionLockCounter = 0;
   String dialogues[][];
   int dialogueSet = 0;
-
+  
   
   public Entity(GamePanel gp, KeyHandler keyH) {
 	  this.gp = gp;

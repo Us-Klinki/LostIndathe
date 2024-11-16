@@ -1,12 +1,16 @@
 package main;
 
+import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
@@ -14,7 +18,7 @@ public class UI {
 	
 	GamePanel gp;
 	Graphics2D g2;
-	Font bahn_s, bahn_l, bahn_sl, bahn_xs;
+	Font yoster, yoster_s, yoster_l, yoster_sl, yoster_xs; 
 	
 	public boolean messageOn = false;
 	public String message = "";
@@ -27,16 +31,23 @@ public class UI {
 	int subState = 0;
 	private String displayedDialogue = "";
 	private int dialogueIndex = 0;
-	private int dialogueSpeed = 2; 
+	private int dialogueSpeed = 4; 
 	private int dialogueCounter = 0;
 
 	public UI(GamePanel gp) {
 		 this.gp = gp; 
 		 
-		 bahn_s = (new Font("Bahnschrift", Font.BOLD, 40));
-		 bahn_sl = (new Font("Bahnschrift", Font.BOLD | Font.ITALIC, 60));
-		 bahn_l = (new Font("Bahnschrift", Font.BOLD, 80));
-		 bahn_xs = (new Font("Bahnschrift", Font.PLAIN, 20));
+		 try (InputStream FontLoader = getClass().getResourceAsStream("/font/yoster.ttf")) {
+			 yoster = Font.createFont(Font.TRUETYPE_FONT, FontLoader);
+			    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			    ge.registerFont(yoster);
+			} catch (FontFormatException | IOException e) {
+			    e.printStackTrace();
+			}
+		 yoster_s = yoster.deriveFont(Font.PLAIN, 40);
+		 yoster_sl = yoster.deriveFont(Font.BOLD, 60);
+		 yoster_l = yoster.deriveFont(Font.BOLD, 80);
+		 yoster_xs = yoster.deriveFont(Font.PLAIN, 20);
 		 
 		 // Fenster erstellen
 		 
@@ -91,7 +102,7 @@ public class UI {
 	public void draw(Graphics2D g2) {
 		
 		this.g2 = g2;
-		g2.setFont(bahn_s);
+		g2.setFont(yoster_s);
 		//g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
@@ -111,6 +122,7 @@ public class UI {
 		}
 		// Optionen-Status
 		else if(gp.gameState == gp.optionsState) {
+			
 			drawOptionsScreen();
 		}
 		
@@ -125,12 +137,12 @@ public class UI {
 	    g2.setColor(new Color(170, 110, 170)); 
 	    g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);  		
 		// Spielname
-		g2.setFont(bahn_l);
+		g2.setFont(yoster_l);
 		String text = "Lost In Dathe";
 		int x = getXforCenteredText(text);
 		int y = gp.tileSize * 8;
 		
-		g2.drawImage(logo, getXforCenteredText(text), 58, 512, 512, null);
+		g2.drawImage(logo, getXforCenteredText(text) + 44, 58, 512, 512, null);
 		// Schatten
 		g2.setColor(Color.black);
 		g2.drawString(text, x + 5, y + 5);
@@ -141,10 +153,10 @@ public class UI {
 		// Logo + Player
 		//x = gp.screenWidth / 2;
 		//y += gp.tileSize * 2;
-		g2.drawImage(gp.getPlayer().down1, gp.tileSize * 21 + 20, gp.tileSize * 6 + 16, gp.tileSize * 2, gp.tileSize * 2, null);
+		g2.drawImage(gp.getPlayer().down1, gp.tileSize * 23, gp.tileSize * 6 + 16, gp.tileSize * 2, gp.tileSize * 2, null);
 		
 		// Menü
-		g2.setFont(bahn_s);
+		g2.setFont(yoster_s);
 		
 		text = "Neues Spiel";
 		x = getXforCenteredText(text);
@@ -175,12 +187,12 @@ public class UI {
 	
 	public void drawPauseScreen() {
 	    
-	    g2.setColor(black); 
+	    g2.setColor(new Color(0, 0, 0, 220)); 
 	    g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);  
 
 	    
 	    String text = "Spiel pausiert";
-	    g2.setFont(bahn_l);
+	    g2.setFont(yoster_l);
 
 	    int x = getXforCenteredText(text);
 	    int y = getYforCenteredText(text); 
@@ -192,27 +204,28 @@ public class UI {
 	}
 	
 	public void drawOptionsScreen() {
-		g2.setFont(bahn_sl);
-		
+		g2.setFont(yoster_sl);
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		//g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.86f));
 		
 		//SUB Window
 		
 		int frameWidth = gp.getTileSize() * 10;
 		int frameHeight = gp.getTileSize() * 13;
-		int frameX = getXforCenteredText("") - frameWidth/2;
+		int frameX = getXforCenteredText("") - frameWidth/2 + 10;
 		int frameY = (gp.getTileSize() * 9) - (frameHeight/2);
+		
+		drawSubWindow(frameX, frameY, frameWidth, frameHeight);
 		int abstand = gp.getTileSize() + gp.getTileSize() / 2;
 		int absatz = gp.getTileSize() * 2;
-		int auswahlAbstand = gp.getTileSize() / 2 + gp.getTileSize() / 8;
-		drawSubWindow(frameX, frameY, frameWidth, frameHeight);
-		
+		int auswahlAbstand = gp.getTileSize() / 2 + gp.getTileSize() / 8 + 10 ;
 		
 		switch(subState) {
 		case 0: options_top(abstand, absatz, frameX, frameY, auswahlAbstand); break;
 		case 1: options_fullScreenNotification(frameX, frameY, auswahlAbstand, abstand, absatz); break;
 		case 2: options_control(absatz, abstand, frameX, frameY, auswahlAbstand); break;
 		case 3: options_endGameConfirmation(absatz, abstand, frameX, frameY, auswahlAbstand); break;
-		}
+		} 
 		
 		gp.keyH.enterPressed = false;
 	}
@@ -233,7 +246,7 @@ public class UI {
 		int checkBoxY = (int) (textY + gp.getTileSize() * 1.46);
 		g2.drawString(text, textX, textY);
 		
-		g2.setFont(bahn_s);
+		g2.setFont(yoster_s);
 		
 		// Vollbild an/aus
 		g2.setColor(Color.white);
@@ -303,7 +316,7 @@ public class UI {
 		textX = frameX + gp.getTileSize() * 6;
 		textY = checkBoxY;
 		g2.setStroke(new BasicStroke(3));
-		g2.setColor(new Color(190, 60, 190));
+		g2.setColor(new Color(110, 9, 20));
 		g2.drawRect(textX, textY, gp.getTileSize() / 2, gp.getTileSize() / 2);
 		if(gp.isFullScreenOn() == true) {
 			g2.fillRect(textX, textY, gp.getTileSize() / 2, gp.getTileSize() / 2);
@@ -325,11 +338,17 @@ public class UI {
 	}
 	
 	public void options_fullScreenNotification(int frameX, int frameY, int auswahlAbstand, int abstand, int absatz) {
+		int textX;
+		int textY;
+		String text = "Bildmodus";
+		textX = getXforCenteredText(text);
+		textY = frameY +  gp.getTileSize() + gp.getTileSize()/2;
+		g2.drawString(text, textX, textY);
 		
-		int textX = frameX + gp.getTileSize();
-		int textY = frameY + gp.getTileSize() * 4;
+		textX = frameX + gp.getTileSize();
+		textY = frameY + gp.getTileSize() * 4;
 		
-		g2.setFont(bahn_xs);
+		g2.setFont(yoster_xs);
 		g2.setColor(Color.white);
 		setCurrentDialogue("Das Spiel muss neugestartet werden, \num die Änderung zu realisieren.");
 		
@@ -338,11 +357,11 @@ public class UI {
 		 	textY+= 40;
 		 }
 		 
-		 g2.setFont(bahn_s);
+		 g2.setFont(yoster_s);
 		 textY += abstand * 3.9;
 		 g2.drawString("Zurück", textX, textY);
 		 if(commandNum == 0) {
-		 	g2.drawString(">", textX-25, textY);
+		 	g2.drawString(">", textX-auswahlAbstand, textY);
 		 	if(gp.keyH.enterPressed == true) {
 		 		subState = 0;
 		 	}
@@ -362,27 +381,31 @@ public class UI {
 		textY = frameY +  gp.getTileSize() + gp.getTileSize()/2;
 		g2.drawString(text, textX, textY);
 		
-		g2.setFont(bahn_s);
+		g2.setFont(yoster_s);
 		g2.setColor(Color.white);
 		textX = frameX + gp.getTileSize();
 		textY += absatz;
 		g2.drawString("Bewegen", textX, textY); textY += abstand;
+		g2.drawString("Interaktion", textX, textY); textY += abstand;
 		g2.drawString("Optionen", textX, textY); textY += abstand;
 		g2.drawString("Pause", textX, textY); textY += abstand;
-		g2.drawString("Debug-Modus", textX, textY); textY += abstand;
+		g2.drawString("Debug", textX, textY); textY += abstand;
 		
-		g2.setFont(bahn_xs);
+		g2.setFont(yoster_s);
+		g2.setColor(new Color(110, 9, 20));
 		textX = frameX + gp.getTileSize() * 7;
 		textY = frameY + gp.getTileSize() * 2 + abstand;
-		g2.drawString("WASD/Pfeile", textX, textY); textY += abstand;
+		g2.drawString("WASD", textX, textY); textY += abstand;
+		g2.drawString("ENTER", textX, textY); textY += abstand;
 		g2.drawString("ESC", textX, textY); textY += abstand;
 		g2.drawString("K", textX, textY); textY += abstand;
 		g2.drawString("Q", textX, textY); textY += abstand;
 		
 		// Zurück
-		g2.setFont(bahn_s);
+		g2.setFont(yoster_s);
+		g2.setColor(Color.white);
 		textX = frameX + gp.getTileSize();
-		textY += absatz;
+		textY += absatz - abstand;
 		g2.drawString("Zurück", textX, textY);
 		if(commandNum == 0) {
 			g2.drawString(">", textX - auswahlAbstand, textY);
@@ -393,22 +416,28 @@ public class UI {
 		}
 	}
 	public void options_endGameConfirmation(int absatz, int abstand, int frameX, int frameY, int auswahlAbstand) {
-		g2.setFont(bahn_xs);
+		int textX;
+		int textY;
+		String text = "Beenden?";
+		textX = getXforCenteredText(text);
+		textY = frameY +  gp.getTileSize() + gp.getTileSize()/2;
+		g2.drawString(text, textX, textY);
+		g2.setFont(yoster_xs);
 		g2.setColor(Color.white);
-		int textX = frameX + gp.getTileSize();
-		int textY = frameY +  gp.getTileSize() + gp.getTileSize()/2;
+		textX = frameX + gp.getTileSize();
+		textY = frameY + 2* abstand + abstand/2;
 		
-		setCurrentDialogue("Spiel verlassen und zum Desktop \nzurückkehren? \n\nUngespeicherter Fortschritt geht verloren.");
+		setCurrentDialogue("Spiel verlassen und zum Desktop \nzurückkehren? \n\nUngespeicherter Fortschritt geht \nverloren.");
 		
 		for (String line: getCurrentDialogue().split("\n")) {
 			 	g2.drawString(line, textX, textY);
 			 	textY+= 40;
 			 } 
-		g2.setFont(bahn_s);
+		g2.setFont(yoster_s);
 		// Nein
-		String text = "Nein";
+		 text = "Nein";
 		textX = getXforCenteredText(text);
-		textY += absatz;
+		textY += absatz/2 + absatz/4;
 		auswahlAbstand = textX - auswahlAbstand;
 		g2.drawString(text, textX, textY);
 		if(commandNum == 0) {
@@ -478,20 +507,22 @@ public class UI {
 	public void drawDialogueScreen() {
 		
 		// Fenster
-		int x = gp.getTileSize() * 3;
+		int x = gp.getTileSize() * 4 + gp.getTileSize() / 2;
 		int y = gp.getTileSize();
-		int width = gp.getScreenWidth() - (gp.getTileSize() * 8);
-		int height = gp.getTileSize() * 6;
+		int width = gp.getScreenWidth() - (gp.getTileSize() * 9);
+		int height = gp.getTileSize() * 4;
 		drawSubWindow(x, y, width, height);
 		
-		g2.setFont(bahn_xs);
+		g2.setFont(yoster_s);
 		
-		x += gp.getTileSize();
-		y += gp.getTileSize();
+		g2.setColor(Color.white);
+		
+		x += gp.getTileSize() / 2;
+		y += gp.getTileSize() * 1.1;
 		
 		for (String line: displayedDialogue.split("\n")) {
 		 	g2.drawString(line, x, y);
-		 	y += 40;
+		 	y += 56;
 		} 
 		//g2.drawString(currentDialogue, x, y);
 		
@@ -513,17 +544,17 @@ public class UI {
 	}
 
 	public void drawSubWindow(int x, int y, int width, int height) {
-		int strokeWidth = 5;
+		int strokeWidth = 3;
 		int bogen = 35;
 		
 		
 		
-		Color c = new Color(0, 0, 0);
+		Color c = new Color(0, 0, 0, 220);
 		g2.setColor(c);
 		g2.fillRoundRect(x, y, width, height, bogen, bogen);
 		
 		
-		Color d = new Color(190, 60, 190);
+		Color d = new Color(110, 9, 20);
 		g2.setColor(d);
 		g2.setStroke(new BasicStroke(strokeWidth)); 
 		g2.drawRoundRect(x + strokeWidth, y + strokeWidth, width - 2 * strokeWidth, height - (2 * strokeWidth), 25, 25);

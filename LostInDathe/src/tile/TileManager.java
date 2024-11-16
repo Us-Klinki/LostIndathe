@@ -39,6 +39,7 @@ public class TileManager {
 		getTileImage();
 		loadMap("/maps/bathroom.txt", 0);
 		loadMap("/maps/subArea.txt", 1);
+		loadMap("/maps/PlatzhalterGeschichte.txt", 2);
 	}
 	
 

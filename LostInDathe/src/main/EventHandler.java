@@ -54,8 +54,8 @@ public class EventHandler {
 		
 		if(canTouchEvent == true) {
 			//if(hit(0, 21, 31, "any") == true) { intraTeleport(gp.dialogueState); }
-			if(hit(0, 20, 30, "any") == true) { interTeleport(1, 20, 19); gp.stopMusic(2); gp.playMusic(6); }
-			else if(hit(1, 26, 24, "any") == true) { interTeleport(0, 20, 25); gp.stopMusic(6); gp.playMusic(2); }
+			if(hit(0, 20, 30, "any") == true) { interTeleport(2, 10, 44); gp.stopMusic(2); gp.playMusic(6); }
+			else if(hit(2, 10, 44, "any") == true) { interTeleport(0, 20, 25); gp.stopMusic(6); gp.playMusic(2); }
 		}
 	}
 	

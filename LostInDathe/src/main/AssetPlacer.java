@@ -16,7 +16,8 @@ public class AssetPlacer {
 	
 	void setObject() { // platzieren eines Objektes mit Array-Index
 		
-		int mapNum = 0;
+		int mapNum = 0; 
+		// Objekte Bad
 		/*gp.getObj()[mapNum][0] = new OBJ_Key(gp);
 		gp.getObj()[mapNum][0].setWorldX(26 * gp.getTileSize());
 		gp.getObj()[mapNum][0].setWorldY(22 * gp.getTileSize());*/
@@ -46,6 +47,12 @@ public class AssetPlacer {
 		gp.getObj()[mapNum][6].setWorldX(20 * gp.getTileSize());
 		gp.getObj()[mapNum][6].setWorldY(30 * gp.getTileSize());
 		
+		mapNum = 2;
+		// Objekte Geschichtsraum
+		gp.getObj()[mapNum][1] = new OBJ_Statue(gp, keyH);
+		gp.getObj()[mapNum][1].setWorldX(10 * gp.getTileSize());
+		gp.getObj()[mapNum][1].setWorldY(42 * gp.getTileSize());
+		
 
 	}
 	public void setNPC() {
@@ -53,8 +60,8 @@ public class AssetPlacer {
 		gp.getNpc()[0][0].worldX = 24*gp.getTileSize();
 		gp.getNpc()[0][0].worldY = 24*gp.getTileSize();
 		
-		gp.getNpc()[0][1] = new NPC_Priebe(gp, keyH);
-		gp.getNpc()[0][1].worldX = 26*gp.getTileSize();
-		gp.getNpc()[0][1].worldY = 24*gp.getTileSize();
+		gp.getNpc()[2][0] = new NPC_Priebe(gp, keyH);
+		gp.getNpc()[2][0].worldX = 14*gp.getTileSize();
+		gp.getNpc()[2][0].worldY = 40*gp.getTileSize();
 	}
 }

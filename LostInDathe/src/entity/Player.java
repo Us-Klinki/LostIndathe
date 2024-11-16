@@ -238,7 +238,13 @@ public class Player extends Entity {
 	public void interactNPC(int i) {
 		if(i != 999) {
 			gp.gameState = gp.dialogueState;
-			gp.getNpc()[gp.getCurrentMap()][i].speak();
+			
+			/*if(getName() == "priebe") {
+				gp.getNpc()[gp.getCurrentMap()][i].speak(1);
+			}
+			else {*/
+				gp.getNpc()[gp.getCurrentMap()][i].speak();
+			//}
 		}
 	}
 	
