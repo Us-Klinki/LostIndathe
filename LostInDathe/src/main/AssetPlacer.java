@@ -53,8 +53,8 @@ public class AssetPlacer {
 		gp.getNpc()[0][0].worldX = 24*gp.getTileSize();
 		gp.getNpc()[0][0].worldY = 24*gp.getTileSize();
 		
-		gp.getNpc()[1][0] = new NPC_Priebe(gp, keyH);
-		gp.getNpc()[1][0].worldX = 24*gp.getTileSize();
-		gp.getNpc()[1][0].worldY = 24*gp.getTileSize();
+		gp.getNpc()[0][1] = new NPC_Priebe(gp, keyH);
+		gp.getNpc()[0][1].worldX = 26*gp.getTileSize();
+		gp.getNpc()[0][1].worldY = 25*gp.getTileSize();
 	}
 }

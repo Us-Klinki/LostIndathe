@@ -85,6 +85,7 @@ public class Entity {
 	  gp.cChecker.checkObject(this, false);
 	  gp.cChecker.checkPlayer(this);
 	  
+	  
 	  double moveX = 0;
 	  double moveY = 0;
 	  
