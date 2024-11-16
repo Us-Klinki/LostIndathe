@@ -5,13 +5,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import main.KeyHandler;
 
 public class OBJ_Bathroomdoor extends SuperObject {
 	
-	GamePanel gp;
 	
-	public OBJ_Bathroomdoor(GamePanel gp) {
-		this.gp = gp;
+	public OBJ_Bathroomdoor(GamePanel gp, KeyHandler keyH) {
+		super(gp, keyH);
 		setName("Bathroomdoor");
 		try {
 			setImage(ImageIO.read(getClass().getResourceAsStream("/objects/bathroomdoor.png")));

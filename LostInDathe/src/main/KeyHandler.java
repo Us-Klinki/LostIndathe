@@ -226,6 +226,7 @@ public class KeyHandler implements KeyListener{
 	
 	public void dialogueState(int code) {
 		int i = gp.cChecker.checkEntity(gp.getPlayer(), gp.getNpc());
+		int j = gp.cChecker.checkObject(gp.getPlayer(), true);
 	    if(code == KeyEvent.VK_ENTER) {
 	        long currentTime = System.currentTimeMillis();						//PressCooldown
 			if (canPressKey && (currentTime - lastKeyPress) >= keyCooldown) {	
@@ -234,6 +235,9 @@ public class KeyHandler implements KeyListener{
 	            
 	            if(gp.gameState == gp.dialogueState && i != 999) {
 	                gp.getNpc()[gp.getCurrentMap()][i].speak();
+	            }
+	            else if(gp.gameState == gp.dialogueState && j != 999) {
+	            	gp.getObj()[gp.getCurrentMap()][j].speak(j);
 	            }
 	        }
 	    }

@@ -11,19 +11,27 @@ import main.UtilityTool;
 
 public class SuperObject {
 	KeyHandler keyH;
+	GamePanel gp;
 	
 	private BufferedImage image;
 	private String name;
 	private boolean collision = false;
+	private boolean key_inside = false;
+	private boolean dialogueStarted = false;
 	private int worldX, worldY;
 	private Rectangle solidArea = new Rectangle(0, 0, 48, 48);
 	private int solidAreaDefaultX = 0;
 	private int solidAreaDefaultY = 0;
+	public String dialogues[][];
+	private int dialogueSet = 0;
 	UtilityTool uToolObjects = new UtilityTool();
 	
-	public void draw(Graphics2D g2, GamePanel gp, KeyHandler keyH) {
+	public SuperObject (GamePanel gp, KeyHandler keyH) {
 		this.keyH = keyH;
-		
+		this.gp = gp;
+		this.dialogues = new String[30][20];
+	}
+	public void draw(Graphics2D g2) {		
 		int screenX = worldX - gp.getPlayer().worldX + gp.getPlayer().screenX;
 		int screenY = worldY - gp.getPlayer().worldY + gp.getPlayer().screenY;
 	
@@ -42,6 +50,35 @@ public class SuperObject {
 		}
 		
 	}
+
+	public void speak(int i) {
+
+		if (!isDialogueStarted()) {
+			setDialogueStarted(true);
+		    if (dialogues[gp.getCurrentMap()][getDialogueSet()] == null) {
+	            setDialogueSet(0);
+	        }
+		    gp.ui.setCurrentDialogue(dialogues[gp.getCurrentMap()][getDialogueSet()]);
+		    return;
+	    }
+	    setDialogueSet(getDialogueSet() + 1);
+		    
+	    if (dialogues[gp.getCurrentMap()][getDialogueSet()] == null) {
+	    	setDialogueSet(0);
+		    setDialogueStarted(false);
+			gp.getObj()[gp.getCurrentMap()][i].setDialogue3();
+	        gp.gameState = gp.playState; 
+	        return;
+	    }
+
+	    gp.ui.setCurrentDialogue(dialogues[gp.getCurrentMap()][getDialogueSet()]);
+	}
+	
+	public void setDialogue1() {}
+	
+	public void setDialogue2() {}
+	
+	public void setDialogue3() {}
 	
 	/**
 	 * @return the name
@@ -141,6 +178,26 @@ public class SuperObject {
 	 */
 	public void setCollision(boolean collision) {
 		this.collision = collision;
+	}
+
+	public boolean isKey_inside() {
+		return key_inside;
+	}
+
+	public void setKey_inside(boolean key_inside) {
+		this.key_inside = key_inside;
+	}
+	public boolean isDialogueStarted() {
+		return dialogueStarted;
+	}
+	public void setDialogueStarted(boolean dialogueStarted) {
+		this.dialogueStarted = dialogueStarted;
+	}
+	public int getDialogueSet() {
+		return dialogueSet;
+	}
+	public void setDialogueSet(int dialogueSet) {
+		this.dialogueSet = dialogueSet;
 	}
 
 }

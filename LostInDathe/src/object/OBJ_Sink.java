@@ -5,13 +5,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import main.KeyHandler;
 
 public class OBJ_Sink extends SuperObject {
 	
-	GamePanel gp;
-	
-	public OBJ_Sink(GamePanel gp) {
-		this.gp = gp;
+	public OBJ_Sink(GamePanel gp, KeyHandler keyH) {
+		super(gp, keyH);
 		setName("Sink");
 		try {
 			

@@ -205,19 +205,34 @@ public class Player extends Entity {
 				System.out.println("Schlüssel: " + hasKey);
 				break;
 			case "Bathroomdoor":
-				//TODO: Bugfix benötigt: Wenn man keinen Schlüssel hat, ist es möglich, sich zu softlocken...
-				if(hasKey > 0) {
+				if(hasKey > 0 && keyH.enterPressed) {		//TODO: Indikator für Enter  drücken
 					gp.playSE(0);
 					gp.getObj()[gp.getCurrentMap()][i].setCollision(false);
 					hasKey--;
 					System.out.println("Schlüssel: " + hasKey);
 				}
-				else if(gp.getObj()[gp.getCurrentMap()][i].isCollision() == true){
+				else if(gp.getObj()[gp.getCurrentMap()][i].isCollision() == true && keyH.enterPressed){
 			        System.out.println("Nicht genug Schlüssel");
 			    }
 				break;
+			case "Toilet":
+				if(gp.getObj()[gp.getCurrentMap()][i].isKey_inside() && keyH.enterPressed) {	//TODO: Indikator für Enter  drücken
+					gp.playSE(1);
+					hasKey++;
+					gp.gameState = gp.dialogueState;
+					if(gp.getObj()[gp.getCurrentMap()][i].isKey_inside()) {
+						gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
+						gp.getObj()[gp.getCurrentMap()][i].speak(i);
+
+					}
+					gp.getObj()[gp.getCurrentMap()][i].setKey_inside(false);
+				}
+				else if(keyH.enterPressed) {
+					gp.gameState = gp.dialogueState;
+					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
+					gp.getObj()[gp.getCurrentMap()][i].speak(i);
+				}
 			}
-			
 		}
 	}
 	

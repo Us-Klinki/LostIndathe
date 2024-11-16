@@ -5,13 +5,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import main.KeyHandler;
 
 public class OBJ_Key extends SuperObject {
 	
-	GamePanel gp;
-	
-	public OBJ_Key(GamePanel gp) {
-		this.gp = gp;
+	public OBJ_Key(GamePanel gp, KeyHandler keyH) {
+		super(gp, keyH);
 		setName("Key");
 		try {
 			

@@ -20,7 +20,7 @@ public class Entity {
   private String Name;
   
   public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, tright1, tright2, tleft1, tleft2, bright1, bright2, bleft1, bleft2;
-  public String direction;
+  public String direction = "down";
   
   public int spriteCounter = 0;
   public int spriteNum = 1;
@@ -31,7 +31,7 @@ public class Entity {
   private int actionLockCounter = 0;
   String dialogues[][];
   int dialogueSet = 0;
-  int dialogueCounter = 0;
+
   
   public Entity(GamePanel gp, KeyHandler keyH) {
 	  this.gp = gp;
@@ -41,40 +41,41 @@ public class Entity {
   public void setAction() {}
   
   public void speak() {
-	    switch(gp.getPlayer().direction) {
-	    case "up": 
-	    	direction = "down";
-	    	break;
-	    case "down": 
-	    	direction = "up";
-	    	break;
-		case "left": 
-			direction = "right";
-			break;
-		case "right": 
-			direction = "left";
-			break;
-	    }
-	    if (!isDialogueStarted()) {
-	        setDialogueStarted(true);
-	        if (dialogues[gp.getCurrentMap()][getDialogueSet()] == null) {
-	            setDialogueSet(0);
-	        }
-	        gp.ui.setCurrentDialogue(dialogues[gp.getCurrentMap()][getDialogueSet()]);
-	        return;
-	    }
+	  switch(gp.getPlayer().direction) {
+	  case "up": 
+		  direction = "down";
+		  break;
+	  case "down": 
+		  direction = "up";
+		  break;
+	  case "left": 
+		  direction = "right";
+		  break;
+	  case "right": 
+		  direction = "left";
+		  break;
+	  }
+	  if (!isDialogueStarted()) {
+		  setDialogueStarted(true);
+	      if (dialogues[gp.getCurrentMap()][getDialogueSet()] == null) {
+	    	  setDialogueSet(0);
+	      }
+	      gp.ui.setCurrentDialogue(dialogues[gp.getCurrentMap()][getDialogueSet()]);
+	      return;
+	  }
 
-	    setDialogueSet(getDialogueSet() + 1);
+	  setDialogueSet(getDialogueSet() + 1);
 	    
-	    if (dialogues[gp.getCurrentMap()][getDialogueSet()] == null) {
-	        setDialogueSet(0);
-	        setDialogueStarted(false); 
-	        gp.gameState = gp.playState; 
-	        return;
-	    }
+	  if (dialogues[gp.getCurrentMap()][getDialogueSet()] == null) {
+		  setDialogueSet(0);
+	      setDialogueStarted(false); 
+	      gp.gameState = gp.playState; 
+	      return;
+	  }
 
-	    gp.ui.setCurrentDialogue(dialogues[gp.getCurrentMap()][getDialogueSet()]);
+	  gp.ui.setCurrentDialogue(dialogues[gp.getCurrentMap()][getDialogueSet()]);
   }
+  
   public void update () {
 	  
 	  setAction();
@@ -254,12 +255,6 @@ public class Entity {
   }
   public void setDialogueSet(int dialogueSet) {
 	this.dialogueSet = dialogueSet;
-  }
-  public int getDialogueCounter() {
-	return dialogueCounter;
-  }
-  public void setDialogueCounter(int dialogueCounter) {
-	this.dialogueCounter = dialogueCounter;
   }
 public boolean isDialogueStarted() {
 	return dialogueStarted;

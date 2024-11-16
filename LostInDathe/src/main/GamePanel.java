@@ -313,7 +313,7 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 		// Hier werden die Objekte platziert
  	 	 		for(int i = 0; i < obj[1].length; i++) {
  	 	 			if(obj[currentMap][i] != null) {	// sicherstellen, dass Arrayindex immer gefüllt ist
- 	 	 				obj[currentMap][i].draw(g2, this, keyH);
+ 	 	 				obj[currentMap][i].draw(g2);
  	 	 			}
  	 	 		}
  	 	 		for(int i = 0; i < npc[1].length; i++) {
