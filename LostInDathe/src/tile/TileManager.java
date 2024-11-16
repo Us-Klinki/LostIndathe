@@ -1,4 +1,4 @@
-package tile;
+package tile; 
 
 import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;

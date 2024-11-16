@@ -25,7 +25,11 @@ public class UI {
 	private int commandNum = 0;
 	private Color black = new Color(0, 0, 0, 0);                    
 	int subState = 0;
-	
+	private String displayedDialogue = "";
+	private int dialogueIndex = 0;
+	private int dialogueSpeed = 2; 
+	private int dialogueCounter = 0;
+
 	public UI(GamePanel gp) {
 		 this.gp = gp; 
 		 
@@ -73,7 +77,9 @@ public class UI {
 	 * @param currentDialogue the currentDialogue to set
 	 */
 	public void setCurrentDialogue(String currentDialogue) {
-		this.currentDialogue = currentDialogue;
+		this.currentDialogue = currentDialogue; 
+		this.displayedDialogue = "";
+		this.dialogueIndex = 0;
 	}
 	
 	public void showMessage(String text) {
@@ -110,6 +116,7 @@ public class UI {
 		
 		// Dialog-Status
 		if(gp.gameState == gp.dialogueState) {
+			updateDialogue();
 			drawDialogueScreen();
 		}
 	}
@@ -237,12 +244,10 @@ public class UI {
 			g2.drawString(">", textX - auswahlAbstand, textY);
 			if(gp.keyH.enterPressed == true) {
 				if(gp.isFullScreenOn() == true) {
-					gp.setFullScreenOn(false);	
-					gp.playSE(7);
+					gp.setFullScreenOn(false);		
 				}
 				else if (gp.isFullScreenOn() == false) {
 					gp.setFullScreenOn(true);
-					gp.playSE(7);
 				}
 				subState = 1;
 			}
@@ -484,13 +489,29 @@ public class UI {
 		x += gp.getTileSize();
 		y += gp.getTileSize();
 		
-		for (String p: getCurrentDialogue().split("\n")) {
-		 	g2.drawString(p, x, y);
+		for (String line: displayedDialogue.split("\n")) {
+		 	g2.drawString(line, x, y);
 		 	y += 40;
 		} 
 		//g2.drawString(currentDialogue, x, y);
+		
+		
 	}
 	
+	
+	// letter by letter
+	public void updateDialogue() {
+	    if (gp.gameState == gp.dialogueState && dialogueIndex < currentDialogue.length()) {
+	        dialogueCounter++;
+	        
+	        if (dialogueCounter >= dialogueSpeed) {
+	            displayedDialogue += currentDialogue.charAt(dialogueIndex);
+	            dialogueIndex++;
+	            dialogueCounter = 0;
+	        }
+	    }
+	}
+
 	public void drawSubWindow(int x, int y, int width, int height) {
 		int strokeWidth = 5;
 		int bogen = 35;

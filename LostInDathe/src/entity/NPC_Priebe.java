@@ -2,16 +2,13 @@ package entity;
 
 import java.util.Random;
 
-
-
 import main.GamePanel;
 import main.KeyHandler;
 
-
-public class NPC_Test extends Entity{ //Man schaft es mit dem NPC das Game zu crashen aber schwer
+public class NPC_Priebe extends Entity {
 	
 	
-	public NPC_Test(GamePanel gp, KeyHandler keyH) {
+	public NPC_Priebe(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
 		
 		setName("test");
@@ -23,23 +20,23 @@ public class NPC_Test extends Entity{ //Man schaft es mit dem NPC das Game zu cr
 	}
 	public void getNPCImage() { 
 		
-	up1 = setup("/npc/oldman_up_1");
-	up2 = setup("/npc/oldman_up_2");
-	down1 = setup("/npc/oldman_down_1");
-	down2 = setup("/npc/oldman_down_2");
-	left1 = setup("/npc/oldman_left_1");
-	left2 = setup("/npc/oldman_left_2");
-	right1 = setup("/npc/oldman_right_1");
-	right2 = setup("/npc/oldman_right_2");
+	up1 = setup("/npc/Herr_Priebe");
+	up2 = setup("/npc/Herr_Priebe");
+	down1 = setup("/npc/Herr_Priebe");
+	down2 = setup("/npc/Herr_Priebe");
+	left1 = setup("/npc/Herr_Priebe");
+	left2 = setup("/npc/Herr_Priebe");
+	right1 = setup("/npc/Herr_Priebe");
+	right2 = setup("/npc/Herr_Priebe");
 
 	}
 	//Dialog Test 
 	
 	public void setDialogue() {
-		dialogues[0][0] = "Hello World!";
-		dialogues[0][1] = "Adventurer";
-		dialogues[0][2] = "You fool";
-		dialogues[0][3] = "You have to save the village, it burn in flames an we dont know what to do. You have to leave the school and play more \nvideo games to find a way to help us. Please i beg u.";
+		dialogues[1][0] = "Hello World!";
+		dialogues[1][1] = "Adventurer";
+		dialogues[1][2] = "You fool";
+		dialogues[1][3] = "You have to save the village, it burn in flames an we dont know what to do. You have to leave the school and play more \nvideo games to find a way to help us. Please i beg u.";
 		
 	}
 	

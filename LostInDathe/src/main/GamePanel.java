@@ -1,6 +1,7 @@
 package main;
 
 import entity.Entity;
+
 import entity.Player;
 import object.SuperObject;
 
@@ -13,8 +14,11 @@ import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.image.VolatileImage;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import tile.Map;
 import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
@@ -149,6 +153,10 @@ public class GamePanel extends JPanel implements Runnable {
  	public EventHandler eHandler = new EventHandler(this);
  	Config config = new Config(this);
  	Thread gameThread;        //Thread ist nötig damit das Spiel durchgehend läuft
+ 	Map map = new Map(this);
+ 	
+ 	
+ 	
  	
  	
  	//ENTITY AND OBJECTS
@@ -165,6 +173,7 @@ public class GamePanel extends JPanel implements Runnable {
  	public final int pauseState = 2;
  	public final int optionsState = 3;
  	public final int dialogueState = 4;
+ 	public final int mapState = 5;
  	
  	//private BufferedImage lastFrame;
  	private Color transparentblack = new Color(0, 0, 0, 128);
@@ -303,6 +312,11 @@ public class GamePanel extends JPanel implements Runnable {
  	 	// TITLE SCREEN
  	 	if(gameState == titleState) {
  	 		ui.draw(g2);	
+ 	 	}
+ 	 	// Map screen 
+ 	 	else if (gameState == mapState) {
+ 	 		map.drawFullMapScreen(g2);
+ 	 		
  	 	}
  	 	// RESTLICHES SPIEL
  	 	else {
