@@ -19,8 +19,8 @@ public class Entity {
   public int speed;
   private String Name;
   
-  public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, tright1, tright2, tleft1, tleft2, bright1, bright2, bleft1, bleft2;
-  public String direction = "down";
+  public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, tright1, tright2, tleft1, tleft2, bright1, bright2, bleft1, bleft2, idle1, idle2;
+  public String direction = "";
   
   public int spriteCounter = 0;
   public int spriteNum = 1;
@@ -98,25 +98,22 @@ public class Entity {
 		  case "right": moveX += speed; break;
 		  }
 	  }
-	  
+	  if(moveX == 0 && moveY == 0) {
+		  direction = "";
+	  }
 	  worldX += moveX;
 	  worldY += moveY;
 	  
-	  if(moveX != 0 || moveY != 0) {
-		  spriteCounter++;
-			if(spriteCounter > 12) { // jede 1/5-Sekunde
-				if(spriteNum == 1) {
-					spriteNum = 2;
-				}
-				else if(spriteNum == 2) {
-					spriteNum = 1;
-				}
-				spriteCounter = 0;
-			}
-		}
-		else {
-			spriteNum = 1; //Stillstand
-		}
+	  spriteCounter++;
+	  if(spriteCounter > 12) { // jede 1/5-Sekunde
+		  if(spriteNum == 1) {
+			  spriteNum = 2;
+		  }
+		  else if(spriteNum == 2) {
+			  spriteNum = 1;
+		  }
+		  spriteCounter = 0;
+	  }
   }
   public void draw(Graphics2D g2) {
 	 BufferedImage image = null;
@@ -165,10 +162,10 @@ public class Entity {
 				break;
 			case "":
 				if(spriteNum == 1) {
-					image = down1;
+					image = idle1;
 				}
 				if(spriteNum == 2) {
-					image = down2;
+					image = idle2;
 				}
 				break;
 			}

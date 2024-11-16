@@ -39,7 +39,7 @@ public class Player extends Entity {
 		worldX = gp.getTileSize() * 20;
 		worldY = gp.getTileSize() * 25;
 		speed = 4;
-		direction = "down";
+		direction = "";
 		
 	}
 	public void getPlayerImage() { 
@@ -60,7 +60,8 @@ public class Player extends Entity {
 		bleft2 = setup("/player/VorneLinks2");
 		bright1 = setup("/player/VorneRechts1");
 		bright2 = setup("/player/VorneRechts2");
-	
+		idle1 = setup("/player/Stehend1");
+		idle2 = setup("/player/Stehend2");
 	}
 	
 	
@@ -160,7 +161,10 @@ public class Player extends Entity {
 	    } else if (moveX < 0 && moveY > 0) {
 	        direction = "bleft";
 	    }
-
+	    
+	    if(moveX == 0 && moveY == 0 && !keyH.upPressed && !keyH.downPressed && !keyH.leftPressed && !keyH.rightPressed) {
+	    	direction = "";
+	    }
 	    // Position aktualisieren
 	    worldX += moveX;
 	    worldY += moveY;
@@ -170,22 +174,16 @@ public class Player extends Entity {
 			
 		
 	    // Richtung setzen
-		if(moveX != 0 || moveY != 0) {
-			spriteCounter++;
-			if(spriteCounter > 12) { // jede 1/5-Sekunde
-				if(spriteNum == 1) {
-					spriteNum = 2;
-				}
-				else if(spriteNum == 2) {
-					spriteNum = 1;
-				}
-				spriteCounter = 0;
+		spriteCounter++;
+		if(spriteCounter > 12) { // jede 1/5-Sekunde
+			if(spriteNum == 1) {
+				spriteNum = 2;
 			}
+			else if(spriteNum == 2) {
+				spriteNum = 1;
+			}
+			spriteCounter = 0;
 		}
-		else {
-			spriteNum = 1;
-		}
-		
 		// Check Event
 		gp.eHandler.checkEvent();
 	}
@@ -315,6 +313,13 @@ public class Player extends Entity {
 			}
 			
 			break;
+		case "":
+			if(spriteNum == 1) {
+				image = idle1;
+			}
+			if(spriteNum == 2) {
+				image = idle2;
+			}
 		}
 		g2.drawImage(image, screenX, screenY, null);
 		

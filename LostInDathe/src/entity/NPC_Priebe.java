@@ -20,14 +20,16 @@ public class NPC_Priebe extends Entity {
 	}
 	public void getNPCImage() { 
 		
-	up1 = setup("/npc/Priebe/Herr_Priebe");
-	up2 = setup("/npc/Priebe/Herr_Priebe");
-	down1 = setup("/npc/Priebe/Herr_Priebe");
-	down2 = setup("/npc/Priebe/Herr_Priebe");
-	left1 = setup("/npc/Priebe/Herr_Priebe");
-	left2 = setup("/npc/Priebe/Herr_Priebe");
-	right1 = setup("/npc/Priebe/Herr_Priebe");
-	right2 = setup("/npc/Priebe/Herr_Priebe");
+	up1 = setup("/npc/Priebe/Priebe_Hinten1");
+	up2 = setup("/npc/Priebe/Priebe_Hinten2");
+	down1 = setup("/npc/Priebe/Priebe_Vorne1");
+	down2 = setup("/npc/Priebe/Priebe_Vorne2");
+	left1 = setup("/npc/Priebe/Priebe_Links1");
+	left2 = setup("/npc/Priebe/Priebe_Links2");
+	right1 = setup("/npc/Priebe/Priebe_Rechts1");
+	right2 = setup("/npc/Priebe/Priebe_Rechts2");
+	idle1 = setup("/npc/Priebe/Priebe_Stehend1");
+	idle2 = setup("/npc/Priebe/Priebe_Stehend2");
 
 	}
 	//Dialog Test 
