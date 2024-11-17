@@ -151,11 +151,24 @@ public class Player extends Entity {
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
 			case "Statue":
-                    if (keyH.pushPressed) {
-                    	speed = speed/2;
+				if (keyH.pushPressed) {
+                    speed = speed/2;
                     	gp.getObj()[gp.getCurrentMap()][i].move(gp.getObj()[gp.getCurrentMap()][i], direction, speed);
                     	speed = 4;
-                    }
+                }
+				else if(keyH.enterPressed) {
+                    	gp.gameState = gp.dialogueState;
+                    	gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
+    					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+				}
+				if(EventHandler.gesGelöst == true) {
+						gp.gameState = gp.dialogueState;
+						gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
+						gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+						if(keyH.enterPressed) {
+							gp.gameState = gp.playState;
+						}
+				}
 				break;
 			}
 		}
@@ -194,11 +207,11 @@ public class Player extends Entity {
 					switch(dialogueCounter) {
 						case 1:
 							gp.getNpc()[gp.getCurrentMap()][i].setDialogue1();
-							System.out.println("Hallo");
+							//System.out.println("Hallo");
 							break;
 						case 2:
 							gp.getNpc()[gp.getCurrentMap()][i].setDialogue2();
-							System.out.println("Ballo");
+							//System.out.println("Ballo");
 							break;
 						case 3: 
 							gp.getNpc()[gp.getCurrentMap()][i].setDialogue3();
