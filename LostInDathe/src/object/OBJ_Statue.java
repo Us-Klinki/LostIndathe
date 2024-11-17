@@ -47,7 +47,7 @@ public class OBJ_Statue extends SuperObject {
 	    Entity.moveObject(this, direction, speed); 
 	}
 
-
+	// TODO: Ziehen
 	public void pull(String direction, int speed) {
 		Entity.pullObject(this, direction, speed);
 		

@@ -57,6 +57,8 @@ public class EventHandler {
 			if(hit(0, 20, 30, "any") == true) { interTeleport(2, 10, 44); gp.stopMusic(2); gp.playMusic(6); }
 			else if(hit(2, 10, 44, "any") == true) { interTeleport(0, 20, 25); gp.stopMusic(6); gp.playMusic(2); }
 		}
+		
+			//if(hitObject(2, 10, 38) == true)
 	}
 	
 	public boolean hit(int eventMap, int eventCol, int eventRow, String reqDirection) {
@@ -88,6 +90,37 @@ public class EventHandler {
 		return hit;
 	}
 	
+	public boolean hitObject(int eventMap, int eventCol, int eventRow) {
+		boolean hitObject = false;
+		for (int i = 0; i < gp.getObj()[1].length; i++) { 
+			if(eventMap == gp.getCurrentMap()) {
+			
+				gp.getObj()[gp.getCurrentMap()][i].getSolidArea().x = gp.getObj()[gp.getCurrentMap()][i].getWorldX() + gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultX();
+				gp.getObj()[gp.getCurrentMap()][i].getSolidArea().y = gp.getObj()[gp.getCurrentMap()][i].getWorldY() + gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultY();
+				eventRect[eventMap][eventCol][eventRow].x = eventCol * gp.getTileSize() + eventRect[eventMap][eventCol][eventRow].x;
+				eventRect[eventMap][eventCol][eventRow].y = eventRow * gp.getTileSize() + eventRect[eventMap][eventCol][eventRow].y;
+		
+				if(gp.getObj()[gp.getCurrentMap()][i].getSolidArea().intersects(eventRect[eventMap][eventCol][eventRow]) && eventRect[eventMap][eventCol][eventRow].eventDone == false) {
+					hitObject = true;
+				
+					previousEventX = gp.getPlayer().worldX;
+					previousEventY = gp.getPlayer().worldY;
+				
+					
+				}
+			}
+		
+			gp.getObj()[gp.getCurrentMap()][i].getSolidArea().x = gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultX();
+			gp.getObj()[gp.getCurrentMap()][i].getSolidArea().y = gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultY();
+			eventRect[eventMap][eventCol][eventRow].x = eventRect[eventMap][eventCol][eventRow].eventRectDefaultX;
+			eventRect[eventMap][eventCol][eventRow].y = eventRect[eventMap][eventCol][eventRow].eventRectDefaultY;
+		}
+				
+		return hitObject;
+	}
+		
+	
+	
 	
 	// TELEPORT innerhalb einer Map
 	/*public void intraTeleport(int gameState) {
@@ -112,4 +145,8 @@ public class EventHandler {
 		gp.playSE(5);
 		
 	}
+	
+	/*public void nextDialogue {
+		
+	} */
 }

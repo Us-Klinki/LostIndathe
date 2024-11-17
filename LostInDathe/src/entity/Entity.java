@@ -32,6 +32,7 @@ public class Entity {
   private int actionLockCounter = 0;
   String dialogues[][];
   int dialogueSet = 0;
+  private boolean pullLock;
   
   
   public Entity(GamePanel gp, KeyHandler keyH) {
@@ -206,7 +207,7 @@ public class Entity {
 	    }
 	}
   
-  /*public static void pullObject(SuperObject object, String direction, int speed) {
+  public static void pullObject(SuperObject object, String direction, int speed) {
 	    switch (direction) {
 	        case "up":
 	            object.setWorldY(object.getWorldY() - speed);  
@@ -222,7 +223,7 @@ public class Entity {
 	            break;
 	    }
 	}
-*/
+
 
 /**
  * @return the solidArea
@@ -296,5 +297,17 @@ public boolean isDialogueStarted() {
 }
 public void setDialogueStarted(boolean dialogueStarted) {
 	this.dialogueStarted = dialogueStarted;
+}
+/**
+ * @return the pullLock
+ */
+public boolean isPullLock() {
+	return pullLock;
+}
+/**
+ * @param pullLock the pullLock to set
+ */
+public void setPullLock(boolean pullLock) {
+	this.pullLock = pullLock;
 }
 }

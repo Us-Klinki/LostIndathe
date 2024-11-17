@@ -111,11 +111,16 @@ public class CollisionChecker {
 					} 
 					if (gp.getObj()[gp.getCurrentMap()][i] instanceof OBJ_Statue) {
 	                    OBJ_Statue statue = (OBJ_Statue) gp.getObj()[gp.getCurrentMap()][i];
-
-	                    if (gp.keyH.interactPressed) {
-	                        statue.move(entity.direction, entity.speed);
-	                        //statue.pull(entity.direction, entity.speed);
+	                    
+	                    if (gp.keyH.pushPressed) {
+	                    	statue.move(entity.direction, entity.speed);
 	                    }
+	                    if (gp.keyH.pullPressed) {
+	                        statue.pull(entity.direction, entity.speed);
+	                       
+	                        
+	                    }
+	                    
 	                }
 					if (player) {
 						objectIndex = i; // Wenn der Spieler das Objekt ist, speichere den Index

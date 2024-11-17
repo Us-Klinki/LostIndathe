@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener{
 	
 	GamePanel gp;
-	public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed;
+	public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, pushPressed, pullPressed;
 	private boolean canPressKey = true;
 	private long lastKeyPress = 0;
 	private final long keyCooldown = 300;
@@ -17,7 +17,7 @@ public class KeyHandler implements KeyListener{
 	}
 	// DEBUG
 	private boolean debug = false;
-	public boolean interactPressed = false;
+	
 	
 	/**
 	 * @return the debug
@@ -142,8 +142,11 @@ public class KeyHandler implements KeyListener{
 		if(code == KeyEvent.VK_M) {
 			gp.gameState = gp.mapState;
 		}
-		if(code == KeyEvent.VK_SPACE) { 
-		    interactPressed = true;
+		if(code == KeyEvent.VK_COMMA) { 
+		    pushPressed = true;
+		}
+		if(code == KeyEvent.VK_PERIOD) {
+			pullPressed = true;
 		}
 		
 
@@ -287,8 +290,11 @@ public class KeyHandler implements KeyListener{
 		if(code == KeyEvent.VK_ESCAPE) {
 			canPressKey = true;
 		}
-		if(code == KeyEvent.VK_SPACE) {
-		    interactPressed = false;
+		if(code == KeyEvent.VK_COMMA) {
+		    pushPressed = false;
+		}
+		if(code == KeyEvent.VK_PERIOD) {
+			pullPressed = false;
 		}
 
 	}
