@@ -150,24 +150,19 @@ public class Player extends Entity {
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
+				break;
 			case "Statue":
 				if (keyH.pushPressed) {
                     speed = speed/2;
                     	gp.getObj()[gp.getCurrentMap()][i].move(gp.getObj()[gp.getCurrentMap()][i], direction, speed);
                     	speed = 4;
                 }
-				else if(keyH.enterPressed) {
-                    	gp.gameState = gp.dialogueState;
-                    	gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
-    					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
-				}
 				if(EventHandler.gesGelöst == true) {
-						gp.gameState = gp.dialogueState;
 						gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
-						gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
-						if(keyH.enterPressed) {
-							gp.gameState = gp.playState;
-						}
+				}
+				if(keyH.enterPressed) {
+					gp.gameState = gp.dialogueState;
+					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
 				break;
 			}

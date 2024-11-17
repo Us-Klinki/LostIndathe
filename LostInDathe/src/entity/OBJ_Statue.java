@@ -27,6 +27,7 @@ public class OBJ_Statue extends Entity {
 		setSolidArea(new Rectangle(8, 20, 32, 28));
 		setSolidAreaDefaultX(getSolidArea().x);
 		setSolidAreaDefaultY(getSolidArea().y);
+		setDialogue1();
 	}
 	
 	public void setDialogue1() {

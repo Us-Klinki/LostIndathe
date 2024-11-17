@@ -9,6 +9,7 @@ public class EventHandler {
 	int previousEventX, previousEventY;
 	boolean canTouchEvent = true;
 	public static boolean gesGelöst = false;
+	public static int i = 0;
 	public EventHandler(GamePanel gp) {
 		this.gp = gp;
 		
