@@ -1,8 +1,8 @@
 package main;
 
 import entity.Entity;
+import entity.OBJ_Statue;
 import entity.Player;
-import object.OBJ_Statue;
 
 
 public class CollisionChecker {
@@ -85,8 +85,8 @@ public class CollisionChecker {
 				entity.getSolidArea().x = entity.worldX + entity.getSolidAreaDefaultX();
 				entity.getSolidArea().y = entity.worldY + entity.getSolidAreaDefaultY();
 				// Bestimme die Hitbox (SolidArea) für das Objekt
-				gp.getObj()[gp.getCurrentMap()][i].getSolidArea().x = gp.getObj()[gp.getCurrentMap()][i].getWorldX() + gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultX();
-				gp.getObj()[gp.getCurrentMap()][i].getSolidArea().y = gp.getObj()[gp.getCurrentMap()][i].getWorldY() + gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultY();
+				gp.getObj()[gp.getCurrentMap()][i].getSolidArea().x = gp.getObj()[gp.getCurrentMap()][i].worldX + gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultX();
+				gp.getObj()[gp.getCurrentMap()][i].getSolidArea().y = gp.getObj()[gp.getCurrentMap()][i].worldY + gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultY();
 
 				// Überprüfe die Richtung der Entität
 				switch (entity.direction) {
@@ -106,7 +106,7 @@ public class CollisionChecker {
 
 				// Prüfe, ob die Hitboxen sich überlappen
 				if (entity.getSolidArea().intersects(gp.getObj()[gp.getCurrentMap()][i].getSolidArea())) {
-					if (gp.getObj()[gp.getCurrentMap()][i].isCollision()) {
+					if (gp.getObj()[gp.getCurrentMap()][i].isCollisionOn()) {
 						entity.setCollisionOn(true);
 					} 
 					if (player) {

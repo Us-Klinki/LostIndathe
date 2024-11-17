@@ -13,12 +13,11 @@ public class NPC_Test extends Entity{ //Man schaft es mit dem NPC das Game zu cr
 	public NPC_Test(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
 		
-		setName("test");
+		setName("Test");
 		direction = "";
 		speed = 1;
 		
 		getNPCImage();
-		setDialogue();
 	}
 	public void getNPCImage() { 
 		
@@ -36,12 +35,20 @@ public class NPC_Test extends Entity{ //Man schaft es mit dem NPC das Game zu cr
 	}
 	//Dialog Test 
 	
-	public void setDialogue() {
+	public void setDialogue1() {
 		dialogues[0][0] = "Hello World!";
 		dialogues[0][1] = "Adventurer";
 		dialogues[0][2] = "You fool";
 		dialogues[0][3] = "You have to save the village, it burn in flames an we dont know what to do. You have to leave the school and play more \nvideo games to find a way to help us. Please i beg u.";
 		
+	}
+	
+	public void setDialogue20() {
+		for(int i = 0; i < 30; i++) {
+			for(int j = 0; j < 20; j++) {
+				dialogues[i][j] = null;
+			}
+		}
 	}
 	
 	
@@ -68,7 +75,7 @@ public class NPC_Test extends Entity{ //Man schaft es mit dem NPC das Game zu cr
 		}
 	}
 	
-	public void speak() {
-		super.speak();
+	public void speak(int i) {
+		super.speak(i, true);
 	}
 }

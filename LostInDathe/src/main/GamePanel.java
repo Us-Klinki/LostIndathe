@@ -3,8 +3,6 @@ package main;
 import entity.Entity;
 
 import entity.Player;
-import object.SuperObject;
-
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -93,13 +91,13 @@ public class GamePanel extends JPanel implements Runnable {
  	/**
  	 * @return the obj
  	 */
- 	public SuperObject[][] getObj() {
+ 	public Entity[][] getObj() {
  		return obj;
  	}
  	/**
  	 * @param obj the obj to set
  	 */
- 	public void setObj(SuperObject obj[][]) {
+ 	public void setObj(Entity obj[][]) {
  		this.obj = obj;
  	}
 	public Entity[][] getNpc() {
@@ -161,7 +159,7 @@ public class GamePanel extends JPanel implements Runnable {
  	
  	//ENTITY AND OBJECTS
  	private Player player = new Player(this, keyH);
- 	private SuperObject obj[][] = new SuperObject[maxMap][30];
+ 	private Entity obj[][] = new Entity[maxMap][30];
  	private Entity npc[][] = new Entity[maxMap][10];
  	Font debug = new Font("Bahnschrift", Font.BOLD, 24);
  	

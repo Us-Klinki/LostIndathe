@@ -5,16 +5,17 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+import main.EventHandler;
 import main.GamePanel;
 import main.KeyHandler;
-import object.OBJ_Statue;
-import object.SuperObject;
 
 public class Player extends Entity {
 
 	public final int screenX;
 	public final int screenY;
 	int hasKey = 0;
+	int hasKeyChemie = 0;
+	public int dialogueCounter = 1;
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		
@@ -69,25 +70,167 @@ public class Player extends Entity {
 	
 	public void update() { // Methode wird 60-mal pro Sekunde aufgerufen
 
-	    double diagonalSpeed = speed / Math.sqrt(2); // Geschwindigkeit bei diagonaler Bewegung
-	    // Initialisierung der x- und y-Bewegung
-	    double moveX = 0;
-	    double moveY = 0;
 	    // Überprüfe Kollisionen der Objekte zum aufheben
 	    int objectIndex = gp.cChecker.checkObject(this, true); // Check object collision first
 	    pickUpObject(objectIndex);
 	    
-	    if(distanceStatue(this, gp.getObj()[2][0]) < 100 && keyH.pullPressed) {
-	    	speed /= 2;
-	    }
-	    pullStatue();
-	    
-	    // Überprüfe Kollision der NPCs zum interagieren
 	    int npcIndex = gp.cChecker.checkEntity(this, gp.getNpc());
 	    if(keyH.enterPressed) {
 			interactNPC(npcIndex);
 	    }
+	    if(distanceStatue(this, gp.getObj()[2][0]) < 100 && keyH.pullPressed) {
+	    	speed /= 2;
+		    playerMovementPull();
+	    }
+	    else {
+		    playerMovement();
+	    }
+	    pullStatue();
 	    
+	    // Überprüfe Kollision der NPCs zum interagieren
+
+	    // Position aktualisieren
+		speed = 4;	
+		
+	    // Richtung setzen
+		spriteCounter++;
+		if(spriteCounter > 12) { // jede 1/5-Sekunde
+			if(spriteNum == 1) {
+				spriteNum = 2;
+			}
+			else if(spriteNum == 2) {
+				spriteNum = 1;
+			}
+			spriteCounter = 0;
+		}
+		// Check Event
+		gp.eHandler.checkEvent();
+	}
+	
+	
+	
+	// Aufsammeln / Interagieren mit Objekten
+	public void pickUpObject(int i) { 
+		
+		if (i != 999) {
+			
+			String objectName = gp.getObj()[gp.getCurrentMap()][i].getName();
+			switch(objectName) {
+			case "Key":
+				gp.playSE(1);
+				hasKey++; // virtuelles Inventar
+				gp.getObj()[gp.getCurrentMap()][i] = null;
+				System.out.println("Schlüssel: " + hasKey);
+				break;
+			case "Bathroomdoor":
+				if(hasKey > 0 && keyH.enterPressed) {		//TODO: Indikator für Enter  drücken
+					gp.playSE(0);
+					gp.getObj()[gp.getCurrentMap()][i].setCollisionOn(false);
+					hasKey--;
+					System.out.println("Schlüssel: " + hasKey);
+				}
+				else if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed){
+			        System.out.println("Nicht genug Schlüssel");
+			    }
+				break;
+			case "Toilet":
+				if(gp.getObj()[gp.getCurrentMap()][i].isKeyInside() && keyH.enterPressed) {	//TODO: Indikator für Enter  drücken
+					gp.playSE(10);
+					hasKey++;
+					gp.gameState = gp.dialogueState;
+					if(gp.getObj()[gp.getCurrentMap()][i].isKeyInside()) {
+						gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
+						gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+
+					}
+					gp.getObj()[gp.getCurrentMap()][i].setKeyInside(false);
+				}
+				else if(keyH.enterPressed) {
+					gp.gameState = gp.dialogueState;
+					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
+					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+				}
+			case "Statue":
+                    if (keyH.pushPressed) {
+                    	speed = speed/2;
+                    	gp.getObj()[gp.getCurrentMap()][i].move(gp.getObj()[gp.getCurrentMap()][i], direction, speed);
+                    	speed = 4;
+                    }
+				break;
+			}
+		}
+	}
+	
+	public double distanceStatue(Entity player, Entity object) {
+		int deltaX = player.worldX - object.worldX;
+	    int deltaY = player.worldY - object.worldY;
+
+        // Calculate the distance to the player
+	    double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+	    return distance;
+	}
+	
+	public void pullStatue() {
+		if (gp.getCurrentMap() == 2) {
+		    double distance = distanceStatue(this, gp.getObj()[2][0]); 
+		    if (distance < 60 && keyH.pullPressed) {
+		    	int pullSpeed = speed*2;
+		        gp.getObj()[2][0].pull(gp.getObj()[2][0], this, pullSpeed);
+		    }
+		}
+	}
+	
+	public void interactNPC(int i) {
+		if(i != 999) {
+			gp.gameState = gp.dialogueState;
+			String npcName = gp.getNpc()[gp.getCurrentMap()][i].getName();
+			switch(npcName) {
+			case "priebe":
+				if(EventHandler.gesGelöst == true) {
+					gp.getNpc()[gp.getCurrentMap()][i].setDialogue5();
+					hasKeyChemie++;
+				}
+				else {
+					switch(dialogueCounter) {
+						case 1:
+							gp.getNpc()[gp.getCurrentMap()][i].setDialogue1();
+							System.out.println("Hallo");
+							break;
+						case 2:
+							gp.getNpc()[gp.getCurrentMap()][i].setDialogue2();
+							System.out.println("Ballo");
+							break;
+						case 3: 
+							gp.getNpc()[gp.getCurrentMap()][i].setDialogue3();
+							break;
+						case 4:
+							gp.getNpc()[gp.getCurrentMap()][i].setDialogue4();
+							break;
+					}
+				}
+				gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+				if(dialogueCounter < 4) {
+					dialogueCounter++;
+				}
+				else {
+					dialogueCounter = 1;
+				}
+				break;
+			case "Test":
+				gp.getNpc()[gp.getCurrentMap()][i].setDialogue1();
+				gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+				break;
+			}
+		}
+	}
+	
+	public void playerMovement() {
+		
+	    double diagonalSpeed = speed / Math.sqrt(2); // Geschwindigkeit bei diagonaler Bewegung
+	    // Initialisierung der x- und y-Bewegung
+	    double moveX = 0;
+	    double moveY = 0;
+		
 	    setCollisionOn(false);
 
 	    // Vertikale Bewegungsrichtung prüfen
@@ -170,110 +313,70 @@ public class Player extends Entity {
 	    if(moveX == 0 && moveY == 0 && !keyH.upPressed && !keyH.downPressed && !keyH.leftPressed && !keyH.rightPressed) {
 	    	direction = "";
 	    }
-	    // Position aktualisieren
 	    worldX += moveX;
 	    worldY += moveY;
-		speed = 4;	
+	}
+	
+	public void playerMovementPull() {
 		
-	    // Richtung setzen
-		spriteCounter++;
-		if(spriteCounter > 12) { // jede 1/5-Sekunde
-			if(spriteNum == 1) {
-				spriteNum = 2;
-			}
-			else if(spriteNum == 2) {
-				spriteNum = 1;
-			}
-			spriteCounter = 0;
-		}
-		// Check Event
-		gp.eHandler.checkEvent();
-	}
-	
-	
-	
-	// Aufsammeln / Interagieren mit Objekten
-	public void pickUpObject(int i) { 
+	    // Initialisierung der x- und y-Bewegung
+	    double moveX = 0;
+	    double moveY = 0;
 		
-		if (i != 999) {
-			
-			String objectName = gp.getObj()[gp.getCurrentMap()][i].getName();
-			switch(objectName) {
-			case "Key":
-				gp.playSE(1);
-				hasKey++; // virtuelles Inventar
-				gp.getObj()[gp.getCurrentMap()][i] = null;
-				System.out.println("Schlüssel: " + hasKey);
-				break;
-			case "Bathroomdoor":
-				if(hasKey > 0 && keyH.enterPressed) {		//TODO: Indikator für Enter  drücken
-					gp.playSE(0);
-					gp.getObj()[gp.getCurrentMap()][i].setCollision(false);
-					hasKey--;
-					System.out.println("Schlüssel: " + hasKey);
-				}
-				else if(gp.getObj()[gp.getCurrentMap()][i].isCollision() == true && keyH.enterPressed){
-			        System.out.println("Nicht genug Schlüssel");
-			    }
-				break;
-			case "Toilet":
-				if(gp.getObj()[gp.getCurrentMap()][i].isKey_inside() && keyH.enterPressed) {	//TODO: Indikator für Enter  drücken
-					gp.playSE(10);
-					hasKey++;
-					gp.gameState = gp.dialogueState;
-					if(gp.getObj()[gp.getCurrentMap()][i].isKey_inside()) {
-						gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
-						gp.getObj()[gp.getCurrentMap()][i].speak(i);
+	    setCollisionOn(false);
 
-					}
-					gp.getObj()[gp.getCurrentMap()][i].setKey_inside(false);
-				}
-				else if(keyH.enterPressed) {
-					gp.gameState = gp.dialogueState;
-					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
-					gp.getObj()[gp.getCurrentMap()][i].speak(i);
-				}
-			case "Statue":
-                    if (keyH.pushPressed) {
-                    	speed = speed/2;
-                    	gp.getObj()[gp.getCurrentMap()][i].move(gp.getObj()[gp.getCurrentMap()][i], direction, speed);
-                    	speed = 4;
-                    }
-				break;
-			}
-		}
-	}
-	
-	public double distanceStatue(Entity player, SuperObject object) {
-		int deltaX = player.worldX - object.getWorldX();
-	    int deltaY = player.worldY - object.getWorldY();
-
-        // Calculate the distance to the player
-	    double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-	    return distance;
-	}
-	
-	public void pullStatue() {
-		if (gp.getCurrentMap() == 2) {
-		    double distance = distanceStatue(this, gp.getObj()[2][0]); 
-		    if (distance < 60 && keyH.pullPressed) {
-		    	int pullSpeed = speed*2;
-		        gp.getObj()[2][0].pull(gp.getObj()[2][0], this, pullSpeed);
-		    }
-		}
-	}
-	
-	public void interactNPC(int i) {
-		if(i != 999) {
-			gp.gameState = gp.dialogueState;
-			
-			/*if(getName() == "priebe") {
-				gp.getNpc()[gp.getCurrentMap()][i].speak(1);
-			}
-			else {*/
-				gp.getNpc()[gp.getCurrentMap()][i].speak();
-			//}
-		}
+	    // Vertikale Bewegungsrichtung prüfen
+	    if (keyH.upPressed) {
+	        direction = "up";
+	        moveY -= speed; // Bewege temporär nach oben
+	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der oberen Bewegung
+	        gp.cChecker.checkObject(this, true);
+	        gp.cChecker.checkEntity(this, gp.getNpc());
+	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
+	            moveY = 0; // Setze Bewegung zurück
+	            setCollisionOn(false);
+	        }
+	    }
+	    else if (keyH.downPressed) {
+	        direction = "down";
+	        moveY += speed; // Bewege temporär nach unten
+	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der unteren Bewegung
+	        gp.cChecker.checkObject(this, true);
+	        gp.cChecker.checkEntity(this, gp.getNpc());
+	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
+	            moveY = 0; // Setze Bewegung zurück
+	            setCollisionOn(false);
+	        }
+	    }
+	    // Horizontale Bewegungsrichtung prüfen
+	    else if (keyH.leftPressed) {
+	        direction = "left";
+	        moveX -= speed; // Bewege temporär nach links
+	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der linken Bewegung
+	        gp.cChecker.checkObject(this, true);
+	        gp.cChecker.checkEntity(this, gp.getNpc());
+	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
+	            moveX = 0; // Setze Bewegung zurück
+	            setCollisionOn(false);
+	        }
+	    }
+	    else if (keyH.rightPressed) {
+	        direction = "right";
+	        moveX += speed; // Bewege temporär nach rechts
+	        gp.cChecker.checkTile(this); // Prüfe Kollision mit der rechten Bewegung
+	        gp.cChecker.checkObject(this, true);
+	        gp.cChecker.checkEntity(this, gp.getNpc());
+	        if (isCollisionOn()) { // Wenn eine Kollision vorliegt, Bewegung zurücksetzen
+	            moveX = 0; // Setze Bewegung zurück
+	            setCollisionOn(false);
+	        }
+	    }
+	    
+	    if(moveX == 0 && moveY == 0 && !keyH.upPressed && !keyH.downPressed && !keyH.leftPressed && !keyH.rightPressed) {
+	    	direction = "";
+	    }
+	    worldX += moveX;
+	    worldY += moveY;
 	}
 	
 	public void draw(Graphics2D g2) {

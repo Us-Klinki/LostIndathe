@@ -8,7 +8,7 @@ public class EventHandler {
 	
 	int previousEventX, previousEventY;
 	boolean canTouchEvent = true;
-	
+	public static boolean gesGelöst = false;
 	public EventHandler(GamePanel gp) {
 		this.gp = gp;
 		
@@ -58,7 +58,9 @@ public class EventHandler {
 			else if(hit(2, 10, 44, "any") == true) { interTeleport(0, 20, 25); gp.stopMusic(6); gp.playMusic(2); }
 		}
 		
-			//if(hitObject(2, 10, 38) == true)
+		if(hitObject(2, 16, 35) == true) {
+			gesGelöst = true;
+		}
 	}
 	
 	public boolean hit(int eventMap, int eventCol, int eventRow, String reqDirection) {
@@ -92,15 +94,14 @@ public class EventHandler {
 	
 	public boolean hitObject(int eventMap, int eventCol, int eventRow) {
 		boolean hitObject = false;
-		for (int i = 0; i < gp.getObj()[1].length; i++) { 
 			if(eventMap == gp.getCurrentMap()) {
 			
-				gp.getObj()[gp.getCurrentMap()][i].getSolidArea().x = gp.getObj()[gp.getCurrentMap()][i].getWorldX() + gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultX();
-				gp.getObj()[gp.getCurrentMap()][i].getSolidArea().y = gp.getObj()[gp.getCurrentMap()][i].getWorldY() + gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultY();
+				gp.getObj()[eventMap][0].getSolidArea().x = gp.getObj()[eventMap][0].worldX + gp.getObj()[eventMap][0].getSolidAreaDefaultX();
+				gp.getObj()[eventMap][0].getSolidArea().y = gp.getObj()[eventMap][0].worldY + gp.getObj()[eventMap][0].getSolidAreaDefaultY();
 				eventRect[eventMap][eventCol][eventRow].x = eventCol * gp.getTileSize() + eventRect[eventMap][eventCol][eventRow].x;
 				eventRect[eventMap][eventCol][eventRow].y = eventRow * gp.getTileSize() + eventRect[eventMap][eventCol][eventRow].y;
 		
-				if(gp.getObj()[gp.getCurrentMap()][i].getSolidArea().intersects(eventRect[eventMap][eventCol][eventRow]) && eventRect[eventMap][eventCol][eventRow].eventDone == false) {
+				if(gp.getObj()[eventMap][0].getSolidArea().intersects(eventRect[eventMap][eventCol][eventRow]) && eventRect[eventMap][eventCol][eventRow].eventDone == false) {
 					hitObject = true;
 				
 					previousEventX = gp.getPlayer().worldX;
@@ -110,17 +111,13 @@ public class EventHandler {
 				}
 			}
 		
-			gp.getObj()[gp.getCurrentMap()][i].getSolidArea().x = gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultX();
-			gp.getObj()[gp.getCurrentMap()][i].getSolidArea().y = gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultY();
+			gp.getObj()[eventMap][0].getSolidArea().x = gp.getObj()[eventMap][0].getSolidAreaDefaultX();
+			gp.getObj()[eventMap][0].getSolidArea().y = gp.getObj()[eventMap][0].getSolidAreaDefaultY();
 			eventRect[eventMap][eventCol][eventRow].x = eventRect[eventMap][eventCol][eventRow].eventRectDefaultX;
 			eventRect[eventMap][eventCol][eventRow].y = eventRect[eventMap][eventCol][eventRow].eventRectDefaultY;
-		}
 				
 		return hitObject;
 	}
-		
-	
-	
 	
 	// TELEPORT innerhalb einer Map
 	/*public void intraTeleport(int gameState) {

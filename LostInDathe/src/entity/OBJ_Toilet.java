@@ -1,27 +1,16 @@
-package object;
-
-import java.awt.Rectangle;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
+package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
 
-public class OBJ_Toilet extends SuperObject {
+public class OBJ_Toilet extends Entity {
 	
 	public OBJ_Toilet(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
 		setName("Toilet");
-		try {
-			setImage(ImageIO.read(getClass().getResourceAsStream("/objects/toilet.png")));
-			uToolObjects.getScaledImage(getImage(), gp.getTileSize(), gp.getTileSize());
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		setCollision(true);
-
+		idle1 = setup("/npc/objects/toilet");
+		idle2 = setup("/npc/objects/toilet");
+		setCollisionOn(true);
 	}
 	
 	public void setDialogue1() {
@@ -34,7 +23,7 @@ public class OBJ_Toilet extends SuperObject {
 		dialogues[0][0] = "There is nothing to find here";
 	}
 	
-	public void setDialogue3() {
+	public void setDialogue20() {
 		for(int i = 0; i < 30; i++) {
 			for(int j = 0; j < 20; j++) {
 				dialogues[i][j] = null;
@@ -42,6 +31,6 @@ public class OBJ_Toilet extends SuperObject {
 		}
 	}
 	public void speak(int i) {
-		super.speak(i);
+		super.speak(i, false);
 	}
 }

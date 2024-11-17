@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -10,7 +11,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
-import object.SuperObject;
+import java.awt.geom.RoundRectangle2D;
 public class Entity {
 
   GamePanel gp;
@@ -19,9 +20,10 @@ public class Entity {
   public int worldY;
   public int speed;
   private String Name;
-  
+  private BufferedImage image;
   public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, tright1, tright2, tleft1, tleft2, bright1, bright2, bleft1, bleft2, idle1, idle2;
   public String direction = "";
+  private boolean keyInside = false;
   
   public int spriteCounter = 0;
   public int spriteNum = 1;
@@ -42,21 +44,24 @@ public class Entity {
   }
   public void setAction() {}
   
-  public void speak() {
-	  switch(gp.getPlayer().direction) {
-	  case "up": 
-		  direction = "down";
-		  break;
-	  case "down": 
-		  direction = "up";
-		  break;
-	  case "left": 
-		  direction = "right";
-		  break;
-	  case "right": 
-		  direction = "left";
-		  break;
+  public void speak(int i, boolean isNPC) {
+	  if(isNPC) {
+		  switch(gp.getPlayer().direction) {
+		  case "up": 
+			  direction = "down";
+		  	  break;
+		  case "down": 
+	  		  direction = "up";
+	  		  break;
+		  case "left": 
+			  direction = "right";
+			  break;
+		  case "right": 
+			  direction = "left";
+			  break;
+		  }
 	  }
+
 	  if (!isDialogueStarted()) {
 		  setDialogueStarted(true);
 	      if (dialogues[gp.getCurrentMap()][getDialogueSet()] == null) {
@@ -71,6 +76,12 @@ public class Entity {
 	  if (dialogues[gp.getCurrentMap()][getDialogueSet()] == null) {
 		  setDialogueSet(0);
 	      setDialogueStarted(false); 
+	      if(gp.getObj()[gp.getCurrentMap()][i] != null) {
+	    	  gp.getObj()[gp.getCurrentMap()][i].setDialogue20();
+	      }
+	      if(gp.getNpc()[gp.getCurrentMap()][i] != null) {
+		      gp.getNpc()[gp.getCurrentMap()][i].setDialogue20();
+	      }
 	      gp.gameState = gp.playState; 
 	      return;
 	  }
@@ -172,6 +183,10 @@ public class Entity {
 				break;
 			}
 			g2.drawImage (image, screenX, screenY, gp.getTileSize(), gp.getTileSize(), null);
+			if(keyH.isDebug() == true) {
+				g2.setColor(Color.YELLOW);
+				g2.drawRect(screenX + getSolidArea().x, screenY + getSolidArea().y, getSolidArea().width, getSolidArea().height);
+			} 
 		}
   }
   
@@ -192,7 +207,23 @@ public class Entity {
   
 
 
-
+	public void setDialogue1() {}
+	
+	public void setDialogue2() {}
+	
+	public void setDialogue3() {}
+	
+	public void setDialogue4() {}
+	
+	public void setDialogue5() {}
+	
+	public void setDialogue6() {}
+	
+	public void setDialogue20() {}
+	
+	public void pull(Entity object, Entity player, int speed) {}
+	
+	public void move(Entity object, String direction, int speed) {}
 /**
  * @return the solidArea
  */
@@ -277,5 +308,17 @@ public boolean isPullLock() {
  */
 public void setPullLock(boolean pullLock) {
 	this.pullLock = pullLock;
+}
+public BufferedImage getImage() {
+	return image;
+}
+public void setImage(BufferedImage image) {
+	this.image = image;
+}
+public boolean isKeyInside() {
+	return keyInside;
+}
+public void setKeyInside(boolean keyInside) {
+	this.keyInside = keyInside;
 }
 }

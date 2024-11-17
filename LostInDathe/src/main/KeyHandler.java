@@ -251,10 +251,10 @@ public class KeyHandler implements KeyListener{
 	            lastKeyPress = currentTime;
 	            
 	            if(gp.gameState == gp.dialogueState && i != 999) {
-	                gp.getNpc()[gp.getCurrentMap()][i].speak();
+	                gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 	            }
 	            else if(gp.gameState == gp.dialogueState && j != 999) {
-	            	gp.getObj()[gp.getCurrentMap()][j].speak(j);
+	            	gp.getObj()[gp.getCurrentMap()][j].speak(j, false);
 	            }
 	        }
 	    }

@@ -532,7 +532,7 @@ public class UI {
 	
 	// letter by letter
 	public void updateDialogue() {
-	    if (gp.gameState == gp.dialogueState && dialogueIndex < currentDialogue.length()) {
+		if (gp.gameState == gp.dialogueState && dialogueIndex < currentDialogue.length()) {
 	        dialogueCounter++;
 	        
 	        if (dialogueCounter >= dialogueSpeed) {

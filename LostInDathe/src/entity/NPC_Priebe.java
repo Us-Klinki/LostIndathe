@@ -16,7 +16,6 @@ public class NPC_Priebe extends Entity {
 		speed = 1;
 		
 		getNPCImage();
-		setDialogue();
 	}
 	public void getNPCImage() { 
 		
@@ -34,13 +33,32 @@ public class NPC_Priebe extends Entity {
 	}
 	//Dialog Test 
 	
-	public void setDialogue() {
-		dialogues[2][0] = "Das Sonnenlicht fehlt wohl.";
-		dialogues[2][1] = "Sie ist sooo blass...";
-		dialogues[2][2] = "Wir haben nicht ewig Zeit.";
-		dialogues[2][3] = "Hilf ihr doch!!!";
-		dialogues[2][4] = "Danke für deine Hilfe! \nIch habe gehört, in der Chemie gibt es Probleme.\nSchau dort mal vorbei, hier haste nen Schlüssel.";
-		
+	public void setDialogue1() {
+		dialogues[2][0] = "Das Sonnenlicht fehlt wohl.";		
+	}
+	
+	public void setDialogue2() {
+		dialogues[2][0] = "Sie ist sooo blass...";
+	}
+	
+	public void setDialogue3() {
+		dialogues[2][0] = "Wir haben nicht ewig Zeit.";
+	}
+	
+	public void setDialogue4() {
+		dialogues[2][0] = "Hilf ihr doch!!!";
+	}
+	
+	public void setDialogue5() {
+		dialogues[2][0] = "Danke für deine Hilfe! \nIch habe gehört, in der Chemie gibt es Probleme.\nSchau dort mal vorbei, hier haste nen Schlüssel.";
+	}
+	
+	public void setDialogue20() {
+		for(int i = 0; i < 30; i++) {
+			for(int j = 0; j < 20; j++) {
+				dialogues[i][j] = null;
+			}
+		}
 	}
 	
 	
@@ -67,7 +85,7 @@ public class NPC_Priebe extends Entity {
 		}
 	}
 	
-	public void speak() {
-		super.speak();
+	public void speak(int i) {
+		super.speak(i, true);
 	}
 }

@@ -2,6 +2,10 @@ package main;
 
 import entity.NPC_Priebe;
 import entity.NPC_Test;
+import entity.OBJ_Bathroomdoor;
+import entity.OBJ_Sink;
+import entity.OBJ_Statue;
+import entity.OBJ_Toilet;
 import object.*;
 
 public class AssetPlacer {
@@ -23,35 +27,35 @@ public class AssetPlacer {
 		gp.getObj()[mapNum][0].setWorldY(22 * gp.getTileSize());*/
 		
 		gp.getObj()[mapNum][1] = new OBJ_Sink(gp, keyH);
-		gp.getObj()[mapNum][1].setWorldX(21 * gp.getTileSize());
-		gp.getObj()[mapNum][1].setWorldY(22 * gp.getTileSize());
+		gp.getObj()[mapNum][1].worldX = 21*gp.getTileSize();
+		gp.getObj()[mapNum][1].worldY = 22*gp.getTileSize();
 		
 		gp.getObj()[mapNum][2] = new OBJ_Sink(gp, keyH);
-		gp.getObj()[mapNum][2].setWorldX(21 * gp.getTileSize());
-		gp.getObj()[mapNum][2].setWorldY(23 * gp.getTileSize());
+		gp.getObj()[mapNum][2].worldX = 21*gp.getTileSize();
+		gp.getObj()[mapNum][2].worldY = 23*gp.getTileSize();
 		
 		gp.getObj()[mapNum][3] = new OBJ_Toilet(gp, keyH);
-		gp.getObj()[mapNum][3].setWorldX(24 * gp.getTileSize());
-		gp.getObj()[mapNum][3].setWorldY(21 * gp.getTileSize());
+		gp.getObj()[mapNum][3].worldX = 24*gp.getTileSize();
+		gp.getObj()[mapNum][3].worldY = 21*gp.getTileSize();
 		
 		gp.getObj()[mapNum][4] = new OBJ_Toilet(gp, keyH);
-		gp.getObj()[mapNum][4].setWorldX(26 * gp.getTileSize());
-		gp.getObj()[mapNum][4].setWorldY(21 * gp.getTileSize());
-		gp.getObj()[mapNum][4].setKey_inside(true);
+		gp.getObj()[mapNum][4].worldX = 26*gp.getTileSize();
+		gp.getObj()[mapNum][4].worldY = 21*gp.getTileSize();
+		gp.getObj()[mapNum][4].setKeyInside(true);
 		
 		gp.getObj()[mapNum][5] = new OBJ_Toilet(gp, keyH);
-		gp.getObj()[mapNum][5].setWorldX(28 * gp.getTileSize());
-		gp.getObj()[mapNum][5].setWorldY(21 * gp.getTileSize());
+		gp.getObj()[mapNum][5].worldX = 28*gp.getTileSize();
+		gp.getObj()[mapNum][5].worldY = 21*gp.getTileSize();
 		
 		gp.getObj()[mapNum][6] = new OBJ_Bathroomdoor(gp, keyH);
-		gp.getObj()[mapNum][6].setWorldX(20 * gp.getTileSize());
-		gp.getObj()[mapNum][6].setWorldY(30 * gp.getTileSize());
+		gp.getObj()[mapNum][6].worldX = 20*gp.getTileSize();
+		gp.getObj()[mapNum][6].worldY = 30*gp.getTileSize();
 		
 		mapNum = 2;
 		// Objekte Geschichtsraum
 		gp.getObj()[mapNum][0] = new OBJ_Statue(gp, keyH);
-		gp.getObj()[mapNum][0].setWorldX(10 * gp.getTileSize());
-		gp.getObj()[mapNum][0].setWorldY(42 * gp.getTileSize());
+		gp.getObj()[mapNum][0].worldX = 10*gp.getTileSize();
+		gp.getObj()[mapNum][0].worldY = 42*gp.getTileSize();
 		
 
 	}
