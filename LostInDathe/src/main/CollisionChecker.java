@@ -2,6 +2,7 @@ package main;
 
 import entity.Entity;
 import entity.Player;
+import object.OBJ_Statue;
 
 
 public class CollisionChecker {
@@ -107,11 +108,21 @@ public class CollisionChecker {
 				if (entity.getSolidArea().intersects(gp.getObj()[gp.getCurrentMap()][i].getSolidArea())) {
 					if (gp.getObj()[gp.getCurrentMap()][i].isCollision()) {
 						entity.setCollisionOn(true);
-					}
+					} 
+					if (gp.getObj()[gp.getCurrentMap()][i] instanceof OBJ_Statue) {
+	                    OBJ_Statue statue = (OBJ_Statue) gp.getObj()[gp.getCurrentMap()][i];
+
+	                    if (gp.keyH.interactPressed) {
+	                        statue.move(entity.direction, entity.speed);
+	                        //statue.pull(entity.direction, entity.speed);
+	                    }
+	                }
 					if (player) {
 						objectIndex = i; // Wenn der Spieler das Objekt ist, speichere den Index
 					}
 				}
+				
+	            
 				
 				// Setze die Hitboxen zurück
 				entity.getSolidArea().x = entity.getSolidAreaDefaultX();

@@ -17,6 +17,7 @@ public class KeyHandler implements KeyListener{
 	}
 	// DEBUG
 	private boolean debug = false;
+	public boolean interactPressed = false;
 	
 	/**
 	 * @return the debug
@@ -138,9 +139,14 @@ public class KeyHandler implements KeyListener{
 		if(code == KeyEvent.VK_K) {
 			gp.gameState = gp.pauseState;
 		}
-		if(code == KeyEvent.VK_SPACE) {
+		if(code == KeyEvent.VK_M) {
 			gp.gameState = gp.mapState;
 		}
+		if(code == KeyEvent.VK_SPACE) { 
+		    interactPressed = true;
+		}
+		
+
 		if(code == KeyEvent.VK_ESCAPE) {
 	        long currentTime = System.currentTimeMillis();
 			if (canPressKey && (currentTime - lastKeyPress) >= keyCooldown) {
@@ -281,6 +287,10 @@ public class KeyHandler implements KeyListener{
 		if(code == KeyEvent.VK_ESCAPE) {
 			canPressKey = true;
 		}
+		if(code == KeyEvent.VK_SPACE) {
+		    interactPressed = false;
+		}
+
 	}
 
 

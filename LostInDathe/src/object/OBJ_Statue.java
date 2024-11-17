@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
+import entity.Entity;
 
 public class OBJ_Statue extends SuperObject {
 	
@@ -41,4 +42,15 @@ public class OBJ_Statue extends SuperObject {
 	public void speak(int i) {
 		super.speak(i);
 	}
+	
+	public void move(String direction, int speed) {
+	    Entity.moveObject(this, direction, speed); 
+	}
+
+
+	public void pull(String direction, int speed) {
+		Entity.pullObject(this, direction, speed);
+		
+	}
+
 }

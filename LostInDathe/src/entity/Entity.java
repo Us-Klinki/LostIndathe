@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
+import object.SuperObject;
 public class Entity {
 
   GamePanel gp;
@@ -187,6 +188,42 @@ public class Entity {
 	}
 	return Sprite;
 }
+  
+  public static void moveObject(SuperObject object, String direction, int speed) {
+	    switch (direction) {
+	        case "up":
+	            object.setWorldY(object.getWorldY() - speed);
+	            break;
+	        case "down":
+	            object.setWorldY(object.getWorldY() + speed);
+	            break;
+	        case "left":
+	            object.setWorldX(object.getWorldX() - speed);
+	            break;
+	        case "right":
+	            object.setWorldX(object.getWorldX() + speed);
+	            break;
+	    }
+	}
+  
+  /*public static void pullObject(SuperObject object, String direction, int speed) {
+	    switch (direction) {
+	        case "up":
+	            object.setWorldY(object.getWorldY() - speed);  
+	            break;
+	        case "down":
+	            object.setWorldY(object.getWorldY() + speed); 
+	            break;
+	        case "left":
+	            object.setWorldX(object.getWorldX() - speed);  
+	            break;
+	        case "right":
+	            object.setWorldX(object.getWorldX() + speed);  
+	            break;
+	    }
+	}
+*/
+
 /**
  * @return the solidArea
  */
