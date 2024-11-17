@@ -13,16 +13,16 @@ public class OBJ_Statue extends Entity {
 	public OBJ_Statue(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
 		setName("Statue");
-		idle1 = setup("/npc/objects/statue");
-		idle2 = setup("/npc/objects/statue");
-		down1 = setup("/npc/objects/statue");
-		down2 = setup("/npc/objects/statue");
-		up1 = setup("/npc/objects/statue");
-		up2 = setup("/npc/objects/statue");
-		left1 = setup("/npc/objects/statue");
-		left2 = setup("/npc/objects/statue");
-		right1 = setup("/npc/objects/statue");
-		right2 = setup("/npc/objects/statue");
+		idle1 = setup("/npc/objects/Statue1");
+		idle2 = setup("/npc/objects/Statue1");
+		down1 = setup("/npc/objects/Statue1");
+		down2 = setup("/npc/objects/Statue1");
+		up1 = setup("/npc/objects/Statue1");
+		up2 = setup("/npc/objects/Statue1");
+		left1 = setup("/npc/objects/Statue1");
+		left2 = setup("/npc/objects/Statue1");
+		right1 = setup("/npc/objects/Statue1");
+		right2 = setup("/npc/objects/Statue1");
 		setCollisionOn(true);
 		setSolidArea(new Rectangle(8, 20, 32, 28));
 		setSolidAreaDefaultX(getSolidArea().x);
