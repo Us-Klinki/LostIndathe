@@ -1,5 +1,6 @@
 package object;
 
+import java.awt.Rectangle;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -21,6 +22,9 @@ public class OBJ_Statue extends SuperObject {
 			e.printStackTrace();
 		}
 		setCollision(true);
+		setSolidArea(new Rectangle(12, 12, 24, 24));
+		setSolidAreaDefaultX(getSolidArea().x);
+		setSolidAreaDefaultY(getSolidArea().y);
 	}
 	
 	public void setDialogue1() {
@@ -43,14 +47,39 @@ public class OBJ_Statue extends SuperObject {
 		super.speak(i);
 	}
 	
-	public void move(String direction, int speed) {
-	    Entity.moveObject(this, direction, speed); 
+	public void move(SuperObject object, String direction, int speed) {
+	    switch (direction) {
+        case "up":
+            object.setWorldY(object.getWorldY() - speed);  
+            break;
+        case "down":
+            object.setWorldY(object.getWorldY() + speed); 
+            break;
+        case "left":
+            object.setWorldX(object.getWorldX() - speed);  
+            break;
+        case "right":
+            object.setWorldX(object.getWorldX() + speed);  
+            break;
+	    }
 	}
 
 	// TODO: Ziehen
-	public void pull(String direction, int speed) {
-		Entity.pullObject(this, direction, speed);
-		
+	public void pull(SuperObject object, Entity player, int speed) {
+		int deltaX = player.worldX - object.getWorldX();
+	    int deltaY = player.worldY - object.getWorldY();
+
+        // Calculate the distance to the player
+	    double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+	    // Normalize the direction vector if distance is greater than zero
+        if (distance > 40) {
+        	// Normalize the direction vector
+	        double normalizedX = deltaX / distance;
+	        double normalizedY = deltaY / distance;
+	        // Move the object towards the player
+	        object.setWorldX(object.getWorldX() + (int)(normalizedX * speed));
+	        object.setWorldY(object.getWorldY() + (int)(normalizedY * speed));
+        }
 	}
 
 }

@@ -49,9 +49,9 @@ public class AssetPlacer {
 		
 		mapNum = 2;
 		// Objekte Geschichtsraum
-		gp.getObj()[mapNum][1] = new OBJ_Statue(gp, keyH);
-		gp.getObj()[mapNum][1].setWorldX(10 * gp.getTileSize());
-		gp.getObj()[mapNum][1].setWorldY(42 * gp.getTileSize());
+		gp.getObj()[mapNum][0] = new OBJ_Statue(gp, keyH);
+		gp.getObj()[mapNum][0].setWorldX(10 * gp.getTileSize());
+		gp.getObj()[mapNum][0].setWorldY(42 * gp.getTileSize());
 		
 
 	}

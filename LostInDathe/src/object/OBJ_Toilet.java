@@ -1,5 +1,6 @@
 package object;
 
+import java.awt.Rectangle;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -20,6 +21,7 @@ public class OBJ_Toilet extends SuperObject {
 			e.printStackTrace();
 		}
 		setCollision(true);
+
 	}
 	
 	public void setDialogue1() {

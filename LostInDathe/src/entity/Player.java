@@ -7,6 +7,8 @@ import java.awt.image.BufferedImage;
 
 import main.GamePanel;
 import main.KeyHandler;
+import object.OBJ_Statue;
+import object.SuperObject;
 
 public class Player extends Entity {
 
@@ -68,14 +70,17 @@ public class Player extends Entity {
 	public void update() { // Methode wird 60-mal pro Sekunde aufgerufen
 
 	    double diagonalSpeed = speed / Math.sqrt(2); // Geschwindigkeit bei diagonaler Bewegung
-
 	    // Initialisierung der x- und y-Bewegung
 	    double moveX = 0;
 	    double moveY = 0;
-
 	    // Überprüfe Kollisionen der Objekte zum aufheben
 	    int objectIndex = gp.cChecker.checkObject(this, true); // Check object collision first
 	    pickUpObject(objectIndex);
+	    
+	    if(distanceStatue(this, gp.getObj()[2][0]) < 100 && keyH.pullPressed) {
+	    	speed /= 2;
+	    }
+	    pullStatue();
 	    
 	    // Überprüfe Kollision der NPCs zum interagieren
 	    int npcIndex = gp.cChecker.checkEntity(this, gp.getNpc());
@@ -168,10 +173,7 @@ public class Player extends Entity {
 	    // Position aktualisieren
 	    worldX += moveX;
 	    worldY += moveY;
-
-	    
-			
-			
+		speed = 4;	
 		
 	    // Richtung setzen
 		spriteCounter++;
@@ -216,7 +218,7 @@ public class Player extends Entity {
 				break;
 			case "Toilet":
 				if(gp.getObj()[gp.getCurrentMap()][i].isKey_inside() && keyH.enterPressed) {	//TODO: Indikator für Enter  drücken
-					gp.playSE(1);
+					gp.playSE(10);
 					hasKey++;
 					gp.gameState = gp.dialogueState;
 					if(gp.getObj()[gp.getCurrentMap()][i].isKey_inside()) {
@@ -231,7 +233,33 @@ public class Player extends Entity {
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i);
 				}
+			case "Statue":
+                    if (keyH.pushPressed) {
+                    	speed = speed/2;
+                    	gp.getObj()[gp.getCurrentMap()][i].move(gp.getObj()[gp.getCurrentMap()][i], direction, speed);
+                    	speed = 4;
+                    }
+				break;
 			}
+		}
+	}
+	
+	public double distanceStatue(Entity player, SuperObject object) {
+		int deltaX = player.worldX - object.getWorldX();
+	    int deltaY = player.worldY - object.getWorldY();
+
+        // Calculate the distance to the player
+	    double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+	    return distance;
+	}
+	
+	public void pullStatue() {
+		if (gp.getCurrentMap() == 2) {
+		    double distance = distanceStatue(this, gp.getObj()[2][0]); 
+		    if (distance < 60 && keyH.pullPressed) {
+		    	int pullSpeed = speed*2;
+		        gp.getObj()[2][0].pull(gp.getObj()[2][0], this, pullSpeed);
+		    }
 		}
 	}
 	

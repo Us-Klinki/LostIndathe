@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+import entity.Entity;
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
@@ -80,6 +81,9 @@ public class SuperObject {
 	
 	public void setDialogue3() {}
 	
+	public void pull(SuperObject object, Entity player, int speed) {}
+	
+	public void move(SuperObject object, String direction, int speed) {}
 	/**
 	 * @return the name
 	 */
@@ -199,5 +203,4 @@ public class SuperObject {
 	public void setDialogueSet(int dialogueSet) {
 		this.dialogueSet = dialogueSet;
 	}
-
 }
