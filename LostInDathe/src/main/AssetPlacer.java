@@ -3,6 +3,7 @@ package main;
 import entity.NPC_Priebe;
 import entity.NPC_Test;
 import entity.OBJ_Bathroomdoor;
+import entity.OBJ_GesDoor;
 import entity.OBJ_Sink;
 import entity.OBJ_Statue;
 import entity.OBJ_Statue2;
@@ -53,15 +54,13 @@ public class AssetPlacer {
 		gp.getObj()[mapNum][6].worldY = 30*gp.getTileSize();
 		
 		mapNum = 2;
-		// Objekte Geschichtsraum
-			gp.getObj()[mapNum][0] = new OBJ_Statue(gp, keyH);
-			gp.getObj()[mapNum][0].worldX = 31*gp.getTileSize();
-			gp.getObj()[mapNum][0].worldY = 20*gp.getTileSize();
-		/*if(EventHandler.gesGelöst == true) {
-			gp.getObj()[mapNum][1] = new OBJ_Statue2(gp, keyH);
-			gp.getObj()[mapNum][1].worldX = 20*gp.getTileSize();
-			gp.getObj()[mapNum][1].worldY = 32*gp.getTileSize() + 1/2;
-		}*/
+		gp.getObj()[mapNum][0] = new OBJ_Statue(gp, keyH);
+		gp.getObj()[mapNum][0].worldX = 31*gp.getTileSize();
+		gp.getObj()[mapNum][0].worldY = 20*gp.getTileSize();
+		gp.getObj()[mapNum][1] = new OBJ_GesDoor(gp, keyH);
+		gp.getObj()[mapNum][1].worldX = 29*gp.getTileSize();
+		gp.getObj()[mapNum][1].worldY = 18*gp.getTileSize();
+		
 
 	}
 	

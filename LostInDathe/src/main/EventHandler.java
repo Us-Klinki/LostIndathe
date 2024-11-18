@@ -13,6 +13,7 @@ public class EventHandler {
 	int previousEventX, previousEventY;
 	boolean canTouchEvent = true;
 	public static boolean gesGelöst = false;
+	public static boolean gesZuDunkel = false;
 	public static boolean playerNotColliding = true;
 	public static int i = 0;
 	public EventHandler(GamePanel gp) {
@@ -90,6 +91,10 @@ public class EventHandler {
 		
 		if(hitObject(2, 20, 31) == true || hitObject(2, 20, 32) == true) {
 			gesGelöst = true;
+		}
+		
+		if(hitObject(2, 20, 27) == true || hitObject(2, 20, 26) == true || hitObject(2, 20, 23) == true || hitObject(2, 20, 22) == true) {
+			gesZuDunkel = true;
 		}
 	}
 	
