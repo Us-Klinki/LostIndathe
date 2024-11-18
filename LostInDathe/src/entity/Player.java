@@ -158,7 +158,11 @@ public class Player extends Entity {
                     	speed = 4;
                 }
 				if(EventHandler.gesGelöst == true) {
-						gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
+					gp.getObj()[gp.getCurrentMap()][i].setDialogue20();
+					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
+				}
+				else {
+					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 				}
 				if(keyH.enterPressed) {
 					gp.gameState = gp.dialogueState;
