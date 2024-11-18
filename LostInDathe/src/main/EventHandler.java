@@ -5,6 +5,7 @@ public class EventHandler {
 	
 	GamePanel gp;
 	EventRect eventRect[][][];
+	EventRect eventRect1[][][];
 	
 	int previousEventX, previousEventY;
 	boolean canTouchEvent = true;
@@ -14,6 +15,7 @@ public class EventHandler {
 		this.gp = gp;
 		
 		eventRect = new EventRect[gp.getMaxMap()][gp.getMaxWorldCol()][gp.getMaxWorldRow()];
+		eventRect1 = new EventRect[gp.getMaxMap()][gp.getMaxWorldCol()][gp.getMaxWorldRow()];
 		
 		int map = 0;
 		int col = 0;
@@ -27,7 +29,15 @@ public class EventHandler {
 			eventRect[map][col][row].height = gp.getTileSize() / 24;
 			eventRect[map][col][row].eventRectDefaultX = eventRect[map][col][row].x;
 			eventRect[map][col][row].eventRectDefaultY = eventRect[map][col][row].y;
-		
+			
+			eventRect1[map][col][row] = new EventRect();
+			eventRect1[map][col][row].x = gp.getTileSize() / 2 - gp.getTileSize() / 48;
+			eventRect1[map][col][row].y = 0;
+			eventRect1[map][col][row].width = gp.getTileSize() / 24;
+			eventRect1[map][col][row].height = gp.getTileSize();
+			eventRect1[map][col][row].eventRectDefaultX = eventRect[map][col][row].x;
+			eventRect1[map][col][row].eventRectDefaultY = eventRect[map][col][row].y;
+			
 			col ++;
 			if(col == gp.getMaxWorldCol()) {
 				col = 0;
@@ -55,11 +65,11 @@ public class EventHandler {
 		
 		if(canTouchEvent == true) {
 			//if(hit(0, 21, 31, "any") == true) { intraTeleport(gp.dialogueState); }
-			if(hit(0, 20, 30, "any") == true) { interTeleport(2, 10, 44); gp.stopMusic(2); gp.playMusic(6); }
-			else if(hit(2, 10, 44, "any") == true) { interTeleport(0, 20, 25); gp.stopMusic(6); gp.playMusic(2); }
+			if(hit(0, 20, 30, "any") == true) { interTeleport(2, 29, 18); gp.stopMusic(2); gp.playMusic(6); }
+			else if(hit(2, 29, 18, "any") == true) { interTeleport(0, 20, 25); gp.stopMusic(6); gp.playMusic(2); }
 		}
 		
-		if(hitObject(2, 16, 35) == true) {
+		if(hitObject(2, 20, 22) == true || hitObject(2, 20, 23)) {
 			gesGelöst = true;
 		}
 	}
@@ -99,10 +109,10 @@ public class EventHandler {
 			
 				gp.getObj()[eventMap][0].getSolidArea().x = gp.getObj()[eventMap][0].worldX + gp.getObj()[eventMap][0].getSolidAreaDefaultX();
 				gp.getObj()[eventMap][0].getSolidArea().y = gp.getObj()[eventMap][0].worldY + gp.getObj()[eventMap][0].getSolidAreaDefaultY();
-				eventRect[eventMap][eventCol][eventRow].x = eventCol * gp.getTileSize() + eventRect[eventMap][eventCol][eventRow].x;
-				eventRect[eventMap][eventCol][eventRow].y = eventRow * gp.getTileSize() + eventRect[eventMap][eventCol][eventRow].y;
+				eventRect1[eventMap][eventCol][eventRow].x = eventCol * gp.getTileSize() + eventRect1[eventMap][eventCol][eventRow].x;
+				eventRect1[eventMap][eventCol][eventRow].y = eventRow * gp.getTileSize() + eventRect1[eventMap][eventCol][eventRow].y;
 		
-				if(gp.getObj()[eventMap][0].getSolidArea().intersects(eventRect[eventMap][eventCol][eventRow]) && eventRect[eventMap][eventCol][eventRow].eventDone == false) {
+				if(gp.getObj()[eventMap][0].getSolidArea().intersects(eventRect1[eventMap][eventCol][eventRow]) && eventRect1[eventMap][eventCol][eventRow].eventDone == false) {
 					hitObject = true;
 				
 					previousEventX = gp.getPlayer().worldX;
@@ -114,8 +124,8 @@ public class EventHandler {
 		
 			gp.getObj()[eventMap][0].getSolidArea().x = gp.getObj()[eventMap][0].getSolidAreaDefaultX();
 			gp.getObj()[eventMap][0].getSolidArea().y = gp.getObj()[eventMap][0].getSolidAreaDefaultY();
-			eventRect[eventMap][eventCol][eventRow].x = eventRect[eventMap][eventCol][eventRow].eventRectDefaultX;
-			eventRect[eventMap][eventCol][eventRow].y = eventRect[eventMap][eventCol][eventRow].eventRectDefaultY;
+			eventRect1[eventMap][eventCol][eventRow].x = eventRect1[eventMap][eventCol][eventRow].eventRectDefaultX;
+			eventRect1[eventMap][eventCol][eventRow].y = eventRect1[eventMap][eventCol][eventRow].eventRectDefaultY;
 				
 		return hitObject;
 	}

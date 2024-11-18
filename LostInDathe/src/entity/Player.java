@@ -13,7 +13,7 @@ public class Player extends Entity {
 
 	public final int screenX;
 	public final int screenY;
-	int hasKey = 0;
+	int hasKey = 1;
 	int hasKeyChemie = 0;
 	public int dialogueCounter = 1;
 	
@@ -81,17 +81,15 @@ public class Player extends Entity {
 	    if(distanceStatue(this, gp.getObj()[2][0]) < 100 && keyH.pullPressed) {
 	    	speed /= 2;
 		    playerMovementPull();
+		    speed = 4;
 	    }
 	    else {
 		    playerMovement();
 	    }
-	    pullStatue();
 	    
-	    // Überprüfe Kollision der NPCs zum interagieren
-
-	    // Position aktualisieren
-		speed = 4;	
+	    pullStatue();
 		
+	    
 	    // Richtung setzen
 		spriteCounter++;
 		if(spriteCounter > 12) { // jede 1/5-Sekunde
@@ -154,8 +152,8 @@ public class Player extends Entity {
 			case "Statue":
 				if (keyH.pushPressed) {
                     speed = speed/2;
-                    	gp.getObj()[gp.getCurrentMap()][i].move(gp.getObj()[gp.getCurrentMap()][i], direction, speed);
-                    	speed = 4;
+                    gp.getObj()[gp.getCurrentMap()][i].move(gp.getObj()[gp.getCurrentMap()][i], direction, speed);
+                   	speed = 4;
                 }
 				if(EventHandler.gesGelöst == true) {
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue20();
@@ -186,8 +184,7 @@ public class Player extends Entity {
 		if (gp.getCurrentMap() == 2) {
 		    double distance = distanceStatue(this, gp.getObj()[2][0]); 
 		    if (distance < 60 && keyH.pullPressed) {
-		    	int pullSpeed = speed*2;
-		        gp.getObj()[2][0].pull(gp.getObj()[2][0], this, pullSpeed);
+		        gp.getObj()[2][0].pull(gp.getObj()[2][0], this, speed);
 		    }
 		}
 	}

@@ -54,8 +54,8 @@ public class AssetPlacer {
 		mapNum = 2;
 		// Objekte Geschichtsraum
 		gp.getObj()[mapNum][0] = new OBJ_Statue(gp, keyH);
-		gp.getObj()[mapNum][0].worldX = 10*gp.getTileSize();
-		gp.getObj()[mapNum][0].worldY = 42*gp.getTileSize();
+		gp.getObj()[mapNum][0].worldX = 31*gp.getTileSize();
+		gp.getObj()[mapNum][0].worldY = 20*gp.getTileSize();
 		
 
 	}
@@ -65,7 +65,7 @@ public class AssetPlacer {
 		gp.getNpc()[0][0].worldY = 24*gp.getTileSize();
 		
 		gp.getNpc()[2][0] = new NPC_Priebe(gp, keyH);
-		gp.getNpc()[2][0].worldX = 14*gp.getTileSize();
-		gp.getNpc()[2][0].worldY = 40*gp.getTileSize();
+		gp.getNpc()[2][0].worldX = 24*gp.getTileSize();
+		gp.getNpc()[2][0].worldY = 20*gp.getTileSize();
 	}
 }

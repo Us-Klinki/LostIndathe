@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.Rectangle;
 import java.util.Random;
 
 import main.GamePanel;
@@ -14,7 +15,10 @@ public class NPC_Priebe extends Entity {
 		setName("priebe");
 		direction = "";
 		speed = 1;
-		
+		setCollisionOn(true);
+		setSolidArea(new Rectangle(8, 20, 32, 28));
+		setSolidAreaDefaultX(getSolidArea().x);
+		setSolidAreaDefaultY(getSolidArea().y);
 		getNPCImage();
 	}
 	public void getNPCImage() { 

@@ -33,30 +33,54 @@ public class TileManager {
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
 		
-		tile = new Tile[20];
+		tile = new Tile[50];
 		mapTileNum = new int[gp.getMaxMap()][gp.getMaxWorldCol()] [gp.getMaxWorldRow()];
 		
 		getTileImage();
 		loadMap("/maps/bathroom.txt", 0);
 		loadMap("/maps/subArea.txt", 1);
-		loadMap("/maps/PlatzhalterGeschichte.txt", 2);
+		loadMap("/maps/Geschitsraum.txt", 2);
+		
 	}
 	
 
 	public void getTileImage() {
 			
 		// setup(TileIndex, "Dateiname", Kollision true/false);
-		setup(0, "1_bathground", false);
-		setup(1, "2_bathwall_plain_bl", true);
-		setup(2, "2_bathwall_plain_br", true);
-		setup(3, "2_bathwall_plain_tl", true);
-		setup(4, "2_bathwall_plain_tr", true);
-		setup(5, "3_bathwall_bl", true);
-		setup(6, "3_bathwall_br", true);
-		setup(7, "3_bathwall_tl", true);
-		setup(8, "3_bathwall_tr", true);
-		setup(9, "4_bathwall", true);
-		setup(10, "5_bathteleport", false);
+		setup(0, "11_bathground", false);
+		setup(1, "12_bathwall_plain_bl", true);
+		setup(2, "12_bathwall_plain_br", true);
+		setup(3, "12_bathwall_plain_tl", true);
+		setup(4, "12_bathwall_plain_tr", true);
+		setup(5, "13_bathwall_bl", true);
+		setup(6, "13_bathwall_br", true);
+		setup(7, "13_bathwall_tl", true);
+		setup(8, "13_bathwall_tr", true);
+		setup(9, "14_bathwall", true);
+		setup(10, "15_bathteleport", false);
+		setup(11, "21_Background", true);
+		setup(12, "22_Wand", true);
+		setup(13, "23_Boden1", false);
+		setup(14, "23_Boden2", false);
+		setup(15, "24_Tisch", true);
+		setup(16, "25_Stuhl", true);
+		setup(17, "26_Pult1", true);
+		setup(18, "26_Pult2", true);
+		setup(19, "26_Pult3", true);
+		setup(20, "27_Schrank1", true);
+		setup(21, "27_Schrank2", true);
+		setup(22, "27_Schrank3", true);
+		setup(23, "27_Schrank4", true);
+		setup(24, "28_Tafel", true);
+		setup(25, "28_Tafel2", true);
+		setup(26, "291_Mülleimer", true);
+		setup(27, "291_Mülleimer2", true);
+		setup(28, "291_Mülleimer3", true);
+		setup(29, "292_Fenster1", true);
+		setup(30, "292_Fenster2", true);
+		setup(31, "293_Schrank1", true);
+		setup(32, "293_Schrank2", true);
+		
 	}
 	
 	public void setup(int tileIndex, String imageName, boolean collision) {

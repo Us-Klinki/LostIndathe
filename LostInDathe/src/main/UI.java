@@ -27,11 +27,10 @@ public class UI {
 	public BufferedImage logo;
 	private String currentDialogue = "";
 	private int commandNum = 0;
-	private Color black = new Color(0, 0, 0, 0);                    
 	int subState = 0;
 	private String displayedDialogue = "";
 	private int dialogueIndex = 0;
-	private int dialogueSpeed = 4; 
+	private int dialogueSpeed = 2; 
 	private int dialogueCounter = 0;
 
 	public UI(GamePanel gp) {
