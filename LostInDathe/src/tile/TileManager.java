@@ -80,6 +80,16 @@ public class TileManager {
 		setup(30, "292_Fenster2", true);
 		setup(31, "293_Schrank1", true);
 		setup(32, "293_Schrank2", true);
+		setup(33, "31_Chemie_Background", true);
+		setup(34, "32_Info_Background", true);
+		setup(35, "33_Bio_Background", true);
+		setup(36, "34_Chemie_Boden", false);
+		setup(37, "34_Chemie_Wand", true);
+		setup(38, "35_Info_Wand", true);
+		setup(39, "36_Bio_Wand", true);
+		setup(40, "37_Chemie_Boden", false);
+		setup(41, "38_Info_Boden", false);
+		setup(42, "39_Bio_Boden", false);
 		
 	}
 	

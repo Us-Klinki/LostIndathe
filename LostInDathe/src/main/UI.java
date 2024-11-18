@@ -531,15 +531,20 @@ public class UI {
 	
 	// letter by letter
 	public void updateDialogue() {
-		if (gp.gameState == gp.dialogueState && dialogueIndex < currentDialogue.length()) {
-	        dialogueCounter++;
+		try {
+			if (gp.gameState == gp.dialogueState && dialogueIndex < currentDialogue.length()) {
+				dialogueCounter++;
 	        
-	        if (dialogueCounter >= dialogueSpeed) {
-	            displayedDialogue += currentDialogue.charAt(dialogueIndex);
-	            dialogueIndex++;
-	            dialogueCounter = 0;
-	        }
-	    }
+				if (dialogueCounter >= dialogueSpeed) {
+					displayedDialogue += currentDialogue.charAt(dialogueIndex);
+					dialogueIndex++;
+					dialogueCounter = 0;
+				}
+			}
+		}
+		catch(Exception e) {
+			System.out.println("Dialog hat nicht geklappt.");
+		}
 	}
 
 	public void drawSubWindow(int x, int y, int width, int height) {

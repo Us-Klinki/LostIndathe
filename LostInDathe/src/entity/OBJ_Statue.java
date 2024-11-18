@@ -30,8 +30,9 @@ public class OBJ_Statue extends Entity {
 	}
 	
 	public void setDialogue1() {
-		dialogues[2][0] = "Ich. Will. Zum. Licht.";
+		dialogues[2][0] = "Ich. Will. Zum. Licht. Kannst du mir nicht helfen?\nMit ',' kannst du mich schieben \nund mit '.' ziehen.";
 		dialogues[2][1] = "Sonne! Sommer! Kaktus!";
+		dialogues[2][2] = "Also was ist jetzt? Ich warte...";
 	}
 	
 	public void setDialogue2() {

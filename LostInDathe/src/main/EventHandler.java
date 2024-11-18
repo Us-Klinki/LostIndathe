@@ -1,21 +1,26 @@
 package main;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 
 public class EventHandler {
 	
 	GamePanel gp;
 	EventRect eventRect[][][];
 	EventRect eventRect1[][][];
+	EventRect eventRect2[][][];
 	
 	int previousEventX, previousEventY;
 	boolean canTouchEvent = true;
 	public static boolean gesGelöst = false;
+	public static boolean playerNotColliding = true;
 	public static int i = 0;
 	public EventHandler(GamePanel gp) {
 		this.gp = gp;
 		
 		eventRect = new EventRect[gp.getMaxMap()][gp.getMaxWorldCol()][gp.getMaxWorldRow()];
 		eventRect1 = new EventRect[gp.getMaxMap()][gp.getMaxWorldCol()][gp.getMaxWorldRow()];
+		eventRect2 = new EventRect[gp.getMaxMap()][gp.getMaxWorldCol()][gp.getMaxWorldRow()];
 		
 		int map = 0;
 		int col = 0;
@@ -37,6 +42,14 @@ public class EventHandler {
 			eventRect1[map][col][row].height = gp.getTileSize();
 			eventRect1[map][col][row].eventRectDefaultX = eventRect[map][col][row].x;
 			eventRect1[map][col][row].eventRectDefaultY = eventRect[map][col][row].y;
+			
+			eventRect2[map][col][row] = new EventRect();
+			eventRect2[map][col][row].x = 0;
+			eventRect2[map][col][row].y = 0;
+			eventRect2[map][col][row].width = gp.getTileSize();
+			eventRect2[map][col][row].height = gp.getTileSize();
+			eventRect2[map][col][row].eventRectDefaultX = eventRect2[map][col][row].x;
+			eventRect2[map][col][row].eventRectDefaultY = eventRect2[map][col][row].y;
 			
 			col ++;
 			if(col == gp.getMaxWorldCol()) {
@@ -68,8 +81,14 @@ public class EventHandler {
 			if(hit(0, 20, 30, "any") == true) { interTeleport(2, 29, 18); gp.stopMusic(2); gp.playMusic(6); }
 			else if(hit(2, 29, 18, "any") == true) { interTeleport(0, 20, 25); gp.stopMusic(6); gp.playMusic(2); }
 		}
+		if(hitTileGroß(2, 20, 31) == true || hitTileGroß(2, 20, 32) == true) {
+			playerNotColliding = false;
+		}
+		else if(hitTileGroß(2, 20, 31) == false || hitTileGroß(2, 20, 32) == false) {
+			playerNotColliding = true;
+		}
 		
-		if(hitObject(2, 20, 22) == true || hitObject(2, 20, 23)) {
+		if(hitObject(2, 20, 31) == true || hitObject(2, 20, 32) == true) {
 			gesGelöst = true;
 		}
 	}
@@ -103,6 +122,32 @@ public class EventHandler {
 		return hit;
 	}
 	
+	public boolean hitTileGroß(int eventMap, int eventCol, int eventRow) {
+		
+		boolean hitTileGroß = false;
+		
+		if(eventMap == gp.getCurrentMap()) {
+			gp.getPlayer().getSolidArea().x = gp.getPlayer().worldX + gp.getPlayer().getSolidAreaDefaultX();
+			gp.getPlayer().getSolidArea().y = gp.getPlayer().worldY + gp.getPlayer().getSolidAreaDefaultY();
+			eventRect2[eventMap][eventCol][eventRow].x = eventCol * gp.getTileSize() + eventRect2[eventMap][eventCol][eventRow].x;
+			eventRect2[eventMap][eventCol][eventRow].y = eventRow * gp.getTileSize() + eventRect2[eventMap][eventCol][eventRow].y;
+		
+			if(gp.getPlayer().getSolidArea().intersects(eventRect2[eventMap][eventCol][eventRow]) && eventRect2[eventMap][eventCol][eventRow].eventDone == false) {
+				
+				hitTileGroß = true;
+				
+				
+			}
+		
+			gp.getPlayer().getSolidArea().x = gp.getPlayer().getSolidAreaDefaultX();
+			gp.getPlayer().getSolidArea().y = gp.getPlayer().getSolidAreaDefaultY();
+			eventRect2[eventMap][eventCol][eventRow].x = eventRect2[eventMap][eventCol][eventRow].eventRectDefaultX;
+			eventRect2[eventMap][eventCol][eventRow].y = eventRect2[eventMap][eventCol][eventRow].eventRectDefaultY;
+		}
+				
+		return hitTileGroß;
+	}
+	
 	public boolean hitObject(int eventMap, int eventCol, int eventRow) {
 		boolean hitObject = false;
 			if(eventMap == gp.getCurrentMap()) {
@@ -115,8 +160,7 @@ public class EventHandler {
 				if(gp.getObj()[eventMap][0].getSolidArea().intersects(eventRect1[eventMap][eventCol][eventRow]) && eventRect1[eventMap][eventCol][eventRow].eventDone == false) {
 					hitObject = true;
 				
-					previousEventX = gp.getPlayer().worldX;
-					previousEventY = gp.getPlayer().worldY;
+		
 				
 					
 				}

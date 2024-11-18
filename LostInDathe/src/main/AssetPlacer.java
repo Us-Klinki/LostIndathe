@@ -5,6 +5,7 @@ import entity.NPC_Test;
 import entity.OBJ_Bathroomdoor;
 import entity.OBJ_Sink;
 import entity.OBJ_Statue;
+import entity.OBJ_Statue2;
 import entity.OBJ_Toilet;
 import object.*;
 
@@ -53,11 +54,21 @@ public class AssetPlacer {
 		
 		mapNum = 2;
 		// Objekte Geschichtsraum
-		gp.getObj()[mapNum][0] = new OBJ_Statue(gp, keyH);
-		gp.getObj()[mapNum][0].worldX = 31*gp.getTileSize();
-		gp.getObj()[mapNum][0].worldY = 20*gp.getTileSize();
-		
+			gp.getObj()[mapNum][0] = new OBJ_Statue(gp, keyH);
+			gp.getObj()[mapNum][0].worldX = 31*gp.getTileSize();
+			gp.getObj()[mapNum][0].worldY = 20*gp.getTileSize();
+		/*if(EventHandler.gesGelöst == true) {
+			gp.getObj()[mapNum][1] = new OBJ_Statue2(gp, keyH);
+			gp.getObj()[mapNum][1].worldX = 20*gp.getTileSize();
+			gp.getObj()[mapNum][1].worldY = 32*gp.getTileSize() + 1/2;
+		}*/
 
+	}
+	
+	void setStatue() {
+		gp.getObj()[2][0] = new OBJ_Statue2(gp, keyH);
+		gp.getObj()[2][0].worldX = 20*gp.getTileSize();
+		gp.getObj()[2][0].worldY = 32*gp.getTileSize();
 	}
 	public void setNPC() {
 		gp.getNpc()[0][0] = new NPC_Test(gp, keyH);

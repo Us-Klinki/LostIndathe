@@ -13,7 +13,7 @@ public class Player extends Entity {
 
 	public final int screenX;
 	public final int screenY;
-	int hasKey = 1;
+	int hasKey = 0;
 	int hasKeyChemie = 0;
 	public int dialogueCounter = 1;
 	
@@ -155,15 +155,23 @@ public class Player extends Entity {
                     gp.getObj()[gp.getCurrentMap()][i].move(gp.getObj()[gp.getCurrentMap()][i], direction, speed);
                    	speed = 4;
                 }
-				if(EventHandler.gesGelöst == true) {
+				/*if(EventHandler.gesGelöst == true) {
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue20();
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
-				}
+				}*/
 				else {
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 				}
 				if(keyH.enterPressed) {
 					gp.gameState = gp.dialogueState;
+					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+				}
+				break;
+			case "Statue2":
+				
+				if(keyH.enterPressed) {
+					gp.gameState = gp.dialogueState;
+					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
 				break;

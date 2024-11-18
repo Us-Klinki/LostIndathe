@@ -37,8 +37,8 @@ public class GamePanel extends JPanel implements Runnable {
 	final int screenHeight = tileSize * maxScreenRow;
   
 	// WORLD SETTINGS
-	final int maxWorldCol = 50;
-	final int maxWorldRow = 50;
+	final int maxWorldCol = 100;
+	final int maxWorldRow = 100;
 	private final int maxMap = 16;
 	private int currentMap = 0;
 	
@@ -289,6 +289,10 @@ public class GamePanel extends JPanel implements Runnable {
  			}*/
 
  			getPlayer().update();
+ 			if(EventHandler.gesGelöst == true && EventHandler.playerNotColliding == true) {
+ 				aPlacer.setStatue();
+ 				EventHandler.gesGelöst = false;
+ 			}
  			
  			for(int i = 0; i < npc[1].length; i++) {
  				if(npc[currentMap][i] != null) {
@@ -380,7 +384,7 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 		// Hier wird der Spieler gespawnt
  	 	 	getPlayer().draw(g2); */
  	 	 	}
- 	 	 	else if (gameState == pauseState) {
+ 	 	 	if (gameState == pauseState) {
  	 	 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
  	 	 		g2.setColor(transparentblack);
  	 	 		g2.fillRect(0, 0, getWidth(), getHeight());
@@ -391,7 +395,7 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f)); // Volle Deckkraft für Text
  	 	 		ui.draw(g2);
  	 	 	}
- 	 	 	else if(gameState == optionsState) {
+ 	 	 	if(gameState == optionsState) {
  	 	 		ui.draw(g2);
  	 	    }
  	 	 	if(gameState == dialogueState) {
