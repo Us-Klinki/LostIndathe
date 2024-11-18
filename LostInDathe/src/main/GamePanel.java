@@ -11,7 +11,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.image.VolatileImage;
-
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -161,6 +163,7 @@ public class GamePanel extends JPanel implements Runnable {
  	private Player player = new Player(this, keyH);
  	private Entity obj[][] = new Entity[maxMap][30];
  	private Entity npc[][] = new Entity[maxMap][10];
+ 	ArrayList<Entity> entityList = new ArrayList<>();
  	Font debug = new Font("Bahnschrift", Font.BOLD, 24);
  	
   
@@ -322,20 +325,60 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 	if(gameState == playState || gameState == dialogueState) {
  	 	    	// Hier werden die Tiles erzeugt
  	 	 		tileM.draw(g2);
- 	 	 		// Hier werden die Objekte platziert
+ 	 	 		
+ 	 	 		// Entitäten werden zur Liste hinzugefügt
+ 	 	 		entityList.add(getPlayer());
+ 	 	 		
+ 	 	 		for(int i = 0; i < npc[currentMap].length; i++) {
+ 	 	 			if(npc[currentMap][i] != null) {
+ 	 	 			entityList.add(npc[currentMap][i]);
+ 	 	 			}			
+ 	 	 		}
+ 	 	 		
+ 	 	 		for(int i = 0; i < obj[currentMap].length; i++) {
+	 	 			if(obj[currentMap][i] != null) {
+	 	 			entityList.add(obj[currentMap][i]);
+	 	 			}	
+	 	 		}
+ 	 	 		
+ 	 	 		// Sortieren
+ 	 	 		Collections.sort(entityList, new Comparator<Entity>() {
+
+					@Override
+					public int compare(Entity e1, Entity e2) {
+
+						int result = Integer.compare(e1.worldY, e2.worldY);
+						return result;
+					}	 	 			
+ 	 	 		});
+ 	 	 		
+ 	 	 		// Zeichne Entitäten
+ 	 	 		for(int i = 0; i < entityList.size(); i++) {
+ 	 	 			entityList.get(i).draw(g2);
+ 	 	 		}
+ 	 	 		
+ 	 	 		// Entitylist leeren
+ 	 	 		entityList.clear();
+ 	 	 		
+ 	 	 		
+ 	 	 		// ALTE METHODE
+ 	 	 		
+ 	 	 		/* Hier werden die Objekte platziert
  	 	 		for(int i = 0; i < obj[1].length; i++) {
  	 	 			if(obj[currentMap][i] != null) {	// sicherstellen, dass Arrayindex immer gefüllt ist
  	 	 				obj[currentMap][i].draw(g2);
  	 	 			}
  	 	 		}
+ 	 	 		// Hier werden die NPCs platziert
  	 	 		for(int i = 0; i < npc[1].length; i++) {
  	 	 			if(npc[currentMap][i] != null) {	// sicherstellen, dass Arrayindex immer gefüllt ist
  	 	 				npc[currentMap][i].draw(g2);
  	 	 			}
- 	 	 		}
- 	 	    
+ 	 	 		}  
+ 	 	 		
+ 	 	 		
  	 	 		// Hier wird der Spieler gespawnt
- 	 	 	getPlayer().draw(g2);
+ 	 	 	getPlayer().draw(g2); */
  	 	 	}
  	 	 	else if (gameState == pauseState) {
  	 	 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
