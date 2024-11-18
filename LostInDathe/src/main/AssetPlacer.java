@@ -4,6 +4,7 @@ import entity.NPC_Priebe;
 import entity.NPC_Test;
 import entity.OBJ_Bathroomdoor;
 import entity.OBJ_GesDoor;
+import entity.OBJ_Informatikdoor;
 import entity.OBJ_Sink;
 import entity.OBJ_Statue;
 import entity.OBJ_Statue2;
@@ -22,6 +23,7 @@ public class AssetPlacer {
 	
 	void setObject() { // platzieren eines Objektes mit Array-Index
 		
+		// BAD
 		int mapNum = 0; 
 		// Objekte Bad
 		/*gp.getObj()[mapNum][0] = new OBJ_Key(gp);
@@ -53,15 +55,35 @@ public class AssetPlacer {
 		gp.getObj()[mapNum][6].worldX = 20*gp.getTileSize();
 		gp.getObj()[mapNum][6].worldY = 30*gp.getTileSize();
 		
+		// Schulhaus OG
+		mapNum = 1;
+		gp.getObj()[mapNum][0] = new OBJ_GesDoor(gp, keyH);
+		gp.getObj()[mapNum][0].worldX = 13*gp.getTileSize();
+		gp.getObj()[mapNum][0].worldY = 11*gp.getTileSize();
+		
+		gp.getObj()[mapNum][1] = new OBJ_GesDoor(gp, keyH);
+		gp.getObj()[mapNum][1].worldX = 12*gp.getTileSize();
+		gp.getObj()[mapNum][1].worldY = 15*gp.getTileSize();
+
+		gp.getObj()[mapNum][2] = new OBJ_Informatikdoor(gp, keyH);
+		gp.getObj()[mapNum][2].worldX = 32*gp.getTileSize();
+		gp.getObj()[mapNum][2].worldY = 15*gp.getTileSize();
+		
+		// GESCHICHTE
 		mapNum = 2;
 		gp.getObj()[mapNum][0] = new OBJ_Statue(gp, keyH);
 		gp.getObj()[mapNum][0].worldX = 31*gp.getTileSize();
 		gp.getObj()[mapNum][0].worldY = 20*gp.getTileSize();
+		
 		gp.getObj()[mapNum][1] = new OBJ_GesDoor(gp, keyH);
 		gp.getObj()[mapNum][1].worldX = 29*gp.getTileSize();
 		gp.getObj()[mapNum][1].worldY = 18*gp.getTileSize();
 		
-
+		// INFORMATIK
+		mapNum = 3;
+		gp.getObj()[mapNum][0] = new OBJ_GesDoor(gp, keyH);
+		gp.getObj()[mapNum][0].worldX = 50*gp.getTileSize();
+		gp.getObj()[mapNum][0].worldY = 50*gp.getTileSize();
 	}
 	
 	void setStatue() {

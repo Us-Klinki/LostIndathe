@@ -11,16 +11,17 @@ public class OBJ_Toilet extends Entity {
 		idle1 = setup("/npc/objects/toilet");
 		idle2 = setup("/npc/objects/toilet");
 		setCollisionOn(true);
+		setHasDialogue(true);
 	}
 	
 	public void setDialogue1() {
-		dialogues[0][0] = "Congratulations";
-		dialogues[0][1] = "Yo found:";
-		dialogues[0][2] = "A key";
+		dialogues[0][0] = "Ich habe einen Schlüssel gefunden!\nVielleicht kann ich damit die Tür nach draußen\n öffnen?";
+		dialogues[0][1] = "Anscheinend kann ich mit vielen Dingen mit \n'ENTER' interagieren...\nDas sollte ich mir merken...";
+		//dialogues[0][2] = "A key";
 	}
 	
 	public void setDialogue2() {
-		dialogues[0][0] = "There is nothing to find here";
+		dialogues[0][0] = "Hier scheint nichts zu sein...";
 	}
 	
 	public void setDialogue20() {

@@ -11,6 +11,5 @@ public class OBJ_Sink extends Entity {
 		idle1 = setup("/npc/objects/sink");
 		idle2 = setup("/npc/objects/sink");
 		setCollisionOn(true);
-		
 	}
 }

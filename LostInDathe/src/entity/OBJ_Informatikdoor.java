@@ -3,22 +3,20 @@ package entity;
 import main.GamePanel;
 import main.KeyHandler;
 
-public class OBJ_Bathroomdoor extends Entity {
+public class OBJ_Informatikdoor extends Entity {
 	
 	
-	public OBJ_Bathroomdoor(GamePanel gp, KeyHandler keyH) {
+	public OBJ_Informatikdoor(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
-		setName("Bathroomdoor");
+		setName("Informatikdoor");
 		idle1 = setup("/npc/objects/Tür");
 		idle2 = setup("/npc/objects/Tür");
 		setCollisionOn(true);
-		
-		
 
 	}
 	
 	public void setDialogue1() {
-		dialogues[0][0] = "Tür zum Schulflur.\nIch benötige einen Schlüssel, um hier heraus \nzu kommen...";
+		dialogues[1][0] = "Informatikraum.\nIch benötige einen Schlüssel, um hier herein \nzu kommen...";
 	}
 	
 	public void setDialogue20() {

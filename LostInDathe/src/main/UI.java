@@ -20,14 +20,15 @@ public class UI {
 	Graphics2D g2;
 	Font yoster, yoster_s, yoster_l, yoster_sl, yoster_xs; 
 	
-	public boolean messageOn = false;
-	public String message = "";
+	public static boolean messageOn = false;
+	public String message = "Interagieren - ENTER";
 	int messageCounter = 0;
 	public boolean gameFinished = false;
 	public BufferedImage logo;
 	private String currentDialogue = "";
 	private int commandNum = 0;
 	int subState = 0;
+	int subStateTitle = 0;
 	private String displayedDialogue = "";
 	private int dialogueIndex = 0;
 	private int dialogueSpeed = 2; 
@@ -46,7 +47,7 @@ public class UI {
 		 yoster_s = yoster.deriveFont(Font.PLAIN, 40);
 		 yoster_sl = yoster.deriveFont(Font.BOLD, 60);
 		 yoster_l = yoster.deriveFont(Font.BOLD, 80);
-		 yoster_xs = yoster.deriveFont(Font.PLAIN, 20);
+		 yoster_xs = yoster.deriveFont(Font.PLAIN, 27);
 		 
 		 // Fenster erstellen
 		 
@@ -92,8 +93,10 @@ public class UI {
 		this.dialogueIndex = 0;
 	}
 	
-	public void showMessage(String text) {
-		
+	public void showMessage(String text, Graphics2D g2) {
+		this.g2 = g2;
+		g2.setFont(yoster_s);
+		g2.setColor(Color.white);
 		message = text;
 		messageOn = true;
 	}
@@ -113,6 +116,9 @@ public class UI {
 		}
 		// Spielstatus
 		else if(gp.gameState == gp.playState) {
+			if(messageOn == true) {
+				g2.drawRoundRect(gp.getTileSize() * 12, gp.getTileSize() * 14, gp.getTileSize() * 8, gp.getTileSize() * 2, 12, 12);
+			}
 			//Platzhalter
 		}
 		// Pausen-Status
@@ -156,7 +162,13 @@ public class UI {
 		
 		// Menü
 		g2.setFont(yoster_s);
+		if(subStateTitle == 0) {title_top(x, y, text);}
+		if(subStateTitle == 1) {title_infos(x, text);}
+
 		
+		
+	}
+	public void title_top(int x, int y, String text) {
 		text = "Neues Spiel";
 		x = getXforCenteredText(text);
 		y = getYforCenteredText(text) +gp.tileSize;
@@ -181,7 +193,54 @@ public class UI {
 		if(getCommandNum() == 2) {
 			g2.drawString(">", xArrow, y);
 		}
+		text = "Infos";
+		x = getXforCenteredText(text);
+		y += gp.tileSize;
+		g2.drawString(text, x, y);
+		if(getCommandNum() == 3) {
+			g2.drawString(">", xArrow, y);
+		}
 		
+		
+	}
+	
+	// TODO: Noch zu erledigen
+	public void title_infos(int x, String text) {
+		int frameWidth = gp.getTileSize() * 18;
+		int frameHeight = gp.getTileSize() * 16;
+		int frameX = getXforCenteredText("") - frameWidth/2 + 10;
+		int frameY = (gp.getTileSize() * 9) - (frameHeight/2);
+		int textX;
+		int textY;
+		boolean transparent = false;
+		
+		drawSubWindow(frameX, frameY, frameWidth, frameHeight, transparent);
+		int abstand = gp.getTileSize();
+		int absatz = gp.getTileSize() / 4 + gp.getTileSize() / 2;
+		int auswahlAbstand = gp.getTileSize() / 2 + gp.getTileSize() / 8 + 10 ;
+		g2.setFont(yoster_sl);
+		text = "Infos";
+		textX = getXforCenteredText(text);
+		textY = frameY +  gp.getTileSize() + gp.getTileSize()/2;
+		int textYzwei = textY;
+		g2.drawString(text, textX, textY);
+		g2.setFont(yoster_s);
+		g2.setColor(Color.white);
+		textX = frameX + gp.getTileSize();
+		textY += abstand;
+		g2.drawString("Entwicklung", textX, textY);
+		g2.setFont(yoster_xs);
+		textX += gp.getTileSize();
+		textY += abstand;
+		g2.drawString("- Thu An Phung", textX, textY);
+		textY += absatz;
+		g2.drawString("- Tom Speer", textX, textY);
+		textY += absatz;
+		g2.drawString("- Gustav Kluge", textX, textY);
+		textX = getXforCenteredText("") + 10;
+		textY = textY - absatz * 2 - abstand;
+		g2.setFont(yoster_s);
+		g2.drawString("Grafikdesign", textX, textY);
 	}
 	
 	public void drawPauseScreen() {
@@ -213,8 +272,9 @@ public class UI {
 		int frameHeight = gp.getTileSize() * 13;
 		int frameX = getXforCenteredText("") - frameWidth/2 + 10;
 		int frameY = (gp.getTileSize() * 9) - (frameHeight/2);
+		boolean transparent = true;
 		
-		drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+		drawSubWindow(frameX, frameY, frameWidth, frameHeight, transparent);
 		int abstand = gp.getTileSize() + gp.getTileSize() / 2;
 		int absatz = gp.getTileSize() * 2;
 		int auswahlAbstand = gp.getTileSize() / 2 + gp.getTileSize() / 8 + 10 ;
@@ -349,7 +409,7 @@ public class UI {
 		
 		g2.setFont(yoster_xs);
 		g2.setColor(Color.white);
-		setCurrentDialogue("Das Spiel muss neugestartet werden, \num die Änderung zu realisieren.");
+		setCurrentDialogue("Das Spiel muss neugestartet\nwerden, um die Änderung \nzu realisieren.");
 		
 		 for (String line: getCurrentDialogue().split("\n")) {
 		 	g2.drawString(line, textX, textY);
@@ -357,7 +417,7 @@ public class UI {
 		 }
 		 
 		 g2.setFont(yoster_s);
-		 textY += abstand * 3.9;
+		 textY += abstand * 3.9 - 40;
 		 g2.drawString("Zurück", textX, textY);
 		 if(commandNum == 0) {
 		 	g2.drawString(">", textX-auswahlAbstand, textY);
@@ -426,7 +486,7 @@ public class UI {
 		textX = frameX + gp.getTileSize();
 		textY = frameY + 2* abstand + abstand/2;
 		
-		setCurrentDialogue("Spiel verlassen und zum Desktop \nzurückkehren? \n\nUngespeicherter Fortschritt geht \nverloren.");
+		setCurrentDialogue("Spiel verlassen und zum \nDesktop zurückkehren? \n\nUngespeicherter Fort-\nschritt geht verloren.");
 		
 		for (String line: getCurrentDialogue().split("\n")) {
 			 	g2.drawString(line, textX, textY);
@@ -510,7 +570,9 @@ public class UI {
 		int y = gp.getTileSize();
 		int width = gp.getScreenWidth() - (gp.getTileSize() * 9);
 		int height = gp.getTileSize() * 4;
-		drawSubWindow(x, y, width, height);
+		boolean transparent = true;
+		
+		drawSubWindow(x, y, width, height, transparent);
 		
 		g2.setFont(yoster_s);
 		
@@ -547,16 +609,21 @@ public class UI {
 		}
 	}
 
-	public void drawSubWindow(int x, int y, int width, int height) {
+	public void drawSubWindow(int x, int y, int width, int height, boolean transparent) {
 		int strokeWidth = 3;
 		int bogen = 35;
 		
 		
-		
-		Color c = new Color(0, 0, 0, 220);
-		g2.setColor(c);
-		g2.fillRoundRect(x, y, width, height, bogen, bogen);
-		
+		if(transparent == true) {
+			Color c = new Color(0, 0, 0, 220);
+			g2.setColor(c);
+			g2.fillRoundRect(x, y, width, height, bogen, bogen);
+		}
+		else {
+			Color c = new Color(0, 0, 0);
+			g2.setColor(c);
+			g2.fillRoundRect(x, y, width, height, bogen, bogen);
+		}
 		
 		Color d = new Color(110, 9, 20);
 		g2.setColor(d);

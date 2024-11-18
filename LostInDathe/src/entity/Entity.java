@@ -17,7 +17,7 @@ public class Entity {
   GamePanel gp;
   KeyHandler keyH;
   public int worldX;
-  public int worldY;
+  public double worldY;
   public int speed;
   private String Name;
   private BufferedImage image;
@@ -30,6 +30,7 @@ public class Entity {
   private Rectangle solidArea = new Rectangle(0, 0, 48, 48);
   private int solidAreaDefaultX, solidAreaDefaultY;
   private boolean collisionOn = false;
+  private boolean hasDialogue = false;
   private boolean dialogueStarted = false;
   private int actionLockCounter = 0;
   String dialogues[][];
@@ -131,7 +132,7 @@ public class Entity {
   public void draw(Graphics2D g2) {
 	 BufferedImage image = null;
 	 int screenX = worldX - gp.getPlayer().worldX + gp.getPlayer().screenX;
-	 int screenY = worldY - gp.getPlayer().worldY + gp.getPlayer().screenY;
+	 int screenY = (int) (worldY - gp.getPlayer().worldY + gp.getPlayer().screenY);
 	
 		// Renderdistanz: So groß wie Bildschirm
 		
@@ -320,5 +321,18 @@ public boolean isKeyInside() {
 }
 public void setKeyInside(boolean keyInside) {
 	this.keyInside = keyInside;
+}
+
+/**
+ * @return the hasDialogue
+ */
+public boolean isHasDialogue() {
+	return hasDialogue;
+}
+/**
+ * @param hasDialogue the hasDialogue to set
+ */
+public void setHasDialogue(boolean hasDialogue) {
+	this.hasDialogue = hasDialogue;
 }
 }

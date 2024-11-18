@@ -33,13 +33,14 @@ public class TileManager {
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
 		
-		tile = new Tile[50];
+		tile = new Tile[200];
 		mapTileNum = new int[gp.getMaxMap()][gp.getMaxWorldCol()] [gp.getMaxWorldRow()];
 		
 		getTileImage();
 		loadMap("/maps/bathroom.txt", 0);
-		loadMap("/maps/subArea.txt", 1);
+		loadMap("/maps/3OG_Gang.txt", 1);
 		loadMap("/maps/Geschitsraum.txt", 2);
+		loadMap("/maps/Informatikraum.txt", 3);
 		
 	}
 	
@@ -90,6 +91,52 @@ public class TileManager {
 		setup(40, "37_Chemie_Boden", false);
 		setup(41, "38_Info_Boden", false);
 		setup(42, "39_Bio_Boden", false);
+		setup(43, "41_Gang_Background", true);
+		setup(44, "42_Gang_Boden", false);
+		setup(45, "43_Gang_Wand", true);
+		setup(46, "44_Fenster1", true);
+		setup(47, "44_Fenster2", true);
+		setup(48, "44_Fenster3", true);
+		setup(49, "44_Fenster4", true);
+		setup(50, "45_Gang_Treppe1", false);
+		setup(51, "45_Gang_Treppe2", true);
+		setup(52, "46_Spind1", true);
+		setup(53, "46_Spind2", true);
+		setup(54, "47_Heizung1", true);
+		setup(55, "47_Heizung2", true);
+		setup(56, "47_Heizung3", true);
+		setup(57, "47_Heizung4", true);
+		setup(58, "51_Fenster", true);
+		setup(59, "52_Whiteboard1", true);
+		setup(60, "52_Whiteboard2", true);
+		setup(61, "53_Tisch1", true);
+		setup(62, "53_Tisch2", true);
+		setup(63, "53_Tisch3", true);
+		setup(64, "53_Tisch4", true);
+		setup(65, "53_Tisch5", true);
+		setup(66, "53_Tisch6", true);
+		setup(67, "53_Tisch7", true);
+		setup(68, "53_Tisch8", true);
+		setup(69, "53_Tisch91", true);
+		setup(70, "53_Tisch92", true);
+		setup(71, "53_Tisch93", true);
+		setup(72, "53_Tisch94", true);
+		setup(73, "54_Schrank1", true);
+		setup(74, "54_Schrank2", true);
+		setup(75, "54_Schrank3", true);
+		setup(76, "54_Schrank4", true);
+		setup(77, "54_Schrank5", true);
+		setup(78, "54_Schrank6", true);
+		setup(79, "551_Tisch", true);
+		setup(80, "552_Stuhl", true);
+		setup(81, "553_Pult.", true);
+		setup(82, "553_Pult1", true);
+		setup(83, "553_Pult3", true);
+		setup(84, "56_Schrank1", true);
+		setup(85, "56_Schrank2", true);
+		setup(86, "56_Schrank3", true);
+		setup(87, "56_Schrank4", true);
+		//setup(88, "36_Bio_Wand", true);
 		
 	}
 	
@@ -169,7 +216,7 @@ public class TileManager {
 			int worldX = worldCol * gp.getTileSize();
 			int worldY = worldRow * gp.getTileSize();
 			int screenX = worldX - gp.getPlayer().worldX + gp.getPlayer().screenX;
-			int screenY = worldY - gp.getPlayer().worldY + gp.getPlayer().screenY;
+			int screenY = (int) (worldY - gp.getPlayer().worldY + gp.getPlayer().screenY);
 			
 			// Renderdistanz: So groß wie Bildschirm
 			

@@ -1,13 +1,20 @@
 package entity;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
 import main.EventHandler;
 import main.GamePanel;
 import main.KeyHandler;
+import main.UI;
 
 public class Player extends Entity {
 
@@ -16,6 +23,8 @@ public class Player extends Entity {
 	int hasKey = 0;
 	int hasKeyChemie = 0;
 	public int dialogueCounter = 1;
+	boolean oneTimeDialogue = true;
+	Font yoster;
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		
@@ -69,6 +78,13 @@ public class Player extends Entity {
 	
 	
 	public void update() { // Methode wird 60-mal pro Sekunde aufgerufen
+		/*if(oneTimeDialogue == true) {
+			setDialogue1();
+			speak(0, false);
+			oneTimeDialogue = false;
+		}*/
+
+			
 
 	    // Überprüfe Kollisionen der Objekte zum aufheben
 	    int objectIndex = gp.cChecker.checkObject(this, true); // Check object collision first
@@ -105,7 +121,19 @@ public class Player extends Entity {
 		gp.eHandler.checkEvent();
 	}
 	
+	public void setDialogue1() {
+		dialogues[0][0] = "Es ist Freitag, 16:57... Ich bin so erschöpft und\nwollte nur noch kurz auf Klo, aber...\nDie Tür ist plötzlich verschlossen!";
+		dialogues[0][1] = "Ich will hier raus... Ich sollte mich umsehen -\nvielleicht kann ich irgendwas finden, das mir weiterhilft.";
+	}
 	
+	
+	public void setDialogue20() {
+		for(int i = 0; i < 30; i++) {
+			for(int j = 0; j < 20; j++) {
+				dialogues[i][j] = null;
+			}
+		}
+	}
 	
 	// Aufsammeln / Interagieren mit Objekten
 	public void pickUpObject(int i) { 
@@ -128,8 +156,25 @@ public class Player extends Entity {
 					System.out.println("Schlüssel: " + hasKey);
 				}
 				else if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed){
+					gp.gameState = gp.dialogueState;
+					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
+					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+					
 			        System.out.println("Nicht genug Schlüssel");
 			    }
+				break;
+			case "Informatikdoor":
+				if(hasKeyChemie > 0 && keyH.enterPressed) {
+					gp.playSE(0);
+					gp.getObj()[gp.getCurrentMap()][i].setCollisionOn(false);
+					hasKeyChemie--;
+					//System.out.println("Schlüssel: " + hasKey);
+				}
+				else if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed){
+					gp.gameState = gp.dialogueState;
+					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
+					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+				}
 				break;
 			case "Toilet":
 				if(gp.getObj()[gp.getCurrentMap()][i].isKeyInside() && keyH.enterPressed) {	//TODO: Indikator für Enter  drücken
@@ -150,15 +195,16 @@ public class Player extends Entity {
 				}
 				break;
 			case "Statue":
+				
 				if (keyH.pushPressed) {
                     speed = speed/2;
                     gp.getObj()[gp.getCurrentMap()][i].move(gp.getObj()[gp.getCurrentMap()][i], direction, speed);
                    	speed = 4;
                 }
-				/*if(EventHandler.gesGelöst == true) {
+				if(EventHandler.gesZuDunkel == true) {
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue20();
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
-				}*/
+				}
 				else {
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 				}
@@ -181,7 +227,7 @@ public class Player extends Entity {
 	
 	public double distanceStatue(Entity player, Entity object) {
 		int deltaX = player.worldX - object.worldX;
-	    int deltaY = player.worldY - object.worldY;
+	    int deltaY = (int) (player.worldY - object.worldY);
 
         // Calculate the distance to the player
 	    double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
@@ -205,6 +251,7 @@ public class Player extends Entity {
 			case "priebe":
 				if(EventHandler.gesGelöst == true) {
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue5();
+					gp.playSE(10);
 					hasKeyChemie++;
 				}
 				else {
@@ -484,4 +531,38 @@ public class Player extends Entity {
 		}
 	
 	}
+
+	public void renderInteractionPrompt(Graphics2D g2) {
+	    // Setze die Farbe mit Transparenz (z. B. Schwarz mit 50% Deckkraft)
+	    Color semiTransparentBlack = new Color(0, 0, 0, 220);
+	    g2.setColor(semiTransparentBlack);
+	    try (InputStream FontLoader = getClass().getResourceAsStream("/font/yoster.ttf")) {
+			 yoster = Font.createFont(Font.TRUETYPE_FONT, FontLoader);
+			    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			    ge.registerFont(yoster);
+			} catch (FontFormatException | IOException e) {
+			    e.printStackTrace();
+			}
+	    yoster = yoster.deriveFont(Font.PLAIN, 40);
+	    // Rechteck zeichnen (Position und Größe anpassen)
+	    int rectX = gp.getTileSize() * 10; // X-Position
+	    int rectY = gp.getTileSize() * 15; // Y-Position
+	    int rectWidth = gp.getTileSize() * 12; // Breite
+	    int rectHeight = gp.getTileSize() * 2; // Höhe
+	    int rectArchWidth = 12;
+	    int rectArchHeight = 12;
+	    g2.fillRoundRect(rectX, rectY, rectWidth, rectHeight, rectArchWidth, rectArchHeight);
+	    
+	    // Schriftfarbe setzen (z. B. Weiß)
+	    g2.setColor(Color.WHITE);
+	    g2.setFont(yoster);
+
+	    // Text zeichnen (zentriert im Rechteck)
+	    String text = "Interagieren - ENTER";
+	    FontMetrics fm = g2.getFontMetrics();
+	    int textX = rectX + (rectWidth - fm.stringWidth(text)) / 2; // Zentrierung
+	    int textY = rectY + (rectHeight - fm.getHeight()) / 2 + fm.getAscent(); // Vertikal zentriert
+	    g2.drawString(text, textX, textY);
+	}
 }
+

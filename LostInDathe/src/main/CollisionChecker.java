@@ -18,8 +18,8 @@ public class CollisionChecker {
 	public void checkTile(Entity entity) {
 		int entityLeftWorldX = entity.worldX + entity.getSolidArea().x;
 		int entityRightWorldX = entity.worldX + entity.getSolidArea().x + entity.getSolidArea().width;
-		int entityTopWorldY = entity.worldY + entity.getSolidArea().y;
-		int entityBottomWorldY = entity.worldY + entity.getSolidArea().y + entity.getSolidArea().height;
+		int entityTopWorldY = (int) (entity.worldY + entity.getSolidArea().y);
+		int entityBottomWorldY = (int) (entity.worldY + entity.getSolidArea().y + entity.getSolidArea().height);
 
 		int entityLeftCol = entityLeftWorldX/gp.tileSize;
 		int entityRightCol = entityRightWorldX/gp.tileSize;
@@ -83,10 +83,10 @@ public class CollisionChecker {
 			if (gp.getObj()[gp.getCurrentMap()][i] != null) {
 				// Bestimme die Hitbox (SolidArea) für die Entität
 				entity.getSolidArea().x = entity.worldX + entity.getSolidAreaDefaultX();
-				entity.getSolidArea().y = entity.worldY + entity.getSolidAreaDefaultY();
+				entity.getSolidArea().y = (int) (entity.worldY + entity.getSolidAreaDefaultY());
 				// Bestimme die Hitbox (SolidArea) für das Objekt
 				gp.getObj()[gp.getCurrentMap()][i].getSolidArea().x = gp.getObj()[gp.getCurrentMap()][i].worldX + gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultX();
-				gp.getObj()[gp.getCurrentMap()][i].getSolidArea().y = gp.getObj()[gp.getCurrentMap()][i].worldY + gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultY();
+				gp.getObj()[gp.getCurrentMap()][i].getSolidArea().y = (int) (gp.getObj()[gp.getCurrentMap()][i].worldY + gp.getObj()[gp.getCurrentMap()][i].getSolidAreaDefaultY());
 
 				// Überprüfe die Richtung der Entität
 				switch (entity.direction) {
@@ -135,10 +135,10 @@ public class CollisionChecker {
 			if (target[gp.getCurrentMap()][i] != null) {
 				// Bestimme die Hitbox (SolidArea) für die Entität
 				entity.getSolidArea().x = entity.worldX + entity.getSolidAreaDefaultX();
-				entity.getSolidArea().y = entity.worldY + entity.getSolidAreaDefaultY();
+				entity.getSolidArea().y = (int) (entity.worldY + entity.getSolidAreaDefaultY());
 				// Bestimme die Hitbox (SolidArea) für das Objekt
 				target[gp.getCurrentMap()][i].getSolidArea().x = target[gp.getCurrentMap()][i].worldX + target[gp.getCurrentMap()][i].getSolidAreaDefaultX();
-				target[gp.getCurrentMap()][i].getSolidArea().y = target[gp.getCurrentMap()][i].worldY + target[gp.getCurrentMap()][i].getSolidAreaDefaultY();
+				target[gp.getCurrentMap()][i].getSolidArea().y = (int) (target[gp.getCurrentMap()][i].worldY + target[gp.getCurrentMap()][i].getSolidAreaDefaultY());
 
 				// Überprüfe die Richtung der Entität
 				switch (entity.direction) {
@@ -178,10 +178,10 @@ public class CollisionChecker {
 	
 	public void checkPlayer(Entity entity) {
 		entity.getSolidArea().x = entity.worldX + entity.getSolidAreaDefaultX();
-		entity.getSolidArea().y = entity.worldY + entity.getSolidAreaDefaultY();
+		entity.getSolidArea().y = (int) (entity.worldY + entity.getSolidAreaDefaultY());
 		// Bestimme die Hitbox (SolidArea) für das Objekt
 		gp.getPlayer().getSolidArea().x = gp.getPlayer().worldX + gp.getPlayer().getSolidAreaDefaultX();
-		gp.getPlayer().getSolidArea().y = gp.getPlayer().worldY + gp.getPlayer().getSolidAreaDefaultY();
+		gp.getPlayer().getSolidArea().y = (int) (gp.getPlayer().worldY + gp.getPlayer().getSolidAreaDefaultY());
 
 		// Überprüfe die Richtung der Entität
 		switch (entity.direction) {

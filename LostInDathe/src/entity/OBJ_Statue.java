@@ -36,7 +36,7 @@ public class OBJ_Statue extends Entity {
 	}
 	
 	public void setDialogue2() {
-		dialogues[2][0] = "Ich bin so dankbar... Gehe zu Priebe...";
+		dialogues[2][0] = "Das ist mir noch zu dunkel...";
 	}
 	
 	public void setDialogue20() {
@@ -110,7 +110,7 @@ public class OBJ_Statue extends Entity {
 	// TODO: Ziehen
 	public void pull(Entity object, Entity player, int speed) {
 		int deltaX = player.worldX - object.worldX;
-	    int deltaY = player.worldY - object.worldY;
+	    int deltaY = (int) (player.worldY - object.worldY);
 
         // Calculate the distance to the player
 	    double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);

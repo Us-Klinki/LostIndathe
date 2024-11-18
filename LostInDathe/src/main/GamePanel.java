@@ -47,7 +47,7 @@ public class GamePanel extends JPanel implements Runnable {
 	int screenHeightVollbild = screenHeight;
 	VolatileImage tempScreen;
 	//BufferedImage tempScreen;
-	Graphics2D g2;
+	public Graphics2D g2;
 	private boolean fullScreenOn = false;
 	
 	
@@ -351,7 +351,7 @@ public class GamePanel extends JPanel implements Runnable {
 					@Override
 					public int compare(Entity e1, Entity e2) {
 
-						int result = Integer.compare(e1.worldY, e2.worldY);
+						int result = Integer.compare((int)e1.worldY, (int)e2.worldY);
 						return result;
 					}	 	 			
  	 	 		});
@@ -360,7 +360,15 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 		for(int i = 0; i < entityList.size(); i++) {
  	 	 			entityList.get(i).draw(g2);
  	 	 		}
- 	 	 		
+ 	 	 		for (int i = 0; i < obj[currentMap].length; i++) { // npcList enthält alle NPCs im Spiel
+ 	 	 			if (obj[currentMap][i] != null && obj[currentMap][i].isHasDialogue() == true) {
+ 	 	 				double distanceSquared = Math.pow(player.worldX - obj[currentMap][i].worldX, 2) + Math.pow(player.worldY - obj[currentMap][i].worldY, 2);
+ 	 	 		    
+ 	 	 				if (distanceSquared < Math.pow(tileSize, 2)) { // Abstand kleiner als tileSize
+ 	 	 					player.renderInteractionPrompt(g2);
+ 	 	 				}
+ 	 	 			}
+ 	 	 		}
  	 	 		// Entitylist leeren
  	 	 		entityList.clear();
  	 	 		
@@ -399,13 +407,39 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 		ui.draw(g2);
  	 	    }
  	 	 	if(gameState == dialogueState) {
- 	 	 		ui.draw(g2);
- 	 	 		for(int i = 0; i < npc[1].length; i++) {
- 	 	 			if(npc[currentMap][i] != null) {	// sicherstellen, dass Arrayindex immer gefüllt ist
- 	 	 				npc[currentMap][i].draw(g2);
- 	 	 			}
+ 	 	 		
+ 	 	 		entityList.add(getPlayer());
+ 	 	 		
+ 	 	 		for(int i = 0; i < npc[currentMap].length; i++) {
+ 	 	 			if(npc[currentMap][i] != null) {
+ 	 	 			entityList.add(npc[currentMap][i]);
+ 	 	 			}			
  	 	 		}
- 	 	 	 	getPlayer().draw(g2);
+ 	 	 		
+ 	 	 		for(int i = 0; i < obj[currentMap].length; i++) {
+	 	 			if(obj[currentMap][i] != null) {
+	 	 			entityList.add(obj[currentMap][i]);
+	 	 			}	
+	 	 		}
+ 	 	 		
+ 	 	 		// Sortieren
+ 	 	 		Collections.sort(entityList, new Comparator<Entity>() {
+
+					@Override
+					public int compare(Entity e1, Entity e2) {
+
+						int result = Integer.compare((int)e1.worldY, (int)e2.worldY);
+						return result;
+					}	 	 			
+ 	 	 		});
+ 	 	 		
+ 	 	 		// Zeichne Entitäten
+ 	 	 		for(int i = 0; i < entityList.size(); i++) {
+ 	 	 			entityList.get(i).draw(g2);
+ 	 	 		}
+ 	 	 		ui.draw(g2);
+ 	 	 		// Entitylist leeren
+ 	 	 		entityList.clear();
  	 	 	}
  	 	}
  	

@@ -22,7 +22,7 @@ public class OBJ_Statue2 extends Entity {
 	}
 	
 	public void setDialogue1() {
-		dialogues[2][0] = "*Ächz*     ...     ... \nWärme, Licht, ich taue auf.\nSchau, wie golden ich bin!";
+		dialogues[2][0] = "*Ächz*...\nWärme, Licht, ich taue auf.\nSchau, wie golden ich bin!";
 		
 	}
 	

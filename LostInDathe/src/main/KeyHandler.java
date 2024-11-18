@@ -82,14 +82,14 @@ public class KeyHandler implements KeyListener{
 			gp.ui.setCommandNum(gp.ui.getCommandNum() - 1);
 			gp.playSE(8);
 			if(gp.ui.getCommandNum() == -1) {
-				gp.ui.setCommandNum(2);
+				gp.ui.setCommandNum(3);
 			}
 		}
 			
 		if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
 			gp.ui.setCommandNum(gp.ui.getCommandNum() + 1);
 			gp.playSE(8);
-			if(gp.ui.getCommandNum() == 3) {
+			if(gp.ui.getCommandNum() == 4) {
 				gp.ui.setCommandNum(0);
 			}
 		}
@@ -107,6 +107,9 @@ public class KeyHandler implements KeyListener{
 			}
 			if(gp.ui.getCommandNum() == 2) {
 				System.exit(0);
+			}
+			if(gp.ui.getCommandNum() == 3) {
+				gp.ui.subStateTitle = 1;
 			}
 		}
 		debug(code);
