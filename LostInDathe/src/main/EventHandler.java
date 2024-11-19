@@ -9,6 +9,7 @@ public class EventHandler {
 	EventRect eventRect[][][];
 	EventRect eventRect1[][][];
 	EventRect eventRect2[][][];
+	EventRect eventRect3[][][];
 	
 	int previousEventX;
 	double previousEventY;
@@ -23,6 +24,7 @@ public class EventHandler {
 		eventRect = new EventRect[gp.getMaxMap()][gp.getMaxWorldCol()][gp.getMaxWorldRow()];
 		eventRect1 = new EventRect[gp.getMaxMap()][gp.getMaxWorldCol()][gp.getMaxWorldRow()];
 		eventRect2 = new EventRect[gp.getMaxMap()][gp.getMaxWorldCol()][gp.getMaxWorldRow()];
+		eventRect3 = new EventRect[gp.getMaxMap()][gp.getMaxWorldCol()][gp.getMaxWorldRow()];
 		
 		int map = 0;
 		int col = 0;
@@ -52,6 +54,14 @@ public class EventHandler {
 			eventRect2[map][col][row].height = gp.getTileSize();
 			eventRect2[map][col][row].eventRectDefaultX = eventRect2[map][col][row].x;
 			eventRect2[map][col][row].eventRectDefaultY = eventRect2[map][col][row].y;
+			
+			eventRect3[map][col][row] = new EventRect();
+			eventRect3[map][col][row].x = 0;
+			eventRect3[map][col][row].y = 0;
+			eventRect3[map][col][row].width = gp.getTileSize();
+			eventRect3[map][col][row].height = gp.getTileSize();
+			eventRect3[map][col][row].eventRectDefaultX = eventRect3[map][col][row].x;
+			eventRect3[map][col][row].eventRectDefaultY = eventRect3[map][col][row].y;
 			
 			col ++;
 			if(col == gp.getMaxWorldCol()) {
@@ -89,6 +99,9 @@ public class EventHandler {
 			// TEMP Teleport OG -> Info; Info -> OG
 			else if(hit(1, 32, 15, "any") == true) { interTeleport(3, 50, 49.9); gp.stopMusic(6); gp.playMusic(2); }
 			else if(hit(3, 50, 50, "any") == true) { interTeleport(1, 32, 15); gp.stopMusic(2); gp.playMusic(6); }
+			// Teleport OG -> Chemie: Chemie -> OG
+			else if(hit(1, 68, 35, "any") == true) { interTeleport(3, 50, 49.9); gp.stopMusic(6); gp.playMusic(2); }
+			else if(hit(3, 50, 50, "any") == true) { interTeleport(1, 68, 35); gp.stopMusic(2); gp.playMusic(6); }
 		}
 		if(hitTileGroß(2, 20, 31) == true || hitTileGroß(2, 20, 32) == true) {
 			playerNotColliding = false;
@@ -189,6 +202,7 @@ public class EventHandler {
 				
 		return hitObject;
 	}
+	
 	
 	// TELEPORT innerhalb einer Map
 	/*public void intraTeleport(int gameState) {
