@@ -3,6 +3,8 @@ package main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import entity.Entity;
+
 public class KeyHandler implements KeyListener{
 	
 	GamePanel gp;
@@ -252,13 +254,15 @@ public class KeyHandler implements KeyListener{
 			if (canPressKey && (currentTime - lastKeyPress) >= keyCooldown) {	
 	            canPressKey = false;
 	            lastKeyPress = currentTime;
-	            
-	            if(gp.gameState == gp.dialogueState && i != 999) {
-	                gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+	            if(Entity.isDialogueStarted() == true) {
+	            	if(gp.gameState == gp.dialogueState && i != 999) {
+	            		gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+	            	}
+	            	else if(gp.gameState == gp.dialogueState && j != 999) {
+	            		gp.getObj()[gp.getCurrentMap()][j].speak(j, false);
+	            	}
 	            }
-	            else if(gp.gameState == gp.dialogueState && j != 999) {
-	            	gp.getObj()[gp.getCurrentMap()][j].speak(j, false);
-	            }	        }
+			}	            
 	    }
 	}
 	
