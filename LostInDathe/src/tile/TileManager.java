@@ -86,7 +86,7 @@ public class TileManager {
 		setup(33, "31_Chemie_Background", true);
 		setup(34, "32_Info_Background", true);
 		setup(35, "33_Bio_Background", true);
-		setup(36, "34_Chemie_Boden", false);
+		setup(36, "34_Chemie_Boden", true);
 		setup(37, "34_Chemie_Wand", true);
 		setup(38, "35_Info_Wand", true);
 		setup(39, "36_Bio_Wand", true);
@@ -138,28 +138,27 @@ public class TileManager {
 		setup(85, "56_Schrank2", true);
 		setup(86, "56_Schrank3", true);
 		setup(87, "56_Schrank4", true);
-		//setup(88, "36_Bio_Wand", true);
-		setup(89, "61_Schrank1",true);
-		setup(90, "61_Schrank2",true);
-		setup(91, "62_Tisch",true);
-		setup(92, "63_Stuhl",true);
-		setup(93, "64_Pult1",true);
-		setup(94, "64_Pult2",true);
-		setup(95, "64_Pult3",true);
-		setup(96, "65_Schrank1",true);
-		setup(97, "65_Schrank2",true);
-		setup(98, "66_Waschbecken",true);
-		setup(99, "67_Pult1",true);
-		setup(100,"67_Pult2 Copy",true);
-		setup(101,"67_Pult3",true);
-		setup(102,"67_Pult4",true);
-		setup(103,"67_Pult5",true);
-		setup(104,"67_Pult6",true);
-		setup(105,"67_Pult7",true);
-		setup(106,"67_Pult8",true);
-		setup(107,"67_Pult9",true);
-		setup(108,"67_Pult91",true);
-		setup(109,"67_Pult92",true);
+		setup(88, "61_Schrank1",true);
+		setup(89, "61_Schrank2",true);
+		setup(90, "62_Tisch",true);
+		setup(91, "63_Stuhl",true);
+		setup(92, "64_Pult1",true);
+		setup(93, "64_Pult2",true);
+		setup(94, "64_Pult3",true);
+		setup(95, "65_Schrank1",true);
+		setup(96, "65_Schrank2",true);
+		setup(97, "66_Waschbecken",true);
+		setup(98, "67_Pult1",true);
+		setup(99,"67_Pult2 Copy",true);
+		setup(100,"67_Pult3",true);
+		setup(101,"67_Pult4",true);
+		setup(102,"67_Pult5",true);
+		setup(103,"67_Pult6",true);
+		setup(104,"67_Pult7",true);
+		setup(105,"67_Pult8",true);
+		setup(106,"67_Pult9",true);
+		setup(107,"67_Pult91",true);
+		setup(108,"67_Pult92",true);
 		
 		
 

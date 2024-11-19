@@ -9,6 +9,12 @@ import entity.OBJ_Sink;
 import entity.OBJ_Statue;
 import entity.OBJ_Statue2;
 import entity.OBJ_Toilet;
+import entity.Chemie.NPC_Köppel;
+import entity.Chemie.OBJ_Base;
+import entity.Chemie.OBJ_Neutral;
+import entity.Chemie.OBJ_Phenolphthalein;
+import entity.Chemie.OBJ_Säure;
+import entity.Chemie.OBJ_Unbekannt;
 import object.*;
 
 public class AssetPlacer {
@@ -84,20 +90,55 @@ public class AssetPlacer {
 		gp.getObj()[mapNum][0] = new OBJ_GesDoor(gp, keyH);
 		gp.getObj()[mapNum][0].worldX = 50*gp.getTileSize();
 		gp.getObj()[mapNum][0].worldY = 50*gp.getTileSize();
+		
+		// CHEMIE
+		mapNum = 4;
+		gp.getObj()[mapNum][0] = new OBJ_Säure(gp, keyH);
+		gp.getObj()[mapNum][0].worldX = 47*gp.getTileSize();
+		gp.getObj()[mapNum][0].worldY = 66*gp.getTileSize();
+		
+		gp.getObj()[mapNum][1] = new OBJ_Base(gp, keyH);
+		gp.getObj()[mapNum][1].worldX = 46*gp.getTileSize();
+		gp.getObj()[mapNum][1].worldY = 66*gp.getTileSize();
+		
+		gp.getObj()[mapNum][2] = new OBJ_Neutral(gp, keyH);
+		gp.getObj()[mapNum][2].worldX = 45*gp.getTileSize();
+		gp.getObj()[mapNum][2].worldY = 66*gp.getTileSize();
+		
+		gp.getObj()[mapNum][3] = new OBJ_Phenolphthalein(gp, keyH);
+		gp.getObj()[mapNum][3].worldX = 44*gp.getTileSize();
+		gp.getObj()[mapNum][3].worldY = 66*gp.getTileSize();
+		
+		gp.getObj()[mapNum][4] = new OBJ_Unbekannt(gp, keyH);
+		gp.getObj()[mapNum][4].worldX = 47*gp.getTileSize();
+		gp.getObj()[mapNum][4].worldY = 63.6*gp.getTileSize();
+		
+		/*gp.getObj()[mapNum][5] = new OBJ_Säure(gp, keyH);
+		gp.getObj()[mapNum][5].setCollisionOn(false);
+		gp.getObj()[mapNum][5].worldX = 43*gp.getTileSize();
+		gp.getObj()[mapNum][5].worldY = 66*gp.getTileSize();*/
+	
+	
+	
 	}
 	
+		
 	void setStatue() {
 		gp.getObj()[2][0] = new OBJ_Statue2(gp, keyH);
 		gp.getObj()[2][0].worldX = 20*gp.getTileSize();
 		gp.getObj()[2][0].worldY = 32*gp.getTileSize();
 	}
 	public void setNPC() {
-		gp.getNpc()[0][0] = new NPC_Test(gp, keyH);
+		/*gp.getNpc()[0][0] = new NPC_Test(gp, keyH);
 		gp.getNpc()[0][0].worldX = 24*gp.getTileSize();
-		gp.getNpc()[0][0].worldY = 24*gp.getTileSize();
+		gp.getNpc()[0][0].worldY = 24*gp.getTileSize();*/
 		
 		gp.getNpc()[2][0] = new NPC_Priebe(gp, keyH);
 		gp.getNpc()[2][0].worldX = 24*gp.getTileSize();
 		gp.getNpc()[2][0].worldY = 20*gp.getTileSize();
+		
+		gp.getNpc()[4][0] = new NPC_Köppel(gp, keyH);
+		gp.getNpc()[4][0].worldX = 47*gp.getTileSize();
+		gp.getNpc()[4][0].worldY = 63*gp.getTileSize();
 	}
 }

@@ -47,9 +47,14 @@ public class Player extends Entity {
 	}
 	
 	public void setDefaultValues() {
+		// TODO: IM BAD
+		//worldX = gp.getTileSize() * 20;
+		//worldY = gp.getTileSize() * 25;
 		
-		worldX = gp.getTileSize() * 20;
-		worldY = gp.getTileSize() * 25;
+		// IM CHEMIERAUM
+		worldX = gp.getTileSize() *  52;
+		worldY = gp.getTileSize() * 64;
+		
 		speed = 4;
 		direction = "";
 		
@@ -272,6 +277,38 @@ public class Player extends Entity {
 							break;
 					}
 				}
+				gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+				if(dialogueCounter < 4) {
+					dialogueCounter++;
+				}
+				else {
+					dialogueCounter = 1;
+				}
+				break;
+			case "Köppel":
+				/*if(EventHandler.gesGelöst == true) {
+					gp.getNpc()[gp.getCurrentMap()][i].setDialogue5();
+					gp.playSE(10);
+					hasKeyChemie++;
+				}
+				else {*/
+					switch(dialogueCounter) {
+						case 1:
+							gp.getNpc()[gp.getCurrentMap()][i].setDialogue1();
+							//System.out.println("Hallo");
+							break;
+						case 2:
+							gp.getNpc()[gp.getCurrentMap()][i].setDialogue2();
+							//System.out.println("Ballo");
+							break;
+						case 3: 
+							gp.getNpc()[gp.getCurrentMap()][i].setDialogue3();
+							break;
+						case 4:
+							gp.getNpc()[gp.getCurrentMap()][i].setDialogue4();
+							break;
+					}
+				//}
 				gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 				if(dialogueCounter < 4) {
 					dialogueCounter++;

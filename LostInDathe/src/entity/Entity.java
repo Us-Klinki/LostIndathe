@@ -33,7 +33,7 @@ public class Entity {
   private boolean hasDialogue = false;
   private boolean dialogueStarted = false;
   private int actionLockCounter = 0;
-  String dialogues[][];
+  protected String dialogues[][];
   int dialogueSet = 0;
   private boolean pullLock;
   

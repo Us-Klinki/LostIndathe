@@ -100,8 +100,8 @@ public class EventHandler {
 			else if(hit(1, 32, 15, "any") == true) { interTeleport(3, 50, 49.9); gp.stopMusic(6); gp.playMusic(2); }
 			else if(hit(3, 50, 50, "any") == true) { interTeleport(1, 32, 15); gp.stopMusic(2); gp.playMusic(6); }
 			// Teleport OG -> Chemie: Chemie -> OG
-			else if(hit(1, 68, 35, "any") == true) { interTeleport(3, 50, 49.9); gp.stopMusic(6); gp.playMusic(2); }
-			else if(hit(3, 50, 50, "any") == true) { interTeleport(1, 68, 35); gp.stopMusic(2); gp.playMusic(6); }
+			else if(hit(1, 68, 41, "any") == true) { interTeleport(4, 53, 63.9); gp.stopMusic(6); gp.playMusic(2); }
+			else if(hit(4, 53, 64, "any") == true) { interTeleport(1, 68, 40.9); gp.stopMusic(2); gp.playMusic(6); }
 		}
 		if(hitTileGroß(2, 20, 31) == true || hitTileGroß(2, 20, 32) == true) {
 			playerNotColliding = false;
