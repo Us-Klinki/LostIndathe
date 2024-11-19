@@ -593,7 +593,8 @@ public class UI {
 	
 	// letter by letter
 	public void updateDialogue() {
-		try {
+		//try {
+		if(currentDialogue != null) {
 			if (gp.gameState == gp.dialogueState && dialogueIndex < currentDialogue.length()) {
 				dialogueCounter++;
 	        
@@ -604,9 +605,11 @@ public class UI {
 				}
 			}
 		}
-		catch(Exception e) {
-			System.out.println("Dialog hat nicht geklappt.");
-		}
+
+		//}
+		//catch(Exception e) {
+			//System.out.println("Dialog hat nicht geklappt.");
+		//}
 	}
 
 	public void drawSubWindow(int x, int y, int width, int height, boolean transparent) {

@@ -13,8 +13,8 @@ public class NPC_Köppel extends Entity {
 	public NPC_Köppel(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
 		
-		setName("köppel");
-		direction = "idle";
+		setName("Köppel");
+		direction = "";
 		speed = 0;
 		setCollisionOn(true);
 		setSolidArea(new Rectangle(8, 20, 32, 28));

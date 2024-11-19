@@ -218,9 +218,9 @@ public class Player extends Entity {
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
 				break;
-			case "Statue2":
+			case "Statuezwei":
 				
-				if(keyH.enterPressed) {
+				if(keyH.enterPressed && gp.gameState == gp.playState) {
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -309,6 +309,7 @@ public class Player extends Entity {
 							break;
 					}
 				//}
+				gp.gameState = gp.dialogueState;
 				gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 				if(dialogueCounter < 4) {
 					dialogueCounter++;

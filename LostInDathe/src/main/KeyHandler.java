@@ -258,8 +258,7 @@ public class KeyHandler implements KeyListener{
 	            }
 	            else if(gp.gameState == gp.dialogueState && j != 999) {
 	            	gp.getObj()[gp.getCurrentMap()][j].speak(j, false);
-	            }
-	        }
+	            }	        }
 	    }
 	}
 	
