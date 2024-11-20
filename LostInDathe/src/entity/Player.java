@@ -232,8 +232,9 @@ public class Player extends Entity {
 			case "Statuezwei":
 				
 				if(keyH.enterPressed && gp.gameState == gp.playState) {
-					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
+					gp.gameState = gp.dialogueState;
+					
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
 				break;

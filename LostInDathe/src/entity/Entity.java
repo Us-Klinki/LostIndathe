@@ -31,7 +31,7 @@ public class Entity {
   private int solidAreaDefaultX, solidAreaDefaultY;
   private boolean collisionOn = false;
   private boolean hasDialogue = false;
-  private boolean dialogueStarted = false;
+  private static boolean dialogueStarted = false;
   private int actionLockCounter = 0;
   protected String dialogues[][];
   int dialogueSet = 0;
@@ -300,7 +300,7 @@ public class Entity {
   public void setDialogueSet(int dialogueSet) {
 	this.dialogueSet = dialogueSet;
   }
-public boolean isDialogueStarted() {
+public static boolean isDialogueStarted() {
 	return dialogueStarted;
 }
 public void setDialogueStarted(boolean dialogueStarted) {
