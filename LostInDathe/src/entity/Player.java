@@ -252,6 +252,9 @@ public class Player extends Entity {
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+					System.out.println("hatErstenIndikator = " + hatErstenIndikator);
+					System.out.println("hatZweitenIndikator = " + hatZweitenIndikator);
+					System.out.println("holZweitenIndikator = " + holZweitenIndikator);
 				}
 				if(keyH.enterPressed && gp.gameState == gp.playState && holErstenIndikator == false) {
 					gp.gameState = gp.dialogueState;
@@ -356,7 +359,6 @@ public class Player extends Entity {
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
-					holZweitenIndikator = false;
 				}
 				if(keyH.enterPressed && gp.gameState == gp.playState && holZweitenIndikator == false) {
 					gp.gameState = gp.dialogueState;
@@ -448,15 +450,9 @@ public class Player extends Entity {
 						break;
 				}
 				
-				if(hatErstenIndikator == true && hatZweitenIndikator == false) {
-			
-					if(holZweitenIndikator == false) {
-							holZweitenIndikator = true;
-							gp.getNpc()[gp.getCurrentMap()][i].setDialogue4();
-				
-					}
-				}
-				if(hatZweitenIndikator == true) {
+				if(holZweitenIndikator == true) {
+					holZweitenIndikator = false;
+					hatZweitenIndikator = false;
 					if(hatSäure == false || hatBase == false || hatNeutral == false) {
 						if(holLösung == false) {
 							gp.getNpc()[gp.getCurrentMap()][i].setDialogue5();
@@ -468,6 +464,16 @@ public class Player extends Entity {
 						}
 					}
 				}
+				
+				if(hatErstenIndikator == true && hatZweitenIndikator == false) {
+			
+					if(holZweitenIndikator == false) {
+							holZweitenIndikator = true;
+							gp.getNpc()[gp.getCurrentMap()][i].setDialogue4();
+				
+					}
+				}
+				
 				
 				if(hatSäure == true) {
 					fehler++;
