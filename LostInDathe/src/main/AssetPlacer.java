@@ -15,6 +15,7 @@ import entity.Chemie.OBJ_Neutral;
 import entity.Chemie.OBJ_Phenolphthalein;
 import entity.Chemie.OBJ_Säure;
 import entity.Chemie.OBJ_Unbekannt;
+import entity.Chemie.OBJ_Universalindikator;
 import object.*;
 
 public class AssetPlacer {
@@ -127,6 +128,19 @@ public class AssetPlacer {
 		gp.getObj()[2][0] = new OBJ_Statue2(gp, keyH);
 		gp.getObj()[2][0].worldX = 20*gp.getTileSize();
 		gp.getObj()[2][0].worldY = 32*gp.getTileSize();
+	}
+	
+	void setUniversalindikator() {
+		gp.getObj()[4][3] = new OBJ_Universalindikator(gp, keyH);
+		gp.getObj()[4][3].worldX = 44*gp.getTileSize();
+		gp.getObj()[4][3].worldY = 66*gp.getTileSize();
+	}
+	
+	void setRoteLösung() {
+		gp.getObj()[4][4] = new OBJ_Säure(gp, keyH);
+		gp.getObj()[4][4].setCollisionOn(false);
+		gp.getObj()[4][4].worldX = 47*gp.getTileSize();
+		gp.getObj()[4][4].worldY = 63.6*gp.getTileSize();
 	}
 	public void setNPC() {
 		/*gp.getNpc()[0][0] = new NPC_Test(gp, keyH);

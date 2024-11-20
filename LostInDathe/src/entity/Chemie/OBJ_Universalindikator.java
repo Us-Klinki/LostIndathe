@@ -17,10 +17,11 @@ public class OBJ_Universalindikator extends Entity {
 		setSolidArea(new Rectangle(0, 0, 48, 48));
 		setSolidAreaDefaultX(getSolidArea().x);
 		setSolidAreaDefaultY(getSolidArea().y);
+		setDialogue1();
 	}
 	
 	public void setDialogue1() {
-		dialogues[4][0] = "";
+		dialogues[4][0] = "Ich habe Universalindikatorlösung gefunden...\nIch sollte sie zügig zu Frau Köppel bringen.\nDen sollte ich gleich in die Lösung geben.";
 		
 	}
 	
@@ -28,7 +29,7 @@ public class OBJ_Universalindikator extends Entity {
 	
 	public void setDialogue20() {
 		for(int i = 0; i < 30; i++) {
-			for(int j = 0; j < 20; j++) {
+			for(int j = 1; j < 20; j++) {
 				dialogues[i][j] = null;
 			}
 		}

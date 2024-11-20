@@ -295,6 +295,13 @@ public class GamePanel extends JPanel implements Runnable {
  				aPlacer.setStatue();
  				EventHandler.gesGelöst = false;
  			}
+ 			if(player.holZweitenIndikator == true) {
+ 				aPlacer.setUniversalindikator();
+ 			}
+ 			
+ 			if(player.IndikatorReaktion == true) {
+ 				aPlacer.setRoteLösung();
+ 			}
  			
  			for(int i = 0; i < npc[1].length; i++) {
  				if(npc[currentMap][i] != null) {

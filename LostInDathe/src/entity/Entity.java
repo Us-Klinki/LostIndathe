@@ -220,6 +220,14 @@ public class Entity {
 	
 	public void setDialogue6() {}
 	
+	public void setDialogue7() {}
+	
+	public void setDialogue8() {}
+	
+	public void setDialogue9() {}
+	
+	public void setDialogue10() {}
+	
 	public void setDialogue20() {}
 	
 	public void pull(Entity object, Entity player, int speed) {}

@@ -20,7 +20,7 @@ public class OBJ_Phenolphthalein extends Entity {
 	}
 	
 	public void setDialogue1() {
-		dialogues[4][0] = "";
+		dialogues[4][0] = "Ich habe eine Indikatorlösung gefunden...\nIch sollte sie zügig zu Frau Köppel bringen.";
 		
 	}
 	

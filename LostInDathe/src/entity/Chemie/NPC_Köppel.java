@@ -17,7 +17,7 @@ public class NPC_Köppel extends Entity {
 		direction = "";
 		speed = 0;
 		setCollisionOn(true);
-		setSolidArea(new Rectangle(8, 20, 32, 28));
+		setSolidArea(new Rectangle(0, 20, 48, 28));
 		setSolidAreaDefaultX(getSolidArea().x);
 		setSolidAreaDefaultY(getSolidArea().y);
 		getNPCImage();
@@ -39,23 +39,30 @@ public class NPC_Köppel extends Entity {
 	//Dialog Test 
 	
 	public void setDialogue1() {
-		dialogues[4][0] = "Das Sonnenlicht fehlt wohl.";		
+		dialogues[4][0] = "[Selbstgespräch] \nWer hat denn hier schon wieder was rumstehen \nlassen? War das etwa Frau Köppel?";
+		dialogues[4][1] = "Ach, du bist auch noch hier. \nDu kannst mir bestimmt behilflich sein! \nIch will die Lösung nicht einfach wegschütten.";
+		dialogues[4][2] = "Wer weiß, was das für eine schädliche \nLösung sein könnte. \nHmm... Ich habe da eine Idee!";
+		dialogues[4][3] = "Bring mir mal bitte die Indikatorlösung.\nDie müsste dahinten auf einem Tisch stehen \nund hat eine rötliche Färbung...";
 	}
 	
 	public void setDialogue2() {
-		dialogues[4][0] = "Sie ist sooo blass...";
+		dialogues[4][0] = "War deine Aufgabe nicht klar?";
 	}
 	
 	public void setDialogue3() {
-		dialogues[4][0] = "Wir haben nicht ewig Zeit.";
+		dialogues[4][0] = "Ich habe nicht ewig Zeit.";
 	}
 	
 	public void setDialogue4() {
-		dialogues[4][0] = "Hilf ihr doch!!!";
+		dialogues[4][0] = "Das ist der Falsche. Mit Phenolphthalein kann \nich jetzt ja gar nichts anfangen...\n";
+		dialogues[4][1] = "Geh noch mal, wir brauchen:\nU-ni-ver-sal-in-di-ka-tor!\nDer müsste auch dahinten sein...";
 	}
 	
 	public void setDialogue5() {
-		dialogues[4][0] = "Danke für deine Hilfe! \nIch habe gehört, in der Chemie gibt es Probleme.\nSchau dort mal vorbei, hier haste nen Schlüssel.";
+		dialogues[4][0] = "Wie? Der stand genau da, wo der andere stand?\nMerkwürdig... Naja, es ist spät.";
+		dialogues[4][1] = "Moment mal, nicht so schnell!\nWo ist denn deine Schutzbrille!\nLass das mal mich machen!";
+		dialogues[4][2] = "Wenn das jetzt eine hoch konzentrierte Säure \noder Base ist, reicht ein Tropfen und deine \nHornhaut ist weggeätzt. Eine neue ist nicht billig.";
+		dialogues[4][3] = "Sprich mich nochmal an, wenn ich\nden Indikator dazu gegeben habe.";
 	}
 	
 	public void setDialogue20() {

@@ -22,6 +22,17 @@ public class Player extends Entity {
 	public final int screenY;
 	int hasKey = 0;
 	int hasKeyChemie = 0;
+	boolean holErstenIndikator = false;
+	boolean hatErstenIndikator = false;
+	public boolean holZweitenIndikator = false;
+	boolean hatZweitenIndikator = false;
+	public boolean IndikatorReaktion = false;
+	boolean hatSäure = false;
+	boolean hatBase = false;
+	boolean hatNeutral = false;
+	public boolean holLösung = false;
+	boolean säurePlacen = false;
+	//boolean Universalindikator = false;
 	public int dialogueCounter = 1;
 	boolean oneTimeDialogue = true;
 	Font yoster;
@@ -226,6 +237,50 @@ public class Player extends Entity {
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
 				break;
+			
+			
+			case "Phenolphthalein":
+			
+				if(keyH.enterPressed && gp.gameState == gp.playState && holErstenIndikator == true) {
+					hatErstenIndikator = true;
+					gp.gameState = gp.dialogueState;
+					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
+					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+				}
+				break;
+			case "Base":
+				
+				if(keyH.enterPressed && gp.gameState == gp.playState) {
+					gp.gameState = gp.dialogueState;
+					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
+					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+				}
+				break;
+			case "Säure":
+				
+				if(keyH.enterPressed && gp.gameState == gp.playState) {
+					gp.gameState = gp.dialogueState;
+					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
+					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+				}
+				break;
+			case "Neutral":
+				
+				if(keyH.enterPressed && gp.gameState == gp.playState) {
+					gp.gameState = gp.dialogueState;
+					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
+					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+				}
+				break;
+			case "Universalindikator":
+				
+				if(keyH.enterPressed && gp.gameState == gp.playState && holZweitenIndikator == true) {
+					hatZweitenIndikator = true;
+					gp.gameState = gp.dialogueState;
+					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
+					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+				}
+				break;
 			}
 		}
 	}
@@ -286,37 +341,76 @@ public class Player extends Entity {
 				}
 				break;
 			case "Köppel":
+				säurePlacen = false;
 				/*if(EventHandler.gesGelöst == true) {
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue5();
 					gp.playSE(10);
 					hasKeyChemie++;
 				}
 				else {*/
-					switch(dialogueCounter) {
-						case 1:
-							gp.getNpc()[gp.getCurrentMap()][i].setDialogue1();
+
+				switch(dialogueCounter) {
+					case 1:
+						if(holErstenIndikator == false) {
+						holErstenIndikator = true;
+						gp.getNpc()[gp.getCurrentMap()][i].setDialogue1();
+						}
 							//System.out.println("Hallo");
-							break;
-						case 2:
-							gp.getNpc()[gp.getCurrentMap()][i].setDialogue2();
+						break;
+					case 2:
+						gp.getNpc()[gp.getCurrentMap()][i].setDialogue2();
 							//System.out.println("Ballo");
-							break;
-						case 3: 
-							gp.getNpc()[gp.getCurrentMap()][i].setDialogue3();
-							break;
-						case 4:
+						break;
+					case 3: 
+						gp.getNpc()[gp.getCurrentMap()][i].setDialogue3();
+						break;
+				}
+				
+				if(hatErstenIndikator == true && hatZweitenIndikator == false) {
+			
+					if(holZweitenIndikator == false) {
+							holZweitenIndikator = true;
 							gp.getNpc()[gp.getCurrentMap()][i].setDialogue4();
-							break;
+				
 					}
-				//}
+				}
+				if(hatZweitenIndikator == true) {
+					if(hatSäure == false || hatBase == false || hatNeutral == false) {
+						
+						if(holLösung == false && IndikatorReaktion == true) {
+							holLösung = true;
+							gp.getNpc()[gp.getCurrentMap()][i].setDialogue6();
+							
+						}
+						if(IndikatorReaktion == false) {
+							gp.getNpc()[gp.getCurrentMap()][i].setDialogue5();
+							
+					
+						}
+						
+					}
+				}
+				
+				
+				
 				gp.gameState = gp.dialogueState;
 				gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
-				if(dialogueCounter < 4) {
-					dialogueCounter++;
+				if(hatZweitenIndikator) {
+					IndikatorReaktion = true;
 				}
-				else {
-					dialogueCounter = 1;
-				}
+				
+				
+				//if(hatErstenIndikator == false) {
+					if(dialogueCounter < 3) {
+						dialogueCounter++;
+					}
+					else {
+						dialogueCounter = 2;
+					}
+				//}
+				
+				
+				
 				break;
 			case "Test":
 				gp.getNpc()[gp.getCurrentMap()][i].setDialogue1();
