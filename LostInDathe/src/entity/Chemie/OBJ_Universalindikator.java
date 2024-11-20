@@ -27,7 +27,7 @@ public class OBJ_Universalindikator extends Entity {
 	}
 	
 	public void setDialogue2() {
-		dialogues[4][0] = "Diese Universalindikatorlösung nützt mir nichts mehr.";
+		dialogues[4][0] = "Diese Universalindikatorlösung nützt mir nichts \nmehr.";
 	}
 	
 	

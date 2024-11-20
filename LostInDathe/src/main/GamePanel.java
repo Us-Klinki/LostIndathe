@@ -42,7 +42,7 @@ public class GamePanel extends JPanel implements Runnable {
 	private final int maxMap = 16;
 	// TODO: 0 = Bad, 1 = OG, 2 = Geschichte, 3 = Informatik, 4 = Chemie
 	//private int currentMap = 0;
-	private int currentMap = 4;
+	private int currentMap = 0;
 	
 	// Für Vollbild
 	int screenWidthVollbild = screenWidth;
@@ -301,6 +301,11 @@ public class GamePanel extends JPanel implements Runnable {
  			
  			if(player.holLösung == true) {
  				aPlacer.setRoteLösung();
+ 			}
+ 			
+ 			if(player.basePlacen) {
+ 				aPlacer.setBase();
+ 				player.basePlacen = false;
  			}
  			
  			for(int i = 0; i < npc[1].length; i++) {

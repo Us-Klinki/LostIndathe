@@ -50,23 +50,25 @@ public class NPC_Köppel extends Entity {
 	}
 	
 	public void setDialogue3() {
-		dialogues[4][0] = "Ich habe nicht ewig Zeit.";
+		dialogues[4][0] = "Vielen Dank für deine Hilfe!";
 	}
 	
 	public void setDialogue4() {
-		dialogues[4][0] = "Das ist der Falsche. Mit Phenolphthalein kann \nich jetzt ja gar nichts anfangen...\n";
-		dialogues[4][1] = "Geh noch mal, wir brauchen:\nU-ni-ver-sal-in-di-ka-tor!\nDer müsste auch dahinten sein...";
+		dialogues[4][0] = "";
+		dialogues[4][1] = "Das ist der Falsche. Mit Phenolphthalein kann \nich jetzt ja gar nichts anfangen...\n";
+		dialogues[4][2] = "Geh noch mal, wir brauchen:\nU-ni-ver-sal-in-di-ka-tor!\nDer müsste auch dahinten sein...";
 	}
 	
 	public void setDialogue5() {
-		dialogues[4][0] = "Wie? Der stand genau da, wo der andere stand?\nMerkwürdig... Naja, es ist spät.";
-		dialogues[4][1] = "Moment mal, nicht so schnell!\nWo ist denn deine Schutzbrille!\n";
-		dialogues[4][2] = "Wenn das jetzt eine hoch konzentrierte Säure \noder Base ist, reicht ein Tropfen und deine \nHornhaut ist verätzt. Eine neue ist nicht billig.";
-		dialogues[4][3] = "Offenbar ist es eine neutralisierbare Lösung.\nBring mir aus dem Vorbereitungsraum die\nneutralisierende Lösung!";
+		dialogues[4][0] = "";
+		dialogues[4][1] = "Wie? Der stand genau da, wo der andere stand?\nMerkwürdig... Naja, es ist spät.";
+		dialogues[4][2] = "Moment mal, nicht so schnell!\nWo ist denn deine Schutzbrille!\n";
+		dialogues[4][3] = "Wenn das jetzt eine hoch konzentrierte Säure \noder Base ist, reicht ein Tropfen und deine \nHornhaut ist verätzt. Eine neue ist nicht billig.";
+		dialogues[4][4] = "Offenbar ist es eine neutralisierbare Lösung.\nBring mir aus dem Vorbereitungsraum die\nneutralisierende Lösung!";
 	}
 	
 	public void setDialogue6() {
-		dialogues[4][0] = "Nee du. Also das wäre ja jetzt schon sehr\nlustig, wenn diese Lösung dadurch neutralisiert würde.\nNimm dir lieber eine andere...";
+		dialogues[4][0] = "Nee du. Also das wäre ja jetzt schon sehr\nlustig, wenn diese Lösung dadurch neutralisiert \nwerden würde. Nimm dir lieber eine andere...";
 	}
 	
 	public void setDialogue7() {
@@ -74,8 +76,9 @@ public class NPC_Köppel extends Entity {
 	}
 	
 	public void setDialogue8() {
-		dialogues[4][0] = "Suuper - wie du sieht, wird die Lösung neutral.";
-		dialogues[4][1] = "Ich habe gehört, Herr Klinkhardt hat in\nRaum 115 Probleme mit dem Licht. Schau doch da mal\nmit diesem Schlüssel vorbei, ja?";
+		dialogues[4][0] = "";
+		dialogues[4][1] = "Suuper - wie du siehst, wird die Lösung neutral.";
+		dialogues[4][2] = "Ich habe gehört, Herr Klinkhardt hat in R 115 \nProbleme mit dem Licht. Schau doch da mal\nmit diesem Schlüssel vorbei, ja?";
 	}
 	
 	public void setDialogue20() {

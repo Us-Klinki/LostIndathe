@@ -1,8 +1,8 @@
 package main;
 
 import entity.NPC_Priebe;
-import entity.NPC_Test;
 import entity.OBJ_Bathroomdoor;
+import entity.OBJ_Chemiedoor;
 import entity.OBJ_GesDoor;
 import entity.OBJ_Informatikdoor;
 import entity.OBJ_Sink;
@@ -16,7 +16,7 @@ import entity.Chemie.OBJ_Phenolphthalein;
 import entity.Chemie.OBJ_Säure;
 import entity.Chemie.OBJ_Unbekannt;
 import entity.Chemie.OBJ_Universalindikator;
-import object.*;
+
 
 public class AssetPlacer {
 	
@@ -76,6 +76,10 @@ public class AssetPlacer {
 		gp.getObj()[mapNum][2].worldX = 32*gp.getTileSize();
 		gp.getObj()[mapNum][2].worldY = 15*gp.getTileSize();
 		
+		gp.getObj()[mapNum][3] = new OBJ_Chemiedoor(gp, keyH);
+		gp.getObj()[mapNum][3].worldX = 68*gp.getTileSize();
+		gp.getObj()[mapNum][3].worldY = 41*gp.getTileSize();
+		
 		// GESCHICHTE
 		mapNum = 2;
 		gp.getObj()[mapNum][0] = new OBJ_Statue(gp, keyH);
@@ -94,6 +98,7 @@ public class AssetPlacer {
 		
 		// CHEMIE
 		mapNum = 4;
+		
 		gp.getObj()[mapNum][0] = new OBJ_Säure(gp, keyH);
 		gp.getObj()[mapNum][0].worldX = 47*gp.getTileSize();
 		gp.getObj()[mapNum][0].worldY = 66*gp.getTileSize();
@@ -113,6 +118,11 @@ public class AssetPlacer {
 		gp.getObj()[mapNum][4] = new OBJ_Unbekannt(gp, keyH);
 		gp.getObj()[mapNum][4].worldX = 47*gp.getTileSize();
 		gp.getObj()[mapNum][4].worldY = 63.6*gp.getTileSize();
+		
+		gp.getObj()[mapNum][5] = new OBJ_Chemiedoor(gp, keyH);
+		gp.getObj()[mapNum][5].setCollisionOn(false);
+		gp.getObj()[mapNum][5].worldX = 53*gp.getTileSize();
+		gp.getObj()[mapNum][5].worldY = 64*gp.getTileSize();
 		
 		/*gp.getObj()[mapNum][5] = new OBJ_Säure(gp, keyH);
 		gp.getObj()[mapNum][5].setCollisionOn(false);
@@ -138,6 +148,13 @@ public class AssetPlacer {
 	
 	void setRoteLösung() {
 		gp.getObj()[4][4] = new OBJ_Säure(gp, keyH);
+		gp.getObj()[4][4].setCollisionOn(false);
+		gp.getObj()[4][4].worldX = 47*gp.getTileSize();
+		gp.getObj()[4][4].worldY = 63.6*gp.getTileSize();
+	}
+	
+	void setBase() {
+		gp.getObj()[4][4] = new OBJ_Neutral(gp, keyH);
 		gp.getObj()[4][4].setCollisionOn(false);
 		gp.getObj()[4][4].worldX = 47*gp.getTileSize();
 		gp.getObj()[4][4].worldY = 63.6*gp.getTileSize();

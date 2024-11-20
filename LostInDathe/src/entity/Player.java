@@ -27,16 +27,20 @@ public class Player extends Entity {
 	boolean hatErstenIndikator = false;
 	public boolean holZweitenIndikator = false;
 	boolean hatZweitenIndikator = false;
+	boolean hatZweitenIndikatorStatisch = false;
 	public boolean IndikatorReaktion = false;
 	boolean hatSäure = false;
+	boolean hatSäureStatisch = false;
 	boolean hatBase = false;
+	boolean hatBaseStatisch = false;
 	boolean hatNeutral = false;
+	boolean hatNeutralStatisch = false;
 	public boolean holLösung = false;
 	boolean holSäure = false;
 	boolean holNeutral = false;
-	boolean basePlacen = false;
+	public boolean basePlacen = false;
 	boolean chemieGelöst = false;
-	int fehler = 0;
+	int fehler = 1;
 	//boolean Universalindikator = false;
 	public int dialogueCounter = 1;
 	boolean oneTimeDialogue = true;
@@ -64,12 +68,12 @@ public class Player extends Entity {
 	
 	public void setDefaultValues() {
 		// TODO: IM BAD
-		//worldX = gp.getTileSize() * 20;
-		//worldY = gp.getTileSize() * 25;
+		worldX = gp.getTileSize() * 20;
+		worldY = gp.getTileSize() * 25;
 		
 		// IM CHEMIERAUM
-		worldX = gp.getTileSize() *  52;
-		worldY = gp.getTileSize() * 64;
+		//worldX = gp.getTileSize() *  52;
+		//worldY = gp.getTileSize() * 64;
 		
 		speed = 4;
 		direction = "";
@@ -185,10 +189,22 @@ public class Player extends Entity {
 			    }
 				break;
 			case "Informatikdoor":
+				if(hasKeyInfo && keyH.enterPressed) {
+					gp.playSE(0);
+					gp.getObj()[gp.getCurrentMap()][i].setCollisionOn(false);
+					//System.out.println("Schlüssel: " + hasKey);
+				}
+				else if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed){
+					gp.gameState = gp.dialogueState;
+					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
+					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+				}
+				break;
+			
+			case "Chemiedoor":
 				if(hasKeyChemie > 0 && keyH.enterPressed) {
 					gp.playSE(0);
 					gp.getObj()[gp.getCurrentMap()][i].setCollisionOn(false);
-					hasKeyChemie--;
 					//System.out.println("Schlüssel: " + hasKey);
 				}
 				else if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed){
@@ -263,7 +279,7 @@ public class Player extends Entity {
 				}
 				break;
 			case "Base":
-				if(keyH.enterPressed && gp.gameState == gp.playState && holLösung == false && chemieGelöst == false) {
+				if(keyH.enterPressed && gp.gameState == gp.playState && holLösung == false && !hatBaseStatisch) {
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -274,9 +290,11 @@ public class Player extends Entity {
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 					holLösung = false;
+					hatBase = true;
+					hatBaseStatisch = true;
 				}
 				
-				if(keyH.enterPressed && gp.gameState == gp.playState && chemieGelöst == true) {
+				if(keyH.enterPressed && gp.gameState == gp.playState && hatBaseStatisch) {
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue3();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -294,7 +312,7 @@ public class Player extends Entity {
 				break;
 			case "Säure":
 				
-				if(keyH.enterPressed && gp.gameState == gp.playState && holSäure == false && chemieGelöst == false) {
+				if(keyH.enterPressed && gp.gameState == gp.playState && holSäure == false && !hatSäureStatisch) {
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -305,9 +323,11 @@ public class Player extends Entity {
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 					holSäure = false;
+					hatSäure = true;
+					hatSäureStatisch = true;
 				}
 				
-				if(keyH.enterPressed && gp.gameState == gp.playState && chemieGelöst == true) {
+				if(keyH.enterPressed && gp.gameState == gp.playState && hatSäureStatisch) {
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue3();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -324,7 +344,7 @@ public class Player extends Entity {
 				break;
 			case "Neutral":
 				
-				if(keyH.enterPressed && gp.gameState == gp.playState && holNeutral == false && chemieGelöst == false) {
+				if(keyH.enterPressed && gp.gameState == gp.playState && holNeutral == false && !hatNeutralStatisch) {
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -335,9 +355,11 @@ public class Player extends Entity {
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 					holNeutral = false;
+					hatNeutral = true;
+					hatNeutralStatisch = true;
 				}
 				
-				if(keyH.enterPressed && gp.gameState == gp.playState && chemieGelöst == true) {
+				if(keyH.enterPressed && gp.gameState == gp.playState && hatNeutralStatisch) {
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue3();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -354,13 +376,15 @@ public class Player extends Entity {
 				break;
 			case "Universalindikator":
 				
-				if(keyH.enterPressed && gp.gameState == gp.playState && holZweitenIndikator == true) {
+				if(keyH.enterPressed && gp.gameState == gp.playState && holZweitenIndikator == true && !hatZweitenIndikatorStatisch) {
 					hatZweitenIndikator = true;
+					hatZweitenIndikatorStatisch = true;
+					holZweitenIndikator = false;
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
-				if(keyH.enterPressed && gp.gameState == gp.playState && holZweitenIndikator == false) {
+				if(keyH.enterPressed && gp.gameState == gp.playState && hatZweitenIndikatorStatisch == true) {
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -432,35 +456,33 @@ public class Player extends Entity {
 					hasKeyChemie++;
 				}
 				else {*/
-
-				switch(dialogueCounter) {
-					case 1:
-						if(holErstenIndikator == false) {
-						holErstenIndikator = true;
-						gp.getNpc()[gp.getCurrentMap()][i].setDialogue1();
-						}
-							//System.out.println("Hallo");
-						break;
-					case 2:
-						gp.getNpc()[gp.getCurrentMap()][i].setDialogue2();
-							//System.out.println("Ballo");
-						break;
-					case 3: 
-						gp.getNpc()[gp.getCurrentMap()][i].setDialogue3();
-						break;
+				if(holErstenIndikator) {
+					gp.getNpc()[gp.getCurrentMap()][i].setDialogue2();
+					gp.gameState = gp.dialogueState;
+					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 				}
+				
+				if(holErstenIndikator == false) {
+					holErstenIndikator = true;
+					gp.getNpc()[gp.getCurrentMap()][i].setDialogue1();
+					gp.gameState = gp.dialogueState;
+					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+					}
+						//System.out.println("Hallo");
+				
 				
 				if(hatErstenIndikator == true && hatZweitenIndikator == false) {
 			
 					if(holZweitenIndikator == false) {
 							gp.getNpc()[gp.getCurrentMap()][i].setDialogue4();
+							gp.gameState = gp.dialogueState;
+							gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 				
 					}
 				}
 				
-				if(holZweitenIndikator == true) {
+				if(hatZweitenIndikator == true) {
 					//holZweitenIndikator = false;
-					hatZweitenIndikator = true;
 					if(hatSäure == false || hatBase == false || hatNeutral == false) {
 						if(holLösung == false) {
 							gp.getNpc()[gp.getCurrentMap()][i].setDialogue5();
@@ -468,9 +490,12 @@ public class Player extends Entity {
 							holLösung = true;
 							holSäure = true;
 							holNeutral = true;
+							gp.gameState = gp.dialogueState;
+							gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 							}
 						}
 					}
+					hatZweitenIndikator = false;
 				}
 				
 				if(hatErstenIndikator == true && hatZweitenIndikator == false) {
@@ -480,10 +505,45 @@ public class Player extends Entity {
 					}
 				}
 				
+				if(hatSäure == true || hatNeutral == true) {
+				    if(fehler == 1) {
+				        gp.getNpc()[gp.getCurrentMap()][i].setDialogue6();
+				    }
+				    if(fehler == 2) {
+				        gp.getNpc()[gp.getCurrentMap()][i].setDialogue7();
+				    }
+				    fehler++;
+				    hatSäure = false;
+				    hatNeutral = false;
+				    gp.gameState = gp.dialogueState;
+					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+				}
+				
+				if(hatBase == true) {
+				    gp.getNpc()[gp.getCurrentMap()][i].setDialogue8();
+				    gp.gameState = gp.dialogueState;
+					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+					gp.playSE(10);
+					hasKeyInfo = true;
+				    chemieGelöst = true;
+				    basePlacen = true;
+				    hatBase = false;
+				    
+				    //return; // Methode wird hier beendet, wenn dieser Fall zutrifft.
+				}
+				
+				if(chemieGelöst) {
+					gp.getNpc()[gp.getCurrentMap()][i].setDialogue3();
+					gp.gameState = gp.dialogueState;
+					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+				}
 				
 				
+
+					
+
 				
-				if(hatSäure == true) {
+				/*if(hatSäure == true) {
 					fehler++;
 					if(fehler == 1) {
 						gp.getNpc()[gp.getCurrentMap()][i].setDialogue6();
@@ -508,22 +568,14 @@ public class Player extends Entity {
 				if(hatBase == true) {
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue8();
 					hasKeyInfo = true;
-				}
-				
-				
-				gp.gameState = gp.dialogueState;
-				gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+					chemieGelöst = true;
+				}*/
 				
 				
 				
-				//if(hatErstenIndikator == false) {
-					if(dialogueCounter < 3) {
-						dialogueCounter++;
-					}
-					else {
-						dialogueCounter = 2;
-					}
-				//}
+				
+				
+			
 				
 				
 				
