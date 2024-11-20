@@ -284,7 +284,7 @@ public class Player extends Entity {
 				}
 				
 				if(keyH.enterPressed && gp.gameState == gp.playState && holLösung == true) {
-					if(hatSäure == true || hatNeutral == true) {
+					if(hatSäure == true || hatBase == true || hatNeutral == true) {
 						gp.gameState = gp.dialogueState;
 						gp.getObj()[gp.getCurrentMap()][i].setDialogue4();
 						gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -315,7 +315,7 @@ public class Player extends Entity {
 				}
 				
 				if(keyH.enterPressed && gp.gameState == gp.playState && holSäure == true) {
-					if(hatBase == true || hatNeutral == true) {
+					if(hatSäure == true || hatBase == true || hatNeutral == true) {
 						gp.gameState = gp.dialogueState;
 						gp.getObj()[gp.getCurrentMap()][i].setDialogue4();
 						gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -345,7 +345,7 @@ public class Player extends Entity {
 				}
 				
 				if(keyH.enterPressed && gp.gameState == gp.playState && holNeutral == true) {
-					if(hatSäure == true || hatBase == true) {
+					if(hatSäure == true || hatBase == true || hatNeutral == true) {
 						gp.gameState = gp.dialogueState;
 						gp.getObj()[gp.getCurrentMap()][i].setDialogue4();
 						gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -450,9 +450,17 @@ public class Player extends Entity {
 						break;
 				}
 				
+				if(hatErstenIndikator == true && hatZweitenIndikator == false) {
+			
+					if(holZweitenIndikator == false) {
+							gp.getNpc()[gp.getCurrentMap()][i].setDialogue4();
+				
+					}
+				}
+				
 				if(holZweitenIndikator == true) {
-					holZweitenIndikator = false;
-					hatZweitenIndikator = false;
+					//holZweitenIndikator = false;
+					hatZweitenIndikator = true;
 					if(hatSäure == false || hatBase == false || hatNeutral == false) {
 						if(holLösung == false) {
 							gp.getNpc()[gp.getCurrentMap()][i].setDialogue5();
@@ -466,13 +474,13 @@ public class Player extends Entity {
 				}
 				
 				if(hatErstenIndikator == true && hatZweitenIndikator == false) {
-			
 					if(holZweitenIndikator == false) {
 							holZweitenIndikator = true;
-							gp.getNpc()[gp.getCurrentMap()][i].setDialogue4();
 				
 					}
 				}
+				
+				
 				
 				
 				if(hatSäure == true) {
