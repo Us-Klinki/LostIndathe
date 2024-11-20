@@ -24,6 +24,10 @@ public class OBJ_Phenolphthalein extends Entity {
 		
 	}
 	
+	public void setDialogue2() {
+		dialogues[4][0] = "Bevor ich hier irgendwas anfasse, \nsollte ich besser mit Frau Köppel sprechen.";
+	}
+	
 	
 	
 	public void setDialogue20() {

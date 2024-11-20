@@ -299,7 +299,7 @@ public class GamePanel extends JPanel implements Runnable {
  				aPlacer.setUniversalindikator();
  			}
  			
- 			if(player.IndikatorReaktion == true) {
+ 			if(player.holLösung == true) {
  				aPlacer.setRoteLösung();
  			}
  			

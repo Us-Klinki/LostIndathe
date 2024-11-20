@@ -20,8 +20,18 @@ public class OBJ_Säure extends Entity {
 	}
 	
 	public void setDialogue1() {
-		dialogues[4][0] = "";
+		dialogues[4][0] = "Ich habe eine saure Lösung gefunden.\nIch sollte mit Frau Köppel sprechen.";
 		
+	}
+	public void setDialogue2() {
+		dialogues[4][0] = "Bevor ich hier irgendwas anfasse, \nsollte ich besser mit Frau Köppel sprechen.";
+	}
+	public void setDialogue3() {
+		dialogues[4][0] = "Ich brauche dieses Objekt nicht.";
+	}
+	
+	public void setDialogue4() {
+		dialogues[4][0] = "Ich trage bereits eine Lösung mit mir und\nsollte zunächst mit Frau Köppel sprechen.";
 	}
 	
 	

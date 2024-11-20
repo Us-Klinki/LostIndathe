@@ -21,7 +21,8 @@ public class OBJ_Universalindikator extends Entity {
 	}
 	
 	public void setDialogue1() {
-		dialogues[4][0] = "Ich habe Universalindikatorlösung gefunden...\nIch sollte sie zügig zu Frau Köppel bringen.\nDen sollte ich gleich in die Lösung geben.";
+		dialogues[4][0] = "Ich habe Universalindikatorlösung gefunden...\nIch sollte sie zügig zu Frau Köppel bringen\nund ihn gleich in die Lösung geben.";
+		dialogues[4][1] = "Diese Universalindikatorlösung nützt mir nichts mehr.";
 		
 	}
 	

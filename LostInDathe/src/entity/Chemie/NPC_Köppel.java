@@ -60,9 +60,22 @@ public class NPC_Köppel extends Entity {
 	
 	public void setDialogue5() {
 		dialogues[4][0] = "Wie? Der stand genau da, wo der andere stand?\nMerkwürdig... Naja, es ist spät.";
-		dialogues[4][1] = "Moment mal, nicht so schnell!\nWo ist denn deine Schutzbrille!\nLass das mal mich machen!";
-		dialogues[4][2] = "Wenn das jetzt eine hoch konzentrierte Säure \noder Base ist, reicht ein Tropfen und deine \nHornhaut ist weggeätzt. Eine neue ist nicht billig.";
-		dialogues[4][3] = "Sprich mich nochmal an, wenn ich\nden Indikator dazu gegeben habe.";
+		dialogues[4][1] = "Moment mal, nicht so schnell!\nWo ist denn deine Schutzbrille!\n";
+		dialogues[4][2] = "Wenn das jetzt eine hoch konzentrierte Säure \noder Base ist, reicht ein Tropfen und deine \nHornhaut ist verätzt. Eine neue ist nicht billig.";
+		dialogues[4][3] = "Offenbar ist es eine neutralisierbare Lösung.\nBring mir aus dem Vorbereitungsraum die\nneutralisierende Lösung!";
+	}
+	
+	public void setDialogue6() {
+		dialogues[4][0] = "Nee du. Also das wäre ja jetzt schon sehr\nlustig, wenn diese Lösung dadurch neutralisiert würde.\nNimm dir lieber eine andere...";
+	}
+	
+	public void setDialogue7() {
+		dialogues[4][0] = "Aiaiai... Und du willst Abitur machen?!";
+	}
+	
+	public void setDialogue8() {
+		dialogues[4][0] = "Suuper - wie du sieht, wird die Lösung neutral.";
+		dialogues[4][1] = "Ich habe gehört, Herr Klinkhardt hat in\nRaum 115 Probleme mit dem Licht. Schau doch da mal\nmit diesem Schlüssel vorbei, ja?";
 	}
 	
 	public void setDialogue20() {
