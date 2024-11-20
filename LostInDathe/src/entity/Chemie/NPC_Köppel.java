@@ -42,7 +42,7 @@ public class NPC_Köppel extends Entity {
 		dialogues[4][0] = "[Selbstgespräch] \nWer hat denn hier schon wieder was rumstehen \nlassen? War das etwa Frau Köppel?";
 		dialogues[4][1] = "Ach, du bist auch noch hier. \nDu kannst mir bestimmt behilflich sein! \nIch will die Lösung nicht einfach wegschütten.";
 		dialogues[4][2] = "Wer weiß, was das für eine schädliche \nLösung sein könnte. \nHmm... Ich habe da eine Idee!";
-		dialogues[4][3] = "Bring mir mal bitte die Indikatorlösung.\nDie müsste dahinten auf einem Tisch stehen \nund hat eine rötliche Färbung...";
+		dialogues[4][3] = "Bring mir mal bitte die Indikatorlösung.\nDie müsste dahinten auf einem Tisch stehen \nund hat eine hellviolette Färbung Färbung...";
 	}
 	
 	public void setDialogue2() {
