@@ -9,7 +9,7 @@ import javax.sound.sampled.FloatControl;
 
 public class Sound {
 	Clip clip;
-	URL soundURL[] = new URL[30];
+	URL soundURL[] = new URL[80];
 	FloatControl fc;
 	int volumeScale = 6;
 	float volume;
@@ -23,10 +23,14 @@ public class Sound {
 		soundURL[4] = pfad("switch.wav");
 		soundURL[5] = pfad("teleport.wav");
 		soundURL[6] = pfad("subArea.wav");
-		soundURL[7] = pfad("Menü_Spiel_Starten.wav");
-		soundURL[8] = pfad("Menü_Button_Wechseln.wav");
-		soundURL[9] = pfad("Menü_Button_Auswählen.wav");
-		soundURL[10] = pfad("Schlüssel_Einsammeln.wav");
+		soundURL[7] = pfad("soundeffect/Menü_Spiel_Starten.wav");
+		soundURL[8] = pfad("soundeffect/Menü_Button_Wechseln.wav");
+		soundURL[9] = pfad("soundeffect/Menü_Button_Auswählen.wav");
+		soundURL[10] = pfad("soundeffect/Schlüssel_Einsammeln.wav");
+		soundURL[11] = pfad("voiceover/priebe/Priebe_Dialog1.wav");
+		soundURL[12] = pfad("voiceover/priebe/Priebe_Dialog2.wav");
+		soundURL[13] = pfad("voiceover/priebe/Priebe_Dialog3.wav");
+		soundURL[14] = pfad("voiceover/priebe/Priebe_Dialog4.wav");
 	}
 	
 	public void setFile(int i) {

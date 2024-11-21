@@ -38,23 +38,21 @@ public class NPC_Priebe extends Entity {
 	//Dialog Test 
 	
 	public void setDialogue1() {
-		dialogues[2][0] = "Das Sonnenlicht fehlt wohl.";		
+		dialogues[2][0] = "Mehr Licht... Mehr Licht...\n...\nWir brauchen mehr Licht.";		
 	}
 	
 	public void setDialogue2() {
-		dialogues[2][0] = "Sie ist sooo blass...";
+		dialogues[2][0] = "Sie braucht mehr Licht!";
 	}
 	
 	public void setDialogue3() {
-		dialogues[2][0] = "Wir haben nicht ewig Zeit.";
+		dialogues[2][0] = "Wir haben doch keine Zeit!!!";
 	}
+	
+
 	
 	public void setDialogue4() {
-		dialogues[2][0] = "Hilf ihr doch!!!";
-	}
-	
-	public void setDialogue5() {
-		dialogues[2][0] = "Danke für deine Hilfe! \nIch habe gehört, in der Chemie gibt es Probleme.\nSchau dort mal vorbei, hier haste nen Schlüssel.";
+		dialogues[2][0] = "Danke, dass du Pablo geholfen hast. Ich habe \ngehört, in der Chemie [R 309] gibt es Probleme.\nSchau dort mal vorbei, hier haste nen Schlüssel.";
 	}
 	
 	public void setDialogue20() {

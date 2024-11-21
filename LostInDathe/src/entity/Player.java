@@ -419,30 +419,42 @@ public class Player extends Entity {
 			switch(npcName) {
 			case "priebe":
 				if(EventHandler.gesGelöst == true) {
-					gp.getNpc()[gp.getCurrentMap()][i].setDialogue5();
-					gp.playSE(10);
+					gp.getNpc()[gp.getCurrentMap()][i].setDialogue4();
+					gp.stopMusic(14);
+					gp.stopMusic(10);
+					gp.playSE(14);
+					if(hasKeyChemie == 0) {
+						gp.playSE(10);
+					}
 					hasKeyChemie++;
 				}
 				else {
 					switch(dialogueCounter) {
 						case 1:
+							gp.stopMusic(12);
+							gp.stopMusic(13);
+							gp.playSE(11);
 							gp.getNpc()[gp.getCurrentMap()][i].setDialogue1();
 							//System.out.println("Hallo");
 							break;
 						case 2:
+							gp.stopMusic(13);
+							gp.stopMusic(11);
+							gp.playSE(12);
 							gp.getNpc()[gp.getCurrentMap()][i].setDialogue2();
 							//System.out.println("Ballo");
 							break;
 						case 3: 
+							gp.stopMusic(11);
+							gp.stopMusic(12);
+							gp.playSE(13);
 							gp.getNpc()[gp.getCurrentMap()][i].setDialogue3();
 							break;
-						case 4:
-							gp.getNpc()[gp.getCurrentMap()][i].setDialogue4();
-							break;
+
 					}
 				}
 				gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
-				if(dialogueCounter < 4) {
+				if(dialogueCounter < 3) {
 					dialogueCounter++;
 				}
 				else {
