@@ -38,6 +38,8 @@ public class Player extends Entity {
 	public boolean holLösung = false;
 	boolean holSäure = false;
 	boolean holNeutral = false;
+	boolean hatDialog4Abgeschlossen = false;
+	boolean hatDialog5Abgeschlossen = false;
 	public boolean basePlacen = false;
 	boolean chemieGelöst = false;
 	int fehler = 1;
@@ -68,12 +70,12 @@ public class Player extends Entity {
 	
 	public void setDefaultValues() {
 		// TODO: IM BAD
-		worldX = gp.getTileSize() * 20;
-		worldY = gp.getTileSize() * 25;
+		//worldX = gp.getTileSize() * 20;
+		//worldY = gp.getTileSize() * 25;
 		
 		// IM CHEMIERAUM
-		//worldX = gp.getTileSize() *  52;
-		//worldY = gp.getTileSize() * 64;
+		worldX = gp.getTileSize() *  52;
+		worldY = gp.getTileSize() * 64;
 		
 		speed = 4;
 		direction = "";
@@ -318,7 +320,16 @@ public class Player extends Entity {
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
 				
+				
+				
+				if(keyH.enterPressed && gp.gameState == gp.playState && hatSäureStatisch) {
+					gp.gameState = gp.dialogueState;
+					gp.getObj()[gp.getCurrentMap()][i].setDialogue3();
+					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+					//holSäure = false;
+				}
 				if(keyH.enterPressed && gp.gameState == gp.playState && holSäure == true && hatBase == false && hatNeutral == false) {
+					System.out.println("Hallo");
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -326,14 +337,6 @@ public class Player extends Entity {
 					hatSäure = true;
 					hatSäureStatisch = true;
 				}
-				
-				if(keyH.enterPressed && gp.gameState == gp.playState && hatSäureStatisch) {
-					gp.gameState = gp.dialogueState;
-					gp.getObj()[gp.getCurrentMap()][i].setDialogue3();
-					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
-					holSäure = false;
-				}
-				
 				if(keyH.enterPressed && gp.gameState == gp.playState && holSäure == true) {
 					if(hatSäure == true || hatBase == true || hatNeutral == true) {
 						gp.gameState = gp.dialogueState;
@@ -468,14 +471,25 @@ public class Player extends Entity {
 					hasKeyChemie++;
 				}
 				else {*/
-				if(holErstenIndikator) {
+				if(hatDialog5Abgeschlossen && (!hatSäure && !hatBase && !hatNeutral)) {
+							gp.getNpc()[gp.getCurrentMap()][i].setDialogue2();
+							gp.gameState = gp.dialogueState;
+							gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+						
+				}
+				if(holErstenIndikator && ((!hatErstenIndikator || hatDialog4Abgeschlossen) && (!hatZweitenIndikator && !hatDialog5Abgeschlossen))) {
+					gp.playSE(16);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue2();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 				}
+				//else {
+					//gp.getNpc()[gp.getCurrentMap()][i].setDialogue20();
+				//}
 				
 				if(holErstenIndikator == false) {
 					holErstenIndikator = true;
+					gp.playSE(15);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue1();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
@@ -486,17 +500,20 @@ public class Player extends Entity {
 				if(hatErstenIndikator == true && hatZweitenIndikator == false) {
 			
 					if(holZweitenIndikator == false) {
-							gp.getNpc()[gp.getCurrentMap()][i].setDialogue4();
-							gp.gameState = gp.dialogueState;
-							gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+						gp.playSE(18);
+						gp.getNpc()[gp.getCurrentMap()][i].setDialogue4();
+						gp.gameState = gp.dialogueState;
+						gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+						hatDialog4Abgeschlossen = true;
 				
 					}
 				}
 				
 				if(hatZweitenIndikator == true) {
-					//holZweitenIndikator = false;
+					hatDialog5Abgeschlossen = true;
 					if(hatSäure == false || hatBase == false || hatNeutral == false) {
 						if(holLösung == false) {
+							gp.playSE(19);
 							gp.getNpc()[gp.getCurrentMap()][i].setDialogue5();
 							if(hatZweitenIndikator) {
 							holLösung = true;
@@ -510,6 +527,8 @@ public class Player extends Entity {
 					hatZweitenIndikator = false;
 				}
 				
+				
+				
 				if(hatErstenIndikator == true && hatZweitenIndikator == false) {
 					if(holZweitenIndikator == false) {
 							holZweitenIndikator = true;
@@ -518,20 +537,28 @@ public class Player extends Entity {
 				}
 				
 				if(hatSäure == true || hatNeutral == true) {
+					System.out.print("Hmm");
 				    if(fehler == 1) {
+				    	System.out.println("1");
+				    	gp.playSE(20);
 				        gp.getNpc()[gp.getCurrentMap()][i].setDialogue6();
+				        gp.gameState = gp.dialogueState;
+						gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 				    }
 				    if(fehler == 2) {
+				    	gp.playSE(21);
 				        gp.getNpc()[gp.getCurrentMap()][i].setDialogue7();
+				        gp.gameState = gp.dialogueState;
+						gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 				    }
 				    fehler++;
 				    hatSäure = false;
 				    hatNeutral = false;
-				    gp.gameState = gp.dialogueState;
-					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+				    
 				}
 				
 				if(hatBase == true) {
+					gp.playSE(22);
 				    gp.getNpc()[gp.getCurrentMap()][i].setDialogue8();
 				    gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
@@ -545,6 +572,7 @@ public class Player extends Entity {
 				}
 				
 				if(chemieGelöst) {
+					gp.playSE(17);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue3();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);

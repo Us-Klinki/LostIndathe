@@ -42,7 +42,7 @@ public class NPC_Köppel extends Entity {
 		dialogues[4][0] = "[Selbstgespräch] \nWer hat denn hier schon wieder was rumstehen \nlassen? War das etwa Frau Köppel?";
 		dialogues[4][1] = "Ach, du bist auch noch hier. \nDu kannst mir bestimmt behilflich sein! \nIch will die Lösung nicht einfach wegschütten.";
 		dialogues[4][2] = "Wer weiß, was das für eine schädliche \nLösung sein könnte. \nHmm... Ich habe da eine Idee!";
-		dialogues[4][3] = "Bring mir mal bitte die Indikatorlösung.\nDie müsste dahinten auf einem Tisch stehen \nund hat eine hellviolette Färbung Färbung...";
+		dialogues[4][3] = "Bring mir mal bitte die Indikatorlösung.\nDie müsste dahinten auf einem Tisch stehen \nund hat eine hellviolette Färbung...";
 	}
 	
 	public void setDialogue2() {
@@ -62,7 +62,7 @@ public class NPC_Köppel extends Entity {
 	public void setDialogue5() {
 		dialogues[4][0] = "";
 		dialogues[4][1] = "Wie? Der stand genau da, wo der andere stand?\nMerkwürdig... Naja, es ist spät.";
-		dialogues[4][2] = "Moment mal, nicht so schnell!\nWo ist denn deine Schutzbrille!\n";
+		dialogues[4][2] = "Moment mal, nicht so schnell!\nWo ist denn deine Schutzbrille?!\n";
 		dialogues[4][3] = "Wenn das jetzt eine hoch konzentrierte Säure \noder Base ist, reicht ein Tropfen und deine \nHornhaut ist verätzt. Eine neue ist nicht billig.";
 		dialogues[4][4] = "Offenbar ist es eine neutralisierbare Lösung.\nBring mir aus dem Vorbereitungsraum die\nneutralisierende Lösung!";
 	}

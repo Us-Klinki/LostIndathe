@@ -42,7 +42,7 @@ public class GamePanel extends JPanel implements Runnable {
 	private final int maxMap = 16;
 	// TODO: 0 = Bad, 1 = OG, 2 = Geschichte, 3 = Informatik, 4 = Chemie
 	//private int currentMap = 0;
-	private int currentMap = 0;
+	private int currentMap = 4;
 	
 	// Für Vollbild
 	int screenWidthVollbild = screenWidth;

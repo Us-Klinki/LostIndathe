@@ -31,6 +31,14 @@ public class Sound {
 		soundURL[12] = pfad("voiceover/priebe/Priebe_Dialog2.wav");
 		soundURL[13] = pfad("voiceover/priebe/Priebe_Dialog3.wav");
 		soundURL[14] = pfad("voiceover/priebe/Priebe_Dialog4.wav");
+		soundURL[15] = pfad("voiceover/köppel/Köppel_Dialog1.wav");
+		soundURL[16] = pfad("voiceover/köppel/Köppel_Dialog2.wav");
+		soundURL[17] = pfad("voiceover/köppel/Köppel_Dialog3.wav");
+		soundURL[18] = pfad("voiceover/köppel/Köppel_Dialog4.wav");
+		soundURL[19] = pfad("voiceover/köppel/Köppel_Dialog5.wav");
+		soundURL[20] = pfad("voiceover/köppel/Köppel_Dialog6.wav");
+		soundURL[21] = pfad("voiceover/köppel/Köppel_Dialog7.wav");
+		soundURL[22] = pfad("voiceover/köppel/Köppel_Dialog8.wav");
 	}
 	
 	public void setFile(int i) {
