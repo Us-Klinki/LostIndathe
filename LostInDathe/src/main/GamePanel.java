@@ -164,7 +164,7 @@ public class GamePanel extends JPanel implements Runnable {
  	//ENTITY AND OBJECTS
  	private Player player = new Player(this, keyH);
  	private Entity obj[][] = new Entity[maxMap][30];
- 	private Entity npc[][] = new Entity[maxMap][10];
+ 	private Entity npc[][] = new Entity[maxMap][30];
  	ArrayList<Entity> entityList = new ArrayList<>();
  	Font debug = new Font("Bahnschrift", Font.BOLD, 24);
  	
@@ -297,10 +297,12 @@ public class GamePanel extends JPanel implements Runnable {
  			}
  			if(player.holZweitenIndikator == true) {
  				aPlacer.setUniversalindikator();
+ 				player.holZweitenIndikator = false;
  			}
  			
  			if(player.holLösung == true) {
  				aPlacer.setRoteLösung();
+ 				//player.holLösung = false;
  			}
  			
  			if(player.basePlacen) {
@@ -386,6 +388,10 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 		// Entitylist leeren
  	 	 		entityList.clear();
  	 	 		
+ 	 	 		if(EventHandler.treppeNichtBegehbar) {
+ 	 	 			player.renderTreppeNichtBegehbar(g2);
+ 	 	 			EventHandler.treppeNichtBegehbar = false;
+ 	 	 		}
  	 	 		
  	 	 		// ALTE METHODE
  	 	 		
@@ -492,6 +498,10 @@ public class GamePanel extends JPanel implements Runnable {
  	public void stopMusic(int i) {
 	  
  		music.stop();
+ 	}
+ 	
+ 	public void stopSE(int i) {
+ 		se.stop();
  	}
  	public void playSE(int i) {
 	  

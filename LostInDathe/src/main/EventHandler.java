@@ -10,13 +10,16 @@ public class EventHandler {
 	EventRect eventRect1[][][];
 	EventRect eventRect2[][][];
 	EventRect eventRect3[][][];
+	EventRect eventRectTreppe[][][];
 	
 	int previousEventX;
 	double previousEventY;
 	boolean canTouchEvent = true;
+	boolean canTouchTreppe = true;
 	public static boolean gesGelöst = false;
 	public static boolean gesZuDunkel = false;
 	public static boolean playerNotColliding = true;
+	public static boolean treppeNichtBegehbar = false;
 	public static int i = 0;
 	public EventHandler(GamePanel gp) {
 		this.gp = gp;
@@ -25,6 +28,7 @@ public class EventHandler {
 		eventRect1 = new EventRect[gp.getMaxMap()][gp.getMaxWorldCol()][gp.getMaxWorldRow()];
 		eventRect2 = new EventRect[gp.getMaxMap()][gp.getMaxWorldCol()][gp.getMaxWorldRow()];
 		eventRect3 = new EventRect[gp.getMaxMap()][gp.getMaxWorldCol()][gp.getMaxWorldRow()];
+		eventRectTreppe = new EventRect[gp.getMaxMap()][gp.getMaxWorldCol()][gp.getMaxWorldRow()];
 		
 		int map = 0;
 		int col = 0;
@@ -63,6 +67,14 @@ public class EventHandler {
 			eventRect3[map][col][row].eventRectDefaultX = eventRect3[map][col][row].x;
 			eventRect3[map][col][row].eventRectDefaultY = eventRect3[map][col][row].y;
 			
+			eventRectTreppe[map][col][row] = new EventRect();
+			eventRectTreppe[map][col][row].x = gp.getTileSize() / 2 - gp.getTileSize() / 48;
+			eventRectTreppe[map][col][row].y = 0;
+			eventRectTreppe[map][col][row].width = gp.getTileSize() / 24;
+			eventRectTreppe[map][col][row].height = gp.getTileSize() * 3;
+			eventRectTreppe[map][col][row].eventRectDefaultX = eventRect3[map][col][row].x;
+			eventRectTreppe[map][col][row].eventRectDefaultY = eventRect3[map][col][row].y;
+			
 			col ++;
 			if(col == gp.getMaxWorldCol()) {
 				col = 0;
@@ -88,21 +100,52 @@ public class EventHandler {
 			canTouchEvent = true;
 		}
 		
+		int xDistanceTreppe = Math.abs(gp.getPlayer().worldX - previousEventX); //abs = Betrag
+		int yDistanceTreppe = (int) Math.abs(gp.getPlayer().worldY - previousEventY);
+		int distanceTreppe = Math.max(xDistanceTreppe, yDistanceTreppe);
+		if(distanceTreppe >= gp.getTileSize() * 3) {
+			canTouchTreppe = true;
+		}
+		
 		if(canTouchEvent == true) {
 			//if(hit(0, 21, 31, "any") == true) { intraTeleport(gp.dialogueState); }
 			// Teleport Bad -> OG; OG -> Bad
-			if(hit(0, 20, 30, "any") == true) { interTeleport(1, 13, 11); gp.stopMusic(2); gp.playMusic(6); }
-			else if(hit(1, 13, 11, "any") == true) { interTeleport(0, 20, 30); gp.stopMusic(6); gp.playMusic(2); }
+			if(hit(0, 20, 30, "any") == true) { interTeleport(1, 17, 11); gp.stopMusic(2); gp.playMusic(6); }
+			else if(hit(1, 17, 11, "any") == true) { interTeleport(0, 20, 30); gp.stopMusic(6); gp.playMusic(2); }
 			// Teleport OG -> Geschichte; Geschichte -> OG
-			else if(hit(1, 12, 15, "any") == true) { interTeleport(2, 29, 18); gp.stopMusic(6); gp.playMusic(2); }
-			else if(hit(2, 29, 18, "any") == true) { interTeleport(1, 12, 15); gp.stopMusic(2); gp.playMusic(6); }
-			// TEMP Teleport OG -> Info; Info -> OG
-			else if(hit(1, 32, 15, "any") == true) { interTeleport(3, 50, 49.9); gp.stopMusic(6); gp.playMusic(2); }
-			else if(hit(3, 50, 50, "any") == true) { interTeleport(1, 32, 15); gp.stopMusic(2); gp.playMusic(6); }
+			else if(hit(1, 16, 15, "any") == true) { interTeleport(2, 29, 18); gp.stopMusic(6); gp.playMusic(2); }
+			else if(hit(2, 29, 18, "any") == true) { interTeleport(1, 16, 15); gp.stopMusic(2); gp.playMusic(6); }
 			// Teleport OG -> Chemie: Chemie -> OG
-			else if(hit(1, 68, 41, "any") == true) { interTeleport(4, 53, 63.9); gp.stopMusic(6); gp.playMusic(2); }
-			else if(hit(4, 53, 64, "any") == true) { interTeleport(1, 68, 40.9); gp.stopMusic(2); gp.playMusic(6); }
+			else if(hit(1, 72, 41, "any") == true) { interTeleport(4, 53, 63.9); gp.stopMusic(6); gp.playMusic(2); }
+			else if(hit(4, 53, 64, "any") == true) { interTeleport(1, 72, 40.9); gp.stopMusic(2); gp.playMusic(6); }
+			// Teleport 2x EG -> Info; Info -> OG
+			else if(hit(5, 42, 24, "any") == true) { interTeleport(3, 50, 49.9); gp.stopMusic(6); gp.playMusic(2); }
+			else if(hit(5, 55, 24, "any") == true) { interTeleport(3, 50, 49.9); gp.stopMusic(6); gp.playMusic(2); }
+			else if(hit(3, 50, 50, "any") == true) { interTeleport(5, 42, 24); gp.stopMusic(2); gp.playMusic(6); }
+			// Teleport 2x EG -> Bio; 2x Bio -> EG
+			else if(hit(5, 79, 40, "any") == true) { interTeleport(6, 43, 46.9); gp.stopMusic(6); gp.playMusic(2); }
+			else if(hit(5, 79, 59, "any") == true) { interTeleport(6, 43, 57.9); gp.stopMusic(6); gp.playMusic(2); }
+			else if(hit(6, 43, 47, "any") == true) { interTeleport(5, 79, 39.9); gp.stopMusic(6); gp.playMusic(2); }
+			else if(hit(6, 43, 58, "any") == true) { interTeleport(5, 79, 58.9); gp.stopMusic(6); gp.playMusic(2); }
+			
+
 		}
+		
+		if(canTouchTreppe) {
+			/* Teleport Aufgang D OG -> EG; EG -> OG
+			 * Information: hitTreppe nutzt ein EventRectangle, dass 3 Tiles hoch ist. Daher immer das oberste Tile nutzen, dann sind alle
+			 * Treppenstufen abgedeckt. (hitTreppe(1, 22, 22, "any) funktioniert auch für y = 23 oder y = 24)
+			 */
+			if(hitTreppe(1, 22, 22, "any") == true) { interTeleport(5, 28, 26); }
+			else if(hitTreppe(5, 28, 25, "any") == true) { interTeleport(1, 22, 23); }
+			// Teleport Aufgang C OG -> EG; EG -> OG
+			else if(hitTreppe(1, 64, 22, "any") == true) { interTeleport(5, 71, 26); }
+			else if(hitTreppe(5, 71, 25, "any") == true) { interTeleport(1, 64, 23); }
+		}
+		
+		if(hitTileGroß(1, 22, 16) == true || hitTileGroß(1, 22, 17) == true || hitTileGroß(1, 22, 18) == true || 
+			hitTileGroß(1, 64, 16) == true || hitTileGroß(1, 64, 17) == true || hitTileGroß(1, 64, 18) == true) { treppeNichtBegehbar = true; }
+		
 		if(hitTileGroß(2, 20, 31) == true || hitTileGroß(2, 20, 32) == true) {
 			playerNotColliding = false;
 		}
@@ -149,6 +192,35 @@ public class EventHandler {
 		}
 				
 		return hit;
+	}
+	
+	public boolean hitTreppe(int eventMap, int eventCol, int eventRow, String reqDirection) {
+		
+		boolean hitTreppe = false;
+		
+		if(eventMap == gp.getCurrentMap()) {
+			gp.getPlayer().getSolidArea().x = gp.getPlayer().worldX + gp.getPlayer().getSolidAreaDefaultX();
+			gp.getPlayer().getSolidArea().y = (int) (gp.getPlayer().worldY + gp.getPlayer().getSolidAreaDefaultY());
+			eventRectTreppe[eventMap][eventCol][eventRow].x = eventCol * gp.getTileSize() + eventRectTreppe[eventMap][eventCol][eventRow].x;
+			eventRectTreppe[eventMap][eventCol][eventRow].y = eventRow * gp.getTileSize() + eventRectTreppe[eventMap][eventCol][eventRow].y;
+		
+			if(gp.getPlayer().getSolidArea().intersects(eventRectTreppe[eventMap][eventCol][eventRow]) && eventRectTreppe[eventMap][eventCol][eventRow].eventDone == false) {
+				if(gp.getPlayer().direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")) {
+					hitTreppe = true;
+				
+					previousEventX = gp.getPlayer().worldX;
+					previousEventY = gp.getPlayer().worldY;
+				
+				}
+			}
+		
+			gp.getPlayer().getSolidArea().x = gp.getPlayer().getSolidAreaDefaultX();
+			gp.getPlayer().getSolidArea().y = gp.getPlayer().getSolidAreaDefaultY();
+			eventRectTreppe[eventMap][eventCol][eventRow].x = eventRectTreppe[eventMap][eventCol][eventRow].eventRectDefaultX;
+			eventRectTreppe[eventMap][eventCol][eventRow].y = eventRectTreppe[eventMap][eventCol][eventRow].eventRectDefaultY;
+		}
+				
+		return hitTreppe;
 	}
 	
 	public boolean hitTileGroß(int eventMap, int eventCol, int eventRow) {
@@ -224,6 +296,7 @@ public class EventHandler {
 		previousEventX = gp.getPlayer().worldX;
 		previousEventY = gp.getPlayer().worldY;
 		canTouchEvent = false;
+		canTouchTreppe = false;
 		gp.playSE(5);
 		
 	}

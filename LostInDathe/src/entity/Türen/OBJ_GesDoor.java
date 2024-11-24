@@ -1,5 +1,6 @@
-package entity;
+package entity.Türen;
 
+import entity.Entity;
 import main.GamePanel;
 import main.KeyHandler;
 

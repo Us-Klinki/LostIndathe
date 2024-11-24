@@ -42,6 +42,8 @@ public class TileManager {
 		loadMap("/maps/Geschitsraum.txt", 2);
 		loadMap("/maps/Informatikraum.txt", 3);
 		loadMap("/maps/Chemieraum.txt", 4);
+		loadMap("/maps/1OG_Gang.txt", 5);
+		loadMap("/maps/Bioraum.txt", 6);
 		
 		
 	}
@@ -138,27 +140,38 @@ public class TileManager {
 		setup(85, "56_Schrank2", true);
 		setup(86, "56_Schrank3", true);
 		setup(87, "56_Schrank4", true);
-		setup(88, "61_Schrank1",true);
-		setup(89, "61_Schrank2",true);
-		setup(90, "62_Tisch",true);
-		setup(91, "63_Stuhl",true);
-		setup(92, "64_Pult1",true);
-		setup(93, "64_Pult2",true);
-		setup(94, "64_Pult3",true);
-		setup(95, "65_Schrank1",true);
-		setup(96, "65_Schrank2",true);
-		setup(97, "66_Waschbecken",true);
-		setup(98, "67_Pult1",true);
-		setup(99,"67_Pult2 Copy",true);
-		setup(100,"67_Pult3",true);
-		setup(101,"67_Pult4",true);
-		setup(102,"67_Pult5",true);
-		setup(103,"67_Pult6",true);
-		setup(104,"67_Pult7",true);
-		setup(105,"67_Pult8",true);
-		setup(106,"67_Pult9",true);
-		setup(107,"67_Pult91",true);
-		setup(108,"67_Pult92",true);
+		setup(88, "61_Schrank1", true);
+		setup(89, "61_Schrank2", true);
+		setup(90, "62_Tisch", true);
+		setup(91, "63_Stuhl", true);
+		setup(92, "64_Pult1", true);
+		setup(93, "64_Pult2", true);
+		setup(94, "64_Pult3", true);
+		setup(95, "65_Schrank1", true);
+		setup(96, "65_Schrank2", true);
+		setup(97, "66_Waschbecken", true);
+		setup(98, "67_Pult1", true);
+		setup(99, "67_Pult2 Copy", true);
+		setup(100, "67_Pult3", true);
+		setup(101, "67_Pult4", true);
+		setup(102, "67_Pult5", true);
+		setup(103, "67_Pult6", true);
+		setup(104, "67_Pult7", true);
+		setup(105, "67_Pult8", true);
+		setup(106, "67_Pult9", true);
+		setup(107, "67_Pult91", true);
+		setup(108, "67_Pult92", true);
+		setup(109, "71_Fenster1", true);
+		setup(110, "71_Fenster2", true);
+		setup(111, "72_Tafel1", true);
+		setup(112, "72_Tafel2", true);
+		setup(113, "72_Tafel3", true);
+		setup(114, "73_Schrank1", true);
+		setup(115, "73_Schrank2", true);
+		setup(116, "73_Schrank3", true);
+		setup(117, "73_Schrank4", true);
+		setup(118, "73_Schrank5", true);
+		setup(119, "73_Schrank6", true);
 		
 		
 

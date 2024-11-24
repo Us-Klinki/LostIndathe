@@ -1,14 +1,15 @@
-package entity;
+package entity.Türen;
 
+import entity.Entity;
 import main.GamePanel;
 import main.KeyHandler;
 
-public class OBJ_Chemiedoor extends Entity {
+public class OBJ_DoorSchulhof extends Entity {
 	
 	
-	public OBJ_Chemiedoor(GamePanel gp, KeyHandler keyH) {
+	public OBJ_DoorSchulhof(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
-		setName("Chemiedoor");
+		setName("DoorSchulhof");
 		idle1 = setup("/npc/objects/Tür");
 		idle2 = setup("/npc/objects/Tür");
 		setCollisionOn(true);
@@ -16,7 +17,7 @@ public class OBJ_Chemiedoor extends Entity {
 	}
 	
 	public void setDialogue1() {
-		dialogues[1][0] = "Chemieraum 309.\nIch benötige einen Schlüssel, um hier herein \nzu kommen...";
+		dialogues[5][0] = "Ausgang zum Schulhof.\nIch benötige einen Schlüssel, um hier \nherauszukommen...";
 	}
 	
 	public void setDialogue20() {

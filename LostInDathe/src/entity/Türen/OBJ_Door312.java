@@ -1,24 +1,23 @@
-package entity;
+package entity.Türen;
 
+import entity.Entity;
 import main.GamePanel;
 import main.KeyHandler;
 
-public class OBJ_Bathroomdoor extends Entity {
+public class OBJ_Door312 extends Entity {
 	
 	
-	public OBJ_Bathroomdoor(GamePanel gp, KeyHandler keyH) {
+	public OBJ_Door312(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
-		setName("Bathroomdoor");
+		setName("Door312");
 		idle1 = setup("/npc/objects/Tür");
 		idle2 = setup("/npc/objects/Tür");
 		setCollisionOn(true);
-		
-		
 
 	}
 	
 	public void setDialogue1() {
-		dialogues[0][0] = "Tür zum Schulflur.\nIch benötige einen Schlüssel, um hier heraus \nzu kommen...";
+		dialogues[1][0] = "Geografieraum 312.\nHier scheint nichts spannendes zu passieren...";
 	}
 	
 	public void setDialogue20() {

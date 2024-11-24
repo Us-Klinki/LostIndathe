@@ -77,43 +77,54 @@ public class KeyHandler implements KeyListener{
 	}
 	
 	public void titleState(int code) {
-		
-			
-		if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
-			//if(gp.ui.getCommandNum() < 1) {
-			gp.ui.setCommandNum(gp.ui.getCommandNum() - 1);
-			gp.playSE(8);
-			if(gp.ui.getCommandNum() == -1) {
-				gp.ui.setCommandNum(3);
-			}
-		}
-			
-		if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
-			gp.ui.setCommandNum(gp.ui.getCommandNum() + 1);
-			gp.playSE(8);
-			if(gp.ui.getCommandNum() == 4) {
-				gp.ui.setCommandNum(0);
-			}
-		}
-		
-		if(code == KeyEvent.VK_ENTER) {
-			if(gp.ui.getCommandNum() == 0) {
-				gp.gameState = gp.playState;
-				gp.stopMusic(3);
-				gp.playSE(9);
-				gp.playSE(7);
-				gp.playMusic(2);
-			}
-			if(gp.ui.getCommandNum() == 1) {
-				// für Savegames später
-			}
-			if(gp.ui.getCommandNum() == 2) {
-				System.exit(0);
-			}
-			if(gp.ui.getCommandNum() == 3) {
-				gp.ui.subStateTitle = 1;
-			}
-		}
+	    int maxCommandNum = 0;
+	    switch (gp.ui.subStateTitle) {
+	        case 0: maxCommandNum = 3; break; // Hauptmenü
+	        case 1: maxCommandNum = 0; break; // Infos-Menü
+	    }
+
+	    // Navigation
+	    if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
+	        gp.ui.setCommandNum(gp.ui.getCommandNum() - 1);
+	        gp.playSE(8);
+	        if (gp.ui.getCommandNum() < 0) {
+	            gp.ui.setCommandNum(maxCommandNum);
+	        }
+	    }
+	    if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
+	        gp.ui.setCommandNum(gp.ui.getCommandNum() + 1);
+	        gp.playSE(8);
+	        if (gp.ui.getCommandNum() > maxCommandNum) {
+	            gp.ui.setCommandNum(0);
+	        }
+	    }
+
+	    // Auswahl im Hauptmenü
+	    if (code == KeyEvent.VK_ENTER && gp.ui.subStateTitle == 0) {
+	        if (gp.ui.getCommandNum() == 0) {
+	            gp.gameState = gp.playState;
+	            gp.stopMusic(3);
+	            gp.playSE(9);
+	            gp.playMusic(2);
+	        }
+	        if (gp.ui.getCommandNum() == 2) {
+	            System.exit(0);
+	        }
+	        if (gp.ui.getCommandNum() == 3) { // "Infos" auswählen
+	            gp.ui.subStateTitle = 1;
+	            gp.ui.setCommandNum(0);
+	            enterPressed = false;
+	            //gp.repaint();
+	        }
+	    }
+
+	    // Rückkehr aus dem Infos-Menü
+	    if (code == KeyEvent.VK_ESCAPE && gp.ui.subStateTitle == 1) {
+	        gp.ui.subStateTitle = 0;
+	        gp.ui.setCommandNum(3); // Zurück zu "Infos"
+	        //System.out.println("Hauptmenü wird erneut angezeigt.");
+	    }
+	
 		debug(code);
 	}
 		

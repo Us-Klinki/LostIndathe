@@ -163,7 +163,8 @@ public class UI {
 		// Menü
 		g2.setFont(yoster_s);
 		if(subStateTitle == 0) {title_top(x, y, text);}
-		if(subStateTitle == 1) {title_infos(x, text);}
+		else if(subStateTitle == 1) {title_infos(x, text);}
+		gp.keyH.enterPressed = false;
 
 		
 		
@@ -227,7 +228,8 @@ public class UI {
 		g2.setFont(yoster_s);
 		g2.setColor(Color.white);
 		textX = frameX + gp.getTileSize();
-		textY += abstand;
+		textY += absatz *2;
+		int textXlinks = textX;
 		g2.drawString("Entwicklung", textX, textY);
 		g2.setFont(yoster_xs);
 		textX += gp.getTileSize();
@@ -237,10 +239,71 @@ public class UI {
 		g2.drawString("- Tom Speer", textX, textY);
 		textY += absatz;
 		g2.drawString("- Gustav Kluge", textX, textY);
-		textX = getXforCenteredText("") + 10;
+		int textYlinks = textY;
+		textX = getXforCenteredText("") + gp.getTileSize();
 		textY = textY - absatz * 2 - abstand;
 		g2.setFont(yoster_s);
 		g2.drawString("Grafikdesign", textX, textY);
+		g2.setFont(yoster_xs);
+		textX += gp.getTileSize();
+		textY += abstand;
+		g2.drawString("- Marika Uhrig", textX, textY);
+		textY += absatz;
+		g2.drawString("- Karoline Schiemann", textX, textY);
+		g2.setFont(yoster_s);
+		textX = textXlinks;
+		textY = textYlinks + 2*absatz;
+		int textYrechts = textY;
+		g2.drawString("Stimmen", textX, textY);
+		g2.setFont(yoster_xs);
+		textX += gp.getTileSize();
+		textY += abstand;
+		g2.drawString("- Felix Peil", textX, textY);
+		textY += absatz;
+		g2.drawString("- Sören Priebe", textX, textY);
+		textY += absatz;
+		g2.drawString("- Anke Köppel", textX, textY);
+		textY += absatz;
+		g2.drawString("- Jörg Klinkhardt", textX, textY);
+		textY += absatz;
+		g2.drawString("- Dina Krecic", textX, textY);
+		textY = textYrechts;
+		textX = getXforCenteredText("") + gp.getTileSize();
+		g2.setFont(yoster_s);
+		g2.drawString("Sounddesign", textX, textY);
+		g2.setFont(yoster_xs);
+		textX += gp.getTileSize();
+		textY += abstand;
+		g2.drawString("- Max Rosenhauer", textX, textY);
+		textY += 2 * abstand;
+		textX -= gp.getTileSize();
+		g2.setFont(yoster_s);
+		g2.drawString("Ober'be'lehrer", textX, textY);
+		g2.setFont(yoster_xs);
+		textX += gp.getTileSize();
+		textY += abstand;
+		g2.drawString("- Klinki", textX, textY);
+		textX = textXlinks;
+		textY += absatz * 1.5;
+		g2.drawString("Ein Informatikprojekt mit Passion im Rahmen des", textX, textY);
+		textY += absatz / 2 + absatz / 4;
+		g2.drawString("Projektsemesters Q3. Präsentiert von Us and Klinki.", textX, textY);
+		textY += absatz;
+		g2.drawString("Version beta-20241124.", textX, textY);
+		textY += 2 * absatz;
+		g2.setFont(yoster_s);
+		
+		textX += gp.getTileSize();
+		g2.drawString("Zurück [ESC]", textX, textY);
+		textX -= gp.getTileSize();
+		
+		if(commandNum == 0) {
+			g2.drawString(">", textX, textY);
+			
+			if(gp.keyH.enterPressed == true) {
+				subStateTitle = 0;
+			}
+		}
 	}
 	
 	public void drawPauseScreen() {
