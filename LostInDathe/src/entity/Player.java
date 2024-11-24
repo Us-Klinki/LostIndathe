@@ -21,11 +21,11 @@ public class Player extends Entity {
 	public final int screenY;
 	
 	// Schlüssel
-	int hasKey = 1;
-	int hasKeyChemie = 1;
+	int hasKey = 0;
+	int hasKeyChemie = 0;
 	boolean hasKeyInfo = true;
 	boolean hasKeyBio = true;
-	boolean hasKeySchulhof = false;
+	boolean hasKeySchulhof = true;
 	
 	// Rätsel Chemie
 	int currentKöppelDialog = 1;
@@ -38,6 +38,10 @@ public class Player extends Entity {
 	public boolean holLösung = false;
 	public boolean basePlacen = false;
 	int fehler = 1;
+	
+	// Rätsel Informatik
+	int currentKlinkiDialog = 1;
+	boolean licht = false;
 	
 	public int dialogueCounter = 1;
 	Font yoster;
@@ -67,12 +71,12 @@ public class Player extends Entity {
 	
 	public void setDefaultValues() {
 		// TODO: IM BAD
-		//worldX = gp.getTileSize() * 20;
-		//worldY = gp.getTileSize() * 25;
+		worldX = gp.getTileSize() * 20;
+		worldY = gp.getTileSize() * 25;
 		
 		// IM CHEMIERAUM
-		worldX = gp.getTileSize() *  52;
-		worldY = gp.getTileSize() * 64;
+		//worldX = gp.getTileSize() *  52;
+		//worldY = gp.getTileSize() * 64;
 		
 		speed = 4;
 		direction = "";
@@ -684,7 +688,75 @@ public class Player extends Entity {
 				}
 				
 				break;
+				
+			case "Klinki":
+				if(currentKlinkiDialog == 8) {
+					gp.getNpc()[gp.getCurrentMap()][i].setDialogue8();
+					gp.gameState = gp.dialogueState;
+					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+				}
+				
+				if(keyH.lichtDialog && currentKlinkiDialog <= 6) {
+					keyH.lichtDialog = false;
+					currentKlinkiDialog = 7;
+				}
+				if(currentKlinkiDialog == 7) {
+					gp.getNpc()[gp.getCurrentMap()][i].setDialogue7();
+					gp.gameState = gp.dialogueState;
+					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+					gp.playSE(10);
+					hasKeyBio = true;
+					currentKlinkiDialog = 8;
+				}
+				
+				if(currentKlinkiDialog == 6) {
+					gp.getNpc()[gp.getCurrentMap()][i].setDialogue6();
+					gp.gameState = gp.dialogueState;
+					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+				}
+				
+				if(currentKlinkiDialog == 5) {
+					gp.getNpc()[gp.getCurrentMap()][i].setDialogue5();
+					gp.gameState = gp.dialogueState;
+					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+					currentKlinkiDialog++;
+				}
+				
+				if(currentKlinkiDialog == 4) {
+					gp.getNpc()[gp.getCurrentMap()][i].setDialogue4();
+					gp.gameState = gp.dialogueState;
+					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+					currentKlinkiDialog++;
+				}
+				if(currentKlinkiDialog == 3) {
+					gp.getNpc()[gp.getCurrentMap()][i].setDialogue3();
+					gp.gameState = gp.dialogueState;
+					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+					currentKlinkiDialog++;
+				}
+				
+				if(currentKlinkiDialog == 2) {
+					gp.getNpc()[gp.getCurrentMap()][i].setDialogue2();
+					gp.gameState = gp.dialogueState;
+					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+					currentKlinkiDialog++;
+				}
+				
+				
+				if(currentKlinkiDialog == 1) {
+					gp.getNpc()[gp.getCurrentMap()][i].setDialogue1();
+					gp.gameState = gp.dialogueState;
+					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+					currentKlinkiDialog++;
+				}
+				
+				
+				
 		
+				
+				
+				
+				break;
 			case "Test":
 				gp.getNpc()[gp.getCurrentMap()][i].setDialogue1();
 				gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);

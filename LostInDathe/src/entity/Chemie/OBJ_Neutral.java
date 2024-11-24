@@ -13,7 +13,7 @@ public class OBJ_Neutral extends Entity {
 		setName("Neutral");
 		idle1 = setup("/npc/objects/chemie/Neutral");
 		idle2 = setup("/npc/objects/chemie/Neutral");
-		setCollisionOn(true);
+		setCollisionOn(false);
 		setSolidArea(new Rectangle(0, 0, 48, 48));
 		setSolidAreaDefaultX(getSolidArea().x);
 		setSolidAreaDefaultY(getSolidArea().y);

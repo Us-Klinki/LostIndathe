@@ -13,7 +13,7 @@ public class OBJ_Säure extends Entity {
 		setName("Säure");
 		idle1 = setup("/npc/objects/chemie/Säure");
 		idle2 = setup("/npc/objects/chemie/Säure");
-		setCollisionOn(true);
+		setCollisionOn(false);
 		setSolidArea(new Rectangle(0, 0, 48, 48));
 		setSolidAreaDefaultX(getSolidArea().x);
 		setSolidAreaDefaultY(getSolidArea().y);

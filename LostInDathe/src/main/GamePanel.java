@@ -3,6 +3,8 @@ package main;
 import entity.Entity;
 
 import entity.Player;
+import environment.EnvironmentManager;
+
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -20,7 +22,7 @@ import javax.swing.JPanel;
 
 import tile.Map;
 import tile.TileManager;
-
+@SuppressWarnings("serial")
 public class GamePanel extends JPanel implements Runnable {
 	
 	//DEBUG
@@ -42,7 +44,7 @@ public class GamePanel extends JPanel implements Runnable {
 	private final int maxMap = 16;
 	// TODO: 0 = Bad, 1 = OG, 2 = Geschichte, 3 = Informatik, 4 = Chemie
 	//private int currentMap = 0;
-	private int currentMap = 4;
+	private int currentMap = 0;
 	
 	// Für Vollbild
 	int screenWidthVollbild = screenWidth;
@@ -156,6 +158,7 @@ public class GamePanel extends JPanel implements Runnable {
  	Config config = new Config(this);
  	Thread gameThread;        //Thread ist nötig damit das Spiel durchgehend läuft
  	Map map = new Map(this);
+ 	EnvironmentManager eManager = new EnvironmentManager(this);
  	
  	
  	
@@ -198,6 +201,7 @@ public class GamePanel extends JPanel implements Runnable {
  	public void setupGame() {
  		aPlacer.setObject();
  		aPlacer.setNPC();
+ 		eManager.setup();
 	  
  		playMusic(3);
  		gameState = titleState;
@@ -310,6 +314,8 @@ public class GamePanel extends JPanel implements Runnable {
  				player.basePlacen = false;
  			}
  			
+
+ 			
  			for(int i = 0; i < npc[1].length; i++) {
  				if(npc[currentMap][i] != null) {
  					npc[currentMap][i].update();
@@ -393,6 +399,10 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 			EventHandler.treppeNichtBegehbar = false;
  	 	 		}
  	 	 		
+ 	 	 		// ENVIRONMENT
+ 	 	 		if(!keyH.licht && currentMap == 3) {
+ 	 	 			eManager.draw(g2);
+ 	 	 		}
  	 	 		// ALTE METHODE
  	 	 		
  	 	 		/* Hier werden die Objekte platziert
@@ -424,6 +434,10 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 		ui.draw(g2);
  	 	 	}
  	 	 	if(gameState == optionsState) {
+ 	 	 		// ENVIRONMENT
+ 	 	 		if(!keyH.licht && currentMap == 3) {
+ 	 	 			eManager.draw(g2);
+ 	 	 		}
  	 	 		ui.draw(g2);
  	 	    }
  	 	 	if(gameState == dialogueState) {
@@ -457,6 +471,11 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 		for(int i = 0; i < entityList.size(); i++) {
  	 	 			entityList.get(i).draw(g2);
  	 	 		}
+ 	 	 		// ENVIRONMENT
+ 	 	 		if(!keyH.licht && currentMap == 3) {
+ 	 	 			eManager.draw(g2);
+ 	 	 		}
+ 	 	 		
  	 	 		ui.draw(g2);
  	 	 		// Entitylist leeren
  	 	 		entityList.clear();

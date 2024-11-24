@@ -13,7 +13,7 @@ public class OBJ_Universalindikator extends Entity {
 		setName("Universalindikator");
 		idle1 = setup("/npc/objects/chemie/Universalindikator");
 		idle2 = setup("/npc/objects/chemie/Universalindikator");
-		setCollisionOn(true);
+		setCollisionOn(false);
 		setSolidArea(new Rectangle(0, 0, 48, 48));
 		setSolidAreaDefaultX(getSolidArea().x);
 		setSolidAreaDefaultY(getSolidArea().y);

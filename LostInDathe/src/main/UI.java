@@ -1,6 +1,6 @@
 package main;
 
-import java.awt.AlphaComposite;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -218,12 +218,10 @@ public class UI {
 		drawSubWindow(frameX, frameY, frameWidth, frameHeight, transparent);
 		int abstand = gp.getTileSize();
 		int absatz = gp.getTileSize() / 4 + gp.getTileSize() / 2;
-		int auswahlAbstand = gp.getTileSize() / 2 + gp.getTileSize() / 8 + 10 ;
 		g2.setFont(yoster_sl);
 		text = "Infos";
 		textX = getXforCenteredText(text);
 		textY = frameY +  gp.getTileSize() + gp.getTileSize()/2;
-		int textYzwei = textY;
 		g2.drawString(text, textX, textY);
 		g2.setFont(yoster_s);
 		g2.setColor(Color.white);
@@ -289,7 +287,7 @@ public class UI {
 		textY += absatz / 2 + absatz / 4;
 		g2.drawString("Projektsemesters Q3. Präsentiert von Us and Klinki.", textX, textY);
 		textY += absatz;
-		g2.drawString("Version beta-20241124.", textX, textY);
+		g2.drawString("Version beta 0.2-20241124.", textX, textY);
 		textY += 2 * absatz;
 		g2.setFont(yoster_s);
 		
@@ -656,7 +654,7 @@ public class UI {
 	
 	// letter by letter
 	public void updateDialogue() {
-		//try {
+		try {
 		if(currentDialogue != null) {
 			if (gp.gameState == gp.dialogueState && dialogueIndex < currentDialogue.length()) {
 				dialogueCounter++;
@@ -669,10 +667,10 @@ public class UI {
 			}
 		}
 
-		//}
-		//catch(Exception e) {
-			//System.out.println("Dialog hat nicht geklappt.");
-		//}
+		}
+		catch(Exception e) {
+			System.out.println("Dialog hat nicht geklappt.");
+		}
 	}
 
 	public void drawSubWindow(int x, int y, int width, int height, boolean transparent) {

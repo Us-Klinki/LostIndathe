@@ -1,8 +1,6 @@
 package main;
 
 import entity.Entity;
-import entity.OBJ_Statue;
-import entity.Player;
 
 
 public class CollisionChecker {

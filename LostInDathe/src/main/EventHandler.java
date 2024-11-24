@@ -1,7 +1,5 @@
 package main;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
 
 public class EventHandler {
 	
@@ -12,6 +10,7 @@ public class EventHandler {
 	EventRect eventRect3[][][];
 	EventRect eventRectTreppe[][][];
 	
+	KeyHandler keyH = new KeyHandler(gp);
 	int previousEventX;
 	double previousEventY;
 	boolean canTouchEvent = true;
@@ -119,8 +118,8 @@ public class EventHandler {
 			else if(hit(1, 72, 41, "any") == true) { interTeleport(4, 53, 63.9); gp.stopMusic(6); gp.playMusic(2); }
 			else if(hit(4, 53, 64, "any") == true) { interTeleport(1, 72, 40.9); gp.stopMusic(2); gp.playMusic(6); }
 			// Teleport 2x EG -> Info; Info -> OG
-			else if(hit(5, 42, 24, "any") == true) { interTeleport(3, 50, 49.9); gp.stopMusic(6); gp.playMusic(2); }
-			else if(hit(5, 55, 24, "any") == true) { interTeleport(3, 50, 49.9); gp.stopMusic(6); gp.playMusic(2); }
+			else if(hit(5, 42, 24, "any") == true) { interTeleport(3, 50, 49.9); gp.stopMusic(6); gp.playMusic(2); keyH.licht = false; }
+			else if(hit(5, 55, 24, "any") == true) { interTeleport(3, 50, 49.9); gp.stopMusic(6); gp.playMusic(2); keyH.licht = false; }
 			else if(hit(3, 50, 50, "any") == true) { interTeleport(5, 42, 24); gp.stopMusic(2); gp.playMusic(6); }
 			// Teleport 2x EG -> Bio; 2x Bio -> EG
 			else if(hit(5, 79, 40, "any") == true) { interTeleport(6, 43, 46.9); gp.stopMusic(6); gp.playMusic(2); }

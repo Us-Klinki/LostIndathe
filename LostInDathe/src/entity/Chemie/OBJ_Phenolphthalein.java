@@ -13,7 +13,7 @@ public class OBJ_Phenolphthalein extends Entity {
 		setName("Phenolphthalein");
 		idle1 = setup("/npc/objects/chemie/Phenolphthalein");
 		idle2 = setup("/npc/objects/chemie/Phenolphthalein");
-		setCollisionOn(true);
+		setCollisionOn(false);
 		setSolidArea(new Rectangle(0, 0, 48, 48));
 		setSolidAreaDefaultX(getSolidArea().x);
 		setSolidAreaDefaultY(getSolidArea().y);

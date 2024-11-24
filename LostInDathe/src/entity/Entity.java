@@ -11,7 +11,6 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
-import java.awt.geom.RoundRectangle2D;
 public class Entity {
 
   GamePanel gp;
@@ -304,7 +303,7 @@ public static boolean isDialogueStarted() {
 	return dialogueStarted;
 }
 public void setDialogueStarted(boolean dialogueStarted) {
-	this.dialogueStarted = dialogueStarted;
+	Entity.dialogueStarted = dialogueStarted;
 }
 /**
  * @return the pullLock

@@ -8,7 +8,7 @@ import entity.Entity;
 public class KeyHandler implements KeyListener{
 	
 	GamePanel gp;
-	public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, pushPressed, pullPressed;
+	public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, pushPressed, pullPressed, licht, lichtDialog;
 	private boolean canPressKey = true;
 	private long lastKeyPress = 0;
 	private final long keyCooldown = 300;
@@ -104,8 +104,9 @@ public class KeyHandler implements KeyListener{
 	        if (gp.ui.getCommandNum() == 0) {
 	            gp.gameState = gp.playState;
 	            gp.stopMusic(3);
-	            gp.playSE(9);
+	            gp.playSE(7);
 	            gp.playMusic(2);
+	            
 	        }
 	        if (gp.ui.getCommandNum() == 2) {
 	            System.exit(0);
@@ -165,6 +166,13 @@ public class KeyHandler implements KeyListener{
 			pullPressed = true;
 		}
 		
+		if(code == KeyEvent.VK_L) {
+			lichtDialog = true;
+		}
+		
+		if(code == KeyEvent.VK_L && gp.getCurrentMap() == 3) {
+			licht = true;
+		}
 
 		if(code == KeyEvent.VK_ESCAPE) {
 	        long currentTime = System.currentTimeMillis();

@@ -13,7 +13,7 @@ public class OBJ_Base extends Entity {
 		setName("Base");
 		idle1 = setup("/npc/objects/chemie/Base");
 		idle2 = setup("/npc/objects/chemie/Base");
-		setCollisionOn(true);
+		setCollisionOn(false);
 		setSolidArea(new Rectangle(0, 0, 48, 48));
 		setSolidAreaDefaultX(getSolidArea().x);
 		setSolidAreaDefaultY(getSolidArea().y);

@@ -1,5 +1,6 @@
 package main;
 
+import entity.NPC_Klinkhardt;
 import entity.NPC_Priebe;
 import entity.OBJ_Sink;
 import entity.OBJ_Statue;
@@ -147,20 +148,20 @@ public class AssetPlacer {
 		mapNum = 4;
 		
 		gp.getObj()[mapNum][0] = new OBJ_Säure(gp, keyH);
-		gp.getObj()[mapNum][0].worldX = 47*gp.getTileSize();
-		gp.getObj()[mapNum][0].worldY = 66*gp.getTileSize();
+		gp.getObj()[mapNum][0].worldX = 45*gp.getTileSize();
+		gp.getObj()[mapNum][0].worldY = 71.6*gp.getTileSize();
 		
 		gp.getObj()[mapNum][1] = new OBJ_Base(gp, keyH);
-		gp.getObj()[mapNum][1].worldX = 46*gp.getTileSize();
-		gp.getObj()[mapNum][1].worldY = 66*gp.getTileSize();
+		gp.getObj()[mapNum][1].worldX = 49*gp.getTileSize();
+		gp.getObj()[mapNum][1].worldY = 71.6*gp.getTileSize();
 		
 		gp.getObj()[mapNum][2] = new OBJ_Neutral(gp, keyH);
-		gp.getObj()[mapNum][2].worldX = 45*gp.getTileSize();
-		gp.getObj()[mapNum][2].worldY = 66*gp.getTileSize();
+		gp.getObj()[mapNum][2].worldX = 47*gp.getTileSize();
+		gp.getObj()[mapNum][2].worldY = 71.6*gp.getTileSize();
 		
 		gp.getObj()[mapNum][3] = new OBJ_Phenolphthalein(gp, keyH);
 		gp.getObj()[mapNum][3].worldX = 44*gp.getTileSize();
-		gp.getObj()[mapNum][3].worldY = 66*gp.getTileSize();
+		gp.getObj()[mapNum][3].worldY = 54.6*gp.getTileSize();
 		
 		gp.getObj()[mapNum][4] = new OBJ_Unbekannt(gp, keyH);
 		gp.getObj()[mapNum][4].worldX = 47*gp.getTileSize();
@@ -251,7 +252,7 @@ public class AssetPlacer {
 	void setUniversalindikator() {
 		gp.getObj()[4][3] = new OBJ_Universalindikator(gp, keyH);
 		gp.getObj()[4][3].worldX = 44*gp.getTileSize();
-		gp.getObj()[4][3].worldY = 66*gp.getTileSize();
+		gp.getObj()[4][3].worldY = 54.6*gp.getTileSize();
 	}
 	
 	void setRoteLösung() {
@@ -273,6 +274,10 @@ public class AssetPlacer {
 		gp.getNpc()[2][0] = new NPC_Priebe(gp, keyH);
 		gp.getNpc()[2][0].worldX = 24*gp.getTileSize();
 		gp.getNpc()[2][0].worldY = 20*gp.getTileSize();
+		
+		gp.getNpc()[3][0] = new NPC_Klinkhardt(gp, keyH);
+		gp.getNpc()[3][0].worldX = 48*gp.getTileSize();
+		gp.getNpc()[3][0].worldY = 50*gp.getTileSize();
 		
 		gp.getNpc()[4][0] = new NPC_Köppel(gp, keyH);
 		gp.getNpc()[4][0].worldX = 47*gp.getTileSize();
