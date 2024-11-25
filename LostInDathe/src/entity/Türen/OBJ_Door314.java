@@ -17,7 +17,7 @@ public class OBJ_Door314 extends Entity {
 	}
 	
 	public void setDialogue1() {
-		dialogues[1][0] = "Geografieraum 314.\nHier scheint nichts spannendes zu passieren...";
+		dialogues[1][0] = "Geografieraum 314. Du schon wieder. Was willste \ndenn bei der Geografie mit ihrem vielen Material? \nDu. brauchst. nur. einen. Schlüssel.";
 	}
 	
 	public void setDialogue20() {

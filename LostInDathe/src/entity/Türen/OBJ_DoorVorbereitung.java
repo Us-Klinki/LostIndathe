@@ -17,11 +17,11 @@ public class OBJ_DoorVorbereitung extends Entity {
 	}
 	
 	public void setDialogue1() {
-		dialogues[1][0] = "Vorbereitungsraum.\nHier scheint nichts spannendes zu passieren...";
+		dialogues[1][0] = "Vorbereitungsraum.\nOah wirklich, ey langsam reichts: In\nVorbereitungsräumen hast du nichts zu suchen!";
 	}
 	
 	public void setDialogue2() {
-		dialogues[5][0] = "Vorbereitungsraum.\nHier scheint nichts spannendes zu passieren...";
+		dialogues[5][0] = "Vorbereitungsraum.\nOah wirklich, ey langsam reichts: In\nVorbereitungsräumen hast du nichts zu suchen!";
 	}
 	
 	public void setDialogue20() {

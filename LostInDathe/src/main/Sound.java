@@ -7,6 +7,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 
+
 public class Sound {
 	Clip clip;
 	URL soundURL[] = new URL[80];
@@ -39,6 +40,17 @@ public class Sound {
 		soundURL[20] = pfad("voiceover/köppel/Köppel_Dialog6.wav");
 		soundURL[21] = pfad("voiceover/köppel/Köppel_Dialog7.wav");
 		soundURL[22] = pfad("voiceover/köppel/Köppel_Dialog8.wav");
+		soundURL[23] = pfad("voiceover/peil/Peil_Dialog1.wav");
+		soundURL[24] = pfad("voiceover/peil/Peil_Dialog2.wav");
+		soundURL[25] = pfad("voiceover/peil/Peil_Dialog3.wav");
+		soundURL[26] = pfad("voiceover/peil/Peil_Dialog4.wav");
+		soundURL[27] = pfad("voiceover/peil/Peil_Dialog5.wav");
+		soundURL[28] = pfad("voiceover/peil/Peil_Dialog6.wav");
+		soundURL[29] = pfad("voiceover/peil/Peil_Dialog7.wav");
+		soundURL[30] = pfad("voiceover/peil/Peil_Dialog8.wav");
+		soundURL[31] = pfad("voiceover/peil/Peil_Dialog9.wav");
+		soundURL[32] = pfad("voiceover/peil/Peil_Dialog10.wav");
+		soundURL[33] = pfad("voiceover/peil/Peil_Dialog11.wav");
 	}
 	
 	public void setFile(int i) {
@@ -91,6 +103,8 @@ public class Sound {
 	public boolean isPlaying() {
 	    return clip != null && clip.isRunning();
 	}
+	
+	   
 	public void checkVolume() {
 		
 		switch(volumeScale) {
@@ -113,5 +127,9 @@ public class Sound {
 	
 	private URL pfad(String dateiname) {
 		return getClass().getResource("/sound/" + dateiname);
+	}
+
+	public int getSoundURLLength() {
+		return soundURL.length;
 	}
 }

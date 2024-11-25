@@ -17,7 +17,8 @@ public class OBJ_Door315 extends Entity {
 	}
 	
 	public void setDialogue1() {
-		dialogues[1][0] = "Matheraum 315.\nHier scheint nichts spannendes zu passieren...";
+		dialogues[1][0] = "Matheraum 315. Du bist ermüdet, ich weiß... So, \nAchtung Wortwitz; Da würde dir eher ein Mate als \nein Matematikraum guttun. Nicht schlecht, 'ne?";
+		dialogues[1][1] = "Hier wirst du auf jeden Fall nie-man-den finden.";
 	}
 	
 	public void setDialogue20() {

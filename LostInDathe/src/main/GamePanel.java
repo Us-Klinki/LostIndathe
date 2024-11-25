@@ -13,6 +13,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.image.VolatileImage;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -151,6 +152,7 @@ public class GamePanel extends JPanel implements Runnable {
  	KeyHandler keyH = new KeyHandler(this);
  	Sound music = new Sound();
  	Sound se = new Sound();
+ 	//URL soundURL[] = sound.soundURL[];
  	public CollisionChecker cChecker = new CollisionChecker(this);
  	private AssetPlacer aPlacer = new AssetPlacer(this, keyH);
  	public UI ui = new UI(this);
@@ -526,6 +528,10 @@ public class GamePanel extends JPanel implements Runnable {
 	  
  		se.setFile(i);
  		se.play();
+ 	}
+ 	
+ 	public int getSoundURLLengthGP() {
+ 		return se.getSoundURLLength();
  	}
 
 	

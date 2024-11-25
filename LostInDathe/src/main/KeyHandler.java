@@ -105,7 +105,11 @@ public class KeyHandler implements KeyListener{
 	            gp.gameState = gp.playState;
 	            gp.stopMusic(3);
 	            gp.playSE(7);
+	            gp.playSE(23);
 	            gp.playMusic(2);
+	            /*if(gp.gameState == gp.dialogueState) {
+	            	gp.stopSE(23);
+	            }*/
 	            
 	        }
 	        if (gp.ui.getCommandNum() == 2) {
