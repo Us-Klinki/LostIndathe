@@ -17,7 +17,7 @@ public class OBJ_Chemiedoor extends Entity {
 	}
 	
 	public void setDialogue1() {
-		dialogues[1][0] = "Chemieraum 309.\nIch benötige einen Schlüssel, um hier herein \nzu kommen...";
+		dialogues[1][0] = "Chemieraum 309. Auf die Gefahr hin, dass ich \nmich wiederhole: Auch für diesen Raum brauchst \ndu einen Schlüssel.";
 	}
 	
 	public void setDialogue20() {

@@ -17,7 +17,7 @@ public class OBJ_DoorMZH extends Entity {
 	}
 	
 	public void setDialogue1() {
-		dialogues[5][0] = "Mehrzweckhalle.\nHier scheint nichts spannendes zu passieren...";
+		dialogues[5][0] = "Mehrzweckhalle.\nHier wirst du keinen Schlüssel nach draußen \nfinden!";
 	}
 	
 	public void setDialogue20() {

@@ -24,9 +24,9 @@ public class Player extends Entity {
 	// Schlüssel
 	int hasKey = 0;
 	int hasKeyChemie = 0;
-	boolean hasKeyInfo = true;
-	boolean hasKeyBio = true;
-	boolean hasKeySchulhof = true;
+	boolean hasKeyInfo = false;
+	boolean hasKeyBio = false;
+	boolean hasKeySchulhof = false;
 	
 	// Rätsel Chemie
 	int currentKöppelDialog = 1;
@@ -189,7 +189,10 @@ public class Player extends Entity {
 					System.out.println("Schlüssel: " + hasKey);
 				}
 				else if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed){
-					
+					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
+						gp.stopSE(j);
+					}
+					gp.playSE(29);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -208,6 +211,7 @@ public class Player extends Entity {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
+					gp.playSE(29);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -225,6 +229,7 @@ public class Player extends Entity {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
+					gp.playSE(29);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -242,7 +247,10 @@ public class Player extends Entity {
 				
 				
 				if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed) {
-					
+					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
+						gp.stopSE(j);
+					}
+					gp.playSE(29);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -250,10 +258,20 @@ public class Player extends Entity {
 				break;
 			
 			case "Door112":
-				if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed) {
+				if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed && !hasKeyBio) {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
+					gp.playSE(28);
+					gp.gameState = gp.dialogueState;
+					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
+					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+				}
+				if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed && hasKeyBio) {
+					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
+						gp.stopSE(j);
+					}
+					gp.playSE(31);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -265,6 +283,7 @@ public class Player extends Entity {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
+					gp.playSE(28);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -272,12 +291,22 @@ public class Player extends Entity {
 			break;
 			
 			case "Door311":
-				if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed) {
+				if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed && hasKeyChemie == 0) {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
+					gp.playSE(28);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
+					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+				}
+				if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed && hasKeyChemie == 1) {
+					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
+						gp.stopSE(j);
+					}
+					gp.playSE(30);
+					gp.gameState = gp.dialogueState;
+					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
 			break;
@@ -323,6 +352,7 @@ public class Player extends Entity {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
+					gp.playSE(28);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -334,6 +364,7 @@ public class Player extends Entity {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
+					gp.playSE(28);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -353,6 +384,7 @@ public class Player extends Entity {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
+					gp.playSE(32);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);

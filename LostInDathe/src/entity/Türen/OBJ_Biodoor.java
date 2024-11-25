@@ -17,7 +17,7 @@ public class OBJ_Biodoor extends Entity {
 	}
 	
 	public void setDialogue1() {
-		dialogues[5][0] = "Bioraum 110.\nIch benötige einen Schlüssel, um hier herein \nzu kommen...";
+		dialogues[5][0] = "Bioraum 110. Auf die Gefahr hin, dass ich \nmich wiederhole: Auch für diesen Raum brauchst \ndu einen Schlüssel.";
 	}
 	
 	public void setDialogue20() {

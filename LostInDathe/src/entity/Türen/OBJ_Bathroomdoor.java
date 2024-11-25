@@ -19,7 +19,7 @@ public class OBJ_Bathroomdoor extends Entity {
 	}
 	
 	public void setDialogue1() {
-		dialogues[0][0] = "Tür zum Schulflur.\nIch benötige einen Schlüssel, um hier heraus \nzu kommen...";
+		dialogues[0][0] = "Zum Schulflur. Auf die Gefahr hin, dass ich \nmich wiederhole: Auch für diesen Raum brauchst \ndu einen Schlüssel.";
 	}
 	
 	public void setDialogue20() {

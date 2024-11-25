@@ -17,7 +17,7 @@ public class OBJ_Door117 extends Entity {
 	}
 	
 	public void setDialogue1() {
-		dialogues[5][0] = "Theaterraum 117.\nHier scheint nichts spannendes zu passieren...";
+		dialogues[5][0] = "Toilette für männlich gelesene Personen.\nHier wirst du keinen Schlüssel nach draußen \nfinden!";
 	}
 	
 	public void setDialogue20() {

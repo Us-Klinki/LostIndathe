@@ -17,7 +17,7 @@ public class OBJ_Door316a extends Entity {
 	}
 	
 	public void setDialogue1() {
-		dialogues[1][0] = "Toilette für männlich gelesene Personen.\nHier wirst du keinen Schlüssel nach draußen finden!";
+		dialogues[1][0] = "Toilette für männlich gelesene Personen.\nHier wirst du keinen Schlüssel nach draußen \nfinden!";
 	}
 	
 	public void setDialogue20() {

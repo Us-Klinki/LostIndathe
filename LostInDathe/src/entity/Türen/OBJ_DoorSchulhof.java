@@ -17,7 +17,8 @@ public class OBJ_DoorSchulhof extends Entity {
 	}
 	
 	public void setDialogue1() {
-		dialogues[5][0] = "Ausgang zum Schulhof.\nIch benötige einen Schlüssel, um hier \nherauszukommen...";
+		dialogues[5][0] = "Wo willstn du jetzt hin? Aufn Schulhof? Jut.\nHaste mir am Anfang nicht zugehört?";
+		dialogues[5][1] = "Hier brauchst du einen Schlüssel,\num rauszukommen. Hast du einen?\nNein.";
 	}
 	
 	public void setDialogue20() {

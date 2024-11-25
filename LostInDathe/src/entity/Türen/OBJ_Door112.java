@@ -17,7 +17,12 @@ public class OBJ_Door112 extends Entity {
 	}
 	
 	public void setDialogue1() {
-		dialogues[5][0] = "Bioraum 112.\nHier scheint nichts spannendes zu passieren...";
+		dialogues[5][0] = "Bioraum 112.\nHier wirst du keinen Schlüssel nach draußen \nfinden!";
+	}
+	
+	public void setDialogue2() {
+		dialogues[5][0] = "100 und 112... Ist wie Polizei und Feuerwehr...\nKann man ja mal verwechseln... 110 ist Polizei,\n112 ist Feuerwehr. So.";
+		dialogues[5][1] = "Ganz im Ernst: R 110 1-1-0 ist ein Stückchen\nweiter rechts.";
 	}
 	
 	public void setDialogue20() {

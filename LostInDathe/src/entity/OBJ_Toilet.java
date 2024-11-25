@@ -15,7 +15,7 @@ public class OBJ_Toilet extends Entity {
 	}
 	
 	public void setDialogue1() {
-		dialogues[0][0] = "Ich habe einen Schlüssel gefunden!\nVielleicht kann ich damit die Tür nach draußen\n öffnen?";
+		dialogues[0][0] = "Ich habe einen Schlüssel gefunden!\nVielleicht kann ich damit die Tür nach draußen\nöffnen?";
 		dialogues[0][1] = "Anscheinend kann ich mit vielen Dingen mit \n'ENTER' interagieren...\nDas sollte ich mir merken...";
 		//dialogues[0][2] = "A key";
 	}
