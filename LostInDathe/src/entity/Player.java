@@ -81,16 +81,16 @@ public class Player extends Entity {
 	
 	public void setDefaultValues() {
 		// TODO: IM BAD
-		//worldX = gp.getTileSize() * 20;
-		//worldY = gp.getTileSize() * 25;
+		worldX = gp.getTileSize() * 20;
+		worldY = gp.getTileSize() * 25;
 		
 		// IM CHEMIERAUM
 		//worldX = gp.getTileSize() *  52;
 		//worldY = gp.getTileSize() * 64;
 		
 		// IM BIORAUM
-		worldX = gp.getTileSize() * 47;
-		worldY = gp.getTileSize() * 44;
+		//worldX = gp.getTileSize() * 47;
+		//worldY = gp.getTileSize() * 44;
 		
 		speed = 4;
 		direction = "";
