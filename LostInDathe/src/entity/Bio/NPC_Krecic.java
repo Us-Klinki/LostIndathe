@@ -38,7 +38,7 @@ public class NPC_Krecic extends Entity{
 	//Dialog Test 
 	
 	public void setDialogue1() {
-		dialogues[6][0] = "Och, nee… Ich kann das nicht mehr… Ich will mehr Geld für den Quatsch!";
+		dialogues[6][0] = "Och, nee… Ich kann das nicht mehr… \nIch will mehr Geld für den Quatsch!";
 		dialogues[6][1] = "Hast du etwa den Käfig offengelassen? \nDu darfst die gleich wieder einsammeln. \nAber fix. Du weißt ja, wie spät es ist.";
 	}
 	
@@ -51,7 +51,8 @@ public class NPC_Krecic extends Entity{
 	}
 	
 	public void setDialogue4() {
-		dialogues[6][0] = "Na geht doch! \nUnd jetzt husch husch raus hier, ausnahmsweise haste mal nen Schlüssel für den Außenhof. \nAber keine Faxen machen!  ";
+		dialogues[6][0] = "Na geht doch! \nUnd jetzt husch husch raus hier.";
+		dialogues[6][1] = "Ausnahmsweise haste mal nen Schlüssel \nfür den Außenhof. Aber keine Faxen machen!";
 	}
 	
 	public void setDialogue5() {

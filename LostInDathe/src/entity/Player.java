@@ -46,12 +46,11 @@ public class Player extends Entity {
 	
 	//Rätsel Bio
 	int Mäusefang = 0;	
+	int countdown = 0;
 	int counter = 0;
 	int currentKrecicDialogue = 1;
 	boolean timerstart;
-	boolean schnell;
-	boolean mittel;
-	boolean langsam;
+	boolean krecicStart;
 
 	
 	public int dialogueCounter = 1;
@@ -148,7 +147,19 @@ public class Player extends Entity {
 	    
 	    pullStatue();
 		
-	    
+	    //Bio Rätsel Countdown
+	    if(gp.getCurrentMap() == 6 && !hasKeySchulhof) {
+	    	bioCountdown();
+	    	if(timerstart == true) {
+	    		counter++;
+	    		if(counter >= 60) {
+	    			countdown--;
+	    			counter = 0;
+	    			System.out.println(countdown);
+	    		}
+	    	}
+	    }
+
 	    // Richtung setzen
 		spriteCounter++;
 		if(spriteCounter > 12) { // jede 1/5-Sekunde
@@ -647,7 +658,6 @@ public class Player extends Entity {
 	
 	public void interactNPC(int i) {
 		if(i != 999) {
-			gp.gameState = gp.dialogueState;
 			String npcName = gp.getNpc()[gp.getCurrentMap()][i].getName();
 			switch(npcName) {
 			case "priebe":
@@ -683,6 +693,7 @@ public class Player extends Entity {
 
 					}
 				}
+				gp.gameState = gp.dialogueState;
 				gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 				if(dialogueCounter < 3) {
 					dialogueCounter++;
@@ -868,46 +879,77 @@ public class Player extends Entity {
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 					currentKrecicDialogue++;
+					krecicStart = true;
 					timerstart = true;
+					counter = 60;
+					break;
 				case 2: 
+					if(Mäusefang == 5) {
+						if(countdown >= 45) {
+							currentKrecicDialogue = 3;
+							break;
+						} 
+						if(countdown >= 35) {
+							currentKrecicDialogue = 4;
+							break;
+						} 
+						if(countdown < 35) {
+							currentKrecicDialogue = 5;
+							break;
+						} 
+					}					
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue2();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
-					if(Mäusefang == 5) {
-						if(schnell == true) {
-							currentKrecicDialogue = 3;
-						}
-						if(mittel == true) {
-							currentKrecicDialogue = 4;
-						}
-						if(langsam == true) {
-							currentKrecicDialogue = 5;
-						}
-					}
+					break;
 				case 3:
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue3();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 					currentKrecicDialogue = 6;
+					gp.playSE(10);
+					hasKeySchulhof = true;
+					break;
 				case 4:
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue4();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 					currentKrecicDialogue = 6;
+					gp.playSE(10);
+					hasKeySchulhof = true;
+					break;
 				case 5:
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue5();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 					currentKrecicDialogue = 6;
+					gp.playSE(10);
+					hasKeySchulhof = true;
+					break;
 				case 6:
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue6();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+					break;
 				}
+				break;
+			case "maus":
+				if(keyH.enterPressed == true) {
+					gp.getAPlacer().mausDispose(i);
+					Mäusefang++;
+				}
+				break;
 			}
 		}
 	}
 	
+	public void bioCountdown() {
+		if(krecicStart == true && gp.gameState == gp.playState) {
+			timerstart = true;
+			countdown = 60;
+			krecicStart = false;
+		}
+	}
 	public void playerMovement() {
 		
 	    double diagonalSpeed = speed / Math.sqrt(2); // Geschwindigkeit bei diagonaler Bewegung

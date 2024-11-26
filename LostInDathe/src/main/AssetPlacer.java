@@ -308,7 +308,8 @@ public class AssetPlacer {
 		gp.getNpc()[6][5] = new NPC_Maus(gp, keyH);
 		gp.getNpc()[6][5].worldX = 50*gp.getTileSize();
 		gp.getNpc()[6][5].worldY = 58*gp.getTileSize();
-		
-		
+	}
+	public void mausDispose(int i) {
+		gp.getNpc()[6][i] = null;
 	}
 }

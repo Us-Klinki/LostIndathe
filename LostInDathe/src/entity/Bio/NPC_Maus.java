@@ -11,9 +11,9 @@ public class NPC_Maus extends Entity{
 	public NPC_Maus(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
 		
-		setName("Maus");
+		setName("maus");
 		direction = "";
-		speed = 0;
+		speed = 6;
 		setCollisionOn(false);
 		setSolidArea(new Rectangle(22, 24, 8, 16));
 		setSolidAreaDefaultX(getSolidArea().x);

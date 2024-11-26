@@ -143,6 +143,10 @@ public class GamePanel extends JPanel implements Runnable {
 	public void setCurrentMap(int currentMap) {
 		this.currentMap = currentMap;
 	}
+	
+	public AssetPlacer getAPlacer() {
+		return aPlacer;
+	}
   
  	// FPS
  	int FPS = 60;
@@ -315,8 +319,6 @@ public class GamePanel extends JPanel implements Runnable {
  				aPlacer.setBase();
  				player.basePlacen = false;
  			}
- 			
-
  			
  			for(int i = 0; i < npc[1].length; i++) {
  				if(npc[currentMap][i] != null) {
