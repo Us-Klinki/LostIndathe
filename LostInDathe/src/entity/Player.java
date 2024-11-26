@@ -22,10 +22,10 @@ public class Player extends Entity {
 	public final int screenY;
 	
 	// Schlüssel
-	int hasKey = 0;
+	int hasKey = 1;
 	int hasKeyChemie = 0;
-	boolean hasKeyInfo = false;
-	boolean hasKeyBio = false;
+	boolean hasKeyInfo = true;
+	boolean hasKeyBio = true;
 	boolean hasKeySchulhof = false;
 	
 	// Rätsel Chemie
@@ -91,6 +91,10 @@ public class Player extends Entity {
 		// IM BIORAUM
 		//worldX = gp.getTileSize() * 47;
 		//worldY = gp.getTileSize() * 44;
+		
+		//IM INFORAUM
+		//worldX = gp.getTileSize() * 40;
+		//worldY = gp.getTileSize() * 22.5;
 		
 		speed = 4;
 		direction = "";
@@ -809,6 +813,14 @@ public class Player extends Entity {
 				
 			case "Klinki":
 				if(currentKlinkiDialog == 8) {
+					gp.stopSE(34);
+					gp.stopSE(35);
+					gp.stopSE(36);
+					gp.stopSE(37);
+					gp.stopSE(38);
+					gp.stopSE(39);
+					gp.stopSE(40);
+					gp.playSE(41);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue8();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
@@ -819,6 +831,13 @@ public class Player extends Entity {
 					currentKlinkiDialog = 7;
 				}
 				if(currentKlinkiDialog == 7) {
+					gp.stopSE(34);
+					gp.stopSE(35);
+					gp.stopSE(36);
+					gp.stopSE(37);
+					gp.stopSE(38);
+					gp.stopSE(39);
+					gp.playSE(40);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue7();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
@@ -828,12 +847,23 @@ public class Player extends Entity {
 				}
 				
 				if(currentKlinkiDialog == 6) {
+					gp.stopSE(34);
+					gp.stopSE(35);
+					gp.stopSE(36);
+					gp.stopSE(37);
+					gp.stopSE(38);
+					gp.playSE(39);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue6();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 				}
 				
 				if(currentKlinkiDialog == 5) {
+					gp.stopSE(34);
+					gp.stopSE(35);
+					gp.stopSE(36);
+					gp.stopSE(37);
+					gp.playSE(38);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue5();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
@@ -841,12 +871,19 @@ public class Player extends Entity {
 				}
 				
 				if(currentKlinkiDialog == 4) {
+					gp.stopSE(34);
+					gp.stopSE(35);
+					gp.stopSE(36);
+					gp.playSE(37);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue4();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 					currentKlinkiDialog++;
 				}
 				if(currentKlinkiDialog == 3) {
+					gp.stopSE(34);
+					gp.stopSE(35);
+					gp.playSE(36);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue3();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
@@ -854,6 +891,8 @@ public class Player extends Entity {
 				}
 				
 				if(currentKlinkiDialog == 2) {
+					gp.stopSE(34);
+					gp.playSE(35);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue2();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
@@ -862,6 +901,7 @@ public class Player extends Entity {
 				
 				
 				if(currentKlinkiDialog == 1) {
+					gp.playSE(34);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue1();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
@@ -875,6 +915,7 @@ public class Player extends Entity {
 			case "krecic":
 				switch(currentKrecicDialogue) {
 				case 1:
+					gp.playSE(42);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue1();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
@@ -897,12 +938,14 @@ public class Player extends Entity {
 							currentKrecicDialogue = 5;
 							break;
 						} 
-					}					
+					}	
+					gp.playSE(43);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue2();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 					break;
 				case 3:
+					gp.playSE(44);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue3();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
@@ -911,6 +954,7 @@ public class Player extends Entity {
 					hasKeySchulhof = true;
 					break;
 				case 4:
+					gp.playSE(45);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue4();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
@@ -919,6 +963,7 @@ public class Player extends Entity {
 					hasKeySchulhof = true;
 					break;
 				case 5:
+					gp.playSE(46);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue5();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
@@ -927,6 +972,7 @@ public class Player extends Entity {
 					hasKeySchulhof = true;
 					break;
 				case 6:
+					gp.playSE(47);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue6();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);

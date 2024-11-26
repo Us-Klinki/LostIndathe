@@ -43,7 +43,7 @@ public class NPC_Klinkhardt extends Entity {
 	}
 	
 	public void setDialogue2() {
-		dialogues[3][0] = "Jetzt mach doch mal das Licht an du Clown, \nich kann ja gar nichts sehen.";
+		dialogues[3][0] = "Jetzt mach doch mal das Licht an Kind, \nich kann ja gar nichts sehen.";
 	}
 	
 	public void setDialogue3() {

@@ -51,6 +51,21 @@ public class Sound {
 		soundURL[31] = pfad("voiceover/peil/Peil_Dialog9.wav");
 		soundURL[32] = pfad("voiceover/peil/Peil_Dialog10.wav");
 		soundURL[33] = pfad("voiceover/peil/Peil_Dialog11.wav");
+		soundURL[34] = pfad("voiceover/klinki/Klinki_Dialog1.wav");
+		soundURL[35] = pfad("voiceover/klinki/Klinki_Dialog2.wav");
+		soundURL[36] = pfad("voiceover/klinki/Klinki_Dialog3.wav");
+		soundURL[37] = pfad("voiceover/klinki/Klinki_Dialog4.wav");
+		soundURL[38] = pfad("voiceover/klinki/Klinki_Dialog5.wav");
+		soundURL[39] = pfad("voiceover/klinki/Klinki_Dialog6.wav");
+		soundURL[40] = pfad("voiceover/klinki/Klinki_Dialog7.wav");
+		soundURL[41] = pfad("voiceover/klinki/Klinki_Dialog8.wav");
+		soundURL[42] = pfad("voiceover/krecic/Krecic_Dialog1.wav");
+		soundURL[43] = pfad("voiceover/krecic/Krecic_Dialog2.wav");
+		soundURL[44] = pfad("voiceover/krecic/Krecic_Dialog3.wav");
+		soundURL[45] = pfad("voiceover/krecic/Krecic_Dialog4.wav");
+		soundURL[46] = pfad("voiceover/krecic/Krecic_Dialog5.wav");
+		soundURL[47] = pfad("voiceover/krecic/Krecic_Dialog6.wav");
+		
 	}
 	
 	public void setFile(int i) {
