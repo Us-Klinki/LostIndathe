@@ -6,6 +6,8 @@ import entity.OBJ_Sink;
 import entity.OBJ_Statue;
 import entity.OBJ_Statue2;
 import entity.OBJ_Toilet;
+import entity.Bio.NPC_Krecic;
+import entity.Bio.NPC_Maus;
 import entity.Chemie.NPC_Köppel;
 import entity.Chemie.OBJ_Base;
 import entity.Chemie.OBJ_Neutral;
@@ -282,5 +284,31 @@ public class AssetPlacer {
 		gp.getNpc()[4][0] = new NPC_Köppel(gp, keyH);
 		gp.getNpc()[4][0].worldX = 47*gp.getTileSize();
 		gp.getNpc()[4][0].worldY = 63*gp.getTileSize();
+		
+		gp.getNpc()[6][0] = new NPC_Krecic(gp, keyH);
+		gp.getNpc()[6][0].worldX = 50*gp.getTileSize();
+		gp.getNpc()[6][0].worldY = 44*gp.getTileSize();
+		
+		gp.getNpc()[6][1] = new NPC_Maus(gp, keyH);
+		gp.getNpc()[6][1].worldX = 44*gp.getTileSize();
+		gp.getNpc()[6][1].worldY = 59*gp.getTileSize();
+		
+		gp.getNpc()[6][2] = new NPC_Maus(gp, keyH);
+		gp.getNpc()[6][2].worldX = 49*gp.getTileSize();
+		gp.getNpc()[6][2].worldY = 48*gp.getTileSize();
+		
+		gp.getNpc()[6][3] = new NPC_Maus(gp, keyH);
+		gp.getNpc()[6][3].worldX = 48*gp.getTileSize();
+		gp.getNpc()[6][3].worldY = 53*gp.getTileSize();
+		
+		gp.getNpc()[6][4] = new NPC_Maus(gp, keyH);
+		gp.getNpc()[6][4].worldX = 53*gp.getTileSize();
+		gp.getNpc()[6][4].worldY = 54*gp.getTileSize();
+		
+		gp.getNpc()[6][5] = new NPC_Maus(gp, keyH);
+		gp.getNpc()[6][5].worldX = 50*gp.getTileSize();
+		gp.getNpc()[6][5].worldY = 58*gp.getTileSize();
+		
+		
 	}
 }

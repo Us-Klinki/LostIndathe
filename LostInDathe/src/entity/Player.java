@@ -44,6 +44,16 @@ public class Player extends Entity {
 	int currentKlinkiDialog = 1;
 	boolean licht = false;
 	
+	//Rätsel Bio
+	int Mäusefang = 0;	
+	int counter = 0;
+	int currentKrecicDialogue = 1;
+	boolean timerstart;
+	boolean schnell;
+	boolean mittel;
+	boolean langsam;
+
+	
 	public int dialogueCounter = 1;
 	Font yoster;
 
@@ -72,12 +82,16 @@ public class Player extends Entity {
 	
 	public void setDefaultValues() {
 		// TODO: IM BAD
-		worldX = gp.getTileSize() * 20;
-		worldY = gp.getTileSize() * 25;
+		//worldX = gp.getTileSize() * 20;
+		//worldY = gp.getTileSize() * 25;
 		
 		// IM CHEMIERAUM
 		//worldX = gp.getTileSize() *  52;
 		//worldY = gp.getTileSize() * 64;
+		
+		// IM BIORAUM
+		worldX = gp.getTileSize() * 47;
+		worldY = gp.getTileSize() * 44;
 		
 		speed = 4;
 		direction = "";
@@ -128,7 +142,7 @@ public class Player extends Entity {
 		    playerMovementPull();
 		    speed = 4;
 	    }
-	    else {
+	    else if(gp.gameState == gp.playState){
 		    playerMovement();
 	    }
 	    
@@ -842,18 +856,54 @@ public class Player extends Entity {
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 					currentKlinkiDialog++;
 				}
-				
-				
-				
-		
-				
-				
-				
 				break;
 			case "Test":
 				gp.getNpc()[gp.getCurrentMap()][i].setDialogue1();
 				gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 				break;
+			case "krecic":
+				switch(currentKrecicDialogue) {
+				case 1:
+					gp.getNpc()[gp.getCurrentMap()][i].setDialogue1();
+					gp.gameState = gp.dialogueState;
+					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+					currentKrecicDialogue++;
+					timerstart = true;
+				case 2: 
+					gp.getNpc()[gp.getCurrentMap()][i].setDialogue2();
+					gp.gameState = gp.dialogueState;
+					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+					if(Mäusefang == 5) {
+						if(schnell == true) {
+							currentKrecicDialogue = 3;
+						}
+						if(mittel == true) {
+							currentKrecicDialogue = 4;
+						}
+						if(langsam == true) {
+							currentKrecicDialogue = 5;
+						}
+					}
+				case 3:
+					gp.getNpc()[gp.getCurrentMap()][i].setDialogue3();
+					gp.gameState = gp.dialogueState;
+					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+					currentKrecicDialogue = 6;
+				case 4:
+					gp.getNpc()[gp.getCurrentMap()][i].setDialogue4();
+					gp.gameState = gp.dialogueState;
+					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+					currentKrecicDialogue = 6;
+				case 5:
+					gp.getNpc()[gp.getCurrentMap()][i].setDialogue5();
+					gp.gameState = gp.dialogueState;
+					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+					currentKrecicDialogue = 6;
+				case 6:
+					gp.getNpc()[gp.getCurrentMap()][i].setDialogue6();
+					gp.gameState = gp.dialogueState;
+					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
+				}
 			}
 		}
 	}
