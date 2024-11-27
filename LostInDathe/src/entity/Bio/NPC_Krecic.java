@@ -39,27 +39,28 @@ public class NPC_Krecic extends Entity{
 	
 	public void setDialogue1() {
 		dialogues[6][0] = "Och, nee… Ich kann das nicht mehr… \nIch will mehr Geld für den Quatsch!";
-		dialogues[6][1] = "Hast du etwa den Käfig offengelassen? \nDu darfst die gleich wieder einsammeln. \nAber fix. Du weißt ja, wie spät es ist.";
+		dialogues[6][1] = "Hast du etwa den Käfig offengelassen? \nDu darfst die gleich wieder einsammeln. \nAber zackig! Du weißt ja, wie spät es ist.";
 	}
 	
 	public void setDialogue2() {
-		dialogues[6][0] = "Vorschlag: „Mach doch mal!!!“ ";
+		dialogues[6][0] = "Mach doch mal!!!";
 	}
 	
 	public void setDialogue3() {
-		dialogues[6][0] = "Not bad! Das gibt dann die 1+! \nWillst auch nach Hause, oder? \nKomm, schnapp dir mal den Schlüssel hier, der passt. ";
+		dialogues[6][0] = "Hmm... Not bad! Das gibt dann die 1 Plus! \nWillst auch nach Hause, oder? Komm, \nschnapp dir mal den Schlüssel hier, der passt. ";
 	}
 	
 	public void setDialogue4() {
 		dialogues[6][0] = "Na geht doch! \nUnd jetzt husch husch raus hier.";
-		dialogues[6][1] = "Ausnahmsweise haste mal nen Schlüssel \nfür den Außenhof. Aber keine Faxen machen!";
+		dialogues[6][1] = "Ausnahmsweise haste mal den Schlüssel \nfür den Außenhof. Aber keinen Quatsch machen!";
 	}
 	
 	public void setDialogue5() {
-		dialogues[6][0] = "[mobbt Spieler*in, weil zu langsam, \naber gibt trotzdem gnädigerweise den Schlüssel zum Außenhof]";
+		dialogues[6][0] = "Ich hab mich jetzt gerade mental schon von \nmeiner Rente verabschiedet, so lang hat das\nhier gedauert.";
+		dialogues[6][1] = "[Sie gibt dir trotzdem einen Schlüssel für den \nAußenhof!]";
 	}
 	public void setDialogue6() {
-		dialogues[6][0] = "Och jetzt muss ich hier aufräumen… \nIch kann das hier nicht mehr ab… ";
+		dialogues[6][0] = "Och jetzt muss ich hier aufräumen…\nIch hab dafür die Nerven nich...";
 	}
 	public void setDialogue20() {
 		for(int i = 0; i < 30; i++) {

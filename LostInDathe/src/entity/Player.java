@@ -22,10 +22,10 @@ public class Player extends Entity {
 	public final int screenY;
 	
 	// Schlüssel
-	int hasKey = 1;
+	int hasKey = 0;
 	int hasKeyChemie = 0;
-	boolean hasKeyInfo = true;
-	boolean hasKeyBio = true;
+	boolean hasKeyInfo = false;
+	boolean hasKeyBio = false;
 	boolean hasKeySchulhof = false;
 	
 	// Rätsel Chemie
@@ -81,16 +81,16 @@ public class Player extends Entity {
 	
 	public void setDefaultValues() {
 		// TODO: IM BAD
-		worldX = gp.getTileSize() * 20;
-		worldY = gp.getTileSize() * 25;
+		//worldX = gp.getTileSize() * 20;
+		//worldY = gp.getTileSize() * 25;
 		
 		// IM CHEMIERAUM
 		//worldX = gp.getTileSize() *  52;
 		//worldY = gp.getTileSize() * 64;
 		
 		// IM BIORAUM
-		//worldX = gp.getTileSize() * 47;
-		//worldY = gp.getTileSize() * 44;
+		worldX = gp.getTileSize() * 47;
+		worldY = gp.getTileSize() * 44;
 		
 		//IM INFORAUM
 		//worldX = gp.getTileSize() * 40;
@@ -302,7 +302,7 @@ public class Player extends Entity {
 					}
 					gp.playSE(31);
 					gp.gameState = gp.dialogueState;
-					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
+					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
 			break;
@@ -980,7 +980,7 @@ public class Player extends Entity {
 				}
 				break;
 			case "maus":
-				if(keyH.enterPressed == true) {
+				if(keyH.enterPressed == true && timerstart) {
 					gp.getAPlacer().mausDispose(i);
 					Mäusefang++;
 				}

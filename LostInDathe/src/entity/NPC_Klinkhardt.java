@@ -36,7 +36,6 @@ public class NPC_Klinkhardt extends Entity {
 	idle2 = setup("/npc/Klinki/Klinkhardt_Stehend2");
 
 	}
-	//Dialog Test 
 	
 	public void setDialogue1() {
 		dialogues[3][0] = "Komm mir nicht zu nahe!";
@@ -55,7 +54,7 @@ public class NPC_Klinkhardt extends Entity {
 	}
 	
 	public void setDialogue5() {
-		dialogues[3][0] = "Ach herrjemine, und du willst Abitur machen?! \nJetzt denk mal ganz simpel…";
+		dialogues[3][0] = "Ach herrjemine, du willst Abitur machen?! \nJetzt denk doch mal ganz simpel…";
 	}
 	
 	public void setDialogue6() {
@@ -63,8 +62,8 @@ public class NPC_Klinkhardt extends Entity {
 	}
 	
 	public void setDialogue7() {
-		dialogues[3][0] = "Na endlich! Deine Klassenarbeit war übrigens \nnicht so prickelnd… Und dein Schriftbild… \nIch konnte noch nicht mal deinen Namen lesen…";
-		dialogues[3][1] = "Das ist mir in den 25 Jahren an dieser Schule \nnoch nicht passiert… Und jetzt raus hier!! \nNerv mal lieber Frau Krecic im Bioraum 110.";
+		dialogues[3][0] = "Na endlich! Deine Klassenarbeit war übrigens \nnicht so prickelnd… Und dein Schriftbild… \nIch konnt' nicht mal deinen Namen lesen…";
+		dialogues[3][1] = "Das ist mir in 25 Jahren noch nicht passiert.\nSo und jetzt raus hier!! \nNerv lieber mal Frau Krecic im Bioraum 110.";
 	}
 	
 	public void setDialogue8() {
