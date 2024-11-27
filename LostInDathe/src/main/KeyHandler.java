@@ -73,6 +73,11 @@ public class KeyHandler implements KeyListener{
 		else if(gp.gameState == gp.mapState) {
 			mapState(code);
 		}
+		
+		// END SCREEN
+		else if(gp.gameState == gp.endState) {
+			endState(code);
+		}
 
 	}
 	
@@ -293,6 +298,12 @@ public class KeyHandler implements KeyListener{
 		
 		if(code == KeyEvent.VK_SPACE) {
 			gp.gameState = gp.playState;
+		}
+	}
+	
+	public void endState(int code) {
+		if(code == KeyEvent.VK_ENTER) {
+			System.exit(0);
 		}
 	}
 	@Override

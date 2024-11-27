@@ -25,8 +25,8 @@ public class Player extends Entity {
 	int hasKey = 0;
 	int hasKeyChemie = 0;
 	boolean hasKeyInfo = false;
-	boolean hasKeyBio = false;
-	boolean hasKeySchulhof = false;
+	boolean hasKeyBio = true;
+	boolean hasKeySchulhof = true;
 	
 	// Rätsel Chemie
 	int currentKöppelDialog = 1;
@@ -89,12 +89,16 @@ public class Player extends Entity {
 		//worldY = gp.getTileSize() * 64;
 		
 		// IM BIORAUM
-		worldX = gp.getTileSize() * 47;
-		worldY = gp.getTileSize() * 44;
+		//worldX = gp.getTileSize() * 47;
+		//worldY = gp.getTileSize() * 44;
 		
-		//IM INFORAUM
+		// IM INFORAUM
 		//worldX = gp.getTileSize() * 40;
 		//worldY = gp.getTileSize() * 22.5;
+		
+		// IM EG vor der Exit-Door 
+		worldX = gp.getTileSize() * 77;
+		worldY = gp.getTileSize() * 59;
 		
 		speed = 4;
 		direction = "";
@@ -405,8 +409,8 @@ public class Player extends Entity {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
-					gp.playSE(0);
-					gp.getObj()[gp.getCurrentMap()][i].setCollisionOn(false);
+					gp.playSE(33);
+					gp.gameState = gp.endState;
 				}
 				
 				else if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed) {

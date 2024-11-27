@@ -44,7 +44,7 @@ public class GamePanel extends JPanel implements Runnable {
 	final int maxWorldRow = 100;
 	private final int maxMap = 16;
 	// TODO: 0 = Bad, 1 = OG, 2 = Geschichte, 3 = Informatik, 4 = Chemie, 5 = EG, 6 = Bio
-	private int currentMap = 6;
+	private int currentMap = 5;
 	//private int currentMap = 6;
 	
 	// Für Vollbild
@@ -186,6 +186,7 @@ public class GamePanel extends JPanel implements Runnable {
  	public final int optionsState = 3;
  	public final int dialogueState = 4;
  	public final int mapState = 5;
+ 	public final int endState = 6;
  	
  	//private BufferedImage lastFrame;
  	private Color transparentblack = new Color(0, 0, 0, 128);
@@ -352,7 +353,7 @@ public class GamePanel extends JPanel implements Runnable {
  	 	// RESTLICHES SPIEL
  	 	else {
  	 		//Überpfrüfung vom game state
- 	 	 	if(gameState == playState || gameState == dialogueState) {
+ 	 	 	if(gameState == playState || gameState == dialogueState || gameState == endState) {
  	 	    	// Hier werden die Tiles erzeugt
  	 	 		tileM.draw(g2);
  	 	 		
@@ -408,7 +409,6 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 			eManager.draw(g2);
  	 	 		}
  	 	 		// ALTE METHODE
- 	 	 		
  	 	 		/* Hier werden die Objekte platziert
  	 	 		for(int i = 0; i < obj[1].length; i++) {
  	 	 			if(obj[currentMap][i] != null) {	// sicherstellen, dass Arrayindex immer gefüllt ist
@@ -444,6 +444,10 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 		}
  	 	 		ui.draw(g2);
  	 	    }
+ 	 	 	
+ 	 	 	if(gameState == endState) {
+ 	 	 		ui.draw(g2);
+ 	 	 	}
  	 	 	if(gameState == dialogueState) {
  	 	 		
  	 	 		entityList.add(getPlayer());
