@@ -22,35 +22,35 @@ public class Player extends Entity {
 	public final int screenY;
 	
 	// Schlüssel
-	int hasKey = 0;
-	int hasKeyChemie = 0;
-	boolean hasKeyInfo = false;
-	boolean hasKeyBio = true;
-	boolean hasKeySchulhof = true;
+	private int hasKey = 0;
+	private int hasKeyChemie = 0;
+	private boolean hasKeyInfo = false;
+	private boolean hasKeyBio = false;
+	private boolean hasKeySchulhof = false;
 	
 	// Rätsel Chemie
-	int currentKöppelDialog = 1;
-	int currentBaseDialog = 2;
-	int currentNeutralDialog = 2;
-	int currentSäureDialog = 2;
-	int currentPhenolphthaleinDialog = 2;
-	int currentUniversalindikatorDialog = 1;
+	private int currentKöppelDialog = 1;
+	private int currentBaseDialog = 2;
+	private int currentNeutralDialog = 2;
+	private int currentSäureDialog = 2;
+	private int currentPhenolphthaleinDialog = 2;
+	private int currentUniversalindikatorDialog = 1;
 	public boolean holZweitenIndikator = false;
 	public boolean holLösung = false;
 	public boolean basePlacen = false;
-	int fehler = 1;
+	private int fehler = 1;
 	
 	// Rätsel Informatik
-	int currentKlinkiDialog = 1;
-	boolean licht = false;
+	private int currentKlinkiDialog = 1;
+	private boolean licht = false;
 	
 	//Rätsel Bio
-	int Mäusefang = 0;	
-	int countdown = 0;
-	int counter = 0;
-	int currentKrecicDialogue = 1;
-	boolean timerstart;
-	boolean krecicStart;
+	private int Mäusefang = 0;	
+	private int countdown = 0;
+	private int counter = 0;
+	private int currentKrecicDialogue = 1;
+	private boolean timerstart;
+	private boolean krecicStart;
 
 	
 	public int dialogueCounter = 1;
@@ -81,8 +81,8 @@ public class Player extends Entity {
 	
 	public void setDefaultValues() {
 		// TODO: IM BAD
-		//worldX = gp.getTileSize() * 20;
-		//worldY = gp.getTileSize() * 25;
+		worldX = gp.getTileSize() * 20;
+		worldY = gp.getTileSize() * 25;
 		
 		// IM CHEMIERAUM
 		//worldX = gp.getTileSize() *  52;
@@ -97,8 +97,8 @@ public class Player extends Entity {
 		//worldY = gp.getTileSize() * 22.5;
 		
 		// IM EG vor der Exit-Door 
-		worldX = gp.getTileSize() * 77;
-		worldY = gp.getTileSize() * 59;
+		//worldX = gp.getTileSize() * 77;
+		//worldY = gp.getTileSize() * 59;
 		
 		speed = 4;
 		direction = "";
@@ -156,14 +156,14 @@ public class Player extends Entity {
 	    pullStatue();
 		
 	    //Bio Rätsel Countdown
-	    if(gp.getCurrentMap() == 6 && !hasKeySchulhof) {
+	    if(gp.getCurrentMap() == 6 && !isHasKeySchulhof()) {
 	    	bioCountdown();
-	    	if(timerstart == true) {
-	    		counter++;
-	    		if(counter >= 60) {
-	    			countdown--;
-	    			counter = 0;
-	    			System.out.println(countdown);
+	    	if(isTimerstart() == true) {
+	    		setCounter(getCounter() + 1);
+	    		if(getCounter() >= 60) {
+	    			setCountdown(getCountdown() - 1);
+	    			setCounter(0);
+	    			System.out.println(getCountdown());
 	    		}
 	    	}
 	    }
@@ -206,20 +206,20 @@ public class Player extends Entity {
 			switch(objectName) {
 			case "Key":
 				gp.playSE(1);
-				hasKey++; // virtuelles Inventar
+				setHasKey(getHasKey() + 1); // virtuelles Inventar
 				gp.getObj()[gp.getCurrentMap()][i] = null;
-				System.out.println("Schlüssel: " + hasKey);
+				System.out.println("Schlüssel: " + getHasKey());
 				break;
 			case "Bathroomdoor":
-				if(hasKey > 0 && keyH.enterPressed) {
+				if(getHasKey() > 0 && keyH.enterPressed) {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
 					//TODO: Indikator für Enter  drücken
 					gp.playSE(0);
 					gp.getObj()[gp.getCurrentMap()][i].setCollisionOn(false);
-					hasKey--;
-					System.out.println("Schlüssel: " + hasKey);
+					setHasKey(getHasKey() - 1);
+					System.out.println("Schlüssel: " + getHasKey());
 				}
 				else if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed){
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
@@ -234,7 +234,7 @@ public class Player extends Entity {
 			    }
 				break;
 			case "Informatikdoor":
-				if(hasKeyInfo && keyH.enterPressed) {
+				if(isHasKeyInfo() && keyH.enterPressed) {
 					
 					//gp.playSE(0);
 					gp.getObj()[gp.getCurrentMap()][i].setCollisionOn(false);
@@ -252,7 +252,7 @@ public class Player extends Entity {
 				break;
 			
 			case "Chemiedoor":
-				if(hasKeyChemie > 0 && keyH.enterPressed) {
+				if(getHasKeyChemie() > 0 && keyH.enterPressed) {
 					
 					//gp.playSE(0);
 					gp.getObj()[gp.getCurrentMap()][i].setCollisionOn(false);
@@ -272,7 +272,7 @@ public class Player extends Entity {
 			
 			case "Biodoor":
 				
-				if(hasKeyBio && keyH.enterPressed) {
+				if(isHasKeyBio() && keyH.enterPressed) {
 					//gp.playSE(0);
 					gp.getObj()[gp.getCurrentMap()][i].setCollisionOn(false);
 				}
@@ -291,7 +291,7 @@ public class Player extends Entity {
 				break;
 			
 			case "Door112":
-				if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed && !hasKeyBio) {
+				if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed && !isHasKeyBio()) {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
@@ -300,7 +300,7 @@ public class Player extends Entity {
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
-				if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed && hasKeyBio) {
+				if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed && isHasKeyBio()) {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
@@ -324,7 +324,7 @@ public class Player extends Entity {
 			break;
 			
 			case "Door311":
-				if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed && hasKeyChemie == 0) {
+				if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed && getHasKeyChemie() == 0) {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
@@ -333,7 +333,7 @@ public class Player extends Entity {
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
-				if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed && hasKeyChemie == 1) {
+				if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed && getHasKeyChemie() == 1) {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
@@ -405,7 +405,7 @@ public class Player extends Entity {
 			break;
 			
 			case "DoorSchulhof":
-				if(hasKeySchulhof && keyH.enterPressed) {
+				if(isHasKeySchulhof() && keyH.enterPressed) {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
@@ -453,7 +453,7 @@ public class Player extends Entity {
 					gp.stopSE(23);
 					gp.playSE(10);
 					gp.playSE(24);
-					hasKey++;
+					setHasKey(getHasKey() + 1);
 					gp.gameState = gp.dialogueState;
 					if(gp.getObj()[gp.getCurrentMap()][i].isKeyInside()) {
 						gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
@@ -499,14 +499,14 @@ public class Player extends Entity {
 			
 			case "Phenolphthalein":
 			
-				if(keyH.enterPressed && gp.gameState == gp.playState && currentPhenolphthaleinDialog == 1) {
+				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentPhenolphthaleinDialog() == 1) {
 					//hatErstenIndikator = true;
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
-					currentKöppelDialog = 4;
+					setCurrentKöppelDialog(4);
 				}
-				if(keyH.enterPressed && gp.gameState == gp.playState && currentPhenolphthaleinDialog == 2) {
+				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentPhenolphthaleinDialog() == 2) {
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -514,31 +514,31 @@ public class Player extends Entity {
 				}
 				break;
 			case "Base":
-				if(keyH.enterPressed && gp.gameState == gp.playState && currentBaseDialog == 2) {
+				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentBaseDialog() == 2) {
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
 				
-				if(keyH.enterPressed && gp.gameState == gp.playState && currentBaseDialog == 1) {
-					currentNeutralDialog = 4;
-					currentSäureDialog = 4;
+				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentBaseDialog() == 1) {
+					setCurrentNeutralDialog(4);
+					setCurrentSäureDialog(4);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 					holLösung = false;
-					currentKöppelDialog = 8;
-					currentBaseDialog = 3;
+					setCurrentKöppelDialog(8);
+					setCurrentBaseDialog(3);
 				}
 				
-				if(keyH.enterPressed && gp.gameState == gp.playState && currentBaseDialog == 3) {
+				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentBaseDialog() == 3) {
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue3();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 					holLösung = false;
 				}
 				
-				if(keyH.enterPressed && gp.gameState == gp.playState && currentBaseDialog == 4) {
+				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentBaseDialog() == 4) {
 						gp.gameState = gp.dialogueState;
 						gp.getObj()[gp.getCurrentMap()][i].setDialogue4();
 						gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -548,7 +548,7 @@ public class Player extends Entity {
 				break;
 			case "Säure":
 				
-				if(keyH.enterPressed && gp.gameState == gp.playState && currentSäureDialog == 2) {
+				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentSäureDialog() == 2) {
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -556,30 +556,30 @@ public class Player extends Entity {
 				
 				
 				
-				if (keyH.enterPressed && gp.gameState == gp.playState && currentSäureDialog == 1) {
-					currentBaseDialog = 4;
-					currentNeutralDialog = 4;
+				if (keyH.enterPressed && gp.gameState == gp.playState && getCurrentSäureDialog() == 1) {
+					setCurrentBaseDialog(4);
+					setCurrentNeutralDialog(4);
 				    gp.gameState = gp.dialogueState;
 				    gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 				    gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
-				    if(fehler == 1) {
-						currentKöppelDialog = 6;
+				    if(getFehler() == 1) {
+						setCurrentKöppelDialog(6);
 					}
-					if(fehler == 2) {
-						currentKöppelDialog = 7;
+					if(getFehler() == 2) {
+						setCurrentKöppelDialog(7);
 					}
-					if(fehler < 2) {
-						fehler++;
+					if(getFehler() < 2) {
+						setFehler(getFehler() + 1);
 					}
-				    currentSäureDialog = 3;
+				    setCurrentSäureDialog(3);
 				} 
-				if (keyH.enterPressed && gp.gameState == gp.playState && currentSäureDialog == 3) {
+				if (keyH.enterPressed && gp.gameState == gp.playState && getCurrentSäureDialog() == 3) {
 				    gp.gameState = gp.dialogueState;
 				    gp.getObj()[gp.getCurrentMap()][i].setDialogue3();
 				    gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
 				
-				if(keyH.enterPressed && gp.gameState == gp.playState && currentSäureDialog == 4) {
+				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentSäureDialog() == 4) {
 						gp.gameState = gp.dialogueState;
 						gp.getObj()[gp.getCurrentMap()][i].setDialogue4();
 						gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -587,39 +587,39 @@ public class Player extends Entity {
 				break;
 			case "Neutral":
 				
-				if(keyH.enterPressed && gp.gameState == gp.playState && currentNeutralDialog == 2) {
+				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentNeutralDialog() == 2) {
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
 				
-				if(keyH.enterPressed && gp.gameState == gp.playState && currentNeutralDialog == 1) {
-					currentBaseDialog = 4;
-					currentSäureDialog = 4;
+				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentNeutralDialog() == 1) {
+					setCurrentBaseDialog(4);
+					setCurrentSäureDialog(4);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 					//holNeutral = false;
 					//hatNeutral = true;
-					if(fehler == 1) {
-						currentKöppelDialog = 6;
+					if(getFehler() == 1) {
+						setCurrentKöppelDialog(6);
 					}
-					if(fehler == 2) {
-						currentKöppelDialog = 7;
+					if(getFehler() == 2) {
+						setCurrentKöppelDialog(7);
 					}
-					if(fehler < 2) {
-						fehler++;
+					if(getFehler() < 2) {
+						setFehler(getFehler() + 1);
 					}
-					currentNeutralDialog = 3;
+					setCurrentNeutralDialog(3);
 				}
 				
-				if(keyH.enterPressed && gp.gameState == gp.playState && currentNeutralDialog == 3) {
+				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentNeutralDialog() == 3) {
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue3();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
 				
-				if(keyH.enterPressed && gp.gameState == gp.playState && currentNeutralDialog == 4) {
+				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentNeutralDialog() == 4) {
 
 						gp.gameState = gp.dialogueState;
 						gp.getObj()[gp.getCurrentMap()][i].setDialogue4();
@@ -629,14 +629,14 @@ public class Player extends Entity {
 				break;
 			case "Universalindikator":
 				
-				if(keyH.enterPressed && gp.gameState == gp.playState && currentUniversalindikatorDialog == 1) {
-					currentKöppelDialog = 5;
-					currentUniversalindikatorDialog++;
+				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentUniversalindikatorDialog() == 1) {
+					setCurrentKöppelDialog(5);
+					setCurrentUniversalindikatorDialog(getCurrentUniversalindikatorDialog() + 1);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
-				if(keyH.enterPressed && gp.gameState == gp.playState && currentUniversalindikatorDialog == 2) {
+				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentUniversalindikatorDialog() == 2) {
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -674,10 +674,10 @@ public class Player extends Entity {
 					gp.stopSE(14);
 					gp.stopMusic(10);
 					gp.playSE(14);
-					if(hasKeyChemie == 0) {
+					if(getHasKeyChemie() == 0) {
 						gp.playSE(10);
 					}
-					hasKeyChemie++;
+					setHasKeyChemie(getHasKeyChemie() + 1);
 				}
 				else {
 					switch(dialogueCounter) {
@@ -712,7 +712,7 @@ public class Player extends Entity {
 				break;
 			
 			case "Köppel":	
-				if(currentKöppelDialog == 2) {
+				if(getCurrentKöppelDialog() == 2) {
 					gp.stopSE(15);
 					gp.stopSE(16);
 					gp.stopSE(18);
@@ -723,16 +723,16 @@ public class Player extends Entity {
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 				}
 	
-				if(currentKöppelDialog == 1) {
+				if(getCurrentKöppelDialog() == 1) {
 					gp.playSE(15);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue1();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
-					currentPhenolphthaleinDialog = 1;
-					currentKöppelDialog++;
+					setCurrentPhenolphthaleinDialog(1);
+					setCurrentKöppelDialog(getCurrentKöppelDialog() + 1);
 				}
 
-				if(currentKöppelDialog == 4) {
+				if(getCurrentKöppelDialog() == 4) {
 					gp.stopSE(15);
 					gp.stopSE(16);
 					gp.playSE(18);
@@ -740,25 +740,25 @@ public class Player extends Entity {
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 					holZweitenIndikator = true;
-					currentKöppelDialog = 2;
+					setCurrentKöppelDialog(2);
 		
 				}
 		
-				if (currentKöppelDialog == 5) {
+				if (getCurrentKöppelDialog() == 5) {
 					gp.stopSE(16);
 					gp.stopSE(18);	
 					gp.playSE(19);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue5();
 					holLösung = true;
-					currentBaseDialog = 1;
-					currentNeutralDialog = 1;
-					currentSäureDialog = 1;
+					setCurrentBaseDialog(1);
+					setCurrentNeutralDialog(1);
+					setCurrentSäureDialog(1);
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
-					currentKöppelDialog = 2;
+					setCurrentKöppelDialog(2);
 				}
 		
-				if(currentKöppelDialog == 6) {
+				if(getCurrentKöppelDialog() == 6) {
 					System.out.println("1");
 					gp.stopSE(19);
 					gp.stopSE(16);
@@ -766,28 +766,28 @@ public class Player extends Entity {
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue6();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
-					currentKöppelDialog = 2;
-					if(currentSäureDialog == 4) {
-						currentSäureDialog = 1;
+					setCurrentKöppelDialog(2);
+					if(getCurrentSäureDialog() == 4) {
+						setCurrentSäureDialog(1);
 					}
-					currentBaseDialog = 1;
-					if(currentNeutralDialog == 4) {
-						currentNeutralDialog = 1;
+					setCurrentBaseDialog(1);
+					if(getCurrentNeutralDialog() == 4) {
+						setCurrentNeutralDialog(1);
 					}
 				}
 				
-				if(currentKöppelDialog == 7) {
+				if(getCurrentKöppelDialog() == 7) {
 					gp.stopSE(16);
 					gp.stopSE(20);
 					gp.playSE(21);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue7();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
-					currentKöppelDialog = 2;
-					currentBaseDialog = 1;
+					setCurrentKöppelDialog(2);
+					setCurrentBaseDialog(1);
 				}
 
-				if(currentKöppelDialog == 8) {
+				if(getCurrentKöppelDialog() == 8) {
 					gp.stopSE(16);
 					gp.stopSE(19);
 					gp.stopSE(20);
@@ -797,15 +797,15 @@ public class Player extends Entity {
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 					gp.playSE(10);
-					currentKöppelDialog = 3;
-					currentSäureDialog = 3;
-					currentNeutralDialog = 3;
-					hasKeyInfo = true;
+					setCurrentKöppelDialog(3);
+					setCurrentSäureDialog(3);
+					setCurrentNeutralDialog(3);
+					setHasKeyInfo(true);
 					basePlacen = true;
 					return; // Methode wird hier beendet, wenn dieser Fall zutrifft.
 				}
 		
-				if(currentKöppelDialog == 3) {
+				if(getCurrentKöppelDialog() == 3) {
 					gp.stopSE(22);
 					gp.playSE(17);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue3();
@@ -816,7 +816,7 @@ public class Player extends Entity {
 				break;
 				
 			case "Klinki":
-				if(currentKlinkiDialog == 8) {
+				if(getCurrentKlinkiDialog() == 8) {
 					gp.stopSE(34);
 					gp.stopSE(35);
 					gp.stopSE(36);
@@ -830,11 +830,11 @@ public class Player extends Entity {
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 				}
 				
-				if(keyH.lichtDialog && currentKlinkiDialog <= 6) {
+				if(keyH.lichtDialog && getCurrentKlinkiDialog() <= 6) {
 					keyH.lichtDialog = false;
-					currentKlinkiDialog = 7;
+					setCurrentKlinkiDialog(7);
 				}
-				if(currentKlinkiDialog == 7) {
+				if(getCurrentKlinkiDialog() == 7) {
 					gp.stopSE(34);
 					gp.stopSE(35);
 					gp.stopSE(36);
@@ -846,11 +846,11 @@ public class Player extends Entity {
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 					gp.playSE(10);
-					hasKeyBio = true;
-					currentKlinkiDialog = 8;
+					setHasKeyBio(true);
+					setCurrentKlinkiDialog(8);
 				}
 				
-				if(currentKlinkiDialog == 6) {
+				if(getCurrentKlinkiDialog() == 6) {
 					gp.stopSE(34);
 					gp.stopSE(35);
 					gp.stopSE(36);
@@ -862,7 +862,7 @@ public class Player extends Entity {
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 				}
 				
-				if(currentKlinkiDialog == 5) {
+				if(getCurrentKlinkiDialog() == 5) {
 					gp.stopSE(34);
 					gp.stopSE(35);
 					gp.stopSE(36);
@@ -871,10 +871,10 @@ public class Player extends Entity {
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue5();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
-					currentKlinkiDialog++;
+					setCurrentKlinkiDialog(getCurrentKlinkiDialog() + 1);
 				}
 				
-				if(currentKlinkiDialog == 4) {
+				if(getCurrentKlinkiDialog() == 4) {
 					gp.stopSE(34);
 					gp.stopSE(35);
 					gp.stopSE(36);
@@ -882,34 +882,34 @@ public class Player extends Entity {
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue4();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
-					currentKlinkiDialog++;
+					setCurrentKlinkiDialog(getCurrentKlinkiDialog() + 1);
 				}
-				if(currentKlinkiDialog == 3) {
+				if(getCurrentKlinkiDialog() == 3) {
 					gp.stopSE(34);
 					gp.stopSE(35);
 					gp.playSE(36);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue3();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
-					currentKlinkiDialog++;
+					setCurrentKlinkiDialog(getCurrentKlinkiDialog() + 1);
 				}
 				
-				if(currentKlinkiDialog == 2) {
+				if(getCurrentKlinkiDialog() == 2) {
 					gp.stopSE(34);
 					gp.playSE(35);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue2();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
-					currentKlinkiDialog++;
+					setCurrentKlinkiDialog(getCurrentKlinkiDialog() + 1);
 				}
 				
 				
-				if(currentKlinkiDialog == 1) {
+				if(getCurrentKlinkiDialog() == 1) {
 					gp.playSE(34);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue1();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
-					currentKlinkiDialog++;
+					setCurrentKlinkiDialog(getCurrentKlinkiDialog() + 1);
 				}
 				break;
 			case "Test":
@@ -917,29 +917,29 @@ public class Player extends Entity {
 				gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 				break;
 			case "krecic":
-				switch(currentKrecicDialogue) {
+				switch(getCurrentKrecicDialogue()) {
 				case 1:
 					gp.playSE(42);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue1();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
-					currentKrecicDialogue++;
-					krecicStart = true;
-					timerstart = true;
-					counter = 60;
+					setCurrentKrecicDialogue(getCurrentKrecicDialogue() + 1);
+					setKrecicStart(true);
+					setTimerstart(true);
+					setCounter(60);
 					break;
 				case 2: 
-					if(Mäusefang == 5) {
-						if(countdown >= 45) {
-							currentKrecicDialogue = 3;
+					if(getMäusefang() == 5) {
+						if(getCountdown() >= 45) {
+							setCurrentKrecicDialogue(3);
 							break;
 						} 
-						if(countdown >= 35) {
-							currentKrecicDialogue = 4;
+						if(getCountdown() >= 35) {
+							setCurrentKrecicDialogue(4);
 							break;
 						} 
-						if(countdown < 35) {
-							currentKrecicDialogue = 5;
+						if(getCountdown() < 35) {
+							setCurrentKrecicDialogue(5);
 							break;
 						} 
 					}	
@@ -953,27 +953,27 @@ public class Player extends Entity {
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue3();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
-					currentKrecicDialogue = 6;
+					setCurrentKrecicDialogue(6);
 					gp.playSE(10);
-					hasKeySchulhof = true;
+					setHasKeySchulhof(true);
 					break;
 				case 4:
 					gp.playSE(45);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue4();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
-					currentKrecicDialogue = 6;
+					setCurrentKrecicDialogue(6);
 					gp.playSE(10);
-					hasKeySchulhof = true;
+					setHasKeySchulhof(true);
 					break;
 				case 5:
 					gp.playSE(46);
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue5();
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
-					currentKrecicDialogue = 6;
+					setCurrentKrecicDialogue(6);
 					gp.playSE(10);
-					hasKeySchulhof = true;
+					setHasKeySchulhof(true);
 					break;
 				case 6:
 					gp.playSE(47);
@@ -984,9 +984,9 @@ public class Player extends Entity {
 				}
 				break;
 			case "maus":
-				if(keyH.enterPressed == true && timerstart) {
+				if(keyH.enterPressed == true && isTimerstart()) {
 					gp.getAPlacer().mausDispose(i);
-					Mäusefang++;
+					setMäusefang(getMäusefang() + 1);
 				}
 				break;
 			}
@@ -994,10 +994,10 @@ public class Player extends Entity {
 	}
 	
 	public void bioCountdown() {
-		if(krecicStart == true && gp.gameState == gp.playState) {
-			timerstart = true;
-			countdown = 60;
-			krecicStart = false;
+		if(isKrecicStart() == true && gp.gameState == gp.playState) {
+			setTimerstart(true);
+			setCountdown(60);
+			setKrecicStart(false);
 		}
 	}
 	public void playerMovement() {
@@ -1307,6 +1307,286 @@ public class Player extends Entity {
 	    int textX = rectX + (rectWidth - fm.stringWidth(text)) / 2; // Zentrierung
 	    int textY = rectY + (rectHeight - fm.getHeight()) / 2 + fm.getAscent(); // Vertikal zentriert
 	    g2.drawString(text, textX, textY);
+	}
+
+	/**
+	 * @return the hasKey
+	 */
+	public int getHasKey() {
+		return hasKey;
+	}
+
+	/**
+	 * @param hasKey the hasKey to set
+	 */
+	public void setHasKey(int hasKey) {
+		this.hasKey = hasKey;
+	}
+
+	/**
+	 * @return the hasKeyChemie
+	 */
+	public int getHasKeyChemie() {
+		return hasKeyChemie;
+	}
+
+	/**
+	 * @param hasKeyChemie the hasKeyChemie to set
+	 */
+	public void setHasKeyChemie(int hasKeyChemie) {
+		this.hasKeyChemie = hasKeyChemie;
+	}
+
+	/**
+	 * @return the hasKeyBio
+	 */
+	public boolean isHasKeyBio() {
+		return hasKeyBio;
+	}
+
+	/**
+	 * @param hasKeyBio the hasKeyBio to set
+	 */
+	public void setHasKeyBio(boolean hasKeyBio) {
+		this.hasKeyBio = hasKeyBio;
+	}
+
+	/**
+	 * @return the hasKeyInfo
+	 */
+	public boolean isHasKeyInfo() {
+		return hasKeyInfo;
+	}
+
+	/**
+	 * @param hasKeyInfo the hasKeyInfo to set
+	 */
+	public void setHasKeyInfo(boolean hasKeyInfo) {
+		this.hasKeyInfo = hasKeyInfo;
+	}
+
+	/**
+	 * @return the hasKeySchulhof
+	 */
+	public boolean isHasKeySchulhof() {
+		return hasKeySchulhof;
+	}
+
+	/**
+	 * @param hasKeySchulhof the hasKeySchulhof to set
+	 */
+	public void setHasKeySchulhof(boolean hasKeySchulhof) {
+		this.hasKeySchulhof = hasKeySchulhof;
+	}
+
+	/**
+	 * @return the currentKöppelDialog
+	 */
+	public int getCurrentKöppelDialog() {
+		return currentKöppelDialog;
+	}
+
+	/**
+	 * @param currentKöppelDialog the currentKöppelDialog to set
+	 */
+	public void setCurrentKöppelDialog(int currentKöppelDialog) {
+		this.currentKöppelDialog = currentKöppelDialog;
+	}
+
+	/**
+	 * @return the currentBaseDialog
+	 */
+	public int getCurrentBaseDialog() {
+		return currentBaseDialog;
+	}
+
+	/**
+	 * @param currentBaseDialog the currentBaseDialog to set
+	 */
+	public void setCurrentBaseDialog(int currentBaseDialog) {
+		this.currentBaseDialog = currentBaseDialog;
+	}
+
+	/**
+	 * @return the currentNeutralDialog
+	 */
+	public int getCurrentNeutralDialog() {
+		return currentNeutralDialog;
+	}
+
+	/**
+	 * @param currentNeutralDialog the currentNeutralDialog to set
+	 */
+	public void setCurrentNeutralDialog(int currentNeutralDialog) {
+		this.currentNeutralDialog = currentNeutralDialog;
+	}
+
+	/**
+	 * @return the currentSäureDialog
+	 */
+	public int getCurrentSäureDialog() {
+		return currentSäureDialog;
+	}
+
+	/**
+	 * @param currentSäureDialog the currentSäureDialog to set
+	 */
+	public void setCurrentSäureDialog(int currentSäureDialog) {
+		this.currentSäureDialog = currentSäureDialog;
+	}
+
+	/**
+	 * @return the currentPhenolphthaleinDialog
+	 */
+	public int getCurrentPhenolphthaleinDialog() {
+		return currentPhenolphthaleinDialog;
+	}
+
+	/**
+	 * @param currentPhenolphthaleinDialog the currentPhenolphthaleinDialog to set
+	 */
+	public void setCurrentPhenolphthaleinDialog(int currentPhenolphthaleinDialog) {
+		this.currentPhenolphthaleinDialog = currentPhenolphthaleinDialog;
+	}
+
+	/**
+	 * @return the currentUniversalindikatorDialog
+	 */
+	public int getCurrentUniversalindikatorDialog() {
+		return currentUniversalindikatorDialog;
+	}
+
+	/**
+	 * @param currentUniversalindikatorDialog the currentUniversalindikatorDialog to set
+	 */
+	public void setCurrentUniversalindikatorDialog(int currentUniversalindikatorDialog) {
+		this.currentUniversalindikatorDialog = currentUniversalindikatorDialog;
+	}
+
+	/**
+	 * @return the fehler
+	 */
+	public int getFehler() {
+		return fehler;
+	}
+
+	/**
+	 * @param fehler the fehler to set
+	 */
+	public void setFehler(int fehler) {
+		this.fehler = fehler;
+	}
+
+	/**
+	 * @return the currentKlinkiDialog
+	 */
+	public int getCurrentKlinkiDialog() {
+		return currentKlinkiDialog;
+	}
+
+	/**
+	 * @param currentKlinkiDialog the currentKlinkiDialog to set
+	 */
+	public void setCurrentKlinkiDialog(int currentKlinkiDialog) {
+		this.currentKlinkiDialog = currentKlinkiDialog;
+	}
+
+	/**
+	 * @return the licht
+	 */
+	public boolean isLicht() {
+		return licht;
+	}
+
+	/**
+	 * @param licht the licht to set
+	 */
+	public void setLicht(boolean licht) {
+		this.licht = licht;
+	}
+
+	/**
+	 * @return the mäusefang
+	 */
+	public int getMäusefang() {
+		return Mäusefang;
+	}
+
+	/**
+	 * @param mäusefang the mäusefang to set
+	 */
+	public void setMäusefang(int mäusefang) {
+		Mäusefang = mäusefang;
+	}
+
+	/**
+	 * @return the countdown
+	 */
+	public int getCountdown() {
+		return countdown;
+	}
+
+	/**
+	 * @param countdown the countdown to set
+	 */
+	public void setCountdown(int countdown) {
+		this.countdown = countdown;
+	}
+
+	/**
+	 * @return the counter
+	 */
+	public int getCounter() {
+		return counter;
+	}
+
+	/**
+	 * @param counter the counter to set
+	 */
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}
+
+	/**
+	 * @return the currentKrecicDialogue
+	 */
+	public int getCurrentKrecicDialogue() {
+		return currentKrecicDialogue;
+	}
+
+	/**
+	 * @param currentKrecicDialogue the currentKrecicDialogue to set
+	 */
+	public void setCurrentKrecicDialogue(int currentKrecicDialogue) {
+		this.currentKrecicDialogue = currentKrecicDialogue;
+	}
+
+	/**
+	 * @return the timerstart
+	 */
+	public boolean isTimerstart() {
+		return timerstart;
+	}
+
+	/**
+	 * @param timerstart the timerstart to set
+	 */
+	public void setTimerstart(boolean timerstart) {
+		this.timerstart = timerstart;
+	}
+
+	/**
+	 * @return the krecicStart
+	 */
+	public boolean isKrecicStart() {
+		return krecicStart;
+	}
+
+	/**
+	 * @param krecicStart the krecicStart to set
+	 */
+	public void setKrecicStart(boolean krecicStart) {
+		this.krecicStart = krecicStart;
 	}
 	
 	

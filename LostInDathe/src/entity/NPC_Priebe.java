@@ -8,11 +8,12 @@ import main.KeyHandler;
 
 public class NPC_Priebe extends Entity {
 	
+	public static final String npcName = "priebe";
 	
 	public NPC_Priebe(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
 		
-		setName("priebe");
+		setName(npcName);
 		direction = "";
 		speed = 1;
 		setCollisionOn(true);

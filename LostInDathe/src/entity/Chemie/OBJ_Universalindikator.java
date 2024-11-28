@@ -8,9 +8,11 @@ import main.KeyHandler;
 
 public class OBJ_Universalindikator extends Entity {
 	
+	public static final String objName = "Universalindikator";
+	
 	public OBJ_Universalindikator(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
-		setName("Universalindikator");
+		setName(objName);
 		idle1 = setup("/npc/objects/chemie/Universalindikator");
 		idle2 = setup("/npc/objects/chemie/Universalindikator");
 		setCollisionOn(false);

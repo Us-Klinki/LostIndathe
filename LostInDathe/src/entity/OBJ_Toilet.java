@@ -5,9 +5,11 @@ import main.KeyHandler;
 
 public class OBJ_Toilet extends Entity {
 	
+	public static final String objName = "Toilet";
+	
 	public OBJ_Toilet(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
-		setName("Toilet");
+		setName(objName);
 		idle1 = setup("/npc/objects/toilet");
 		idle2 = setup("/npc/objects/toilet");
 		setCollisionOn(true);

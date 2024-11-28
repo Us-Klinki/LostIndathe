@@ -8,10 +8,13 @@ import main.GamePanel;
 import main.KeyHandler;
 
 public class NPC_Maus extends Entity{
+	
+	public static final String npcName = "maus";
+	
 	public NPC_Maus(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
 		
-		setName("maus");
+		setName(npcName);
 		direction = "";
 		speed = 6;
 		setCollisionOn(false);

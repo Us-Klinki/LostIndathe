@@ -8,9 +8,11 @@ import main.KeyHandler;
 
 public class OBJ_Base extends Entity {
 	
+	public static final String objName = "Base";
+	
 	public OBJ_Base(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
-		setName("Base");
+		setName(objName);
 		idle1 = setup("/npc/objects/chemie/Base");
 		idle2 = setup("/npc/objects/chemie/Base");
 		setCollisionOn(false);

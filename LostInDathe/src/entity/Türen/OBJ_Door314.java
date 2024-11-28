@@ -5,11 +5,12 @@ import main.GamePanel;
 import main.KeyHandler;
 
 public class OBJ_Door314 extends Entity {
+	public static final String objName = "Door314";
 	
 	
 	public OBJ_Door314(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
-		setName("Door314");
+		setName(objName);
 		idle1 = setup("/npc/objects/Tür");
 		idle2 = setup("/npc/objects/Tür");
 		setCollisionOn(true);

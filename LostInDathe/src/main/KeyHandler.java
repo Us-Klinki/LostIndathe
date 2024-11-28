@@ -115,7 +115,13 @@ public class KeyHandler implements KeyListener{
 	            /*if(gp.gameState == gp.dialogueState) {
 	            	gp.stopSE(23);
 	            }*/
-	            
+	        }
+	        if(gp.ui.getCommandNum() == 1) {
+	        	gp.saveLoad.load();
+	        	gp.gameState = gp.playState;
+	            gp.stopMusic(3);
+	            gp.playSE(7);
+	            gp.playMusic(2);
 	        }
 	        if (gp.ui.getCommandNum() == 2) {
 	            System.exit(0);

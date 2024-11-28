@@ -6,6 +6,7 @@ import main.KeyHandler;
 
 public class OBJ_Door315 extends Entity {
 	
+	public static final String objName = "Door315";
 	
 	public OBJ_Door315(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);

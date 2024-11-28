@@ -8,9 +8,11 @@ import main.KeyHandler;
 
 public class OBJ_Statue extends Entity {
 	
+	public static final String objName = "Statue";
+	
 	public OBJ_Statue(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
-		setName("Statue");
+		setName(objName);
 		idle1 = setup("/npc/objects/Statue1");
 		idle2 = setup("/npc/objects/Statue1");
 		down1 = setup("/npc/objects/Statue1");

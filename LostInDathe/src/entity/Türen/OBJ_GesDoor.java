@@ -6,10 +6,11 @@ import main.KeyHandler;
 
 public class OBJ_GesDoor extends Entity {
 	
+	public static final String objName = "GesDoor";
 	
 	public OBJ_GesDoor(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
-		setName("GesDoor");
+		setName(objName);
 		idle1 = setup("/npc/objects/Tür");
 		idle2 = setup("/npc/objects/Tür");
 		setCollisionOn(false);

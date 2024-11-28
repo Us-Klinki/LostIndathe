@@ -305,7 +305,7 @@ public class UI {
 		textY += absatz / 2 + absatz / 4;
 		g2.drawString("Projektsemesters Q3. Präsentiert von Us and Klinki.", textX, textY);
 		textY += absatz;
-		g2.drawString("Version beta 0.2-20241124.", textX, textY);
+		g2.drawString("Version alpha 0.9.0-20241127.", textX, textY);
 		textY += 2 * absatz;
 		g2.setFont(yoster_s);
 		
@@ -595,7 +595,7 @@ public class UI {
 		textX = frameX + gp.getTileSize();
 		textY = frameY + 2* abstand + abstand/2;
 		
-		setCurrentDialogue("Spiel verlassen und zum \nDesktop zurückkehren? \n\nUngespeicherter Fort-\nschritt geht verloren.");
+		setCurrentDialogue("Spiel verlassen und zum \nDesktop zurückkehren? \n\nSpielstand wird\nzwischengespeichert.");
 		
 		for (String line: getCurrentDialogue().split("\n")) {
 			 	g2.drawString(line, textX, textY);
@@ -633,6 +633,7 @@ public class UI {
 			if(gp.keyH.enterPressed == true) {
 				//subState = 0;
 				//commandNum = 0;
+				gp.saveLoad.save();
 				System.exit(1);
 				
 				//gp.music.stop();

@@ -8,9 +8,11 @@ import main.KeyHandler;
 
 public class OBJ_Phenolphthalein extends Entity {
 	
+	public static final String objName = "Phenolphthalein";
+	
 	public OBJ_Phenolphthalein(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
-		setName("Phenolphthalein");
+		setName(objName);
 		idle1 = setup("/npc/objects/chemie/Phenolphthalein");
 		idle2 = setup("/npc/objects/chemie/Phenolphthalein");
 		setCollisionOn(false);

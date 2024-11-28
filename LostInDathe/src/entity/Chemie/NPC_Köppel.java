@@ -9,11 +9,13 @@ import main.KeyHandler;
 
 public class NPC_Köppel extends Entity {
 	
+	public static final String npcName = "Köppel";
+	
 	
 	public NPC_Köppel(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
 		
-		setName("Köppel");
+		setName(npcName);
 		direction = "";
 		speed = 0;
 		setCollisionOn(true);

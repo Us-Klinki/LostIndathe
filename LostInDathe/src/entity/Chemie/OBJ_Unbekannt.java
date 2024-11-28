@@ -8,9 +8,11 @@ import main.KeyHandler;
 
 public class OBJ_Unbekannt extends Entity {
 	
+	public static final String objName = "Unbekannt";
+	
 	public OBJ_Unbekannt(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
-		setName("Unbekannt");
+		setName(objName);
 		idle1 = setup("/npc/objects/chemie/Unbekannt");
 		idle2 = setup("/npc/objects/chemie/Unbekannt");
 		setCollisionOn(false);

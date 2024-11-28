@@ -9,11 +9,12 @@ import main.KeyHandler;
 
 public class NPC_Klinkhardt extends Entity {
 	
+	public static final String npcName = "Klinki";
 	
 	public NPC_Klinkhardt(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
 		
-		setName("Klinki");
+		setName(npcName);
 		direction = "";
 		speed = 0;
 		setCollisionOn(true);

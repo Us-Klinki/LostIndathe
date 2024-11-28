@@ -8,9 +8,11 @@ import main.KeyHandler;
 
 public class OBJ_Säure extends Entity {
 	
+	public static final String objName = "Säure";
+	
 	public OBJ_Säure(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
-		setName("Säure");
+		setName(objName);
 		idle1 = setup("/npc/objects/chemie/Säure");
 		idle2 = setup("/npc/objects/chemie/Säure");
 		setCollisionOn(false);

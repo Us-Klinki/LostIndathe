@@ -21,6 +21,7 @@ import java.util.Comparator;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import data.SaveLoad;
 import tile.Map;
 import tile.TileManager;
 @SuppressWarnings("serial")
@@ -44,7 +45,7 @@ public class GamePanel extends JPanel implements Runnable {
 	final int maxWorldRow = 100;
 	private final int maxMap = 16;
 	// TODO: 0 = Bad, 1 = OG, 2 = Geschichte, 3 = Informatik, 4 = Chemie, 5 = EG, 6 = Bio
-	private int currentMap = 5;
+	private int currentMap = 0;
 	//private int currentMap = 6;
 	
 	// Für Vollbild
@@ -104,8 +105,8 @@ public class GamePanel extends JPanel implements Runnable {
  	/**
  	 * @param obj the obj to set
  	 */
- 	public void setObj(Entity obj[][]) {
- 		this.obj = obj;
+ 	public void setObj(Entity obj, int mapNum, int i) {
+ 	    this.obj[mapNum][i] = obj;
  	}
 	public Entity[][] getNpc() {
 		return npc;
@@ -165,6 +166,8 @@ public class GamePanel extends JPanel implements Runnable {
  	Thread gameThread;        //Thread ist nötig damit das Spiel durchgehend läuft
  	Map map = new Map(this);
  	EnvironmentManager eManager = new EnvironmentManager(this);
+ 	SaveLoad saveLoad = new SaveLoad(this);
+ 	public EntityGenerator eGenerator = new EntityGenerator(this, keyH);
  	
  	
  	
@@ -172,8 +175,8 @@ public class GamePanel extends JPanel implements Runnable {
  	
  	//ENTITY AND OBJECTS
  	private Player player = new Player(this, keyH);
- 	private Entity obj[][] = new Entity[maxMap][30];
- 	private Entity npc[][] = new Entity[maxMap][30];
+ 	public Entity obj[][] = new Entity[maxMap][30];
+ 	public Entity npc[][] = new Entity[maxMap][30];
  	ArrayList<Entity> entityList = new ArrayList<>();
  	Font debug = new Font("Bahnschrift", Font.BOLD, 24);
  	

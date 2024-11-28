@@ -9,11 +9,12 @@ import main.KeyHandler;
 
 public class NPC_Test extends Entity{ //Man schaft es mit dem NPC das Game zu crashen aber schwer
 	
+	public static final String npcName = "Test";
 	
 	public NPC_Test(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
 		
-		setName("Test");
+		setName(npcName);
 		direction = "";
 		speed = 1;
 		

@@ -8,9 +8,11 @@ import main.KeyHandler;
 
 public class OBJ_NeutralReplacer extends Entity {
 	
+	public static final String objName = "NeutralReplacer";
+	
 	public OBJ_NeutralReplacer(GamePanel gp, KeyHandler keyH) {
 		super(gp, keyH);
-		setName("NeutralReplacer");
+		setName(objName);
 		idle1 = setup("/npc/objects/chemie/Neutral");
 		idle2 = setup("/npc/objects/chemie/Neutral");
 		setCollisionOn(false);
