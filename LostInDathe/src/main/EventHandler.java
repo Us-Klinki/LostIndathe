@@ -118,9 +118,9 @@ public class EventHandler {
 			else if(hit(1, 72, 41, "any") == true) { interTeleport(4, 53, 63.9); gp.stopMusic(6); gp.playMusic(2); }
 			else if(hit(4, 53, 64, "any") == true) { interTeleport(1, 72, 40.9); gp.stopMusic(2); gp.playMusic(6); }
 			// Teleport 2x EG -> Info; Info -> OG
-			else if(hit(5, 42, 24, "any") == true) { interTeleport(3, 50, 49.9); gp.stopMusic(6); gp.playMusic(2); keyH.licht = false; }
-			else if(hit(5, 55, 24, "any") == true) { interTeleport(3, 50, 49.9); gp.stopMusic(6); gp.playMusic(2); keyH.licht = false; }
-			else if(hit(3, 50, 50, "any") == true) { interTeleport(5, 42, 24); gp.stopMusic(2); gp.playMusic(6); }
+			else if(hit(5, 42, 24, "any") == true) { interTeleport(3, 50, 49.9); gp.stopMusic(6); gp.playMusic(48); keyH.licht = false; }
+			else if(hit(5, 55, 24, "any") == true) { interTeleport(3, 50, 49.9); gp.stopMusic(6); gp.playMusic(48); keyH.licht = false; }
+			else if(hit(3, 50, 50, "any") == true) { interTeleport(5, 42, 24); gp.stopMusic(48); gp.playMusic(6); }
 			// Teleport 2x EG -> Bio; 2x Bio -> EG
 			else if(hit(5, 79, 40, "any") == true) { interTeleport(6, 43, 46.9); gp.stopMusic(6); gp.playMusic(2); }
 			else if(hit(5, 79, 59, "any") == true) { interTeleport(6, 43, 57.9); gp.stopMusic(6); gp.playMusic(2); }
@@ -138,8 +138,8 @@ public class EventHandler {
 			if(hitTreppe(1, 22, 22, "any") == true) { interTeleport(5, 28, 26); }
 			else if(hitTreppe(5, 28, 25, "any") == true) { interTeleport(1, 22, 23); }
 			// Teleport Aufgang C OG -> EG; EG -> OG
-			else if(hitTreppe(1, 64, 22, "any") == true) { interTeleport(5, 71, 26); }
-			else if(hitTreppe(5, 71, 25, "any") == true) { interTeleport(1, 64, 23); }
+			else if(hitTreppe(1, 65, 22, "any") == true) { interTeleport(5, 72, 26); }
+			else if(hitTreppe(5, 72, 25, "any") == true) { interTeleport(1, 65 , 23); }
 		}
 		
 		if(hitTileGroß(1, 22, 16) == true || hitTileGroß(1, 22, 17) == true || hitTileGroß(1, 22, 18) == true || 

@@ -18,7 +18,7 @@ public class Sound {
 	public Sound() {
 		
 		soundURL[0] = pfad("door.wav");
-		soundURL[1] = pfad("key.wav");
+		soundURL[1] = pfad("soundeffect/Toilettenspuelung.wav");
 		soundURL[2] = pfad("music.wav");
 		soundURL[3] = pfad("mainmenu.wav");
 		soundURL[4] = pfad("switch.wav");
@@ -65,6 +65,7 @@ public class Sound {
 		soundURL[45] = pfad("voiceover/krecic/Krecic_Dialog4.wav");
 		soundURL[46] = pfad("voiceover/krecic/Krecic_Dialog5.wav");
 		soundURL[47] = pfad("voiceover/krecic/Krecic_Dialog6.wav");
+		soundURL[48] = pfad("soundtrack/Informatik_Song.wav");
 		
 	}
 	

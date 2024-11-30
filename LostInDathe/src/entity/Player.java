@@ -451,6 +451,7 @@ public class Player extends Entity {
 			case "Toilet":
 				if(gp.getObj()[gp.getCurrentMap()][i].isKeyInside() && keyH.enterPressed) {	//TODO: Indikator für Enter  drücken
 					gp.stopSE(23);
+					gp.playSE(1);
 					gp.playSE(10);
 					gp.playSE(24);
 					setHasKey(getHasKey() + 1);
@@ -463,6 +464,7 @@ public class Player extends Entity {
 					gp.getObj()[gp.getCurrentMap()][i].setKeyInside(false);
 				}
 				else if(keyH.enterPressed) {
+					gp.playSE(1);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
