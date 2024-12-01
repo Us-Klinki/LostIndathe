@@ -122,6 +122,7 @@ public class UI {
 			if(messageOn == true) {
 				g2.drawRoundRect(gp.getTileSize() * 12, gp.getTileSize() * 14, gp.getTileSize() * 8, gp.getTileSize() * 2, 12, 12);
 			}
+			drawHud();
 		}
 		// Pausen-Status
 		else if(gp.gameState == gp.pauseState) {
@@ -137,6 +138,7 @@ public class UI {
 		if(gp.gameState == gp.dialogueState) {
 			updateDialogue();
 			drawDialogueScreen();
+			drawHud();
 		}
 		
 		if(gp.gameState == gp.endState) {
@@ -232,8 +234,9 @@ public class UI {
 		int textX;
 		int textY;
 		boolean transparent = false;
+		boolean hellTransparent = false;
 		
-		drawSubWindow(frameX, frameY, frameWidth, frameHeight, transparent);
+		drawSubWindow(frameX, frameY, frameWidth, frameHeight, transparent, hellTransparent);
 		int abstand = gp.getTileSize();
 		int absatz = gp.getTileSize() / 4 + gp.getTileSize() / 2;
 		g2.setFont(yoster_sl);
@@ -353,8 +356,9 @@ public class UI {
 		int frameX = getXforCenteredText("") - frameWidth/2 + 10;
 		int frameY = (gp.getTileSize() * 9) - (frameHeight/2);
 		boolean transparent = true;
+		boolean hellTransparent = false;
 		
-		drawSubWindow(frameX, frameY, frameWidth, frameHeight, transparent);
+		drawSubWindow(frameX, frameY, frameWidth, frameHeight, transparent, hellTransparent);
 		int abstand = gp.getTileSize() + gp.getTileSize() / 2;
 		int absatz = gp.getTileSize() * 2;
 		int auswahlAbstand = gp.getTileSize() / 2 + gp.getTileSize() / 8 + 10 ;
@@ -689,8 +693,9 @@ public class UI {
 		int width = gp.getScreenWidth() - (gp.getTileSize() * 9);
 		int height = gp.getTileSize() * 4;
 		boolean transparent = true;
+		boolean hellTransparent = false;
 		
-		drawSubWindow(x, y, width, height, transparent);
+		drawSubWindow(x, y, width, height, transparent, hellTransparent);
 		
 		g2.setFont(yoster_s);
 		
@@ -715,7 +720,8 @@ public class UI {
 		int textX;
 		int textY;
 		boolean transparenz = true;
-		drawSubWindow(frameX, frameY, gp.getTileSize() * 31, gp.getTileSize() * 17, transparenz);
+		boolean hellTransparent = false;
+		drawSubWindow(frameX, frameY, gp.getTileSize() * 31, gp.getTileSize() * 17, transparenz, hellTransparent);
 		int abstand = gp.getTileSize();
 		int absatz = gp.getTileSize() / 4 + gp.getTileSize() / 2;
 		int umbruch = absatz / 2 + absatz / 4;
@@ -792,6 +798,10 @@ public class UI {
 		}
 	}
 	
+	public void drawHud() {
+		
+	}
+	
 	// letter by letter
 	public void updateDialogue() {
 		try {
@@ -813,12 +823,18 @@ public class UI {
 		}
 	}
 
-	public void drawSubWindow(int x, int y, int width, int height, boolean transparent) {
+	public void drawSubWindow(int x, int y, int width, int height, boolean transparent, boolean hellTransparent) {
 		int strokeWidth = 3;
 		int bogen = 35;
 		
 		
-		if(transparent == true) {
+		if(hellTransparent) {
+			Color c = new Color(0, 0, 0, 240);
+			g2.setColor(c);
+			g2.fillRoundRect(x, y, width, height, bogen, bogen);
+		}
+		
+		else if(transparent == true) {
 			Color c = new Color(0, 0, 0, 220);
 			g2.setColor(c);
 			g2.fillRoundRect(x, y, width, height, bogen, bogen);
