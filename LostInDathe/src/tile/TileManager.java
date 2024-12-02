@@ -172,6 +172,16 @@ public class TileManager {
 		setup(117, "73_Schrank4", true);
 		setup(118, "73_Schrank5", true);
 		setup(119, "73_Schrank6", true);
+		setup(120, "73_Schrank7", true);
+		setup(121, "73_Schrank8", true);
+		setup(122, "73_Schrank9", true);
+		setup(123, "73_Schrank91", true);
+		setup(124, "74_Gang_Fade", false);
+		setup(125, "75_Schrank1", true);
+		setup(126, "75_Schrank2", true);
+		setup(127, "76_Schrank1", true);
+		setup(128, "76_Schrank2", true);
+		
 		
 		
 

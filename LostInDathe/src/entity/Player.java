@@ -204,6 +204,14 @@ public class Player extends Entity {
 			
 			String objectName = gp.getObj()[gp.getCurrentMap()][i].getName();
 			switch(objectName) {
+			case "Sink":
+				if (keyH.enterPressed) {
+					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
+						gp.stopSE(j);
+					}
+					gp.playSE(51);
+				}
+				break;
 			case "Key":
 				gp.playSE(1);
 				setHasKey(getHasKey() + 1); // virtuelles Inventar
@@ -216,7 +224,7 @@ public class Player extends Entity {
 						gp.stopSE(j);
 					}
 					//TODO: Indikator für Enter  drücken
-					gp.playSE(0);
+					gp.playSE(50);
 					gp.getObj()[gp.getCurrentMap()][i].setCollisionOn(false);
 					setHasKey(getHasKey() - 1);
 					System.out.println("Schlüssel: " + getHasKey());
@@ -234,9 +242,9 @@ public class Player extends Entity {
 			    }
 				break;
 			case "Informatikdoor":
-				if(isHasKeyInfo() && keyH.enterPressed) {
+				if(isHasKeyInfo() && keyH.enterPressed && gp.getObj()[gp.getCurrentMap()][i].isCollisionOn()) {
 					
-					//gp.playSE(0);
+					gp.playSE(50);
 					gp.getObj()[gp.getCurrentMap()][i].setCollisionOn(false);
 					//System.out.println("Schlüssel: " + hasKey);
 				}
@@ -252,9 +260,9 @@ public class Player extends Entity {
 				break;
 			
 			case "Chemiedoor":
-				if(getHasKeyChemie() > 0 && keyH.enterPressed) {
+				if(getHasKeyChemie() > 0 && keyH.enterPressed && gp.getObj()[gp.getCurrentMap()][i].isCollisionOn()) {
 					
-					//gp.playSE(0);
+					gp.playSE(50);
 					gp.getObj()[gp.getCurrentMap()][i].setCollisionOn(false);
 					//System.out.println("Schlüssel: " + hasKey);
 				}
@@ -272,8 +280,8 @@ public class Player extends Entity {
 			
 			case "Biodoor":
 				
-				if(isHasKeyBio() && keyH.enterPressed) {
-					//gp.playSE(0);
+				if(isHasKeyBio() && keyH.enterPressed && gp.getObj()[gp.getCurrentMap()][i].isCollisionOn()) {
+					gp.playSE(50);
 					gp.getObj()[gp.getCurrentMap()][i].setCollisionOn(false);
 				}
 				
@@ -405,10 +413,11 @@ public class Player extends Entity {
 			break;
 			
 			case "DoorSchulhof":
-				if(isHasKeySchulhof() && keyH.enterPressed) {
+				if(isHasKeySchulhof() && keyH.enterPressed && gp.getObj()[gp.getCurrentMap()][i].isCollisionOn()) {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
+					gp.playSE(50);
 					gp.playSE(33);
 					gp.gameState = gp.endState;
 				}
@@ -674,7 +683,6 @@ public class Player extends Entity {
 				if(EventHandler.gesGelöst == true) {
 					gp.getNpc()[gp.getCurrentMap()][i].setDialogue4();
 					gp.stopSE(14);
-					gp.stopMusic(10);
 					gp.playSE(14);
 					if(getHasKeyChemie() == 0) {
 						gp.playSE(10);

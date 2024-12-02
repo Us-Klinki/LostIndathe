@@ -112,8 +112,8 @@ public class EventHandler {
 			if(hit(0, 20, 30, "any") == true) { interTeleport(1, 17, 11); /*gp.stopSE(24);*/ gp.stopMusic(2);  gp.playMusic(6); }
 			else if(hit(1, 17, 11, "any") == true) { interTeleport(0, 20, 30); gp.stopMusic(6); gp.playMusic(2); }
 			// Teleport OG -> Geschichte; Geschichte -> OG
-			else if(hit(1, 16, 15, "any") == true) { interTeleport(2, 29, 18); gp.stopMusic(6); gp.playMusic(2); }
-			else if(hit(2, 29, 18, "any") == true) { interTeleport(1, 16, 15); gp.stopMusic(2); gp.playMusic(6); }
+			else if(hit(1, 16, 15, "any") == true) { interTeleport(2, 29, 18); gp.stopMusic(6); gp.playMusic(49); }
+			else if(hit(2, 29, 18, "any") == true) { interTeleport(1, 16, 15); gp.stopMusic(49); gp.playMusic(6); }
 			// Teleport OG -> Chemie: Chemie -> OG
 			else if(hit(1, 72, 41, "any") == true) { interTeleport(4, 53, 63.9); gp.stopMusic(6); gp.playMusic(2); }
 			else if(hit(4, 53, 64, "any") == true) { interTeleport(1, 72, 40.9); gp.stopMusic(2); gp.playMusic(6); }
@@ -296,9 +296,7 @@ public class EventHandler {
 		previousEventY = gp.getPlayer().worldY;
 		canTouchEvent = false;
 		canTouchTreppe = false;
-		for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
-			gp.stopSE(j);
-		}
+		
 		gp.playSE(5);
 		
 	}

@@ -66,6 +66,9 @@ public class Sound {
 		soundURL[46] = pfad("voiceover/krecic/Krecic_Dialog5.wav");
 		soundURL[47] = pfad("voiceover/krecic/Krecic_Dialog6.wav");
 		soundURL[48] = pfad("soundtrack/Informatik_Song.wav");
+		soundURL[49] = pfad("soundtrack/Geschichte_Song.wav");
+		soundURL[50] = pfad("soundeffect/Tuer_Oeffnen.wav");
+		soundURL[51] = pfad("soundeffect/Waschbecken.wav");
 		
 	}
 	
@@ -78,11 +81,12 @@ public class Sound {
 			clip.open(ais);
 			fc = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
 			checkVolume();
-			
-		}catch(Exception e) {
+			}catch(Exception e) {
 		}
 		
 	}
+	
+
 	public void play() {
 		
 		clip.start();
