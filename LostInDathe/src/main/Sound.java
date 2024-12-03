@@ -1,6 +1,7 @@
 package main;
 
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -14,6 +15,7 @@ public class Sound {
 	FloatControl fc;
 	int volumeScale = 6;
 	float volume;
+	private ArrayList<Clip> activeClips;
 	
 	public Sound() {
 		
@@ -70,6 +72,7 @@ public class Sound {
 		soundURL[50] = pfad("soundeffect/Tuer_Oeffnen.wav");
 		soundURL[51] = pfad("soundeffect/Waschbecken.wav");
 		
+		activeClips = new ArrayList<>();
 	}
 	
 	public void setFile(int i) {
@@ -81,6 +84,7 @@ public class Sound {
 			clip.open(ais);
 			fc = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
 			checkVolume();
+			activeClips.add(clip);
 			}catch(Exception e) {
 		}
 		
@@ -96,8 +100,12 @@ public class Sound {
 		clip.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 	public void stop() {
-		
-		clip.stop();
+        for (Clip clip : activeClips) {
+            if (clip.isRunning()) {
+                clip.stop();
+            }
+        }
+        activeClips.clear(); // Clear the list after stopping
 	}
 	
 	public void pause() {

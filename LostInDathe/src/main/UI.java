@@ -5,6 +5,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
@@ -21,6 +22,7 @@ public class UI {
 	Font yoster, yoster_s, yoster_l, yoster_sl, yoster_xs; 
 	Color signal, white;
 	
+	int counter = 0;
 	public static boolean messageOn = false;
 	public String message = "Interagieren - ENTER";
 	int messageCounter = 0;
@@ -34,17 +36,18 @@ public class UI {
 	private int dialogueIndex = 0;
 	private int dialogueSpeed = 2; 
 	private int dialogueCounter = 0;
+	public BufferedImage phenol, key, universal, base, neutral, säure, maus;
 
 	public UI(GamePanel gp) {
 		 this.gp = gp; 
 		 
 		 try (InputStream FontLoader = getClass().getResourceAsStream("/font/yoster.ttf")) {
 			 yoster = Font.createFont(Font.TRUETYPE_FONT, FontLoader);
-			    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			    ge.registerFont(yoster);
-			} catch (FontFormatException | IOException e) {
-			    e.printStackTrace();
-			}
+			 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			 ge.registerFont(yoster);
+		} catch (FontFormatException | IOException e) {
+			e.printStackTrace();
+		}
 		 yoster_s = yoster.deriveFont(Font.PLAIN, 40);
 		 yoster_sl = yoster.deriveFont(Font.BOLD, 60);
 		 yoster_l = yoster.deriveFont(Font.BOLD, 80);
@@ -60,8 +63,13 @@ public class UI {
 		 final int frameHeight = gp.tileSize * 10;
 		 //drawSubWindow (frameX, frameY, frameWidth, frameHeight); */
 		 getUiImage(); 
+		 phenol = setupHud("/npc/objects/chemie/Phenolphthalein");
+		 key = setupHud("/npc/objects/key");
+		 universal = setupHud("/npc/objects/chemie/Universalindikator");
+		 säure = setupHud("/npc/objects/chemie/Säure");
+		 base = setupHud("/npc/objects/chemie/Base");
 		 
-		 }
+	}
 	
 	/**
 	 * @return the commandNum
@@ -119,10 +127,11 @@ public class UI {
 		}
 		// Spielstatus
 		else if(gp.gameState == gp.playState) {
+			drawHud();
 			if(messageOn == true) {
 				g2.drawRoundRect(gp.getTileSize() * 12, gp.getTileSize() * 14, gp.getTileSize() * 8, gp.getTileSize() * 2, 12, 12);
 			}
-			drawHud();
+
 		}
 		// Pausen-Status
 		else if(gp.gameState == gp.pauseState) {
@@ -135,13 +144,13 @@ public class UI {
 		}
 		
 		// Dialog-Status
-		if(gp.gameState == gp.dialogueState) {
+		else if(gp.gameState == gp.dialogueState) {
 			updateDialogue();
 			drawDialogueScreen();
 			drawHud();
 		}
 		
-		if(gp.gameState == gp.endState) {
+		else if(gp.gameState == gp.endState) {
 			drawEndScreen();
 		}
 	}
@@ -236,7 +245,7 @@ public class UI {
 		boolean transparent = false;
 		boolean hellTransparent = false;
 		
-		drawSubWindow(frameX, frameY, frameWidth, frameHeight, transparent, hellTransparent);
+		drawSubWindow(frameX, frameY, frameWidth, frameHeight, transparent, hellTransparent, false);
 		int abstand = gp.getTileSize();
 		int absatz = gp.getTileSize() / 4 + gp.getTileSize() / 2;
 		g2.setFont(yoster_sl);
@@ -358,7 +367,8 @@ public class UI {
 		boolean transparent = true;
 		boolean hellTransparent = false;
 		
-		drawSubWindow(frameX, frameY, frameWidth, frameHeight, transparent, hellTransparent);
+		drawSubWindow(frameX, frameY, frameWidth, frameHeight, transparent, hellTransparent, false);
+		
 		int abstand = gp.getTileSize() + gp.getTileSize() / 2;
 		int absatz = gp.getTileSize() * 2;
 		int auswahlAbstand = gp.getTileSize() / 2 + gp.getTileSize() / 8 + 10 ;
@@ -695,7 +705,7 @@ public class UI {
 		boolean transparent = true;
 		boolean hellTransparent = false;
 		
-		drawSubWindow(x, y, width, height, transparent, hellTransparent);
+		drawSubWindow(x, y, width, height, transparent, hellTransparent, false);
 		
 		g2.setFont(yoster_s);
 		
@@ -721,7 +731,7 @@ public class UI {
 		int textY;
 		boolean transparenz = true;
 		boolean hellTransparent = false;
-		drawSubWindow(frameX, frameY, gp.getTileSize() * 31, gp.getTileSize() * 17, transparenz, hellTransparent);
+		drawSubWindow(frameX, frameY, gp.getTileSize() * 31, gp.getTileSize() * 17, transparenz, hellTransparent, false);
 		int abstand = gp.getTileSize();
 		int absatz = gp.getTileSize() / 4 + gp.getTileSize() / 2;
 		int umbruch = absatz / 2 + absatz / 4;
@@ -798,47 +808,153 @@ public class UI {
 		}
 	}
 	
+	public BufferedImage setupHud(String imagePath) {
+			
+		UtilityTool uTool = new UtilityTool();
+		BufferedImage Sprite = null;
+		try {
+			Sprite = ImageIO.read(getClass().getResourceAsStream(imagePath +".png"));
+			Sprite = uTool.getScaledImage(Sprite, gp.getTileSize(), gp.getTileSize());
+				
+		} catch (IOException e) {
+			e.printStackTrace();	
+		}
+		return Sprite;
+	}
+	
 	public void drawHud() {
+		int subX = gp.getTileSize()*25-5;
+		int subY = gp.getTileSize()*16+10;
+		int subWidth = gp.getTileSize()*7-4;
+		int subHeight = gp.getTileSize();
+		int imageHeight = gp.getTileSize()/2+5;
+		int imageWidth = gp.getTileSize()/2+5;
+		int imageY = subY + 10;
+		int imageX = subX + 10;
+		int textX = imageX + gp.getTileSize()/2+8;
+		int textY = imageY + 25;
+		int abstand = gp.getTileSize()/2+8;
 		
+		if(gp.getPlayer().getHasKey() == 1) { 
+			drawSubWindow(subX, subY+gp.getTileSize()/2+5, subWidth, subHeight, false, false, true);
+			g2.drawImage(key, imageX, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
+			g2.setColor(Color.black);
+			g2.setFont(yoster_xs);
+			g2.drawString("Kloschlüssel", textX, textY + gp.getTileSize()/2+5);
+		}
+		
+		if(gp.getPlayer().getHasKeyChemie() == 1) { 
+			if(gp.getPlayer().getCurrentKöppelDialog() == 4) {
+				drawSubWindow(subX, subY, subWidth, subHeight*2-19, false, false, true);
+				g2.drawImage(key, imageX, imageY + abstand, imageWidth, imageHeight, null);
+				g2.drawImage(phenol, imageX, imageY, imageWidth, imageHeight, null);
+				g2.setColor(Color.black);
+				g2.setFont(yoster_xs);
+				g2.drawString("311", textX, textY + abstand);
+				g2.drawString("Phenolphtalein", textX, textY);
+			} 
+			else if(gp.getPlayer().getCurrentKöppelDialog() == 5) {
+				drawSubWindow(subX, subY, subWidth, subHeight*2-19, false, false, true);
+				g2.drawImage(universal, imageX, imageY, imageWidth, imageHeight, null);
+				g2.drawImage(key, imageX, imageY + abstand, imageWidth, imageHeight, null);
+				g2.setColor(Color.black);
+				g2.setFont(yoster_xs);
+				g2.drawString("Universalindikator", textX, textY);
+				g2.drawString("311", textX, textY + abstand);
+			}
+			else if(gp.getPlayer().hatSäure) {
+				drawSubWindow(subX, subY, subWidth, subHeight*2-19, false, false, true);
+				g2.drawImage(säure, imageX, imageY, imageWidth, imageHeight, null);
+				g2.drawImage(key, imageX, imageY + abstand, imageWidth, imageHeight, null);
+				g2.setColor(Color.black);
+				g2.setFont(yoster_xs);
+				g2.drawString("Säure", textX, textY);
+				g2.drawString("311", textX, textY + abstand);
+			}else if(gp.getPlayer().getCurrentKöppelDialog() == 5) {
+				drawSubWindow(subX, subY, subWidth, subHeight*2-19, false, false, true);
+				g2.drawImage(base, imageX, imageY, imageWidth, imageHeight, null);
+				g2.drawImage(key, imageX, imageY + abstand, imageWidth, imageHeight, null);
+				g2.setColor(Color.black);
+				g2.setFont(yoster_xs);
+				g2.drawString("Base", textX, textY);
+				g2.drawString("311", textX, textY + abstand);
+			}
+		}
+		
+		if(gp.getPlayer().isHasKeyInfo() == true) { 
+			drawSubWindow(subX, subY, subWidth, subHeight*2-19, false, false, true);
+			g2.drawImage(key, imageX, imageY, imageWidth, imageHeight, null);
+			g2.drawImage(key, imageX, imageY + abstand, imageWidth, imageHeight, null);
+			g2.setColor(Color.black);
+			g2.setFont(yoster_xs);
+			g2.drawString("115", textX, textY);
+			g2.drawString("311", textX, textY + abstand);
+		}
+		
+		if(gp.getPlayer().isHasKeyBio() == true) { 
+			drawSubWindow(subX, subY, subWidth, subHeight*2-19, false, false, true);
+			g2.drawImage(key, imageX, imageY, imageWidth, imageHeight, null);
+			g2.drawImage(key, imageX, imageY + abstand, imageWidth, imageHeight, null);
+			g2.setColor(Color.black);
+			g2.setFont(yoster_xs);
+			g2.drawString("110", textX, textY);
+			g2.drawString("311", textX, textY + abstand);
+		}
+		
+		if(gp.getPlayer().isHasKeySchulhof() == true) { 
+			drawSubWindow(subX, subY, subWidth, subHeight*2-19, false, false, true);
+			g2.drawImage(key, imageX, imageY, imageWidth, imageHeight, null);
+			g2.drawImage(key, imageX, imageY + abstand, imageWidth, imageHeight, null);
+			g2.setColor(Color.black);
+			g2.setFont(yoster_xs);
+			g2.drawString("Schulhofschlüssel", textX, textY);
+			g2.drawString("311", textX, textY + abstand);
+		}
 	}
 	
 	// letter by letter
 	public void updateDialogue() {
 		try {
-		if(currentDialogue != null) {
-			if (gp.gameState == gp.dialogueState && dialogueIndex < currentDialogue.length()) {
-				dialogueCounter++;
-	        
-				if (dialogueCounter >= dialogueSpeed) {
-					displayedDialogue += currentDialogue.charAt(dialogueIndex);
-					dialogueIndex++;
-					dialogueCounter = 0;
+			if(currentDialogue != null) {
+				if (gp.gameState == gp.dialogueState && dialogueIndex < currentDialogue.length()) {
+					dialogueCounter++;
+		        
+					if (dialogueCounter >= dialogueSpeed) {
+						displayedDialogue += currentDialogue.charAt(dialogueIndex);
+						dialogueIndex++;
+						dialogueCounter = 0;
+					}
 				}
 			}
-		}
-
 		}
 		catch(Exception e) {
 			System.out.println("Dialog hat nicht geklappt.");
 		}
 	}
 
-	public void drawSubWindow(int x, int y, int width, int height, boolean transparent, boolean hellTransparent) {
+	public void drawSubWindow(int x, int y, int width, int height, boolean transparent, boolean hellTransparent, boolean clear) {
 		int strokeWidth = 3;
 		int bogen = 35;
 		
 		
 		if(hellTransparent) {
-			Color c = new Color(0, 0, 0, 240);
+			Color c = new Color(0, 0, 0, 100);
 			g2.setColor(c);
 			g2.fillRoundRect(x, y, width, height, bogen, bogen);
 		}
 		
 		else if(transparent == true) {
-			Color c = new Color(0, 0, 0, 220);
+			Color c = new Color(0, 0, 0, 100);
 			g2.setColor(c);
 			g2.fillRoundRect(x, y, width, height, bogen, bogen);
 		}
+		
+		else if(clear == true) {
+			Color c = new Color(0, 0, 0, 0);
+			g2.setColor(c);
+			g2.fillRoundRect(x, y, width, height, bogen, bogen);
+		}
+		
 		else {
 			Color c = new Color(0, 0, 0);
 			g2.setColor(c);

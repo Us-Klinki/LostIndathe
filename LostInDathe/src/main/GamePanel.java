@@ -251,7 +251,7 @@ public class GamePanel extends JPanel implements Runnable {
   
  	@Override
  	public void run() {
-    
+ 		
  		double drawIntervall = 1000000000/FPS;
  		double delta = 0;
  		long lastTime = System.nanoTime();
@@ -270,7 +270,7 @@ public class GamePanel extends JPanel implements Runnable {
  			lastTime = currentTime;
       
  			if(delta >= 1) {
-    		
+ 				
  				if (gameState == playState) {
  					update();
  				}
@@ -343,7 +343,7 @@ public class GamePanel extends JPanel implements Runnable {
  	 	if(keyH.isDebug() == true) {
  			drawStart = System.nanoTime();
  	 	}
- 	    //g2.clearRect(0, 0, getWidth(), getHeight()); // Clear the entire graphics context	
+ 	    //g2.clearRect(0, 0, getWidth(), getHeight());	//TODO: WICHTIG unbedingt angucken
  	 	// TITLE SCREEN
  	 	if(gameState == titleState) {
  	 		ui.draw(g2);	
@@ -411,23 +411,7 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 		if(!keyH.licht && currentMap == 3) {
  	 	 			eManager.draw(g2);
  	 	 		}
- 	 	 		// ALTE METHODE
- 	 	 		/* Hier werden die Objekte platziert
- 	 	 		for(int i = 0; i < obj[1].length; i++) {
- 	 	 			if(obj[currentMap][i] != null) {	// sicherstellen, dass Arrayindex immer gefüllt ist
- 	 	 				obj[currentMap][i].draw(g2);
- 	 	 			}
- 	 	 		}
- 	 	 		// Hier werden die NPCs platziert
- 	 	 		for(int i = 0; i < npc[1].length; i++) {
- 	 	 			if(npc[currentMap][i] != null) {	// sicherstellen, dass Arrayindex immer gefüllt ist
- 	 	 				npc[currentMap][i].draw(g2);
- 	 	 			}
- 	 	 		}  
- 	 	 		
- 	 	 		
- 	 	 		// Hier wird der Spieler gespawnt
- 	 	 	getPlayer().draw(g2); */
+ 	 	 		ui.draw(g2);
  	 	 	}
  	 	 	if (gameState == pauseState) {
  	 	 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
@@ -509,14 +493,13 @@ public class GamePanel extends JPanel implements Runnable {
  	 		g2.drawString("x: " + player.worldX / tileSize, 10, 30);
  	 		g2.drawString("y: " + (player.worldY + 48) / tileSize, 10, 55);
  	 	}
- 	    
+ 	 
  	 }
 
  	public void drawToScreen() {
  		
  		Graphics g = getGraphics();
  		g.drawImage(tempScreen, 0, 0, screenWidthVollbild, screenHeightVollbild, null);
- 		
  		g.dispose();
  	}
  	public void playMusic(int i) {

@@ -14,7 +14,6 @@ import java.io.InputStream;
 import main.EventHandler;
 import main.GamePanel;
 import main.KeyHandler;
-import main.Sound;
 
 public class Player extends Entity {
 
@@ -35,6 +34,8 @@ public class Player extends Entity {
 	private int currentSäureDialog = 2;
 	private int currentPhenolphthaleinDialog = 2;
 	private int currentUniversalindikatorDialog = 1;
+	public boolean hatSäure = false;
+	public boolean hatNeutral = false;
 	public boolean holZweitenIndikator = false;
 	public boolean holLösung = false;
 	public boolean basePlacen = false;
@@ -473,6 +474,7 @@ public class Player extends Entity {
 					gp.getObj()[gp.getCurrentMap()][i].setKeyInside(false);
 				}
 				else if(keyH.enterPressed) {
+					gp.stopSE(23);
 					gp.playSE(1);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
@@ -573,6 +575,7 @@ public class Player extends Entity {
 				    gp.gameState = gp.dialogueState;
 				    gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 				    gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+				    hatSäure = true;
 				    if(getFehler() == 1) {
 						setCurrentKöppelDialog(6);
 					}
@@ -611,7 +614,7 @@ public class Player extends Entity {
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 					//holNeutral = false;
-					//hatNeutral = true;
+					hatNeutral = true;
 					if(getFehler() == 1) {
 						setCurrentKöppelDialog(6);
 					}
