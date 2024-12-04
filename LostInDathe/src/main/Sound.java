@@ -19,13 +19,13 @@ public class Sound {
 	
 	public Sound() {
 		
-		soundURL[0] = pfad("door.wav");
+		soundURL[0] = pfad("door.wav"); // nicht mehr genutzt
 		soundURL[1] = pfad("soundeffect/Toilettenspuelung.wav");
-		soundURL[2] = pfad("music.wav");
-		soundURL[3] = pfad("mainmenu.wav");
-		soundURL[4] = pfad("switch.wav");
-		soundURL[5] = pfad("teleport.wav");
-		soundURL[6] = pfad("subArea.wav");
+		soundURL[2] = pfad("music.wav"); // ersetzen durch Musik im Gang
+		soundURL[3] = pfad("mainmenu.wav"); // ersetzen durch Musik im Hauptmenü
+		soundURL[4] = pfad("switch.wav"); // nicht mehr genutzt
+		soundURL[5] = pfad("soundtrack/Chemie_Song.wav");
+		soundURL[6] = pfad("subArea.wav"); // nicht mehr genutzt
 		soundURL[7] = pfad("soundeffect/Menü_Spiel_Starten.wav");
 		soundURL[8] = pfad("soundeffect/Menü_Button_Wechseln.wav");
 		soundURL[9] = pfad("soundeffect/Menü_Button_Auswählen.wav");
@@ -77,6 +77,8 @@ public class Sound {
 		soundURL[55] = pfad("soundeffect/Laufen_Klack_Klack_Flur.wav");
 		soundURL[56] = pfad("soundeffect/Laufen_Klack_Klack_Raum.wav");
 		soundURL[57] = pfad("soundtrack/Biologie_Song.wav");
+		// vorerst die Indexe oben überschreiben (nicht mehr genutzte Sounds/Soundtracks)
+		
 		
 		activeClips = new ArrayList<>();
 	}

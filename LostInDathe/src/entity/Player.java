@@ -22,7 +22,7 @@ public class Player extends Entity {
 	
 	// Schlüssel
 	private int hasKey = 0;
-	private int hasKeyChemie = 0;
+	private int hasKeyChemie = 1;
 	private boolean hasKeyInfo = false;
 	private boolean hasKeyBio = false;
 	private boolean hasKeySchulhof = false;
@@ -83,12 +83,12 @@ public class Player extends Entity {
 	
 	public void setDefaultValues() {
 		// TODO: IM BAD
-		worldX = gp.getTileSize() * 20;
-		worldY = gp.getTileSize() * 25;
+		//worldX = gp.getTileSize() * 20;
+		//worldY = gp.getTileSize() * 25;
 		
 		// IM CHEMIERAUM
-		//worldX = gp.getTileSize() *  52;
-		//worldY = gp.getTileSize() * 64;
+		worldX = gp.getTileSize() *  52;
+		worldY = gp.getTileSize() * 64;
 		
 		// IM BIORAUM
 		//worldX = gp.getTileSize() * 47;

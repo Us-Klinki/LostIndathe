@@ -115,23 +115,23 @@ public class EventHandler {
 			else if(hit(1, 16, 15, "any") == true) { interTeleport(2, 29, 18); gp.stopMusic(6); gp.playMusic(49); }
 			else if(hit(2, 29, 18, "any") == true) { interTeleport(1, 16, 15); gp.stopMusic(49); gp.playMusic(6); }
 			// Teleport OG -> Chemie: Chemie -> OG
-			else if(hit(1, 72, 41, "any") == true) { interTeleport(4, 53, 63.9); gp.stopMusic(6); gp.playMusic(2); }
-			else if(hit(4, 53, 64, "any") == true) { interTeleport(1, 72, 40.9); gp.stopMusic(2); gp.playMusic(6); }
+			else if(hit(1, 72, 41, "any") == true) { interTeleport(4, 53, 63.9); gp.stopMusic(6); gp.playMusic(5); }
+			else if(hit(4, 53, 64, "any") == true) { interTeleport(1, 72, 40.9); gp.stopMusic(5); gp.playMusic(6); }
 			
-			else if(hit(1, 72, 34, "any") == true) { interTeleport(4, 53, 70.9); gp.stopMusic(6); gp.playMusic(2); }
-			else if(hit(4, 53, 71, "any") == true) { interTeleport(1, 72, 33.9); gp.stopMusic(2); gp.playMusic(6); }
+			else if(hit(1, 72, 34, "any") == true) { interTeleport(4, 53, 70.9); gp.stopMusic(6); gp.playMusic(5); }
+			else if(hit(4, 53, 71, "any") == true) { interTeleport(1, 72, 33.9); gp.stopMusic(5); gp.playMusic(6); }
 			
-			else if(hit(1, 72, 55, "any") == true) { interTeleport(4, 53, 52.9); gp.stopMusic(6); gp.playMusic(2); }
-			else if(hit(4, 53, 53, "any") == true) { interTeleport(1, 72, 54.9); gp.stopMusic(2); gp.playMusic(6); }
+			else if(hit(1, 72, 55, "any") == true) { interTeleport(4, 53, 52.9); gp.stopMusic(6); gp.playMusic(5); }
+			else if(hit(4, 53, 53, "any") == true) { interTeleport(1, 72, 54.9); gp.stopMusic(5); gp.playMusic(6); }
 			// Teleport 2x EG -> Info; Info -> OG
 			else if(hit(5, 42, 24, "any") == true) { interTeleport(3, 50, 49.9); gp.stopMusic(6); gp.playMusic(48); keyH.licht = false; }
 			else if(hit(5, 55, 24, "any") == true) { interTeleport(3, 50, 49.9); gp.stopMusic(6); gp.playMusic(48); keyH.licht = false; }
 			else if(hit(3, 50, 50, "any") == true) { interTeleport(5, 42, 24); gp.stopMusic(48); gp.playMusic(6); }
 			// Teleport 2x EG -> Bio; 2x Bio -> EG
-			else if(hit(5, 79, 40, "any") == true) { interTeleport(6, 43, 46.9); gp.stopMusic(6); gp.playMusic(2); }
-			else if(hit(5, 79, 59, "any") == true) { interTeleport(6, 43, 57.9); gp.stopMusic(6); gp.playMusic(2); }
-			else if(hit(6, 43, 47, "any") == true) { interTeleport(5, 79, 39.9); gp.stopMusic(6); gp.playMusic(2); }
-			else if(hit(6, 43, 58, "any") == true) { interTeleport(5, 79, 58.9); gp.stopMusic(6); gp.playMusic(2); }
+			else if(hit(5, 79, 40, "any") == true) { interTeleport(6, 43, 46.9); gp.stopMusic(6); gp.playMusic(57); }
+			else if(hit(5, 79, 59, "any") == true) { interTeleport(6, 43, 57.9); gp.stopMusic(6); gp.playMusic(57); }
+			else if(hit(6, 43, 47, "any") == true) { interTeleport(5, 79, 39.9); gp.stopMusic(57); gp.playMusic(6); }
+			else if(hit(6, 43, 58, "any") == true) { interTeleport(5, 79, 58.9); gp.stopMusic(57); gp.playMusic(6); }
 			
 
 		}
@@ -303,7 +303,6 @@ public class EventHandler {
 		canTouchEvent = false;
 		canTouchTreppe = false;
 		
-		gp.playSE(5);
 		
 	}
 	
