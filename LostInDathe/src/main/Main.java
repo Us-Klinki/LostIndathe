@@ -26,7 +26,7 @@ public class Main {
     setWindow(new JFrame());               //JFrame wird erstellt
     getWindow().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    //Das Fenster kann geschlossen werden
     getWindow().setResizable(false);                  //Das Fenster kann nicht vergrößert werden
-    getWindow().setTitle("Lost in Dathe Version alpha-0.9.0 / 20241127"); 
+    getWindow().setTitle("Lost in Dathe Version pre-1 1.0.0 / 20241204"); 
     new Main().setIcon();
     //GUI Leiste oben zum Fenster schließen
     

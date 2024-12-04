@@ -415,7 +415,7 @@ public class UI {
 		textY += absatz / 2 + absatz / 4;
 		g2.drawString("Projektsemesters Q3. Präsentiert von Us and Klinki.", textX, textY);
 		textY += absatz;
-		g2.drawString("Version alpha 0.9.0-20241127.", textX, textY);
+		g2.drawString("Version pre-1 1.0.0-20241204.", textX, textY);
 		textY += 2 * absatz;
 		g2.setFont(yoster_s);
 		
@@ -967,7 +967,7 @@ public class UI {
 		textX -= gp.getTileSize();
 		
 		
-		g2.drawString("Dathe-Gymnasium, Dez. 2024. Version alpha 0.9.0-20241127. Präsentiert von [Us and Klinki]", textX, textY);
+		g2.drawString("Dathe-Gymnasium, Dez. 2024. Version pre-1 1.0.0-20241204. Präsentiert von [Us and Klinki]", textX, textY);
 		textY += 2 * absatz;
 		g2.setFont(yoster_s);
 		g2.setColor(signal);
