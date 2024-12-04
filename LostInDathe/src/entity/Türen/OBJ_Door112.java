@@ -22,7 +22,7 @@ public class OBJ_Door112 extends Entity {
 	}
 	
 	public void setDialogue2() {
-		dialogues[5][0] = "100 und 112... Ist wie Polizei und Feuerwehr...\nKann man ja mal verwechseln... 110 ist Polizei,\n112 ist Feuerwehr. So.";
+		dialogues[5][0] = "110 und 112... Ist wie Polizei und Feuerwehr...\nKann man ja mal verwechseln... 110 ist Polizei,\n112 ist Feuerwehr. So.";
 		dialogues[5][1] = "Ganz im Ernst: R 110 1-1-0 ist ein Stückchen\nweiter rechts.";
 	}
 	

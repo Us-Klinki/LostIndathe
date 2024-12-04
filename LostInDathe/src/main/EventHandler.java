@@ -128,10 +128,10 @@ public class EventHandler {
 			else if(hit(5, 55, 24, "any") == true) { interTeleport(3, 50, 49.9); gp.stopMusic(6); gp.playMusic(48); keyH.licht = false; }
 			else if(hit(3, 50, 50, "any") == true) { interTeleport(5, 42, 24); gp.stopMusic(48); gp.playMusic(6); }
 			// Teleport 2x EG -> Bio; 2x Bio -> EG
-			else if(hit(5, 79, 40, "any") == true) { interTeleport(6, 43, 46.9); gp.stopMusic(6); gp.playMusic(2); }
-			else if(hit(5, 79, 59, "any") == true) { interTeleport(6, 43, 57.9); gp.stopMusic(6); gp.playMusic(2); }
-			else if(hit(6, 43, 47, "any") == true) { interTeleport(5, 79, 39.9); gp.stopMusic(6); gp.playMusic(2); }
-			else if(hit(6, 43, 58, "any") == true) { interTeleport(5, 79, 58.9); gp.stopMusic(6); gp.playMusic(2); }
+			else if(hit(5, 79, 40, "any") == true) { interTeleport(6, 43, 46.9); gp.stopMusic(6); gp.playMusic(57); }
+			else if(hit(5, 79, 59, "any") == true) { interTeleport(6, 43, 57.9); gp.stopMusic(6); gp.playMusic(57); }
+			else if(hit(6, 43, 47, "any") == true) { interTeleport(5, 79, 39.9); gp.stopMusic(57); gp.playMusic(2); }
+			else if(hit(6, 43, 58, "any") == true) { interTeleport(5, 79, 58.9); gp.stopMusic(57); gp.playMusic(2); }
 			
 
 		}
