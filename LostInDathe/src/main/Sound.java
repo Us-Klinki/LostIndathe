@@ -76,6 +76,7 @@ public class Sound {
 		soundURL[54] = pfad("soundeffect/Chemikalien_Blubb_Glubb.wav");
 		soundURL[55] = pfad("soundeffect/Laufen_Klack_Klack_Flur.wav");
 		soundURL[56] = pfad("soundeffect/Laufen_Klack_Klack_Raum.wav");
+		soundURL[57] = pfad("soundtrack/Biologie_Song.wav");
 		
 		activeClips = new ArrayList<>();
 	}
