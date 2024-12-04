@@ -162,7 +162,7 @@ public class GamePanel extends JPanel implements Runnable {
  	private AssetPlacer aPlacer = new AssetPlacer(this, keyH);
  	public UI ui = new UI(this);
  	public EventHandler eHandler = new EventHandler(this);
- 	Config config = new Config(this);
+ 	Config config = new Config(this, ui);
  	Thread gameThread;        //Thread ist nötig damit das Spiel durchgehend läuft
  	Map map = new Map(this);
  	EnvironmentManager eManager = new EnvironmentManager(this);
@@ -190,6 +190,7 @@ public class GamePanel extends JPanel implements Runnable {
  	public final int dialogueState = 4;
  	public final int mapState = 5;
  	public final int endState = 6;
+ 	public boolean startState = true;
  	
  	//private BufferedImage lastFrame;
  	private Color transparentblack = new Color(0, 0, 0, 128);
@@ -430,6 +431,7 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 			eManager.draw(g2);
  	 	 		}
  	 	 		ui.draw(g2);
+ 	 	 		//g2.clearRect(0, 0, getWidth(), getHeight());
  	 	    }
  	 	 	
  	 	 	if(gameState == endState) {

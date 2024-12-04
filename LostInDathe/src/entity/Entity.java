@@ -82,7 +82,8 @@ public class Entity {
 	      if(gp.getNpc()[gp.getCurrentMap()][i] != null) {
 		      gp.getNpc()[gp.getCurrentMap()][i].setDialogue20();
 	      }
-	      gp.gameState = gp.playState; 
+	      gp.gameState = gp.playState;
+	      gp.stopSE(1);
 	      return;
 	  }
 

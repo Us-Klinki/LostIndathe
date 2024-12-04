@@ -20,6 +20,8 @@ public class DataStorage implements Serializable {
 	int currentSäureDialog;
 	int currentPhenolphthaleinDialog;
 	int currentUniversalindikatorDialog;
+	boolean hatSäure;
+	boolean hatNeutral;
 	boolean holZweitenIndikator;
 	boolean holLösung;
 	boolean basePlacen;
@@ -44,4 +46,6 @@ public class DataStorage implements Serializable {
 	int mapNPCWorldX[][];
 	int mapNPCWorldY[][];
 	
+	//Startstate
+	boolean startState;
 }

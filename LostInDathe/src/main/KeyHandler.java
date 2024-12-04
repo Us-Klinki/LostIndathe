@@ -49,6 +49,11 @@ public class KeyHandler implements KeyListener{
 			titleState(code);
 		}
 		
+		// START STATE
+		else if(gp.startState) {
+			startState(code);
+		}
+		
 		// PLAY STATE
 		else if(gp.gameState == gp.playState) {
 			playState(code);
@@ -111,7 +116,7 @@ public class KeyHandler implements KeyListener{
 	            gp.stopMusic(3);
 	            gp.playSE(7);
 	            gp.playSE(23);
-	            gp.playMusic(2);
+	            //gp.playMusic(2);
 	            /*if(gp.gameState == gp.dialogueState) {
 	            	gp.stopSE(23);
 	            }*/
@@ -121,7 +126,7 @@ public class KeyHandler implements KeyListener{
 	        	gp.gameState = gp.playState;
 	            gp.stopMusic(3);
 	            gp.playSE(7);
-	            gp.playMusic(2);
+	            gp.playMusic(52);
 	        }
 	        if (gp.ui.getCommandNum() == 2) {
 	            System.exit(0);
@@ -201,7 +206,12 @@ public class KeyHandler implements KeyListener{
 		if(code == KeyEvent.VK_R) {
 			switch(gp.getCurrentMap()) {
 			case 0: gp.tileM.loadMap("/maps/bathroom.txt", 0); break;
-			case 1: gp.tileM.loadMap("/maps/subArea.txt", 1); break;
+			case 1: gp.tileM.loadMap("/maps/3OG_Gang.txt", 1); break;
+			case 2: gp.tileM.loadMap("/maps/Geschitsraum.txt", 2); break;
+			case 3: gp.tileM.loadMap("/maps/Informatikraum.txt", 3); break;
+			case 4: gp.tileM.loadMap("/maps/Chemieraum.txt", 4); break;
+			case 5: gp.tileM.loadMap("/maps/1OG_Gang.txt", 5); break;
+			case 6: gp.tileM.loadMap("/maps/Bioraum.txt", 6); break;
 			}
 		}
 	}
@@ -234,7 +244,7 @@ public class KeyHandler implements KeyListener{
 		
 		int maxCommandNum = 0;
 		switch(gp.ui.subState) {
-		case 0: maxCommandNum = 5; break;
+		case 0: maxCommandNum = 6; break;
 		case 3: maxCommandNum = 1; break;
 		}
 		if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
@@ -302,7 +312,7 @@ public class KeyHandler implements KeyListener{
 	
 	public void mapState (int code) {
 		
-		if(code == KeyEvent.VK_SPACE) {
+		if(code == KeyEvent.VK_M) {
 			gp.gameState = gp.playState;
 		}
 	}
@@ -310,6 +320,14 @@ public class KeyHandler implements KeyListener{
 	public void endState(int code) {
 		if(code == KeyEvent.VK_ENTER) {
 			System.exit(0);
+		}
+	}
+	
+	public void startState(int code) {
+		if(code == KeyEvent.VK_ENTER) {
+			gp.startState = false;
+			gp.stopSE(23);
+			gp.playMusic(52);
 		}
 	}
 	@Override

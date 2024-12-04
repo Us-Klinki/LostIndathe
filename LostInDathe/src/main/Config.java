@@ -8,9 +8,11 @@ import java.io.IOException;
 
 public class Config {
 	GamePanel gp;
+	UI ui;
 	
-	Config(GamePanel gp) {
+	Config(GamePanel gp, UI ui) {
 		this.gp = gp;
+		this.ui = ui;
 	}
 	
 	public void saveConfig() {
@@ -35,6 +37,15 @@ public class Config {
 			bw.write(String.valueOf(gp.se.volumeScale));
 			bw.newLine();
 			
+			// Hud an?
+			if(ui.hudOn) {
+				bw.write("True");
+			}
+			if(!ui.hudOn) {
+				bw.write("False");
+			}
+			
+			bw.newLine();
 			bw.close();
 		
 		} catch (IOException e) {
@@ -67,6 +78,16 @@ public class Config {
 			configRead = br.readLine();
 			gp.se.volumeScale = Integer.parseInt(configRead);
 
+			configRead = br.readLine();
+			// Hud
+			if(configRead.equals("True")) {
+				ui.hudOn = true;
+			}
+			
+			if(configRead.equals("False")) {
+				ui.hudOn = false;;
+			}
+			
 			br.close();
 			
 		} catch (Exception e) {

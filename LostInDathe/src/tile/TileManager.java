@@ -182,6 +182,30 @@ public class TileManager {
 		setup(127, "76_Schrank1", true);
 		setup(128, "76_Schrank2", true);
 		
+		setup(129, "77_Schrank1", true);
+		setup(130, "77_Schrank2", true);
+		setup(131, "77_Schrank3", true);
+		setup(132, "77_Schrank4", true);
+		setup(133, "77_Schrank5", true);
+		setup(134, "77_Schrank7", true);
+		setup(135, "77_Schrank8", true);
+		setup(136, "77_Schrank9", true);
+		setup(137, "78_Schrank1", true);
+		setup(138, "78_Schrank2", true);
+		setup(139, "78_Schrank3", true);
+		setup(140, "78_Schrank4", true);
+		setup(141, "78_Schrank5", true);
+		setup(142, "78_Schrank6", true);
+		setup(143, "79_Waschbecken1", true);
+		setup(144, "79_Waschbecken2", true);
+		setup(145, "81_Gang_Fade2", false);
+		setup(146, "81_Gang_Fade3", true);
+		setup(147, "81_Gang_Fade4", true);
+		setup(148, "82_bad_trennwand", true);
+		setup(149, "82_bad_trennwand2", true);
+		setup(150, "82_bad_trennwand3", true);
+		
+		
 		
 		
 

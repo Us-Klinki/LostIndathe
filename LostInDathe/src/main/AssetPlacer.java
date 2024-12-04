@@ -173,6 +173,22 @@ public class AssetPlacer {
 		gp.getObj()[mapNum][5].worldX = 53*gp.getTileSize();
 		gp.getObj()[mapNum][5].worldY = 64*gp.getTileSize();
 		
+		gp.getObj()[mapNum][6] = new OBJ_GesDoor(gp, keyH);
+		gp.getObj()[mapNum][6].worldX = 53*gp.getTileSize();
+		gp.getObj()[mapNum][6].worldY = 53*gp.getTileSize();
+		
+		gp.getObj()[mapNum][7] = new OBJ_GesDoor(gp, keyH);
+		gp.getObj()[mapNum][7].worldX = 53*gp.getTileSize();
+		gp.getObj()[mapNum][7].worldY = 71*gp.getTileSize();
+		
+		gp.getObj()[mapNum][8] = new OBJ_DoorVorbereitung(gp, keyH);
+		gp.getObj()[mapNum][8].worldX = 51*gp.getTileSize();
+		gp.getObj()[mapNum][8].worldY = 51*gp.getTileSize();
+		
+		gp.getObj()[mapNum][9] = new OBJ_Door311(gp, keyH);
+		gp.getObj()[mapNum][9].worldX = 51*gp.getTileSize();
+		gp.getObj()[mapNum][9].worldY = 77*gp.getTileSize();
+		
 		/*gp.getObj()[mapNum][5] = new OBJ_Säure(gp, keyH);
 		gp.getObj()[mapNum][5].setCollisionOn(false);
 		gp.getObj()[mapNum][5].worldX = 43*gp.getTileSize();

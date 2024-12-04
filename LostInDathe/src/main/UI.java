@@ -5,10 +5,13 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.TexturePaint;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,14 +22,15 @@ public class UI {
 	
 	GamePanel gp;
 	Graphics2D g2;
-	Font yoster, yoster_s, yoster_l, yoster_sl, yoster_xs; 
-	Color signal, white;
+	Font yoster, yoster_s, yoster_l, yoster_sl, yoster_xs, yoster_t; 
+	Color signal, white, header, transparent, dunkellila, menü, menüdunkel;
 	
 	int counter = 0;
 	public static boolean messageOn = false;
 	public String message = "Interagieren - ENTER";
 	int messageCounter = 0;
 	public boolean gameFinished = false;
+	public boolean hudOn = true;
 	public BufferedImage logo;
 	private String currentDialogue = "";
 	private int commandNum = 0;
@@ -36,7 +40,7 @@ public class UI {
 	private int dialogueIndex = 0;
 	private int dialogueSpeed = 2; 
 	private int dialogueCounter = 0;
-	public BufferedImage phenol, key, universal, base, neutral, säure, maus;
+	public BufferedImage phenol, key, universal, base, neutral, säure, maus, gustav, karo, kiki, max, thuan, tom, klinki, priebe, köppel, krecic;
 
 	public UI(GamePanel gp) {
 		 this.gp = gp; 
@@ -52,8 +56,14 @@ public class UI {
 		 yoster_sl = yoster.deriveFont(Font.BOLD, 60);
 		 yoster_l = yoster.deriveFont(Font.BOLD, 80);
 		 yoster_xs = yoster.deriveFont(Font.PLAIN, 27);
+		 yoster_t = yoster.deriveFont(Font.ITALIC, 15);
 		 signal = new Color(255, 208, 0);
 		 white = new Color(255, 255, 255);
+		 header = new Color(23, 224, 172);
+		 transparent = new Color(0, 0, 0, 0);
+		 dunkellila = new Color(148, 18, 144);
+		 menü = new Color(170, 110, 170);
+		 menüdunkel = new Color(175, 112, 175);
 		 
 		 // Fenster erstellen
 		 
@@ -68,6 +78,18 @@ public class UI {
 		 universal = setupHud("/npc/objects/chemie/Universalindikator");
 		 säure = setupHud("/npc/objects/chemie/Säure");
 		 base = setupHud("/npc/objects/chemie/Base");
+		 neutral = setupHud("/npc/objects/chemie/Neutral");
+		 gustav = setupHud("/pictures/Gustav");
+		 karo = setupHud("/pictures/Karo");
+		 kiki = setupHud("/pictures/Kiki");
+		 max = setupHud("/pictures/Max");
+		 thuan = setupHud("/pictures/ThuAn");
+		 tom = setupHud("/pictures/Tom");
+		 klinki = setupHud("/npc/Klinki/Klinkhardt_Stehend1");
+		 priebe = setupHud("/npc/Priebe/Priebe_Stehend1");
+		 köppel = setupHud("/npc/Köppel/Köppel_Stehend1");
+		 krecic = setupHud("/npc/Krecic/Krecic_Stehend1");
+		 
 		 
 	}
 	
@@ -127,7 +149,12 @@ public class UI {
 		}
 		// Spielstatus
 		else if(gp.gameState == gp.playState) {
-			drawHud();
+			if(gp.startState) {
+				drawPlayStartScreen();
+			}
+			if(hudOn) {
+				drawHud();
+			}
 			if(messageOn == true) {
 				g2.drawRoundRect(gp.getTileSize() * 12, gp.getTileSize() * 14, gp.getTileSize() * 8, gp.getTileSize() * 2, 12, 12);
 			}
@@ -156,13 +183,18 @@ public class UI {
 	}
 	
 	public void drawTitleScreen() {
-	    g2.setColor(new Color(170, 110, 170)); 
+	    g2.setColor(menü); 
 	    g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);  		
 		// Spielname
 		g2.setFont(yoster_l);
 		String text = "Lost In Dathe";
 		int x = getXforCenteredText(text);
 		int y = gp.tileSize * 8;
+		int picX = gp.getTileSize() * 3 + gp.getTileSize() / 2;
+		int picY = gp.getTileSize() * 15;
+		int textY = picY + gp.getTileSize() * 2 + gp.getTileSize() / 2;
+		int picTab = gp.getTileSize() * 2 + gp.getTileSize() / 2;
+		int picSize = gp.getTileSize() * 2;
 		
 		g2.drawImage(logo, getXforCenteredText(text) + 44, 58, 512, 512, null);
 		// Schatten
@@ -176,6 +208,62 @@ public class UI {
 		//x = gp.screenWidth / 2;
 		//y += gp.tileSize * 2;
 		g2.drawImage(gp.getPlayer().down1, gp.tileSize * 23, gp.tileSize * 6 + 16, gp.tileSize * 2, gp.tileSize * 2, null);
+		g2.setColor(Color.black);
+		int[] xPoints = {0, gp.getTileSize() * 3, gp.getTileSize() * 29, gp.getTileSize() * 32}; // x-Koordinaten der Ecken
+        int[] yPoints = {gp.getTileSize() * 18, gp.getTileSize() * 14, gp.getTileSize() * 14, gp.getTileSize() * 18};
+		int width = gp.getTileSize() * 32;
+		int height = gp.getTileSize() * 4;
+		
+		// Erstelle ein BufferedImage für den Farbverlauf
+        BufferedImage gradientImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D gImage = gradientImage.createGraphics();
+        
+     // Farbverlauf erstellen (von Blau unten nach Weiß oben)
+        GradientPaint gradient = new GradientPaint(0, height, dunkellila, 0, 0, menüdunkel);
+        gImage.setPaint(gradient);
+        gImage.fillRect(0, 0, width, height);
+        gImage.dispose();
+        
+        TexturePaint texturePaint = new TexturePaint(gradientImage, new Rectangle(0, gp.getTileSize() * 18, width, height));
+        g2.setPaint(texturePaint);
+
+        // Trapez zeichnen
+        g2.fillPolygon(xPoints, yPoints, 4);
+        
+        g2.fillPolygon(xPoints, yPoints, 4);
+		
+		g2.setColor(Color.white);
+        g2.setFont(yoster_t);
+		g2.drawImage(klinki, picX, picY, picSize, picSize, null);
+		g2.drawString("Klinki", picX + 24, textY);
+		picX += picTab;
+		g2.drawImage(köppel, picX, picY, picSize, picSize, null);
+		g2.drawString("Köppel", picX + 20, textY);
+		picX += picTab;
+		g2.drawImage(gustav, picX, picY, picSize, picSize, null);
+		g2.drawString("Gustav", picX + 16, textY);
+		picX += picTab;
+		g2.drawImage(karo, picX, picY, picSize, picSize, null);
+		g2.drawString("Karo", picX + 27, textY);
+		picX += picTab;
+		g2.drawImage(kiki, picX, picY, picSize, picSize, null);
+		g2.drawString("Kiki", picX + 30, textY);
+		picX += picTab;
+		g2.drawImage(max, picX, picY, picSize, picSize, null);
+		g2.drawString("Max", picX + 32, textY);
+		picX += picTab;
+		g2.drawImage(thuan, picX, picY, picSize, picSize, null);
+		g2.drawString("Thu An", picX + 18, textY);
+		picX += picTab;
+		g2.drawImage(tom, picX, picY, picSize, picSize, null);
+		g2.drawString("Tom", picX + 32, textY);
+		picX += picTab;
+		g2.drawImage(krecic, picX, picY, picSize, picSize, null);
+		g2.drawString("Krecic", picX + 23, textY);
+		picX += picTab;
+		g2.drawImage(priebe, picX, picY, picSize, picSize, null);
+		g2.drawString("Priebe", picX + 20, textY);
+		
 		
 		// Menü
 		g2.setFont(yoster_s);
@@ -254,12 +342,14 @@ public class UI {
 		textY = frameY +  gp.getTileSize() + gp.getTileSize()/2;
 		g2.drawString(text, textX, textY);
 		g2.setFont(yoster_s);
-		g2.setColor(Color.white);
+		g2.setColor(header);
 		textX = frameX + gp.getTileSize();
 		textY += absatz *2;
 		int textXlinks = textX;
+		
 		g2.drawString("Entwicklung", textX, textY);
 		g2.setFont(yoster_xs);
+		g2.setColor(Color.white);
 		textX += gp.getTileSize();
 		textY += abstand;
 		g2.drawString("- Thu An Phung", textX, textY);
@@ -271,10 +361,12 @@ public class UI {
 		textX = getXforCenteredText("") + gp.getTileSize();
 		textY = textY - absatz * 2 - abstand;
 		g2.setFont(yoster_s);
+		g2.setColor(header);
 		g2.drawString("Grafikdesign", textX, textY);
 		g2.setFont(yoster_xs);
 		textX += gp.getTileSize();
 		textY += abstand;
+		g2.setColor(Color.white);
 		g2.drawString("- Marika Uhrig", textX, textY);
 		textY += absatz;
 		g2.drawString("- Karoline Schiemann", textX, textY);
@@ -282,10 +374,12 @@ public class UI {
 		textX = textXlinks;
 		textY = textYlinks + 2*absatz;
 		int textYrechts = textY;
+		g2.setColor(header);
 		g2.drawString("Stimmen", textX, textY);
 		g2.setFont(yoster_xs);
 		textX += gp.getTileSize();
 		textY += abstand;
+		g2.setColor(Color.white);
 		g2.drawString("- Felix Peil", textX, textY);
 		textY += absatz;
 		g2.drawString("- Sören Priebe", textX, textY);
@@ -298,18 +392,22 @@ public class UI {
 		textY = textYrechts;
 		textX = getXforCenteredText("") + gp.getTileSize();
 		g2.setFont(yoster_s);
+		g2.setColor(header);
 		g2.drawString("Sounddesign", textX, textY);
 		g2.setFont(yoster_xs);
 		textX += gp.getTileSize();
 		textY += abstand;
+		g2.setColor(Color.white);
 		g2.drawString("- Max Rosenhauer", textX, textY);
 		textY += 2 * abstand;
 		textX -= gp.getTileSize();
 		g2.setFont(yoster_s);
+		g2.setColor(header);
 		g2.drawString("Ober'be'lehrer", textX, textY);
 		g2.setFont(yoster_xs);
 		textX += gp.getTileSize();
 		textY += abstand;
+		g2.setColor(Color.white);
 		g2.drawString("- Klinki", textX, textY);
 		textX = textXlinks;
 		textY += absatz * 1.5;
@@ -369,15 +467,16 @@ public class UI {
 		
 		drawSubWindow(frameX, frameY, frameWidth, frameHeight, transparent, hellTransparent, false);
 		
-		int abstand = gp.getTileSize() + gp.getTileSize() / 2;
+		int abstand = gp.getTileSize() + gp.getTileSize() / 4;
+		int abstandSub = gp.getTileSize() + gp.getTileSize() / 2;
 		int absatz = gp.getTileSize() * 2;
 		int auswahlAbstand = gp.getTileSize() / 2 + gp.getTileSize() / 8 + 10 ;
 		
 		switch(subState) {
 		case 0: options_top(abstand, absatz, frameX, frameY, auswahlAbstand); break;
-		case 1: options_fullScreenNotification(frameX, frameY, auswahlAbstand, abstand, absatz); break;
-		case 2: options_control(absatz, abstand, frameX, frameY, auswahlAbstand); break;
-		case 3: options_endGameConfirmation(absatz, abstand, frameX, frameY, auswahlAbstand); break;
+		case 1: options_fullScreenNotification(frameX, frameY, auswahlAbstand, abstandSub, absatz); break;
+		case 2: options_control(absatz, abstandSub, frameX, frameY, auswahlAbstand); break;
+		case 3: options_endGameConfirmation(absatz, abstandSub, frameX, frameY, auswahlAbstand); break;
 		} 
 		
 		gp.keyH.enterPressed = false;
@@ -443,15 +542,33 @@ public class UI {
 		if(commandNum == 2) {
 			g2.drawString(">", textX - auswahlAbstand, textY);
 		}
-		
-		// Steuerung
+		// Soundeffekte
 		textY += abstand;
 		g2.setColor(white);
 		if(commandNum == 3) {
 			g2.setColor(signal);
 		}
-		g2.drawString("Steuerung", textX, textY);
+		g2.drawString("Hud", textX, textY);
 		if(commandNum == 3) {
+			g2.drawString(">", textX - auswahlAbstand, textY);
+			if(gp.keyH.enterPressed == true) {
+				if(hudOn) {
+					hudOn = false;		
+				}
+				else if (!hudOn) {
+					hudOn = true;
+				}
+			}
+		}
+		
+		// Steuerung
+		textY += abstand;
+		g2.setColor(white);
+		if(commandNum == 4) {
+			g2.setColor(signal);
+		}
+		g2.drawString("Steuerung", textX, textY);
+		if(commandNum == 4) {
 			g2.drawString(">", textX - auswahlAbstand, textY);
 			if(gp.keyH.enterPressed == true) {
 				subState = 2;
@@ -461,11 +578,11 @@ public class UI {
 		// Spiel beenden
 		textY += abstand;
 		g2.setColor(white);
-		if(commandNum == 4) {
+		if(commandNum == 5) {
 			g2.setColor(signal);
 		}
 		g2.drawString("Spiel beenden", textX, textY);
-		if(commandNum == 4) {
+		if(commandNum == 5) {
 			g2.drawString(">", textX - auswahlAbstand, textY);
 			if(gp.keyH.enterPressed == true) {
 				subState = 3;
@@ -474,13 +591,13 @@ public class UI {
 		}
 		
 		// Zurück
-		textY += absatz;
+		textY += absatz - 12;
 		g2.setColor(white);
-		if(commandNum == 5) {
+		if(commandNum == 6) {
 			g2.setColor(signal);
 		}
 		g2.drawString("Zurück zum Spiel", textX, textY);
-		if(commandNum == 5) {
+		if(commandNum == 6) {
 			g2.drawString(">", textX - auswahlAbstand, textY);
 			if(gp.keyH.enterPressed == true) {
 				gp.gameState = gp.playState;
@@ -492,7 +609,8 @@ public class UI {
 		textX = frameX + gp.getTileSize() * 6;
 		textY = checkBoxY;
 		g2.setStroke(new BasicStroke(3));
-		g2.setColor(new Color(110, 9, 20));
+		//g2.setColor(new Color(110, 9, 20));
+		g2.setColor(header);
 		g2.drawRect(textX, textY, gp.getTileSize() / 2, gp.getTileSize() / 2);
 		if(gp.isFullScreenOn() == true) {
 			g2.fillRect(textX, textY, gp.getTileSize() / 2, gp.getTileSize() / 2);
@@ -509,6 +627,13 @@ public class UI {
 		g2.drawRect(textX, textY, musicAuswahlBreite, gp.getTileSize() / 2);
 		volumeWidth = (musicAuswahlBreite + 5) / 11 * gp.se.volumeScale;
 		g2.fillRect(textX, textY, (int) volumeWidth, gp.getTileSize() / 2);
+		
+		// Hud
+		textY += abstand;
+		g2.drawRect(textX, textY, gp.getTileSize() / 2, gp.getTileSize() / 2);
+		if(hudOn) {
+			g2.fillRect(textX, textY, gp.getTileSize() / 2, gp.getTileSize() / 2);
+		}
 		
 		gp.config.saveConfig();
 	}
@@ -567,17 +692,17 @@ public class UI {
 		g2.drawString("Bewegen", textX, textY); textY += abstand;
 		g2.drawString("Interaktion", textX, textY); textY += abstand;
 		g2.drawString("Optionen", textX, textY); textY += abstand;
-		g2.drawString("Pause", textX, textY); textY += abstand;
+		g2.drawString("MapViewer", textX, textY); textY += abstand;
 		g2.drawString("Debug", textX, textY); textY += abstand;
 		
 		g2.setFont(yoster_s);
-		g2.setColor(new Color(110, 9, 20));
+		g2.setColor(header);
 		textX = frameX + gp.getTileSize() * 7;
 		textY = frameY + gp.getTileSize() * 2 + abstand;
 		g2.drawString("WASD", textX, textY); textY += abstand;
 		g2.drawString("ENTER", textX, textY); textY += abstand;
 		g2.drawString("ESC", textX, textY); textY += abstand;
-		g2.drawString("K", textX, textY); textY += abstand;
+		g2.drawString("M", textX, textY); textY += abstand;
 		g2.drawString("Q", textX, textY); textY += abstand;
 		
 		// Zurück
@@ -593,7 +718,7 @@ public class UI {
 			g2.drawString(">", textX - auswahlAbstand, textY);
 			if(gp.keyH.enterPressed == true) {
 				subState = 0;
-				commandNum = 3;
+				commandNum = 4;
 			}
 		}
 	}
@@ -629,7 +754,7 @@ public class UI {
 			g2.drawString(">", auswahlAbstand, textY);
 			if(gp.keyH.enterPressed == true) {
 				subState = 0;
-				commandNum = 4;
+				commandNum = 5;
 			}
 		}
 		
@@ -702,8 +827,8 @@ public class UI {
 		int y = gp.getTileSize();
 		int width = gp.getScreenWidth() - (gp.getTileSize() * 9);
 		int height = gp.getTileSize() * 4;
-		boolean transparent = true;
-		boolean hellTransparent = false;
+		boolean transparent = false;
+		boolean hellTransparent = true;
 		
 		drawSubWindow(x, y, width, height, transparent, hellTransparent, false);
 		
@@ -722,7 +847,53 @@ public class UI {
 		
 		
 	}
+	public void drawPlayStartScreen() {
+		String text;
+		int frameX = gp.getTileSize() * 6;
+		int frameY = gp.getTileSize() * 4; 
+		int textX;
+		int textY;
+		boolean transparenz = true;
+		boolean hellTransparent = false;
+		drawSubWindow(frameX, frameY, gp.getTileSize() * 20, gp.getTileSize() * 10, transparenz, hellTransparent, false);
+		int abstand = gp.getTileSize();
+		int absatz = gp.getTileSize() / 4 + gp.getTileSize() / 2;
+		int umbruch = absatz / 2 + absatz / 4 + absatz /8;
+		g2.setFont(yoster_sl);
+		text = "Herzlich Willkommen!";
+		textX = getXforCenteredText(text);
+		textY = frameY + gp.getTileSize() + gp.getTileSize()/2;
+		g2.drawString(text, textX, textY);
+		g2.setFont(yoster_s);
+		g2.setColor(header);
+		textX = frameX + gp.getTileSize();
+		textY += absatz *2;
+		g2.drawString("Es ist Freitag, 16:57 Uhr...", textX, textY);
+		textY += abstand;
+		g2.setColor(Color.WHITE);
+		g2.setFont(yoster_xs);
+		g2.drawString("Du hattest fünf Blöcke von mir reingedrückt bekommen", textX, textY);
+		textY += umbruch;
+		g2.drawString("und jetzt willste mit deiner Restkraft auch noch aufs", textX, textY);
+		textY += umbruch;
+		g2.drawString("Klo. Aber wie du siehst: Das Klo wurde in der Zwischen-", textX, textY);
+		textY += umbruch;
+		g2.drawString("zeit von außen abgeschlossen, also musst du ir-gend-wie", textX, textY);
+		textY += umbruch;
+		g2.drawString("hier einen Schlüssel finden. Schauste dich mal um, wenn", textX, textY);
+		textY += umbruch;
+		g2.drawString("du Probleme hast, kommste wieder...", textX, textY);
+		textY += 2 * absatz;
+		g2.setFont(yoster_s);
+		g2.setColor(signal);
+		textX += gp.getTileSize();
+		g2.drawString("Weiter", textX, textY);
+		textX -= gp.getTileSize();
+		g2.drawString(">", textX, textY);
+		
 	
+	
+	}
 	public void drawEndScreen() {
 		String text;
 		int frameX = gp.getTileSize() / 2;
@@ -738,10 +909,10 @@ public class UI {
 		g2.setFont(yoster_sl);
 		text = "Gratulation! Du bist draußen!";
 		textX = getXforCenteredText(text);
-		textY = frameY +  gp.getTileSize() + gp.getTileSize()/2;
+		textY = frameY + gp.getTileSize() + gp.getTileSize()/2;
 		g2.drawString(text, textX, textY);
 		g2.setFont(yoster_s);
-		g2.setColor(Color.white);
+		g2.setColor(header);
 		textX = frameX + gp.getTileSize();
 		textY += absatz *2;
 		int textXlinks = textX;
@@ -749,6 +920,7 @@ public class UI {
 		g2.setFont(yoster_xs);
 		textX += gp.getTileSize();
 		textY += abstand;
+		g2.setColor(Color.white);
 		g2.drawString("LostInDathe ist ein Informatikprojekt des Projektsemesters Q3. Nach vielen Herausfor-", textX, textY);
 		textY += umbruch;
 		g2.drawString("derungen und intensivem Arbeiten, sind wir stolz, dieses Spiel präsentieren zu können.", textX, textY);
@@ -759,10 +931,12 @@ public class UI {
 		textY += 2 * absatz;
 		textX -= gp.getTileSize();
 		g2.setFont(yoster_s);
+		g2.setColor(header);
 		g2.drawString("Das Team", textX, textY);
 		textY += abstand;
 		textX += gp.getTileSize();
 		g2.setFont(yoster_xs);
+		g2.setColor(Color.white);
 		g2.drawString("Programm:", textX, textY);
 		g2.drawImage(gp.getPlayer().bleft1, gp.tileSize * 21, gp.tileSize * 8 + 16, gp.tileSize * 2, gp.tileSize * 2, null);
 		g2.drawImage(gp.getPlayer().idle1, gp.tileSize * 23 + 8, gp.tileSize * 8 + 16, gp.tileSize * 2, gp.tileSize * 2, null);
@@ -782,8 +956,10 @@ public class UI {
 		textY += 2 * absatz;
 		textX -= gp.getTileSize();
 		g2.setFont(yoster_s);
+		g2.setColor(header);
 		g2.drawString("Mitwirkende Lehrkräfte", textX, textY);
 		textY += abstand;
+		g2.setColor(Color.white);
 		textX += gp.getTileSize();
 		g2.setFont(yoster_xs);
 		g2.drawString("Felix Peil, Sören Priebe, Anke Köppel, Jörg Klinkhardt, Dina Krecic", textX, textY);
@@ -836,79 +1012,89 @@ public class UI {
 		int abstand = gp.getTileSize()/2+8;
 		
 		if(gp.getPlayer().getHasKey() == 1) { 
+			drawSubWindow(subX, subY, subWidth, subHeight*2-19, false, false, true);
+			g2.drawImage(key, imageX, imageY, imageWidth, imageHeight, null);
+			g2.setColor(Color.black);
+			g2.setFont(yoster_xs);
+			g2.drawString("Kloschlüssel", textX, textY);
+			g2.drawString("> Geh' in R 317", textX, textY + abstand);
+		}
+		if(gp.getPlayer().getHasKey() == 2 && gp.getCurrentMap() <= 1 && gp.getPlayer().getHasKeyChemie() == 0) {
+			drawSubWindow(subX, subY+gp.getTileSize()/2+5, subWidth, subHeight, false, false, true);
+			g2.setColor(Color.black);
+			g2.setFont(yoster_xs);
+			g2.drawString("> Geh' in R 317", textX, textY + gp.getTileSize()/2+5);
+		}
+		if(gp.getPlayer().getHasKeyChemie() == 1 && gp.getCurrentMap() <= 2 && gp.getPlayer().getCurrentKöppelDialog()  < 7 && !gp.getPlayer().isHasKeyInfo()) {
 			drawSubWindow(subX, subY+gp.getTileSize()/2+5, subWidth, subHeight, false, false, true);
 			g2.drawImage(key, imageX, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
 			g2.setColor(Color.black);
 			g2.setFont(yoster_xs);
-			g2.drawString("Kloschlüssel", textX, textY + gp.getTileSize()/2+5);
+			g2.drawString("R 309 [Chemie]", textX, textY + gp.getTileSize()/2+5);
 		}
-		
 		if(gp.getPlayer().getHasKeyChemie() == 1) { 
 			if(gp.getPlayer().getCurrentKöppelDialog() == 4) {
-				drawSubWindow(subX, subY, subWidth, subHeight*2-19, false, false, true);
-				g2.drawImage(key, imageX, imageY + abstand, imageWidth, imageHeight, null);
-				g2.drawImage(phenol, imageX, imageY, imageWidth, imageHeight, null);
+				drawSubWindow(subX, subY+gp.getTileSize()/2+5, subWidth, subHeight, false, false, true);
+				g2.drawImage(phenol, imageX, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
 				g2.setColor(Color.black);
 				g2.setFont(yoster_xs);
-				g2.drawString("311", textX, textY + abstand);
-				g2.drawString("Phenolphtalein", textX, textY);
+				g2.drawString("Phenolphthalein", textX, textY + gp.getTileSize()/2+5);
 			} 
 			else if(gp.getPlayer().getCurrentKöppelDialog() == 5) {
-				drawSubWindow(subX, subY, subWidth, subHeight*2-19, false, false, true);
-				g2.drawImage(universal, imageX, imageY, imageWidth, imageHeight, null);
-				g2.drawImage(key, imageX, imageY + abstand, imageWidth, imageHeight, null);
+				drawSubWindow(subX, subY+gp.getTileSize()/2+5, subWidth, subHeight, false, false, true);
+				g2.drawImage(universal, imageX, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
 				g2.setColor(Color.black);
 				g2.setFont(yoster_xs);
-				g2.drawString("Universalindikator", textX, textY);
-				g2.drawString("311", textX, textY + abstand);
+				g2.drawString("Universalindikator", textX, textY + gp.getTileSize()/2+5);
 			}
-			else if(gp.getPlayer().hatSäure) {
-				drawSubWindow(subX, subY, subWidth, subHeight*2-19, false, false, true);
-				g2.drawImage(säure, imageX, imageY, imageWidth, imageHeight, null);
-				g2.drawImage(key, imageX, imageY + abstand, imageWidth, imageHeight, null);
+			else if(gp.getPlayer().hatSäure && gp.getPlayer().getCurrentKöppelDialog() != 2 
+					&& (gp.getPlayer().getCurrentKöppelDialog() == 6 || gp.getPlayer().getCurrentKöppelDialog() == 7)) {
+				drawSubWindow(subX, subY+gp.getTileSize()/2+5, subWidth, subHeight, false, false, true);
+				g2.drawImage(säure, imageX, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
 				g2.setColor(Color.black);
 				g2.setFont(yoster_xs);
-				g2.drawString("Säure", textX, textY);
-				g2.drawString("311", textX, textY + abstand);
-			}else if(gp.getPlayer().getCurrentKöppelDialog() == 5) {
-				drawSubWindow(subX, subY, subWidth, subHeight*2-19, false, false, true);
-				g2.drawImage(base, imageX, imageY, imageWidth, imageHeight, null);
-				g2.drawImage(key, imageX, imageY + abstand, imageWidth, imageHeight, null);
+				g2.drawString("Saure Lösung", textX, textY + gp.getTileSize()/2+5);
+			}
+			else if(gp.getPlayer().hatNeutral && gp.getPlayer().getCurrentKöppelDialog() != 2 
+					&& (gp.getPlayer().getCurrentKöppelDialog() == 6 || gp.getPlayer().getCurrentKöppelDialog() == 7)) {
+				drawSubWindow(subX, subY+gp.getTileSize()/2+5, subWidth, subHeight, false, false, true);
+				g2.drawImage(neutral, imageX, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
 				g2.setColor(Color.black);
 				g2.setFont(yoster_xs);
-				g2.drawString("Base", textX, textY);
-				g2.drawString("311", textX, textY + abstand);
+				g2.drawString("Neutrale Lösung", textX, textY + gp.getTileSize()/2+5);
+			}
+			else if(gp.getPlayer().getCurrentKöppelDialog() > 5 && (gp.getPlayer().getCurrentBaseDialog() == 1 ||
+					gp.getPlayer().getCurrentBaseDialog() == 3)) {
+				drawSubWindow(subX, subY+gp.getTileSize()/2+5, subWidth, subHeight, false, false, true);
+				g2.drawImage(base, imageX, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
+				g2.setColor(Color.black);
+				g2.setFont(yoster_xs);
+				g2.drawString("Base", textX, textY + gp.getTileSize()/2+5);
 			}
 		}
 		
-		if(gp.getPlayer().isHasKeyInfo() == true) { 
-			drawSubWindow(subX, subY, subWidth, subHeight*2-19, false, false, true);
-			g2.drawImage(key, imageX, imageY, imageWidth, imageHeight, null);
-			g2.drawImage(key, imageX, imageY + abstand, imageWidth, imageHeight, null);
+		if(gp.getPlayer().isHasKeyInfo() == true && gp.getCurrentMap() != 3 && !gp.getPlayer().isHasKeyBio()) { 
+			drawSubWindow(subX, subY+gp.getTileSize()/2+5, subWidth, subHeight, false, false, true);
+			g2.drawImage(key, imageX, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
 			g2.setColor(Color.black);
 			g2.setFont(yoster_xs);
-			g2.drawString("115", textX, textY);
-			g2.drawString("311", textX, textY + abstand);
+			g2.drawString("R 115 [Informatik]", textX, textY + gp.getTileSize()/2+5);
 		}
 		
-		if(gp.getPlayer().isHasKeyBio() == true) { 
-			drawSubWindow(subX, subY, subWidth, subHeight*2-19, false, false, true);
-			g2.drawImage(key, imageX, imageY, imageWidth, imageHeight, null);
-			g2.drawImage(key, imageX, imageY + abstand, imageWidth, imageHeight, null);
+		if(gp.getPlayer().isHasKeyBio() == true && gp.getCurrentMap() != 6 && !gp.getPlayer().isHasKeySchulhof()) { 
+			drawSubWindow(subX, subY+gp.getTileSize()/2+5, subWidth, subHeight, false, false, true);
+			g2.drawImage(key, imageX, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
 			g2.setColor(Color.black);
 			g2.setFont(yoster_xs);
-			g2.drawString("110", textX, textY);
-			g2.drawString("311", textX, textY + abstand);
+			g2.drawString("R 110 [Bio]", textX, textY + gp.getTileSize()/2+5);
 		}
 		
-		if(gp.getPlayer().isHasKeySchulhof() == true) { 
-			drawSubWindow(subX, subY, subWidth, subHeight*2-19, false, false, true);
-			g2.drawImage(key, imageX, imageY, imageWidth, imageHeight, null);
-			g2.drawImage(key, imageX, imageY + abstand, imageWidth, imageHeight, null);
+		if(gp.getPlayer().isHasKeySchulhof() == true && gp.gameState != gp.endState) { 
+			drawSubWindow(subX, subY+gp.getTileSize()/2+5, subWidth, subHeight, false, false, true);
+			g2.drawImage(key, imageX, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
 			g2.setColor(Color.black);
 			g2.setFont(yoster_xs);
-			g2.drawString("Schulhofschlüssel", textX, textY);
-			g2.drawString("311", textX, textY + abstand);
+			g2.drawString("Schulhofschlüssel", textX, textY + gp.getTileSize()/2+5);
 		}
 	}
 	
@@ -938,13 +1124,13 @@ public class UI {
 		
 		
 		if(hellTransparent) {
-			Color c = new Color(0, 0, 0, 100);
+			Color c = new Color(0, 0, 0, 160);
 			g2.setColor(c);
 			g2.fillRoundRect(x, y, width, height, bogen, bogen);
 		}
 		
 		else if(transparent == true) {
-			Color c = new Color(0, 0, 0, 100);
+			Color c = new Color(0, 0, 0, 220);
 			g2.setColor(c);
 			g2.fillRoundRect(x, y, width, height, bogen, bogen);
 		}
@@ -961,7 +1147,7 @@ public class UI {
 			g2.fillRoundRect(x, y, width, height, bogen, bogen);
 		}
 		
-		Color d = new Color(110, 9, 20);
+		Color d = new Color(177, 0, 57);
 		g2.setColor(d);
 		g2.setStroke(new BasicStroke(strokeWidth)); 
 		g2.drawRoundRect(x + strokeWidth, y + strokeWidth, width - 2 * strokeWidth, height - (2 * strokeWidth), 25, 25);

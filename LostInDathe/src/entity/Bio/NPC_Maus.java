@@ -26,13 +26,13 @@ public class NPC_Maus extends Entity{
 	public void getNPCImage() { 
 		
 	up1 = setup("/npc/Maus/Maus_Hinten1");
-	up2 = setup("/npc/Maus/Maus_Hinten1");
+	up2 = setup("/npc/Maus/Maus_Hinten2");
 	down1 = setup("/npc/Maus/Maus_Vorne1");
-	down2 = setup("/npc/Maus/Maus_Vorne1");
-	left1 = setup("/npc/Maus/Maus_l");
-	left2 = setup("/npc/Maus/Maus_l");
-	right1 = setup("/npc/Maus/Maus_r");
-	right2 = setup("/npc/Maus/Maus_r");
+	down2 = setup("/npc/Maus/Maus_Vorne2");
+	left1 = setup("/npc/Maus/Maus_links1");
+	left2 = setup("/npc/Maus/Maus_links2");
+	right1 = setup("/npc/Maus/Maus_rechts1");
+	right2 = setup("/npc/Maus/Maus_rechts2");
 	idle1 = setup("/npc/Maus/Maus_Hinten1");
 	idle2 = setup("/npc/Maus/Maus_Hinten1");
 

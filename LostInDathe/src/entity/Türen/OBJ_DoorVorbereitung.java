@@ -25,6 +25,10 @@ public class OBJ_DoorVorbereitung extends Entity {
 		dialogues[5][0] = "Vorbereitungsraum.\nOah wirklich, ey langsam reichts: In\nVorbereitungsräumen hast du nichts zu suchen!";
 	}
 	
+	public void setDialogue3() {
+		dialogues[4][0] = "Vorbereitungsraum.\nOah wirklich, ey langsam reichts: In\nVorbereitungsräumen hast du nichts zu suchen!";
+	}
+	
 	public void setDialogue20() {
 		for(int i = 0; i < 30; i++) {
 			for(int j = 0; j < 20; j++) {

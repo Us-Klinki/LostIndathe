@@ -26,6 +26,11 @@ public class OBJ_Door311 extends Entity {
 		dialogues[1][1] = "Du sollst in Raum 309: 3-0-9;\nnicht in Raum 311: 3-1-1...";
 	}
 	
+	public void setDialogue3() {
+		dialogues[4][0] = "Dein Ernst jetzt?\nDa ist je jeglicher Hopfen und Malz verloren, \nwas die Auffassungsgabe angeht.";
+		dialogues[4][1] = "Du sollst in Raum 309: 3-0-9;\nnicht in Raum 311: 3-1-1...";
+	}
+	
 	public void setDialogue20() {
 		for(int i = 0; i < 30; i++) {
 			for(int j = 0; j < 20; j++) {

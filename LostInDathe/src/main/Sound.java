@@ -71,6 +71,11 @@ public class Sound {
 		soundURL[49] = pfad("soundtrack/Geschichte_Song.wav");
 		soundURL[50] = pfad("soundeffect/Tuer_Oeffnen.wav");
 		soundURL[51] = pfad("soundeffect/Waschbecken.wav");
+		soundURL[52] = pfad("soundtrack/Bad_Song.wav");
+		soundURL[53] = pfad("soundeffect/Tuer_Ist_Verschlossen.wav");
+		soundURL[54] = pfad("soundeffect/Chemikalien_Blubb_Glubb.wav");
+		soundURL[55] = pfad("soundeffect/Laufen_Klack_Klack_Flur.wav");
+		soundURL[56] = pfad("soundeffect/Laufen_Klack_Klack_Raum.wav");
 		
 		activeClips = new ArrayList<>();
 	}

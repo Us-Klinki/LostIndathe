@@ -37,6 +37,8 @@ public class SaveLoad {
 			ds.currentSäureDialog = gp.getPlayer().getCurrentSäureDialog();
 			ds.currentPhenolphthaleinDialog = gp.getPlayer().getCurrentPhenolphthaleinDialog();
 			ds.currentUniversalindikatorDialog = gp.getPlayer().getCurrentUniversalindikatorDialog();
+			ds.hatSäure = gp.getPlayer().hatNeutral;
+			ds.hatNeutral = gp.getPlayer().hatNeutral;
 			ds.holZweitenIndikator = gp.getPlayer().holZweitenIndikator;
 			ds.holLösung = gp.getPlayer().holLösung;
 			ds.basePlacen = gp.getPlayer().basePlacen;
@@ -50,6 +52,7 @@ public class SaveLoad {
 			ds.timerstart = gp.getPlayer().isTimerstart();
 			ds.krecicStart = gp.getPlayer().isKrecicStart();
 			ds.dialogueCounter = gp.getPlayer().dialogueCounter;
+			ds.startState = gp.startState;
 			
 			ds.mapObjectNames = new String[gp.getMaxMap()][gp.getObj()[1].length];
 			ds.mapObjectWorldX = new int[gp.getMaxMap()][gp.getObj()[1].length];
@@ -110,6 +113,8 @@ public class SaveLoad {
 			gp.getPlayer().setCurrentSäureDialog(ds.currentSäureDialog);
 			gp.getPlayer().setCurrentPhenolphthaleinDialog(ds.currentPhenolphthaleinDialog);
 			gp.getPlayer().setCurrentUniversalindikatorDialog(ds.currentUniversalindikatorDialog);
+			gp.getPlayer().hatNeutral = ds.hatNeutral;
+			gp.getPlayer().hatSäure = ds.hatSäure;
 			gp.getPlayer().holZweitenIndikator = ds.holZweitenIndikator;
 			gp.getPlayer().holLösung = ds.holLösung;
 			gp.getPlayer().basePlacen = ds.basePlacen;
@@ -123,6 +128,7 @@ public class SaveLoad {
 			gp.getPlayer().setTimerstart(ds.timerstart);
 			gp.getPlayer().setKrecicStart(ds.krecicStart);
 			gp.getPlayer().dialogueCounter = ds.dialogueCounter;
+			gp.startState = ds.startState;
 			
 			// Objekte auf der Map
 			for(int mapNum = 0; mapNum < gp.getMaxMap(); mapNum++) {

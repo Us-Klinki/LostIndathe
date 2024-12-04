@@ -52,7 +52,8 @@ public class Player extends Entity {
 	private int currentKrecicDialogue = 1;
 	private boolean timerstart;
 	private boolean krecicStart;
-
+	
+	boolean isSEPlaying = false;
 	
 	public int dialogueCounter = 1;
 	Font yoster;
@@ -220,14 +221,14 @@ public class Player extends Entity {
 				System.out.println("Schlüssel: " + getHasKey());
 				break;
 			case "Bathroomdoor":
-				if(getHasKey() > 0 && keyH.enterPressed) {
+				if(getHasKey() == 1 && keyH.enterPressed) {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
 					//TODO: Indikator für Enter  drücken
 					gp.playSE(50);
 					gp.getObj()[gp.getCurrentMap()][i].setCollisionOn(false);
-					setHasKey(getHasKey() - 1);
+					setHasKey(getHasKey() + 1);
 					System.out.println("Schlüssel: " + getHasKey());
 				}
 				else if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed){
@@ -235,6 +236,7 @@ public class Player extends Entity {
 						gp.stopSE(j);
 					}
 					gp.playSE(29);
+					gp.playSE(53);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -254,6 +256,7 @@ public class Player extends Entity {
 						gp.stopSE(j);
 					}
 					gp.playSE(29);
+					gp.playSE(53);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -272,6 +275,7 @@ public class Player extends Entity {
 						gp.stopSE(j);
 					}
 					gp.playSE(29);
+					gp.playSE(53);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -293,6 +297,7 @@ public class Player extends Entity {
 						gp.stopSE(j);
 					}
 					gp.playSE(29);
+					gp.playSE(53);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -305,6 +310,7 @@ public class Player extends Entity {
 						gp.stopSE(j);
 					}
 					gp.playSE(28);
+					gp.playSE(53);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -314,6 +320,7 @@ public class Player extends Entity {
 						gp.stopSE(j);
 					}
 					gp.playSE(31);
+					gp.playSE(53);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -326,6 +333,7 @@ public class Player extends Entity {
 						gp.stopSE(j);
 					}
 					gp.playSE(28);
+					gp.playSE(53);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -337,6 +345,7 @@ public class Player extends Entity {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
+					gp.playSE(53);
 					gp.playSE(28);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
@@ -346,10 +355,20 @@ public class Player extends Entity {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
-					gp.playSE(30);
-					gp.gameState = gp.dialogueState;
-					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
-					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+					if(gp.getCurrentMap() == 1) {
+						gp.playSE(53);
+						gp.playSE(30);
+						gp.gameState = gp.dialogueState;
+						gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
+						gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+					}
+					if(gp.getCurrentMap() == 4) {
+						gp.playSE(53);
+						gp.playSE(30);
+						gp.gameState = gp.dialogueState;
+						gp.getObj()[gp.getCurrentMap()][i].setDialogue3();
+						gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+					}
 				}
 			break;
 			
@@ -358,6 +377,7 @@ public class Player extends Entity {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
+					gp.playSE(53);
 					gp.playSE(25);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
@@ -370,6 +390,7 @@ public class Player extends Entity {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
+					gp.playSE(53);
 					gp.playSE(25);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
@@ -383,6 +404,7 @@ public class Player extends Entity {
 						gp.stopSE(j);
 					}
 					gp.playSE(26);
+					gp.playSE(53);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -394,6 +416,7 @@ public class Player extends Entity {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
+					gp.playSE(53);
 					gp.playSE(28);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
@@ -406,6 +429,7 @@ public class Player extends Entity {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
+					gp.playSE(53);
 					gp.playSE(28);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
@@ -427,6 +451,7 @@ public class Player extends Entity {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
+					gp.playSE(53);
 					gp.playSE(32);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
@@ -440,15 +465,27 @@ public class Player extends Entity {
 						for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 							gp.stopSE(j);
 						}
+						gp.playSE(53);
 						gp.playSE(27);
 						gp.gameState = gp.dialogueState;
 						gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
+						gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+					}
+					if(gp.getCurrentMap() == 4) {
+						for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
+							gp.stopSE(j);
+						}
+						gp.playSE(53);
+						gp.playSE(27);
+						gp.gameState = gp.dialogueState;
+						gp.getObj()[gp.getCurrentMap()][i].setDialogue3();
 						gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 					}
 					if(gp.getCurrentMap() == 5) {
 						for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 							gp.stopSE(j);
 						}
+						gp.playSE(53);
 						gp.playSE(27);
 						gp.gameState = gp.dialogueState;
 						gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
@@ -514,12 +551,14 @@ public class Player extends Entity {
 			
 				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentPhenolphthaleinDialog() == 1) {
 					//hatErstenIndikator = true;
+					gp.playSE(54);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 					setCurrentKöppelDialog(4);
 				}
 				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentPhenolphthaleinDialog() == 2) {
+					gp.playSE(54);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -528,6 +567,7 @@ public class Player extends Entity {
 				break;
 			case "Base":
 				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentBaseDialog() == 2) {
+					gp.playSE(54);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -536,6 +576,7 @@ public class Player extends Entity {
 				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentBaseDialog() == 1) {
 					setCurrentNeutralDialog(4);
 					setCurrentSäureDialog(4);
+					gp.playSE(54);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -545,6 +586,7 @@ public class Player extends Entity {
 				}
 				
 				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentBaseDialog() == 3) {
+					gp.playSE(54);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue3();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -552,9 +594,10 @@ public class Player extends Entity {
 				}
 				
 				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentBaseDialog() == 4) {
-						gp.gameState = gp.dialogueState;
-						gp.getObj()[gp.getCurrentMap()][i].setDialogue4();
-						gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+					gp.playSE(54);	
+					gp.gameState = gp.dialogueState;
+					gp.getObj()[gp.getCurrentMap()][i].setDialogue4();
+					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 
 				}
 				
@@ -562,6 +605,7 @@ public class Player extends Entity {
 			case "Säure":
 				
 				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentSäureDialog() == 2) {
+					gp.playSE(54);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -570,6 +614,7 @@ public class Player extends Entity {
 				
 				
 				if (keyH.enterPressed && gp.gameState == gp.playState && getCurrentSäureDialog() == 1) {
+					gp.playSE(54);
 					setCurrentBaseDialog(4);
 					setCurrentNeutralDialog(4);
 				    gp.gameState = gp.dialogueState;
@@ -588,13 +633,15 @@ public class Player extends Entity {
 				    setCurrentSäureDialog(3);
 				} 
 				if (keyH.enterPressed && gp.gameState == gp.playState && getCurrentSäureDialog() == 3) {
-				    gp.gameState = gp.dialogueState;
+					gp.playSE(54);
+					gp.gameState = gp.dialogueState;
 				    gp.getObj()[gp.getCurrentMap()][i].setDialogue3();
 				    gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
 				
 				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentSäureDialog() == 4) {
-						gp.gameState = gp.dialogueState;
+					gp.playSE(54);	
+					gp.gameState = gp.dialogueState;
 						gp.getObj()[gp.getCurrentMap()][i].setDialogue4();
 						gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
@@ -602,12 +649,14 @@ public class Player extends Entity {
 			case "Neutral":
 				
 				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentNeutralDialog() == 2) {
+					gp.playSE(54);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
 				
 				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentNeutralDialog() == 1) {
+					gp.playSE(54);
 					setCurrentBaseDialog(4);
 					setCurrentSäureDialog(4);
 					gp.gameState = gp.dialogueState;
@@ -628,22 +677,24 @@ public class Player extends Entity {
 				}
 				
 				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentNeutralDialog() == 3) {
+					gp.playSE(54);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue3();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
 				
 				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentNeutralDialog() == 4) {
-
-						gp.gameState = gp.dialogueState;
-						gp.getObj()[gp.getCurrentMap()][i].setDialogue4();
-						gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+					gp.playSE(54);
+					gp.gameState = gp.dialogueState;
+					gp.getObj()[gp.getCurrentMap()][i].setDialogue4();
+					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 
 				}
 				break;
 			case "Universalindikator":
 				
 				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentUniversalindikatorDialog() == 1) {
+					gp.playSE(54);
 					setCurrentKöppelDialog(5);
 					setCurrentUniversalindikatorDialog(getCurrentUniversalindikatorDialog() + 1);
 					gp.gameState = gp.dialogueState;
@@ -651,6 +702,7 @@ public class Player extends Entity {
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
 				}
 				if(keyH.enterPressed && gp.gameState == gp.playState && getCurrentUniversalindikatorDialog() == 2) {
+					gp.playSE(54);
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue2();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
@@ -780,6 +832,8 @@ public class Player extends Entity {
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 					setCurrentKöppelDialog(2);
+					hatNeutral = false;
+					hatSäure = false;
 					if(getCurrentSäureDialog() == 4) {
 						setCurrentSäureDialog(1);
 					}
@@ -1067,6 +1121,39 @@ public class Player extends Entity {
 	            moveX = 0; // Setze Bewegung zurück
 	            setCollisionOn(false);
 	        }
+	    }
+	    
+	    if((keyH.rightPressed || keyH.leftPressed || keyH.upPressed || keyH.downPressed) && 
+	    		(gp.getCurrentMap() == 1 || gp.getCurrentMap() == 5)
+	    		&& !isSEPlaying) {
+	    	isSEPlaying = true; // Markiere, dass der Soundeffekt abgespielt wird
+	        gp.playSE(55);
+
+	        // Fügen Sie einen Listener oder Timer hinzu, um isSEPlaying zurückzusetzen, wenn der Soundeffekt endet
+	        new Thread(() -> {
+	            try {
+	                Thread.sleep(965); // Methode zum Abrufen der Sounddauer
+	            } catch (InterruptedException e) {
+	                e.printStackTrace();
+	            }
+	            isSEPlaying = false; // Zurücksetzen, wenn der Sound fertig ist
+	        }).start();
+	    }
+	    if((keyH.rightPressed || keyH.leftPressed || keyH.upPressed || keyH.downPressed) && 
+	    		(gp.getCurrentMap() == 0 || (gp.getCurrentMap() >= 2 && gp.getCurrentMap() <= 4) || gp.getCurrentMap() == 6) 
+	    		&& !isSEPlaying) {
+	    	isSEPlaying = true; // Markiere, dass der Soundeffekt abgespielt wird
+	        gp.playSE(56);
+
+	        // Fügen Sie einen Listener oder Timer hinzu, um isSEPlaying zurückzusetzen, wenn der Soundeffekt endet
+	        new Thread(() -> {
+	            try {
+	                Thread.sleep(993); // Methode zum Abrufen der Sounddauer
+	            } catch (InterruptedException e) {
+	                e.printStackTrace();
+	            }
+	            isSEPlaying = false; // Zurücksetzen, wenn der Sound fertig ist
+	        }).start();
 	    }
 
 
