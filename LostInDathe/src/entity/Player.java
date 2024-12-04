@@ -22,7 +22,7 @@ public class Player extends Entity {
 	
 	// Schlüssel
 	private int hasKey = 0;
-	private int hasKeyChemie = 0;
+	private int hasKeyChemie = 1;
 	private boolean hasKeyInfo = false;
 	private boolean hasKeyBio = false;
 	private boolean hasKeySchulhof = false;
@@ -444,6 +444,7 @@ public class Player extends Entity {
 					}
 					gp.playSE(50);
 					gp.playSE(33);
+					gp.playMusic(0);
 					gp.gameState = gp.endState;
 				}
 				

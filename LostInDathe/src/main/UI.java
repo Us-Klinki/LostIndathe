@@ -925,9 +925,9 @@ public class UI {
 		textY += umbruch;
 		g2.drawString("derungen und intensivem Arbeiten, sind wir stolz, dieses Spiel präsentieren zu können.", textX, textY);
 		textY += umbruch;
-		g2.drawString("Es war anstrengend, keine Frage, aber es hat sich sehr gelohnt. Wir danken dem Fachbe-", textX, textY);
+		g2.drawString("Es war anstrengend, keine Frage, aber es hat sich sehr gelohnt. Wir hoffen, dass du Spaß", textX, textY);
 		textY += umbruch;
-		g2.drawString("reich Informatik für diese Möglichkeit. Logisches Denken ist der Weg zum Ziel.", textX, textY);
+		g2.drawString("hattest und das Spiel genießen konntest.", textX, textY);
 		textY += 2 * absatz;
 		textX -= gp.getTileSize();
 		g2.setFont(yoster_s);
@@ -943,7 +943,7 @@ public class UI {
 		g2.drawImage(gp.getPlayer().bright1, gp.tileSize * 25 + 16, gp.tileSize * 8 + 16, gp.tileSize * 2, gp.tileSize * 2, null);
 		g2.drawImage(gp.getPlayer().up1, gp.tileSize * 27 + 24, gp.tileSize * 8 + 16, gp.tileSize * 2, gp.tileSize * 2, null);
 		int xTab = textX + gp.getTileSize() * 5;
-		g2.drawString("Thu An Phung, Tom Speer, Gustav Kluge", xTab, textY);
+		g2.drawString("Thu An Phùng, Tom Speer, Gustav Kluge", xTab, textY);
 		textY += absatz;
 		g2.drawString("Grafik:", textX, textY);
 		g2.drawString("Marika Uhrig, Karoline Schiemann", xTab, textY);
