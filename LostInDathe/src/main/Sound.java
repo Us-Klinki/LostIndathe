@@ -77,6 +77,10 @@ public class Sound {
 		soundURL[55] = pfad("soundeffect/Laufen_Klack_Klack_Flur.wav");
 		soundURL[56] = pfad("soundeffect/Laufen_Klack_Klack_Raum.wav");
 		soundURL[57] = pfad("soundtrack/Biologie_Song.wav");
+		soundURL[58] = pfad("soundtrack/Chemie_Song.wav");
+		soundURL[59] = pfad("soundtrack/Credit_Scene_Song.wav");
+		soundURL[60] = pfad("soundtrack/Hauptmenue_Song.wav");
+		soundURL[61] = pfad("soundtrack/Overworld_Flur_Song.wav");
 		
 		activeClips = new ArrayList<>();
 	}
