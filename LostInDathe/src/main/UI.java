@@ -1010,35 +1010,39 @@ public class UI {
 		int textX = imageX + gp.getTileSize()/2+8;
 		int textY = imageY + 25;
 		int abstand = gp.getTileSize()/2+8;
+		int u = 0;
 		
 		if(gp.getPlayer().getHasKey() == 1) { 
-			drawSubWindow(subX, subY, subWidth, subHeight*2-19, false, false, true);
-			g2.drawImage(key, imageX, imageY, imageWidth, imageHeight, null);
+			u = 64;
+			drawSubWindow(subX + u, subY, subWidth - u, subHeight*2-19, false, false, true);
+			g2.drawImage(key, imageX + u, imageY, imageWidth, imageHeight, null);
 			g2.setColor(Color.black);
 			g2.setFont(yoster_xs);
-			g2.drawString("Kloschlüssel", textX, textY);
-			g2.drawString("> Geh' in R 317", textX, textY + abstand);
+			g2.drawString("Kloschlüssel", textX + u, textY);
+			g2.drawString("> Geh' in R 317", textX + u, textY + abstand);
 		}
 		if(gp.getPlayer().getHasKey() == 2 && gp.getCurrentMap() <= 1 && gp.getPlayer().getHasKeyChemie() == 0) {
-			drawSubWindow(subX, subY+gp.getTileSize()/2+5, subWidth, subHeight, false, false, true);
+			u = 64;
+			drawSubWindow(subX + u + 24, subY + gp.getTileSize()/2+5, subWidth - u - 24, subHeight, false, false, true);
 			g2.setColor(Color.black);
 			g2.setFont(yoster_xs);
-			g2.drawString("> Geh' in R 317", textX, textY + gp.getTileSize()/2+5);
+			g2.drawString("> Geh' in R 317", textX + u, textY + gp.getTileSize()/2+5);
 		}
 		if(gp.getPlayer().getHasKeyChemie() == 1 && gp.getCurrentMap() <= 2 && gp.getPlayer().getCurrentKöppelDialog()  < 7 && !gp.getPlayer().isHasKeyInfo()) {
-			drawSubWindow(subX, subY+gp.getTileSize()/2+5, subWidth, subHeight, false, false, true);
-			g2.drawImage(key, imageX, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
+			drawSubWindow(subX + gp.getTileSize() + 16, subY+gp.getTileSize()/2+5, subWidth - gp.getTileSize()*2 + 32, subHeight, false, false, true);
+			g2.drawImage(key, imageX + gp.getTileSize() + 12, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
 			g2.setColor(Color.black);
 			g2.setFont(yoster_xs);
-			g2.drawString("R 309 [Chemie]", textX, textY + gp.getTileSize()/2+5);
+			g2.drawString("R 309 [Chemie]", textX + gp.getTileSize() + 12, textY + gp.getTileSize()/2+5);
 		}
 		if(gp.getPlayer().getHasKeyChemie() == 1) { 
 			if(gp.getPlayer().getCurrentKöppelDialog() == 4) {
-				drawSubWindow(subX, subY+gp.getTileSize()/2+5, subWidth, subHeight, false, false, true);
-				g2.drawImage(phenol, imageX, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
+				u = 40;
+				drawSubWindow(subX + u, subY+gp.getTileSize()/2+5, subWidth - u, subHeight, false, false, true);
+				g2.drawImage(phenol, imageX + u, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
 				g2.setColor(Color.black);
 				g2.setFont(yoster_xs);
-				g2.drawString("Phenolphthalein", textX, textY + gp.getTileSize()/2+5);
+				g2.drawString("Phenolphthalein", textX + u, textY + gp.getTileSize()/2+5);
 			} 
 			else if(gp.getPlayer().getCurrentKöppelDialog() == 5) {
 				drawSubWindow(subX, subY+gp.getTileSize()/2+5, subWidth, subHeight, false, false, true);
@@ -1049,44 +1053,49 @@ public class UI {
 			}
 			else if(gp.getPlayer().hatSäure && gp.getPlayer().getCurrentKöppelDialog() != 2 
 					&& (gp.getPlayer().getCurrentKöppelDialog() == 6 || gp.getPlayer().getCurrentKöppelDialog() == 7)) {
-				drawSubWindow(subX, subY+gp.getTileSize()/2+5, subWidth, subHeight, false, false, true);
-				g2.drawImage(säure, imageX, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
+				u = 76;
+				drawSubWindow(subX + u, subY+gp.getTileSize()/2+5, subWidth - u, subHeight, false, false, true);
+				g2.drawImage(säure, imageX + u, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
 				g2.setColor(Color.black);
 				g2.setFont(yoster_xs);
-				g2.drawString("Saure Lösung", textX, textY + gp.getTileSize()/2+5);
+				g2.drawString("Saure Lösung", textX + u, textY + gp.getTileSize()/2+5);
 			}
 			else if(gp.getPlayer().hatNeutral && gp.getPlayer().getCurrentKöppelDialog() != 2 
 					&& (gp.getPlayer().getCurrentKöppelDialog() == 6 || gp.getPlayer().getCurrentKöppelDialog() == 7)) {
-				drawSubWindow(subX, subY+gp.getTileSize()/2+5, subWidth, subHeight, false, false, true);
-				g2.drawImage(neutral, imageX, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
+				u = 40;
+				drawSubWindow(subX + u, subY+gp.getTileSize()/2+5, subWidth - u, subHeight, false, false, true);
+				g2.drawImage(neutral, imageX + u, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
 				g2.setColor(Color.black);
 				g2.setFont(yoster_xs);
-				g2.drawString("Neutrale Lösung", textX, textY + gp.getTileSize()/2+5);
+				g2.drawString("Neutrale Lösung", textX + u, textY + gp.getTileSize()/2+5);
 			}
 			else if(gp.getPlayer().getCurrentKöppelDialog() > 5 && (gp.getPlayer().getCurrentBaseDialog() == 1 ||
 					gp.getPlayer().getCurrentBaseDialog() == 3)) {
-				drawSubWindow(subX, subY+gp.getTileSize()/2+5, subWidth, subHeight, false, false, true);
-				g2.drawImage(base, imageX, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
+				u = gp.getTileSize()*5 - 32;
+				drawSubWindow(subX + u, subY+gp.getTileSize()/2+5, subWidth - u, subHeight, false, false, true);
+				g2.drawImage(base, imageX + u, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
 				g2.setColor(Color.black);
 				g2.setFont(yoster_xs);
-				g2.drawString("Base", textX, textY + gp.getTileSize()/2+5);
+				g2.drawString("Base", textX + u, textY + gp.getTileSize()/2+5);
 			}
 		}
 		
 		if(gp.getPlayer().isHasKeyInfo() == true && gp.getCurrentMap() != 3 && !gp.getPlayer().isHasKeyBio()) { 
-			drawSubWindow(subX, subY+gp.getTileSize()/2+5, subWidth, subHeight, false, false, true);
-			g2.drawImage(key, imageX, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
+			u = 8;
+			drawSubWindow(subX - u, subY+gp.getTileSize()/2+5, subWidth + u, subHeight, false, false, true);
+			g2.drawImage(key, imageX - u, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
 			g2.setColor(Color.black);
 			g2.setFont(yoster_xs);
-			g2.drawString("R 115 [Informatik]", textX, textY + gp.getTileSize()/2+5);
+			g2.drawString("R 115 [Informatik]", textX - u, textY + gp.getTileSize()/2+5);
 		}
 		
 		if(gp.getPlayer().isHasKeyBio() == true && gp.getCurrentMap() != 6 && !gp.getPlayer().isHasKeySchulhof()) { 
-			drawSubWindow(subX, subY+gp.getTileSize()/2+5, subWidth, subHeight, false, false, true);
-			g2.drawImage(key, imageX, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
+			u = gp.getTileSize()*2+12;
+			drawSubWindow(subX + u, subY+gp.getTileSize()/2+5, subWidth - u, subHeight, false, false, true);
+			g2.drawImage(key, imageX + u, imageY + gp.getTileSize()/2+5, imageWidth, imageHeight, null);
 			g2.setColor(Color.black);
 			g2.setFont(yoster_xs);
-			g2.drawString("R 110 [Bio]", textX, textY + gp.getTileSize()/2+5);
+			g2.drawString("R 110 [Bio]", textX + u, textY + gp.getTileSize()/2+5);
 		}
 		
 		if(gp.getPlayer().isHasKeySchulhof() == true && gp.gameState != gp.endState) { 

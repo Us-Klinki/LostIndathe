@@ -22,7 +22,7 @@ public class Player extends Entity {
 	
 	// Schlüssel
 	private int hasKey = 0;
-	private int hasKeyChemie = 1;
+	private int hasKeyChemie = 0;
 	private boolean hasKeyInfo = false;
 	private boolean hasKeyBio = false;
 	private boolean hasKeySchulhof = false;
@@ -53,8 +53,11 @@ public class Player extends Entity {
 	private boolean timerstart;
 	private boolean krecicStart;
 	
+	int a = 0;
+	int b = 0;
+	int c = 0;
 	boolean isSEPlaying = false;
-	
+	private int idleCountdown = 30;
 	public int dialogueCounter = 1;
 	Font yoster;
 
@@ -165,22 +168,10 @@ public class Player extends Entity {
 	    		if(getCounter() >= 60) {
 	    			setCountdown(getCountdown() - 1);
 	    			setCounter(0);
-	    			System.out.println(getCountdown());
 	    		}
 	    	}
 	    }
 
-	    // Richtung setzen
-		spriteCounter++;
-		if(spriteCounter > 12) { // jede 1/5-Sekunde
-			if(spriteNum == 1) {
-				spriteNum = 2;
-			}
-			else if(spriteNum == 2) {
-				spriteNum = 1;
-			}
-			spriteCounter = 0;
-		}
 		// Check Event
 		gp.eHandler.checkEvent();
 	}
@@ -201,7 +192,6 @@ public class Player extends Entity {
 	
 	// Aufsammeln / Interagieren mit Objekten
 	public void pickUpObject(int i) { 
-		
 		if (i != 999) {
 			
 			String objectName = gp.getObj()[gp.getCurrentMap()][i].getName();
@@ -249,7 +239,7 @@ public class Player extends Entity {
 					
 					gp.playSE(50);
 					gp.getObj()[gp.getCurrentMap()][i].setCollisionOn(false);
-					//System.out.println("Schlüssel: " + hasKey);
+					c = 1;
 				}
 				else if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed){
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
@@ -260,15 +250,20 @@ public class Player extends Entity {
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+				}
+				
+				if(c == 1) {
+					gp.getObj()[gp.getCurrentMap()][i].setCollisionOn(false);
 				}
 				break;
 			
 			case "Chemiedoor":
+				
 				if(getHasKeyChemie() > 0 && keyH.enterPressed && gp.getObj()[gp.getCurrentMap()][i].isCollisionOn()) {
 					
 					gp.playSE(50);
 					gp.getObj()[gp.getCurrentMap()][i].setCollisionOn(false);
-					//System.out.println("Schlüssel: " + hasKey);
+					b = 1;
 				}
 				else if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed){
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
@@ -279,6 +274,10 @@ public class Player extends Entity {
 					gp.gameState = gp.dialogueState;
 					gp.getObj()[gp.getCurrentMap()][i].setDialogue1();
 					gp.getObj()[gp.getCurrentMap()][i].speak(i, false);
+				}
+				
+				if(b == 1) {
+					gp.getObj()[gp.getCurrentMap()][i].setCollisionOn(false);
 				}
 				break;
 				
@@ -288,9 +287,12 @@ public class Player extends Entity {
 				if(isHasKeyBio() && keyH.enterPressed && gp.getObj()[gp.getCurrentMap()][i].isCollisionOn()) {
 					gp.playSE(50);
 					gp.getObj()[gp.getCurrentMap()][i].setCollisionOn(false);
+					a = 1;
 				}
 				
-				
+				if(a == 1) {
+					gp.getObj()[gp.getCurrentMap()][i].setCollisionOn(false);
+				}
 				
 				if(gp.getObj()[gp.getCurrentMap()][i].isCollisionOn() == true && keyH.enterPressed) {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
@@ -442,6 +444,7 @@ public class Player extends Entity {
 					for(int j = 0; j < gp.getSoundURLLengthGP(); j++) {
 						gp.stopSE(j);
 					}
+					gp.stopMusic(4);
 					gp.playSE(50);
 					gp.playSE(33);
 					gp.playMusic(0);
@@ -1124,16 +1127,16 @@ public class Player extends Entity {
 	        }
 	    }
 	    
-	    if((keyH.rightPressed || keyH.leftPressed || keyH.upPressed || keyH.downPressed) && 
-	    		(gp.getCurrentMap() == 1 || gp.getCurrentMap() == 5)
-	    		&& !isSEPlaying) {
+	    //Schrittsound
+	    /*if((keyH.rightPressed || keyH.leftPressed || keyH.upPressed || keyH.downPressed) && 
+	    		(gp.getCurrentMap() == 1 || gp.getCurrentMap() == 5) && !isSEPlaying) {
 	    	isSEPlaying = true; // Markiere, dass der Soundeffekt abgespielt wird
 	        gp.playSE(55);
 
 	        // Fügen Sie einen Listener oder Timer hinzu, um isSEPlaying zurückzusetzen, wenn der Soundeffekt endet
 	        new Thread(() -> {
 	            try {
-	                Thread.sleep(965); // Methode zum Abrufen der Sounddauer
+	                Thread.sleep(200); // Methode zum Abrufen der Sounddauer
 	            } catch (InterruptedException e) {
 	                e.printStackTrace();
 	            }
@@ -1141,21 +1144,20 @@ public class Player extends Entity {
 	        }).start();
 	    }
 	    if((keyH.rightPressed || keyH.leftPressed || keyH.upPressed || keyH.downPressed) && 
-	    		(gp.getCurrentMap() == 0 || (gp.getCurrentMap() >= 2 && gp.getCurrentMap() <= 4) || gp.getCurrentMap() == 6) 
-	    		&& !isSEPlaying) {
+	    		(gp.getCurrentMap() == 0 || (gp.getCurrentMap() >= 2 && gp.getCurrentMap() <= 4) || gp.getCurrentMap() == 6) && !isSEPlaying) {
 	    	isSEPlaying = true; // Markiere, dass der Soundeffekt abgespielt wird
-	        gp.playSE(56);
+	        gp.playSE(6);
 
 	        // Fügen Sie einen Listener oder Timer hinzu, um isSEPlaying zurückzusetzen, wenn der Soundeffekt endet
 	        new Thread(() -> {
 	            try {
-	                Thread.sleep(993); // Methode zum Abrufen der Sounddauer
+	                Thread.sleep(200); // Methode zum Abrufen der Sounddauer
 	            } catch (InterruptedException e) {
 	                e.printStackTrace();
 	            }
 	            isSEPlaying = false; // Zurücksetzen, wenn der Sound fertig ist
 	        }).start();
-	    }
+	    }*/
 
 
 
@@ -1188,8 +1190,38 @@ public class Player extends Entity {
 	    }
 	    
 	    if(moveX == 0 && moveY == 0 && !keyH.upPressed && !keyH.downPressed && !keyH.leftPressed && !keyH.rightPressed) {
-	    	direction = "";
+	    	idleCountdown--;
+	    	if( idleCountdown < 1) {
+	    		//Frameabwechslung
+				spriteCounter++;
+				if(spriteCounter > 12) { // jede 1/5-Sekunde
+					if(spriteNum == 1) {
+						spriteNum = 2;
+					}
+					else if(spriteNum == 2) {
+						spriteNum = 1;
+					}
+					spriteCounter = 0;
+				}
+	    		direction = "";
+	    	}
 	    }
+	    else {
+	    	//Frameabwechslung
+			spriteCounter++;
+			if(spriteCounter > 12) { // jede 1/5-Sekunde
+				if(spriteNum == 1) {
+					spriteNum = 2;
+				}
+				else if(spriteNum == 2) {
+					spriteNum = 1;
+				}
+				spriteCounter = 0;
+			}
+	    	idleCountdown = 30;
+	    }
+
+	    
 	    worldX += moveX;
 	    worldY += moveY;
 	}
@@ -1249,13 +1281,38 @@ public class Player extends Entity {
 	        }
 	    }
 	    
-	    if(moveX == 0 && moveY == 0 && !keyH.upPressed && !keyH.downPressed && !keyH.leftPressed && !keyH.rightPressed) {
-	    	direction = "";
-	    }
+	    //Schrittsound
+	    /*if((keyH.rightPressed || keyH.leftPressed || keyH.upPressed || keyH.downPressed) && (gp.getCurrentMap() == 2) && !isSEPlaying) {
+	    	isSEPlaying = true; // Markiere, dass der Soundeffekt abgespielt wird
+	        gp.playSE(56);
+
+	        new Thread(() -> {
+	            try {
+	                Thread.sleep(400); // Methode zum Abrufen der Sounddauer
+	            } catch (InterruptedException e) {
+	                e.printStackTrace();
+	            }
+	            isSEPlaying = false; // Zurücksetzen, wenn der Sound fertig ist
+	        }).start();
+	    }*/
+	    
+	    //Frameabwechslung
+		spriteCounter++;
+		if(spriteCounter > 12) { // jede 1/5-Sekunde
+			if(spriteNum == 1) {
+				spriteNum = 2;
+			}
+			else if(spriteNum == 2) {
+				spriteNum = 1;
+			}
+			spriteCounter = 0;
+		}
+		
 	    worldX += moveX;
 	    worldY += moveY;
 	}
 	
+
 	public void draw(Graphics2D g2) {
 		
 		

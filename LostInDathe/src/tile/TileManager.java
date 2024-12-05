@@ -201,9 +201,9 @@ public class TileManager {
 		setup(145, "81_Gang_Fade2", false);
 		setup(146, "81_Gang_Fade3", true);
 		setup(147, "81_Gang_Fade4", true);
-		setup(148, "82_bad_trennwand", true);
-		setup(149, "82_bad_trennwand2", true);
-		setup(150, "82_bad_trennwand3", true);
+		setup(148, "82_bad_trennwand", false);
+		setup(149, "82_bad_trennwand2", false);
+		setup(150, "82_bad_trennwand3", false);
 		
 		
 		

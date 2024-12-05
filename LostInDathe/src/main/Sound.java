@@ -21,11 +21,11 @@ public class Sound {
 		
 		soundURL[0] = pfad("soundtrack/Credit_Scene_Song.wav"); // Credit Scene
 		soundURL[1] = pfad("soundeffect/Toilettenspuelung.wav");
-		soundURL[2] = pfad("soundtrack/Overworld_Flur_Song.wav"); // ersetzen durch Musik im Gang
-		soundURL[3] = pfad("soundtrack/Hauptmenue_Song.wav"); // ersetzen durch Musik im Hauptmenü
-		soundURL[4] = pfad("switch.wav"); // nicht mehr genutzt
+		soundURL[2] = pfad("soundtrack/Overworld_Flur_Song.wav"); 
+		soundURL[3] = pfad("soundtrack/Hauptmenue_Song.wav"); 
+		soundURL[4] = pfad("soundtrack/Biologie_Song.wav");
 		soundURL[5] = pfad("soundtrack/Chemie_Song.wav");
-		soundURL[6] = pfad("subArea.wav"); // nicht mehr genutzt
+		soundURL[6] = pfad("soundeffect/Laufen_Klack_KLack_Raum.wav");
 		soundURL[7] = pfad("soundeffect/Menü_Spiel_Starten.wav");
 		soundURL[8] = pfad("soundeffect/Menü_Button_Wechseln.wav");
 		soundURL[9] = pfad("soundeffect/Menü_Button_Auswählen.wav");
@@ -75,8 +75,9 @@ public class Sound {
 		soundURL[53] = pfad("soundeffect/Tuer_Ist_Verschlossen.wav");
 		soundURL[54] = pfad("soundeffect/Chemikalien_Blubb_Glubb.wav");
 		soundURL[55] = pfad("soundeffect/Laufen_Klack_Klack_Flur.wav");
-		soundURL[56] = pfad("soundeffect/Laufen_Klack_Klack_Raum.wav");
-		soundURL[57] = pfad("soundtrack/Biologie_Song.wav");
+		soundURL[56] = pfad("soundeffect/Laufen_Klack_KLack_Raum_400ms.wav");
+
+
 		// vorerst die Indexe oben überschreiben (nicht mehr genutzte Sounds/Soundtracks)
 		
 		activeClips = new ArrayList<>();

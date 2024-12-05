@@ -2,6 +2,8 @@ package main;
 
 import entity.NPC_Klinkhardt;
 import entity.NPC_Priebe;
+import entity.OBJ_Border;
+import entity.OBJ_Border_2;
 import entity.OBJ_Sink;
 import entity.OBJ_Statue;
 import entity.OBJ_Statue2;
@@ -78,6 +80,34 @@ public class AssetPlacer {
 		gp.getObj()[mapNum][6] = new OBJ_Bathroomdoor(gp, keyH);
 		gp.getObj()[mapNum][6].worldX = 20*gp.getTileSize();
 		gp.getObj()[mapNum][6].worldY = 30*gp.getTileSize();
+		
+		//Borders Horizontal
+		
+		gp.getObj()[mapNum][7] = new OBJ_Border(gp, keyH);
+		gp.getObj()[mapNum][7].worldX = 23*gp.getTileSize();
+		gp.getObj()[mapNum][7].worldY = 22*gp.getTileSize();
+		
+		gp.getObj()[mapNum][8] = new OBJ_Border(gp, keyH);
+		gp.getObj()[mapNum][8].worldX = 25*gp.getTileSize();
+		gp.getObj()[mapNum][8].worldY = 22*gp.getTileSize();
+		
+		gp.getObj()[mapNum][9] = new OBJ_Border(gp, keyH);
+		gp.getObj()[mapNum][9].worldX = 27*gp.getTileSize();
+		gp.getObj()[mapNum][9].worldY = 22*gp.getTileSize();		
+		
+		gp.getObj()[mapNum][10] = new OBJ_Border(gp, keyH);
+		gp.getObj()[mapNum][10].worldX = 29*gp.getTileSize();
+		gp.getObj()[mapNum][10].worldY = 22*gp.getTileSize();
+		
+		//Borders Vertikal
+		
+		gp.getObj()[mapNum][11] = new OBJ_Border_2(gp, keyH);
+		gp.getObj()[mapNum][11].worldX = 25*gp.getTileSize();
+		gp.getObj()[mapNum][11].worldY = 22*gp.getTileSize();
+		
+		gp.getObj()[mapNum][12] = new OBJ_Border_2(gp, keyH);
+		gp.getObj()[mapNum][12].worldX = 27*gp.getTileSize();
+		gp.getObj()[mapNum][12].worldY = 22*gp.getTileSize();
 		
 		// Schulhaus OG
 		mapNum = 1;
