@@ -745,8 +745,9 @@ public class Player extends Entity {
 					gp.playSE(14);
 					if(getHasKeyChemie() == 0) {
 						gp.playSE(10);
+						setHasKeyChemie(getHasKeyChemie() + 1);
 					}
-					setHasKeyChemie(getHasKeyChemie() + 1);
+
 				}
 				else {
 					switch(dialogueCounter) {
