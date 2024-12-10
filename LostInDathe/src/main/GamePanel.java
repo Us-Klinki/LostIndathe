@@ -13,7 +13,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.image.VolatileImage;
-import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

@@ -6,7 +6,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GradientPaint;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
@@ -352,7 +351,7 @@ public class UI {
 		g2.setColor(Color.white);
 		textX += gp.getTileSize();
 		textY += abstand;
-		g2.drawString("- Thu An Phung", textX, textY);
+		g2.drawString("- Thu An Phùng", textX, textY);
 		textY += absatz;
 		g2.drawString("- Tom Speer", textX, textY);
 		textY += absatz;
@@ -415,7 +414,7 @@ public class UI {
 		textY += absatz / 2 + absatz / 4;
 		g2.drawString("Projektsemesters Q3. Präsentiert von Us and Klinki.", textX, textY);
 		textY += absatz;
-		g2.drawString("Version 1.0.1-20241206.", textX, textY);
+		g2.drawString("Version 1.0.2-20241210.", textX, textY);
 		textY += 2 * absatz;
 		g2.setFont(yoster_s);
 		
@@ -915,7 +914,6 @@ public class UI {
 		g2.setColor(header);
 		textX = frameX + gp.getTileSize();
 		textY += absatz *2;
-		int textXlinks = textX;
 		g2.drawString("Vielen Dank, dass du LostInDathe gespielt hast.", textX, textY);
 		g2.setFont(yoster_xs);
 		textX += gp.getTileSize();
@@ -967,7 +965,7 @@ public class UI {
 		textX -= gp.getTileSize();
 		
 		
-		g2.drawString("Dathe-Gymnasium, Dezember 2024. Version 1.0.1-20241202. Präsentiert von [Us and Klinki]", textX, textY);
+		g2.drawString("Dathe-Gymnasium, Dezember 2024. Version 1.0.2-20241210. Präsentiert von [Us and Klinki]", textX, textY);
 		textY += 2 * absatz;
 		g2.setFont(yoster_s);
 		g2.setColor(signal);
