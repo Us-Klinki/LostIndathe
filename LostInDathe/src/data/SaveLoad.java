@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import main.EventHandler;
 import main.GamePanel;
 
 public class SaveLoad {
@@ -51,6 +52,7 @@ public class SaveLoad {
 			ds.timerstart = gp.getPlayer().isTimerstart();
 			ds.krecicStart = gp.getPlayer().isKrecicStart();
 			ds.dialogueCounter = gp.getPlayer().dialogueCounter;
+			ds.gesGelöst = EventHandler.gesGelöst;
 			ds.startState = gp.startState;
 			
 			ds.mapObjectNames = new String[gp.getMaxMap()][gp.getObj()[1].length];
@@ -127,19 +129,23 @@ public class SaveLoad {
 			gp.getPlayer().setTimerstart(ds.timerstart);
 			gp.getPlayer().setKrecicStart(ds.krecicStart);
 			gp.getPlayer().dialogueCounter = ds.dialogueCounter;
+			EventHandler.gesGelöst = ds.gesGelöst;
 			gp.startState = ds.startState;
 			
 			// Objekte auf der Map
 			for(int mapNum = 0; mapNum < gp.getMaxMap(); mapNum++) {
 				for(int i = 0; i < gp.getObj()[1].length; i++) {
-					if(ds.mapObjectNames[mapNum][i].equals("NA")) {
-						gp.setObj(null, mapNum, i);
-						
-					}
-					else {
-						gp.obj[mapNum][i] = gp.eGenerator.getObject(ds.mapObjectNames[mapNum][i]);
-						gp.obj[mapNum][i].worldX = ds.mapObjectWorldX[mapNum][i];
-						gp.obj[mapNum][i].worldY = ds.mapObjectWorldY[mapNum][i];
+					if (ds.mapObjectNames[mapNum][i].equals("NA")) {
+					    gp.setObj(null, mapNum, i);
+					} else {
+						System.out.println("Lade Objekt: " + ds.mapObjectNames[mapNum][i]);
+					    gp.obj[mapNum][i] = gp.eGenerator.getObject(ds.mapObjectNames[mapNum][i]);
+					    if (gp.obj[mapNum][i] != null) {
+					        gp.obj[mapNum][i].worldX = ds.mapObjectWorldX[mapNum][i];
+					        gp.obj[mapNum][i].worldY = ds.mapObjectWorldY[mapNum][i];
+					    } else {
+					        System.err.println("Objekt konnte nicht geladen werden: " + ds.mapObjectNames[mapNum][i]);
+					    }
 					}
 				}
 			}

@@ -179,7 +179,8 @@ public class GamePanel extends JPanel implements Runnable {
  	public Entity npc[][] = new Entity[maxMap][30];
  	ArrayList<Entity> entityList = new ArrayList<>();
  	Font debug = new Font("Bahnschrift", Font.BOLD, 24);
- 	
+ 	public boolean statueSet = EventHandler.gesGelöst;
+ 	public boolean indikatorSet = player.holZweitenIndikator;
   
  	//Game State
  	public int gameState;
@@ -306,13 +307,15 @@ public class GamePanel extends JPanel implements Runnable {
  			}*/
 
  			getPlayer().update();
- 			if(EventHandler.gesGelöst == true && EventHandler.playerNotColliding == true) {
+ 			if(EventHandler.gesGelöst == true && EventHandler.playerNotColliding == true && statueSet) {
+ 				
  				aPlacer.setStatue();
- 				EventHandler.gesGelöst = false;
+ 				statueSet = false;
+ 				//EventHandler.gesGelöst = false;
  			}
- 			if(player.holZweitenIndikator == true) {
+ 			if(player.holZweitenIndikator == true && indikatorSet) {
  				aPlacer.setUniversalindikator();
- 				player.holZweitenIndikator = false;
+ 				indikatorSet = false;
  			}
  			
  			if(player.holLösung == true) {
@@ -409,7 +412,7 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 		}
  	 	 		
  	 	 		// ENVIRONMENT
- 	 	 		if(!keyH.licht && currentMap == 3) {
+ 	 	 		if((!keyH.licht && !getPlayer().isLicht()) && currentMap == 3) {
  	 	 			eManager.draw(g2);
  	 	 		}
  	 	 		ui.draw(g2);

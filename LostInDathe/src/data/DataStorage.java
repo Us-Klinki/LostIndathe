@@ -49,4 +49,7 @@ public class DataStorage implements Serializable {
 	
 	//Startstate
 	boolean startState;
+	
+	//Geschichte
+	boolean gesGelöst;
 }

@@ -813,6 +813,7 @@ public class Player extends Entity {
 					gp.gameState = gp.dialogueState;
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 					holZweitenIndikator = true;
+					gp.indikatorSet = true;
 					setCurrentKöppelDialog(2);
 		
 				}
@@ -905,7 +906,7 @@ public class Player extends Entity {
 					gp.getNpc()[gp.getCurrentMap()][i].speak(i, true);
 				}
 				
-				if(keyH.lichtDialog && getCurrentKlinkiDialog() <= 6) {
+				if((keyH.lichtDialog || licht) && getCurrentKlinkiDialog() <= 6) {
 					keyH.lichtDialog = false;
 					setCurrentKlinkiDialog(7);
 				}

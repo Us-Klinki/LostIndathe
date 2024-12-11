@@ -160,6 +160,7 @@ public class EventHandler {
 		
 		if(hitObject(2, 20, 31) == true || hitObject(2, 20, 32) == true) {
 			gesGelöst = true;
+			gp.statueSet = true;
 		}
 		
 		if(hitObject(2, 20, 27) == true || hitObject(2, 20, 26) == true || hitObject(2, 20, 23) == true || hitObject(2, 20, 22) == true) {

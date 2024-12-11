@@ -212,12 +212,10 @@ public class KeyHandler implements KeyListener{
 			pullPressed = true;
 		}
 		
-		if(code == KeyEvent.VK_L) {
-			lichtDialog = true;
-		}
-		
 		if(code == KeyEvent.VK_L && gp.getCurrentMap() == 3) {
 			licht = true;
+			lichtDialog = true;
+			gp.getPlayer().setLicht(true);
 		}
 
 		if(code == KeyEvent.VK_ESCAPE) {

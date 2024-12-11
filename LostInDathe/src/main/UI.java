@@ -141,8 +141,8 @@ public class UI {
 		this.g2 = g2;
 		g2.setFont(yoster_s);
 		//g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		//g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		//g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g2.setColor(Color.white);
 		
 		// Titelstatus
@@ -425,7 +425,7 @@ public class UI {
 		textY += absatz / 2 + absatz / 4;
 		g2.drawString("Projektsemesters Q3. Präsentiert von Us and Klinki.", textX, textY);
 		textY += absatz;
-		g2.drawString("Version 1.0.3-20241211.", textX, textY);
+		g2.drawString("Version 1.0.4-20241211b.", textX, textY);
 		textY += 2 * absatz;
 		g2.setFont(yoster_s);
 		
@@ -463,7 +463,7 @@ public class UI {
 	
 	public void drawOptionsScreen() {
 		g2.setFont(yoster_sl);
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		//g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		//g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.86f));
 		
 		//SUB Window
@@ -976,7 +976,7 @@ public class UI {
 		textX -= gp.getTileSize();
 		
 		
-		g2.drawString("Dathe-Gymnasium, Dezember 2024. Version 1.0.3-20241211. Präsentiert von [Us and Klinki]", textX, textY);
+		g2.drawString("Dathe-Gymnasium, Dezember 2024. Version 1.0.4-20241211b. Präsentiert von [Us and Klinki]", textX, textY);
 		textY += 2 * absatz;
 		g2.setFont(yoster_s);
 		g2.setColor(signal);
