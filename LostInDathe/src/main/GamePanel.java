@@ -357,7 +357,7 @@ public class GamePanel extends JPanel implements Runnable {
  	 	// RESTLICHES SPIEL
  	 	else {
  	 		//Überpfrüfung vom game state
- 	 	 	if(gameState == playState || gameState == dialogueState || gameState == endState) {
+ 	 	 	if(gameState == playState || gameState == dialogueState || gameState == endState || gameState == optionsState || gameState == pauseState) {
  	 	    	// Hier werden die Tiles erzeugt
  	 	 		tileM.draw(g2);
  	 	 		
@@ -415,21 +415,21 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 		ui.draw(g2);
  	 	 	}
  	 	 	if (gameState == pauseState) {
- 	 	 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
- 	 	 		g2.setColor(transparentblack);
- 	 	 		g2.fillRect(0, 0, getWidth(), getHeight());
+ 	 	 		//g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+ 	 	 		//g2.setColor(transparentblack);
+ 	 	 		//g2.fillRect(0, 0, getWidth(), getHeight());
  	 	 		// Den letzten Frame zeichnen
  	 	 		//if (lastFrame != null) {
  	 	 			//g2.drawImage(lastFrame, 0, 0, null); // Zeige den letzten Frame an
  	 	 		//}
- 	 	 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f)); // Volle Deckkraft für Text
+ 	 	 		//g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f)); // Volle Deckkraft für Text
  	 	 		ui.draw(g2);
  	 	 	}
  	 	 	if(gameState == optionsState) {
  	 	 		// ENVIRONMENT
- 	 	 		if(!keyH.licht && currentMap == 3) {
+ 	 	 		/*if(!keyH.licht && currentMap == 3) {
  	 	 			eManager.draw(g2);
- 	 	 		}
+ 	 	 		}*/
  	 	 		ui.draw(g2);
  	 	 		//g2.clearRect(0, 0, getWidth(), getHeight());
  	 	    }
@@ -439,7 +439,7 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 	}
  	 	 	if(gameState == dialogueState) {
  	 	 		
- 	 	 		entityList.add(getPlayer());
+ 	 	 		/*entityList.add(getPlayer());
  	 	 		
  	 	 		for(int i = 0; i < npc[currentMap].length; i++) {
  	 	 			if(npc[currentMap][i] != null) {
@@ -467,15 +467,15 @@ public class GamePanel extends JPanel implements Runnable {
  	 	 		// Zeichne Entitäten
  	 	 		for(int i = 0; i < entityList.size(); i++) {
  	 	 			entityList.get(i).draw(g2);
- 	 	 		}
+ 	 	 		}*/
  	 	 		// ENVIRONMENT
- 	 	 		if(!keyH.licht && currentMap == 3) {
+ 	 	 		/*if(!keyH.licht && currentMap == 3) {
  	 	 			eManager.draw(g2);
- 	 	 		}
+ 	 	 		}*/
  	 	 		
  	 	 		ui.draw(g2);
  	 	 		// Entitylist leeren
- 	 	 		entityList.clear();
+ 	 	 		//entityList.clear();
  	 	 	}
  	 	}
  	

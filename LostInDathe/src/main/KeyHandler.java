@@ -308,6 +308,7 @@ public class KeyHandler implements KeyListener{
 	            }
 			}	            
 	    }
+	    debug(code);
 	}
 	
 	public void mapState (int code) {
@@ -315,12 +316,14 @@ public class KeyHandler implements KeyListener{
 		if(code == KeyEvent.VK_M) {
 			gp.gameState = gp.playState;
 		}
+		debug(code);
 	}
 	
 	public void endState(int code) {
 		if(code == KeyEvent.VK_ENTER) {
 			System.exit(0);
 		}
+		debug(code);
 	}
 	
 	public void startState(int code) {
@@ -329,6 +332,7 @@ public class KeyHandler implements KeyListener{
 			gp.stopSE(23);
 			gp.playMusic(52);
 		}
+		debug(code);
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {

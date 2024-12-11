@@ -414,7 +414,7 @@ public class UI {
 		textY += absatz / 2 + absatz / 4;
 		g2.drawString("Projektsemesters Q3. Präsentiert von Us and Klinki.", textX, textY);
 		textY += absatz;
-		g2.drawString("Version 1.0.2-20241210.", textX, textY);
+		g2.drawString("Version 1.0.3-20241211.", textX, textY);
 		textY += 2 * absatz;
 		g2.setFont(yoster_s);
 		
@@ -434,7 +434,7 @@ public class UI {
 	
 	public void drawPauseScreen() {
 	    
-	    g2.setColor(new Color(0, 0, 0, 220)); 
+	    g2.setColor(new Color(0, 0, 0, 160)); 
 	    g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);  
 
 	    
@@ -446,7 +446,7 @@ public class UI {
 
 	    
 	    
-	    g2.setColor(Color.yellow); 
+	    g2.setColor(signal); 
 	    g2.drawString(text, x, y); 
 	}
 	
@@ -965,7 +965,7 @@ public class UI {
 		textX -= gp.getTileSize();
 		
 		
-		g2.drawString("Dathe-Gymnasium, Dezember 2024. Version 1.0.2-20241210. Präsentiert von [Us and Klinki]", textX, textY);
+		g2.drawString("Dathe-Gymnasium, Dezember 2024. Version 1.0.3-20241211. Präsentiert von [Us and Klinki]", textX, textY);
 		textY += 2 * absatz;
 		g2.setFont(yoster_s);
 		g2.setColor(signal);
@@ -973,13 +973,13 @@ public class UI {
 		g2.drawString("Spiel beenden", textX, textY);
 		textX -= gp.getTileSize();
 		
-		if(commandNum == 0) {
+		//if(commandNum == 0) {
 			g2.drawString(">", textX, textY);
 			
-			if(gp.keyH.enterPressed == true) {
-				subStateTitle = 0;
-			}
-		}
+			//if(gp.keyH.enterPressed == true) {
+			//	subStateTitle = 0;
+			//}
+		//}
 	}
 	
 	public BufferedImage setupHud(String imagePath) {
@@ -1137,7 +1137,7 @@ public class UI {
 		}
 		
 		else if(transparent == true) {
-			Color c = new Color(0, 0, 0, 220);
+			Color c = new Color(0, 0, 0, 200);
 			g2.setColor(c);
 			g2.fillRoundRect(x, y, width, height, bogen, bogen);
 		}

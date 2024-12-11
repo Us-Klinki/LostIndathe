@@ -20,7 +20,7 @@ public class Lighting {
 
 		
 
-		Color color = new Color(0, 0, 0, 0.85f);
+		Color color = new Color(0, 0, 0, 0.72f);
 
 		g2.setColor(color);
 		g2.fillRect(0, 0, gp.getScreenWidth(), gp.getScreenHeight());
