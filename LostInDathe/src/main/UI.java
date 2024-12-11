@@ -12,6 +12,7 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.TexturePaint;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -22,7 +23,7 @@ public class UI {
 	GamePanel gp;
 	Graphics2D g2;
 	Font yoster, yoster_s, yoster_l, yoster_sl, yoster_xs, yoster_t; 
-	Color signal, white, header, transparent, dunkellila, menü, menüdunkel;
+	Color signal, white, header, transparent, dunkellila, menü, menüdunkel, grau;
 	
 	int counter = 0;
 	public static boolean messageOn = false;
@@ -39,6 +40,7 @@ public class UI {
 	private int dialogueIndex = 0;
 	private int dialogueSpeed = 2; 
 	private int dialogueCounter = 0;
+	File saveFile = new File("save.dat");
 	public BufferedImage phenol, key, universal, base, neutral, säure, maus, gustav, karo, kiki, max, thuan, tom, klinki, priebe, köppel, krecic;
 
 	public UI(GamePanel gp) {
@@ -63,6 +65,7 @@ public class UI {
 		 dunkellila = new Color(148, 18, 144);
 		 menü = new Color(170, 110, 170);
 		 menüdunkel = new Color(175, 112, 175);
+		 grau = new Color(156, 156, 156);
 		 
 		 // Fenster erstellen
 		 
@@ -292,7 +295,15 @@ public class UI {
 		text = "Spiel laden";
 		x = getXforCenteredText(text);
 		y += gp.tileSize;
-		g2.drawString(text, x, y);
+		if(saveFile.exists()) {
+			g2.drawString(text, x, y);
+		}
+		else {
+			g2.setColor(grau);
+			g2.drawString(text, x, y);
+			g2.setColor(white);
+		}
+		
 		if(getCommandNum() == 1) {
 			g2.drawString(">", xArrow, y);
 		}

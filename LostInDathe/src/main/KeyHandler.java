@@ -2,6 +2,7 @@ package main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 
 import entity.Entity;
 
@@ -12,6 +13,7 @@ public class KeyHandler implements KeyListener{
 	private boolean canPressKey = true;
 	private long lastKeyPress = 0;
 	private final long keyCooldown = 300;
+	File saveFile = new File("save.dat");
 	
 	//GAME STATE
 	public KeyHandler(GamePanel gp) {
@@ -121,7 +123,9 @@ public class KeyHandler implements KeyListener{
 	            	gp.stopSE(23);
 	            }*/
 	        }
-	        if(gp.ui.getCommandNum() == 1) {
+	        
+	        
+	        if(gp.ui.getCommandNum() == 1 && saveFile.exists()) {
 	        	gp.saveLoad.load();
 	        	gp.gameState = gp.playState;
 	            gp.stopMusic(3);
