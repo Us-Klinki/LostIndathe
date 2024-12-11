@@ -500,6 +500,9 @@ public class Player extends Entity {
 			break;
 			
 			case "Toilet":
+				if(hasKey == 0) {
+					gp.getObj()[0][4].setKeyInside(true);
+				}
 				if(gp.getObj()[gp.getCurrentMap()][i].isKeyInside() && keyH.enterPressed) {	//TODO: Indikator für Enter  drücken
 					gp.stopSE(23);
 					gp.playSE(1);

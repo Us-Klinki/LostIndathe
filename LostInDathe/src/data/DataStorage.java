@@ -35,6 +35,7 @@ public class DataStorage implements Serializable {
 	boolean timerstart;
 	boolean krecicStart;
 	int dialogueCounter;
+	boolean keyInside;
 	
 	// Objekte auf der Map
 	String mapObjectNames[][];

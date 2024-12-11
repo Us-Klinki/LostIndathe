@@ -130,7 +130,29 @@ public class KeyHandler implements KeyListener{
 	        	gp.gameState = gp.playState;
 	            gp.stopMusic(3);
 	            gp.playSE(7);
-	            gp.playMusic(52);
+	            switch(gp.getCurrentMap()) {
+	            case 0:
+	            	gp.playMusic(52);
+	            	break;
+	            case 1:
+	            	gp.playMusic(2);
+	            	break;
+	            case 2:
+	            	gp.playMusic(49);
+	            	break;
+	            case 3:
+	            	gp.playMusic(48);
+	            	break;
+	            case 4:
+	            	gp.playMusic(5);
+	            	break;
+	            case 5:
+	            	gp.playMusic(2);
+	            	break;
+	            case 6:
+	            	gp.playMusic(4);
+	            	break;
+	            }
 	        }
 	        if (gp.ui.getCommandNum() == 2) {
 	            System.exit(0);

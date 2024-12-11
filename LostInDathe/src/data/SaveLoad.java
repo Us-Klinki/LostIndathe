@@ -143,6 +143,7 @@ public class SaveLoad {
 					}
 				}
 			}
+
 			
 			for(int mapNum = 0; mapNum < gp.getMaxMap(); mapNum++) {
 				for(int i = 0; i < gp.getNpc()[1].length; i++) {
